@@ -27,12 +27,24 @@ export default [
       // Règles Vue personnalisées
       'vue/multi-word-component-names': 'warn',
       'vue/no-unused-vars': 'error',
+      'vue/max-attributes-per-line': ['warn', {
+        singleline: 5,
+        multiline: 1
+      }],
 
       // Règles TypeScript personnalisées
       '@typescript-eslint/no-unused-vars': ['error', {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_'
       }],
+
+      // Non nécessaire avec l'utilisation de typescript
+      'no-undef': 'off',
+
+      // Désactivé car trop strict avec les composants Vue
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
     },

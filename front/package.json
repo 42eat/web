@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "type-check": "vue-tsc --noEmit",
+    "format": "eslint . --fix"
   },
   "dependencies": {
     "vue": "^3.5.24"
