@@ -1,6 +1,19 @@
+@import url("./assets/style/theme/default.css");
+
 :root {
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	color: rgb(var(--text-main));
+	background-color: rgb(var(--bg-page));
+	height: 100vh;
 }
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+

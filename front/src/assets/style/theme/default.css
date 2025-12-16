@@ -1,0 +1,39 @@
+/*
+Try being coherent naming CSS variables by following this pattern :
+  --<category>-<usage>-<level>-<state>
+
+`category` is mandatory and should specify the related css property.
+ex: color, text, bg, font, radius, transition, space, ...
+
+`usage` is about the role of the value.
+ex: main, alt, danger, accent, warning, ...
+
+`level` should describe the intensity of the value without having the value in its name.
+ex: xs, sm, md, lg, xl, ...
+
+`state` is in specific cases often related to an element statecause by the user.
+ex: open, focused, hover, open, closed, ...
+
+If a CSS property already has a "category naming" use the same.
+*/
+
+:root {
+	--color-main: 255, 255, 255;
+	--color-alt: 200, 200, 200;
+
+	--text-main: var(--color-main);
+	--text-alt: var(--color-alt);
+
+	--bg-page: 15, 10, 25;
+	--bg-section: 75, 45, 45;
+	--bg-surface: 75, 45, 45;
+	--bg-overlay: 75, 45, 45;
+	--bg-input: 75, 45, 45;
+	--bg-input-active: 75, 45, 45;
+
+	--fill-main: var(--color-main);
+	--fill-alt: var(--color-alt);
+
+	--stroke-main: var(--color-main);
+	--stroke-alt: var(--color-alt);
+}

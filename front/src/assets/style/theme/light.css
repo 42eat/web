@@ -1,0 +1,18 @@
+/*
+Try being coherent naming css variables by following this pattern :
+  --<category>-<usage>-<level>-<state>
+
+`category` is mandatory and should specify the related css property.
+ex: color, text, bg, font, radius, transition, space, ...
+
+`usage` is about the role of the value.
+ex: main, alt, danger, accent, warning, ...
+
+`level` should describe the intensity of the value without having the value in its name.
+ex: xs, sm, md, lg, xl, ...
+
+`state` is in specific cases often related to an element statecause by the user.
+ex: open, focused, hover, open, closed, ...
+
+If a CSS property already has a "category naming" use the same.
+*/
