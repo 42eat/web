@@ -1,0 +1,17 @@
+{
+	"name": "ft-intro-rpg",
+	"workspaces": [
+		"front",
+		"back"
+	],
+	"scripts": {
+		"dev:front": "npm run dev --prefix front",
+		"dev:back": "npm run dev --prefix back",
+		"dev": "concurrently -n back,front -c blue,green \"npm run dev --prefix server\" \"wait-on tcp:localhost:3001 && npm run dev --prefix client\"",
+		"build": "concurrently -n back,front -c blue,green \"npm run build --prefix client\" \"npm run build --prefix server\""
+	},
+	"devDependencies": {
+		"concurrently": "^9.2.1",
+		"wait-on": "^9.0.1"
+	}
+}
