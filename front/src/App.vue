@@ -4,7 +4,7 @@ import FoyerLogoNeon from './assets/images/FoyerLogoNeon.vue';
 
 const isActive = ref(true);
 
-function boucleAleatoire() {
+function randomTimedLoop() {
 	isActive.value = !isActive.value;
 	let delay;
 	if (isActive.value) {
@@ -12,10 +12,10 @@ function boucleAleatoire() {
 	} else {
 		delay = Math.pow(Math.floor(Math.random() * 20) + 10, 2);
 	}
-	setTimeout(boucleAleatoire, delay);
+	setTimeout(randomTimedLoop, delay);
 }
 
-boucleAleatoire();
+randomTimedLoop();
 
 </script>
 
