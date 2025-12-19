@@ -1,13 +1,31 @@
+mod app_state;
+use app_state::AppState;
+
+mod config;
+use config::*;
+
 mod routes;
 
-use axum::{Router, routing::get};
+use axum::Router;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/", get(|| async { "Hello, World!" }));
+    dotenvy::dotenv().expect("Failed to load .env file");
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:8080")
-        .await
-        .unwrap();
+    let (listener, app) = {
+        let config = Config::load();
+
+        let listener = tokio::net::TcpListener::bind(config.bind_url())
+            .await
+            .unwrap_or_else(|err| panic!("Failed to bind to address {}: {err}", config.bind_url()));
+
+        let app_state = AppState::new(config);
+
+        let app = Router::new()
+            .with_state(app_state);
+
+        (listener, app)
+    };
+
     axum::serve(listener, app).await.expect("Server crashed");
 }
