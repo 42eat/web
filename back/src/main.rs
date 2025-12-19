@@ -9,7 +9,11 @@ mod routes;
 mod logger;
 use logger::Logger;
 
+mod session;
+use session::Session;
+
 use axum::Router;
+use tower_cookies::CookieManagerLayer;
 use tower_http::trace::{DefaultMakeSpan, DefaultOnRequest, DefaultOnResponse, TraceLayer};
 use tracing::{Level, info};
 
@@ -34,6 +38,7 @@ async fn main() {
         info!("Starting web server");
 
         let app = Router::new()
+            .layer(CookieManagerLayer::new())
             .layer(
                 TraceLayer::new_for_http()
                     .make_span_with(DefaultMakeSpan::new().level(Level::INFO))
