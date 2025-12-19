@@ -38,6 +38,7 @@ async fn main() {
         info!("Starting web server");
 
         let app = Router::new()
+            .nest("/api", routes::router())
             .layer(CookieManagerLayer::new())
             .layer(
                 TraceLayer::new_for_http()
