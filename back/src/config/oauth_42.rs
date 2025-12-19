@@ -2,6 +2,7 @@ use super::env_var;
 
 use oauth2::{AuthUrl, ClientId, ClientSecret, EndpointNotSet, EndpointSet, RedirectUrl, TokenUrl};
 use tower_cookies::Key;
+use tracing::debug;
 
 type BasicClient = oauth2::basic::BasicClient<
     EndpointSet,
@@ -19,6 +20,8 @@ pub struct OAuth42Config {
 
 impl OAuth42Config {
     pub fn from_env() -> Self {
+        debug!("Loading 42 OAuth config");
+
         Self {
             client: client_from_env(),
             state_cookie_signing_key: Key::try_from(
