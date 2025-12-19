@@ -12,7 +12,6 @@ use logger::Logger;
 mod session;
 use session::Session;
 
-use axum::Router;
 use tower_cookies::CookieManagerLayer;
 use tower_http::trace::{DefaultMakeSpan, DefaultOnRequest, DefaultOnResponse, TraceLayer};
 use tracing::{Level, info};
@@ -37,8 +36,7 @@ async fn main() {
 
         info!("Starting web server");
 
-        let app = Router::new()
-            .nest("/api", routes::router())
+        let app = routes::router()
             .layer(CookieManagerLayer::new())
             .layer(
                 TraceLayer::new_for_http()

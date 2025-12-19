@@ -4,7 +4,7 @@ use tracing::info;
 
 use crate::{Session, app_state::AppState};
 
-/// GET /api/auth/42/login
+/// GET /auth/42/login
 ///
 /// Redirects the user to the 42 OAuth2 authorization URL.
 #[tracing::instrument]

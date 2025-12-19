@@ -1,4 +1,4 @@
-/// GET /api/health-check
+/// GET /health-check
 ///
 /// Returns:
 /// "OK"

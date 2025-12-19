@@ -26,7 +26,7 @@ impl Session {
             .http_only(true)
             .secure(IS_RELEASE_BUILD)
             .max_age(tower_cookies::cookie::time::Duration::minutes(3))
-            .path("/api/auth/42/")
+            .path("/auth/42/")
             .build();
 
         self.0

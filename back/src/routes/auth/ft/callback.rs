@@ -41,7 +41,7 @@ struct User42Data {
     login: String,
 }
 
-/// GET /api/auth/42/callback
+/// GET /auth/42/callback
 ///
 /// Success Response:
 /// - redirects to the home page.
