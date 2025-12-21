@@ -1,0 +1,38 @@
+[package]
+name = "web-42-eats-api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Asynchronous runtime
+tokio = { version = "1", features = ["full"] }
+
+# Web framework
+axum = { version = "0.8", features = ["macros"] }
+tower-http = { version = "0.6", features = ["trace"] }
+## Cookie management
+tower-cookies = { version = "0.11", features = ["signed", "private"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-appender = "0.2"
+
+# OAuth2 support
+oauth2 = "5"
+
+# Serialization/Deserialization
+serde = "1"
+# Serialization of query strings
+serde_urlencoded = "0.7"
+
+# Environment variable management
+## Auto load .env file into environment variables
+dotenvy = "0.15"
+
+# Utilities
+## Derive getters for structs
+derive-getters = "0.5"
+
+# HTTP client to make external requests
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
