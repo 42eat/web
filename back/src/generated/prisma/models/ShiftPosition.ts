@@ -28,60 +28,60 @@ export type AggregateShiftPosition = {
 
 export type ShiftPositionAvgAggregateOutputType = {
   id: number | null
-  xpMult: number | null
+  xp_mult: number | null
 }
 
 export type ShiftPositionSumAggregateOutputType = {
   id: number | null
-  xpMult: number | null
+  xp_mult: number | null
 }
 
 export type ShiftPositionMinAggregateOutputType = {
   id: number | null
   position: string | null
-  xpMult: number | null
+  xp_mult: number | null
 }
 
 export type ShiftPositionMaxAggregateOutputType = {
   id: number | null
   position: string | null
-  xpMult: number | null
+  xp_mult: number | null
 }
 
 export type ShiftPositionCountAggregateOutputType = {
   id: number
   position: number
-  xpMult: number
+  xp_mult: number
   _all: number
 }
 
 
 export type ShiftPositionAvgAggregateInputType = {
   id?: true
-  xpMult?: true
+  xp_mult?: true
 }
 
 export type ShiftPositionSumAggregateInputType = {
   id?: true
-  xpMult?: true
+  xp_mult?: true
 }
 
 export type ShiftPositionMinAggregateInputType = {
   id?: true
   position?: true
-  xpMult?: true
+  xp_mult?: true
 }
 
 export type ShiftPositionMaxAggregateInputType = {
   id?: true
   position?: true
-  xpMult?: true
+  xp_mult?: true
 }
 
 export type ShiftPositionCountAggregateInputType = {
   id?: true
   position?: true
-  xpMult?: true
+  xp_mult?: true
   _all?: true
 }
 
@@ -174,7 +174,7 @@ export type ShiftPositionGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type ShiftPositionGroupByOutputType = {
   id: number
   position: string
-  xpMult: number
+  xp_mult: number | null
   _count: ShiftPositionCountAggregateOutputType | null
   _avg: ShiftPositionAvgAggregateOutputType | null
   _sum: ShiftPositionSumAggregateOutputType | null
@@ -203,15 +203,15 @@ export type ShiftPositionWhereInput = {
   NOT?: Prisma.ShiftPositionWhereInput | Prisma.ShiftPositionWhereInput[]
   id?: Prisma.IntFilter<"ShiftPosition"> | number
   position?: Prisma.StringFilter<"ShiftPosition"> | string
-  xpMult?: Prisma.FloatFilter<"ShiftPosition"> | number
-  shiftMembers?: Prisma.ShiftMemberListRelationFilter
+  xp_mult?: Prisma.FloatNullableFilter<"ShiftPosition"> | number | null
+  shift_members?: Prisma.ShiftMemberListRelationFilter
 }
 
 export type ShiftPositionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
-  shiftMembers?: Prisma.ShiftMemberOrderByRelationAggregateInput
+  xp_mult?: Prisma.SortOrderInput | Prisma.SortOrder
+  shift_members?: Prisma.ShiftMemberOrderByRelationAggregateInput
 }
 
 export type ShiftPositionWhereUniqueInput = Prisma.AtLeast<{
@@ -220,14 +220,14 @@ export type ShiftPositionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ShiftPositionWhereInput | Prisma.ShiftPositionWhereInput[]
   OR?: Prisma.ShiftPositionWhereInput[]
   NOT?: Prisma.ShiftPositionWhereInput | Prisma.ShiftPositionWhereInput[]
-  xpMult?: Prisma.FloatFilter<"ShiftPosition"> | number
-  shiftMembers?: Prisma.ShiftMemberListRelationFilter
+  xp_mult?: Prisma.FloatNullableFilter<"ShiftPosition"> | number | null
+  shift_members?: Prisma.ShiftMemberListRelationFilter
 }, "id" | "position">
 
 export type ShiftPositionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ShiftPositionCountOrderByAggregateInput
   _avg?: Prisma.ShiftPositionAvgOrderByAggregateInput
   _max?: Prisma.ShiftPositionMaxOrderByAggregateInput
@@ -241,50 +241,50 @@ export type ShiftPositionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ShiftPositionScalarWhereWithAggregatesInput | Prisma.ShiftPositionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ShiftPosition"> | number
   position?: Prisma.StringWithAggregatesFilter<"ShiftPosition"> | string
-  xpMult?: Prisma.FloatWithAggregatesFilter<"ShiftPosition"> | number
+  xp_mult?: Prisma.FloatNullableWithAggregatesFilter<"ShiftPosition"> | number | null
 }
 
 export type ShiftPositionCreateInput = {
   position: string
-  xpMult?: number
-  shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutPositionInput
+  xp_mult?: number | null
+  shift_members?: Prisma.ShiftMemberCreateNestedManyWithoutPositionInput
 }
 
 export type ShiftPositionUncheckedCreateInput = {
   id?: number
   position: string
-  xpMult?: number
-  shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutPositionInput
+  xp_mult?: number | null
+  shift_members?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutPositionInput
 }
 
 export type ShiftPositionUpdateInput = {
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
-  shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutPositionNestedInput
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  shift_members?: Prisma.ShiftMemberUpdateManyWithoutPositionNestedInput
 }
 
 export type ShiftPositionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
-  shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutPositionNestedInput
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  shift_members?: Prisma.ShiftMemberUncheckedUpdateManyWithoutPositionNestedInput
 }
 
 export type ShiftPositionCreateManyInput = {
   id?: number
   position: string
-  xpMult?: number
+  xp_mult?: number | null
 }
 
 export type ShiftPositionUpdateManyMutationInput = {
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftPositionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftPositionNullableScalarRelationFilter = {
@@ -295,91 +295,91 @@ export type ShiftPositionNullableScalarRelationFilter = {
 export type ShiftPositionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrder
 }
 
 export type ShiftPositionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrder
 }
 
 export type ShiftPositionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrder
 }
 
 export type ShiftPositionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrder
 }
 
 export type ShiftPositionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  xpMult?: Prisma.SortOrder
+  xp_mult?: Prisma.SortOrder
 }
 
-export type ShiftPositionCreateNestedOneWithoutShiftMembersInput = {
-  create?: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedCreateWithoutShiftMembersInput>
-  connectOrCreate?: Prisma.ShiftPositionCreateOrConnectWithoutShiftMembersInput
+export type ShiftPositionCreateNestedOneWithoutShift_membersInput = {
+  create?: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedCreateWithoutShift_membersInput>
+  connectOrCreate?: Prisma.ShiftPositionCreateOrConnectWithoutShift_membersInput
   connect?: Prisma.ShiftPositionWhereUniqueInput
 }
 
-export type ShiftPositionUpdateOneWithoutShiftMembersNestedInput = {
-  create?: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedCreateWithoutShiftMembersInput>
-  connectOrCreate?: Prisma.ShiftPositionCreateOrConnectWithoutShiftMembersInput
-  upsert?: Prisma.ShiftPositionUpsertWithoutShiftMembersInput
+export type ShiftPositionUpdateOneWithoutShift_membersNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedCreateWithoutShift_membersInput>
+  connectOrCreate?: Prisma.ShiftPositionCreateOrConnectWithoutShift_membersInput
+  upsert?: Prisma.ShiftPositionUpsertWithoutShift_membersInput
   disconnect?: Prisma.ShiftPositionWhereInput | boolean
   delete?: Prisma.ShiftPositionWhereInput | boolean
   connect?: Prisma.ShiftPositionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ShiftPositionUpdateToOneWithWhereWithoutShiftMembersInput, Prisma.ShiftPositionUpdateWithoutShiftMembersInput>, Prisma.ShiftPositionUncheckedUpdateWithoutShiftMembersInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShiftPositionUpdateToOneWithWhereWithoutShift_membersInput, Prisma.ShiftPositionUpdateWithoutShift_membersInput>, Prisma.ShiftPositionUncheckedUpdateWithoutShift_membersInput>
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
 }
 
-export type ShiftPositionCreateWithoutShiftMembersInput = {
+export type ShiftPositionCreateWithoutShift_membersInput = {
   position: string
-  xpMult?: number
+  xp_mult?: number | null
 }
 
-export type ShiftPositionUncheckedCreateWithoutShiftMembersInput = {
+export type ShiftPositionUncheckedCreateWithoutShift_membersInput = {
   id?: number
   position: string
-  xpMult?: number
+  xp_mult?: number | null
 }
 
-export type ShiftPositionCreateOrConnectWithoutShiftMembersInput = {
+export type ShiftPositionCreateOrConnectWithoutShift_membersInput = {
   where: Prisma.ShiftPositionWhereUniqueInput
-  create: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedCreateWithoutShiftMembersInput>
+  create: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedCreateWithoutShift_membersInput>
 }
 
-export type ShiftPositionUpsertWithoutShiftMembersInput = {
-  update: Prisma.XOR<Prisma.ShiftPositionUpdateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedUpdateWithoutShiftMembersInput>
-  create: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedCreateWithoutShiftMembersInput>
+export type ShiftPositionUpsertWithoutShift_membersInput = {
+  update: Prisma.XOR<Prisma.ShiftPositionUpdateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedUpdateWithoutShift_membersInput>
+  create: Prisma.XOR<Prisma.ShiftPositionCreateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedCreateWithoutShift_membersInput>
   where?: Prisma.ShiftPositionWhereInput
 }
 
-export type ShiftPositionUpdateToOneWithWhereWithoutShiftMembersInput = {
+export type ShiftPositionUpdateToOneWithWhereWithoutShift_membersInput = {
   where?: Prisma.ShiftPositionWhereInput
-  data: Prisma.XOR<Prisma.ShiftPositionUpdateWithoutShiftMembersInput, Prisma.ShiftPositionUncheckedUpdateWithoutShiftMembersInput>
+  data: Prisma.XOR<Prisma.ShiftPositionUpdateWithoutShift_membersInput, Prisma.ShiftPositionUncheckedUpdateWithoutShift_membersInput>
 }
 
-export type ShiftPositionUpdateWithoutShiftMembersInput = {
+export type ShiftPositionUpdateWithoutShift_membersInput = {
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
-export type ShiftPositionUncheckedUpdateWithoutShiftMembersInput = {
+export type ShiftPositionUncheckedUpdateWithoutShift_membersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   position?: Prisma.StringFieldUpdateOperationsInput | string
-  xpMult?: Prisma.FloatFieldUpdateOperationsInput | number
+  xp_mult?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 
@@ -388,11 +388,11 @@ export type ShiftPositionUncheckedUpdateWithoutShiftMembersInput = {
  */
 
 export type ShiftPositionCountOutputType = {
-  shiftMembers: number
+  shift_members: number
 }
 
 export type ShiftPositionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  shiftMembers?: boolean | ShiftPositionCountOutputTypeCountShiftMembersArgs
+  shift_members?: boolean | ShiftPositionCountOutputTypeCountShift_membersArgs
 }
 
 /**
@@ -408,7 +408,7 @@ export type ShiftPositionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
 /**
  * ShiftPositionCountOutputType without action
  */
-export type ShiftPositionCountOutputTypeCountShiftMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftPositionCountOutputTypeCountShift_membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ShiftMemberWhereInput
 }
 
@@ -416,32 +416,32 @@ export type ShiftPositionCountOutputTypeCountShiftMembersArgs<ExtArgs extends ru
 export type ShiftPositionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   position?: boolean
-  xpMult?: boolean
-  shiftMembers?: boolean | Prisma.ShiftPosition$shiftMembersArgs<ExtArgs>
+  xp_mult?: boolean
+  shift_members?: boolean | Prisma.ShiftPosition$shift_membersArgs<ExtArgs>
   _count?: boolean | Prisma.ShiftPositionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shiftPosition"]>
 
 export type ShiftPositionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   position?: boolean
-  xpMult?: boolean
+  xp_mult?: boolean
 }, ExtArgs["result"]["shiftPosition"]>
 
 export type ShiftPositionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   position?: boolean
-  xpMult?: boolean
+  xp_mult?: boolean
 }, ExtArgs["result"]["shiftPosition"]>
 
 export type ShiftPositionSelectScalar = {
   id?: boolean
   position?: boolean
-  xpMult?: boolean
+  xp_mult?: boolean
 }
 
-export type ShiftPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "position" | "xpMult", ExtArgs["result"]["shiftPosition"]>
+export type ShiftPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "position" | "xp_mult", ExtArgs["result"]["shiftPosition"]>
 export type ShiftPositionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  shiftMembers?: boolean | Prisma.ShiftPosition$shiftMembersArgs<ExtArgs>
+  shift_members?: boolean | Prisma.ShiftPosition$shift_membersArgs<ExtArgs>
   _count?: boolean | Prisma.ShiftPositionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ShiftPositionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -450,12 +450,12 @@ export type ShiftPositionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $ShiftPositionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ShiftPosition"
   objects: {
-    shiftMembers: Prisma.$ShiftMemberPayload<ExtArgs>[]
+    shift_members: Prisma.$ShiftMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     position: string
-    xpMult: number
+    xp_mult: number | null
   }, ExtArgs["result"]["shiftPosition"]>
   composites: {}
 }
@@ -850,7 +850,7 @@ readonly fields: ShiftPositionFieldRefs;
  */
 export interface Prisma__ShiftPositionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  shiftMembers<T extends Prisma.ShiftPosition$shiftMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShiftPosition$shiftMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shift_members<T extends Prisma.ShiftPosition$shift_membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShiftPosition$shift_membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -882,7 +882,7 @@ export interface Prisma__ShiftPositionClient<T, Null = never, ExtArgs extends ru
 export interface ShiftPositionFieldRefs {
   readonly id: Prisma.FieldRef<"ShiftPosition", 'Int'>
   readonly position: Prisma.FieldRef<"ShiftPosition", 'String'>
-  readonly xpMult: Prisma.FieldRef<"ShiftPosition", 'Float'>
+  readonly xp_mult: Prisma.FieldRef<"ShiftPosition", 'Float'>
 }
     
 
@@ -1271,9 +1271,9 @@ export type ShiftPositionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * ShiftPosition.shiftMembers
+ * ShiftPosition.shift_members
  */
-export type ShiftPosition$shiftMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftPosition$shift_membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ShiftMember
    */

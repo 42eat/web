@@ -37,22 +37,22 @@ export type BattlepassSeasonSumAggregateOutputType = {
 export type BattlepassSeasonMinAggregateOutputType = {
   id: number | null
   name: string | null
-  startAt: Date | null
-  endAt: Date | null
+  start_at: Date | null
+  end_at: Date | null
 }
 
 export type BattlepassSeasonMaxAggregateOutputType = {
   id: number | null
   name: string | null
-  startAt: Date | null
-  endAt: Date | null
+  start_at: Date | null
+  end_at: Date | null
 }
 
 export type BattlepassSeasonCountAggregateOutputType = {
   id: number
   name: number
-  startAt: number
-  endAt: number
+  start_at: number
+  end_at: number
   _all: number
 }
 
@@ -68,22 +68,22 @@ export type BattlepassSeasonSumAggregateInputType = {
 export type BattlepassSeasonMinAggregateInputType = {
   id?: true
   name?: true
-  startAt?: true
-  endAt?: true
+  start_at?: true
+  end_at?: true
 }
 
 export type BattlepassSeasonMaxAggregateInputType = {
   id?: true
   name?: true
-  startAt?: true
-  endAt?: true
+  start_at?: true
+  end_at?: true
 }
 
 export type BattlepassSeasonCountAggregateInputType = {
   id?: true
   name?: true
-  startAt?: true
-  endAt?: true
+  start_at?: true
+  end_at?: true
   _all?: true
 }
 
@@ -176,8 +176,8 @@ export type BattlepassSeasonGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type BattlepassSeasonGroupByOutputType = {
   id: number
   name: string
-  startAt: Date
-  endAt: Date
+  start_at: Date
+  end_at: Date
   _count: BattlepassSeasonCountAggregateOutputType | null
   _avg: BattlepassSeasonAvgAggregateOutputType | null
   _sum: BattlepassSeasonSumAggregateOutputType | null
@@ -206,8 +206,8 @@ export type BattlepassSeasonWhereInput = {
   NOT?: Prisma.BattlepassSeasonWhereInput | Prisma.BattlepassSeasonWhereInput[]
   id?: Prisma.IntFilter<"BattlepassSeason"> | number
   name?: Prisma.StringFilter<"BattlepassSeason"> | string
-  startAt?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
-  endAt?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
+  start_at?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
+  end_at?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
   tiers?: Prisma.BattlepassTierListRelationFilter
   rewards?: Prisma.MemberBattlepassRewardListRelationFilter
 }
@@ -215,8 +215,8 @@ export type BattlepassSeasonWhereInput = {
 export type BattlepassSeasonOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  startAt?: Prisma.SortOrder
-  endAt?: Prisma.SortOrder
+  start_at?: Prisma.SortOrder
+  end_at?: Prisma.SortOrder
   tiers?: Prisma.BattlepassTierOrderByRelationAggregateInput
   rewards?: Prisma.MemberBattlepassRewardOrderByRelationAggregateInput
 }
@@ -227,8 +227,8 @@ export type BattlepassSeasonWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BattlepassSeasonWhereInput[]
   NOT?: Prisma.BattlepassSeasonWhereInput | Prisma.BattlepassSeasonWhereInput[]
   name?: Prisma.StringFilter<"BattlepassSeason"> | string
-  startAt?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
-  endAt?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
+  start_at?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
+  end_at?: Prisma.DateTimeFilter<"BattlepassSeason"> | Date | string
   tiers?: Prisma.BattlepassTierListRelationFilter
   rewards?: Prisma.MemberBattlepassRewardListRelationFilter
 }, "id">
@@ -236,8 +236,8 @@ export type BattlepassSeasonWhereUniqueInput = Prisma.AtLeast<{
 export type BattlepassSeasonOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  startAt?: Prisma.SortOrder
-  endAt?: Prisma.SortOrder
+  start_at?: Prisma.SortOrder
+  end_at?: Prisma.SortOrder
   _count?: Prisma.BattlepassSeasonCountOrderByAggregateInput
   _avg?: Prisma.BattlepassSeasonAvgOrderByAggregateInput
   _max?: Prisma.BattlepassSeasonMaxOrderByAggregateInput
@@ -251,14 +251,14 @@ export type BattlepassSeasonScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BattlepassSeasonScalarWhereWithAggregatesInput | Prisma.BattlepassSeasonScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"BattlepassSeason"> | number
   name?: Prisma.StringWithAggregatesFilter<"BattlepassSeason"> | string
-  startAt?: Prisma.DateTimeWithAggregatesFilter<"BattlepassSeason"> | Date | string
-  endAt?: Prisma.DateTimeWithAggregatesFilter<"BattlepassSeason"> | Date | string
+  start_at?: Prisma.DateTimeWithAggregatesFilter<"BattlepassSeason"> | Date | string
+  end_at?: Prisma.DateTimeWithAggregatesFilter<"BattlepassSeason"> | Date | string
 }
 
 export type BattlepassSeasonCreateInput = {
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   tiers?: Prisma.BattlepassTierCreateNestedManyWithoutSeasonInput
   rewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutSeasonInput
 }
@@ -266,16 +266,16 @@ export type BattlepassSeasonCreateInput = {
 export type BattlepassSeasonUncheckedCreateInput = {
   id?: number
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   tiers?: Prisma.BattlepassTierUncheckedCreateNestedManyWithoutSeasonInput
   rewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type BattlepassSeasonUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tiers?: Prisma.BattlepassTierUpdateManyWithoutSeasonNestedInput
   rewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutSeasonNestedInput
 }
@@ -283,8 +283,8 @@ export type BattlepassSeasonUpdateInput = {
 export type BattlepassSeasonUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tiers?: Prisma.BattlepassTierUncheckedUpdateManyWithoutSeasonNestedInput
   rewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutSeasonNestedInput
 }
@@ -292,28 +292,28 @@ export type BattlepassSeasonUncheckedUpdateInput = {
 export type BattlepassSeasonCreateManyInput = {
   id?: number
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
 }
 
 export type BattlepassSeasonUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BattlepassSeasonUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BattlepassSeasonCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  startAt?: Prisma.SortOrder
-  endAt?: Prisma.SortOrder
+  start_at?: Prisma.SortOrder
+  end_at?: Prisma.SortOrder
 }
 
 export type BattlepassSeasonAvgOrderByAggregateInput = {
@@ -323,15 +323,15 @@ export type BattlepassSeasonAvgOrderByAggregateInput = {
 export type BattlepassSeasonMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  startAt?: Prisma.SortOrder
-  endAt?: Prisma.SortOrder
+  start_at?: Prisma.SortOrder
+  end_at?: Prisma.SortOrder
 }
 
 export type BattlepassSeasonMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  startAt?: Prisma.SortOrder
-  endAt?: Prisma.SortOrder
+  start_at?: Prisma.SortOrder
+  end_at?: Prisma.SortOrder
 }
 
 export type BattlepassSeasonSumOrderByAggregateInput = {
@@ -373,16 +373,16 @@ export type BattlepassSeasonUpdateOneRequiredWithoutRewardsNestedInput = {
 
 export type BattlepassSeasonCreateWithoutTiersInput = {
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   rewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutSeasonInput
 }
 
 export type BattlepassSeasonUncheckedCreateWithoutTiersInput = {
   id?: number
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   rewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutSeasonInput
 }
 
@@ -404,31 +404,31 @@ export type BattlepassSeasonUpdateToOneWithWhereWithoutTiersInput = {
 
 export type BattlepassSeasonUpdateWithoutTiersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutSeasonNestedInput
 }
 
 export type BattlepassSeasonUncheckedUpdateWithoutTiersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type BattlepassSeasonCreateWithoutRewardsInput = {
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   tiers?: Prisma.BattlepassTierCreateNestedManyWithoutSeasonInput
 }
 
 export type BattlepassSeasonUncheckedCreateWithoutRewardsInput = {
   id?: number
   name: string
-  startAt: Date | string
-  endAt: Date | string
+  start_at: Date | string
+  end_at: Date | string
   tiers?: Prisma.BattlepassTierUncheckedCreateNestedManyWithoutSeasonInput
 }
 
@@ -450,16 +450,16 @@ export type BattlepassSeasonUpdateToOneWithWhereWithoutRewardsInput = {
 
 export type BattlepassSeasonUpdateWithoutRewardsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tiers?: Prisma.BattlepassTierUpdateManyWithoutSeasonNestedInput
 }
 
 export type BattlepassSeasonUncheckedUpdateWithoutRewardsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  startAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tiers?: Prisma.BattlepassTierUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
@@ -506,8 +506,8 @@ export type BattlepassSeasonCountOutputTypeCountRewardsArgs<ExtArgs extends runt
 export type BattlepassSeasonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  startAt?: boolean
-  endAt?: boolean
+  start_at?: boolean
+  end_at?: boolean
   tiers?: boolean | Prisma.BattlepassSeason$tiersArgs<ExtArgs>
   rewards?: boolean | Prisma.BattlepassSeason$rewardsArgs<ExtArgs>
   _count?: boolean | Prisma.BattlepassSeasonCountOutputTypeDefaultArgs<ExtArgs>
@@ -516,25 +516,25 @@ export type BattlepassSeasonSelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type BattlepassSeasonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  startAt?: boolean
-  endAt?: boolean
+  start_at?: boolean
+  end_at?: boolean
 }, ExtArgs["result"]["battlepassSeason"]>
 
 export type BattlepassSeasonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  startAt?: boolean
-  endAt?: boolean
+  start_at?: boolean
+  end_at?: boolean
 }, ExtArgs["result"]["battlepassSeason"]>
 
 export type BattlepassSeasonSelectScalar = {
   id?: boolean
   name?: boolean
-  startAt?: boolean
-  endAt?: boolean
+  start_at?: boolean
+  end_at?: boolean
 }
 
-export type BattlepassSeasonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "startAt" | "endAt", ExtArgs["result"]["battlepassSeason"]>
+export type BattlepassSeasonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "start_at" | "end_at", ExtArgs["result"]["battlepassSeason"]>
 export type BattlepassSeasonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tiers?: boolean | Prisma.BattlepassSeason$tiersArgs<ExtArgs>
   rewards?: boolean | Prisma.BattlepassSeason$rewardsArgs<ExtArgs>
@@ -552,8 +552,8 @@ export type $BattlepassSeasonPayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
-    startAt: Date
-    endAt: Date
+    start_at: Date
+    end_at: Date
   }, ExtArgs["result"]["battlepassSeason"]>
   composites: {}
 }
@@ -981,8 +981,8 @@ export interface Prisma__BattlepassSeasonClient<T, Null = never, ExtArgs extends
 export interface BattlepassSeasonFieldRefs {
   readonly id: Prisma.FieldRef<"BattlepassSeason", 'Int'>
   readonly name: Prisma.FieldRef<"BattlepassSeason", 'String'>
-  readonly startAt: Prisma.FieldRef<"BattlepassSeason", 'DateTime'>
-  readonly endAt: Prisma.FieldRef<"BattlepassSeason", 'DateTime'>
+  readonly start_at: Prisma.FieldRef<"BattlepassSeason", 'DateTime'>
+  readonly end_at: Prisma.FieldRef<"BattlepassSeason", 'DateTime'>
 }
     
 

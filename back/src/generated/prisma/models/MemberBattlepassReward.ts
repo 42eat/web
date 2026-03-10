@@ -28,80 +28,80 @@ export type AggregateMemberBattlepassReward = {
 
 export type MemberBattlepassRewardAvgAggregateOutputType = {
   id: number | null
-  memberId: number | null
-  seasonId: number | null
-  tierId: number | null
+  member_id: number | null
+  season_id: number | null
+  tier_id: number | null
 }
 
 export type MemberBattlepassRewardSumAggregateOutputType = {
   id: number | null
-  memberId: number | null
-  seasonId: number | null
-  tierId: number | null
+  member_id: number | null
+  season_id: number | null
+  tier_id: number | null
 }
 
 export type MemberBattlepassRewardMinAggregateOutputType = {
   id: number | null
-  memberId: number | null
-  seasonId: number | null
-  tierId: number | null
-  claimedAt: Date | null
+  member_id: number | null
+  season_id: number | null
+  tier_id: number | null
+  claimed_at: Date | null
 }
 
 export type MemberBattlepassRewardMaxAggregateOutputType = {
   id: number | null
-  memberId: number | null
-  seasonId: number | null
-  tierId: number | null
-  claimedAt: Date | null
+  member_id: number | null
+  season_id: number | null
+  tier_id: number | null
+  claimed_at: Date | null
 }
 
 export type MemberBattlepassRewardCountAggregateOutputType = {
   id: number
-  memberId: number
-  seasonId: number
-  tierId: number
-  claimedAt: number
+  member_id: number
+  season_id: number
+  tier_id: number
+  claimed_at: number
   _all: number
 }
 
 
 export type MemberBattlepassRewardAvgAggregateInputType = {
   id?: true
-  memberId?: true
-  seasonId?: true
-  tierId?: true
+  member_id?: true
+  season_id?: true
+  tier_id?: true
 }
 
 export type MemberBattlepassRewardSumAggregateInputType = {
   id?: true
-  memberId?: true
-  seasonId?: true
-  tierId?: true
+  member_id?: true
+  season_id?: true
+  tier_id?: true
 }
 
 export type MemberBattlepassRewardMinAggregateInputType = {
   id?: true
-  memberId?: true
-  seasonId?: true
-  tierId?: true
-  claimedAt?: true
+  member_id?: true
+  season_id?: true
+  tier_id?: true
+  claimed_at?: true
 }
 
 export type MemberBattlepassRewardMaxAggregateInputType = {
   id?: true
-  memberId?: true
-  seasonId?: true
-  tierId?: true
-  claimedAt?: true
+  member_id?: true
+  season_id?: true
+  tier_id?: true
+  claimed_at?: true
 }
 
 export type MemberBattlepassRewardCountAggregateInputType = {
   id?: true
-  memberId?: true
-  seasonId?: true
-  tierId?: true
-  claimedAt?: true
+  member_id?: true
+  season_id?: true
+  tier_id?: true
+  claimed_at?: true
   _all?: true
 }
 
@@ -193,10 +193,10 @@ export type MemberBattlepassRewardGroupByArgs<ExtArgs extends runtime.Types.Exte
 
 export type MemberBattlepassRewardGroupByOutputType = {
   id: number
-  memberId: number
-  seasonId: number
-  tierId: number
-  claimedAt: Date
+  member_id: number
+  season_id: number
+  tier_id: number
+  claimed_at: Date
   _count: MemberBattlepassRewardCountAggregateOutputType | null
   _avg: MemberBattlepassRewardAvgAggregateOutputType | null
   _sum: MemberBattlepassRewardSumAggregateOutputType | null
@@ -224,10 +224,10 @@ export type MemberBattlepassRewardWhereInput = {
   OR?: Prisma.MemberBattlepassRewardWhereInput[]
   NOT?: Prisma.MemberBattlepassRewardWhereInput | Prisma.MemberBattlepassRewardWhereInput[]
   id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  memberId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  seasonId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  tierId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  claimedAt?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
+  member_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  season_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  tier_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  claimed_at?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   season?: Prisma.XOR<Prisma.BattlepassSeasonScalarRelationFilter, Prisma.BattlepassSeasonWhereInput>
   tier?: Prisma.XOR<Prisma.BattlepassTierScalarRelationFilter, Prisma.BattlepassTierWhereInput>
@@ -235,10 +235,10 @@ export type MemberBattlepassRewardWhereInput = {
 
 export type MemberBattlepassRewardOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
-  claimedAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
+  claimed_at?: Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
   season?: Prisma.BattlepassSeasonOrderByWithRelationInput
   tier?: Prisma.BattlepassTierOrderByWithRelationInput
@@ -249,10 +249,10 @@ export type MemberBattlepassRewardWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MemberBattlepassRewardWhereInput | Prisma.MemberBattlepassRewardWhereInput[]
   OR?: Prisma.MemberBattlepassRewardWhereInput[]
   NOT?: Prisma.MemberBattlepassRewardWhereInput | Prisma.MemberBattlepassRewardWhereInput[]
-  memberId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  seasonId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  tierId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  claimedAt?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
+  member_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  season_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  tier_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  claimed_at?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   season?: Prisma.XOR<Prisma.BattlepassSeasonScalarRelationFilter, Prisma.BattlepassSeasonWhereInput>
   tier?: Prisma.XOR<Prisma.BattlepassTierScalarRelationFilter, Prisma.BattlepassTierWhereInput>
@@ -260,10 +260,10 @@ export type MemberBattlepassRewardWhereUniqueInput = Prisma.AtLeast<{
 
 export type MemberBattlepassRewardOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
-  claimedAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
+  claimed_at?: Prisma.SortOrder
   _count?: Prisma.MemberBattlepassRewardCountOrderByAggregateInput
   _avg?: Prisma.MemberBattlepassRewardAvgOrderByAggregateInput
   _max?: Prisma.MemberBattlepassRewardMaxOrderByAggregateInput
@@ -276,60 +276,60 @@ export type MemberBattlepassRewardScalarWhereWithAggregatesInput = {
   OR?: Prisma.MemberBattlepassRewardScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MemberBattlepassRewardScalarWhereWithAggregatesInput | Prisma.MemberBattlepassRewardScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
-  memberId?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
-  seasonId?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
-  tierId?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
-  claimedAt?: Prisma.DateTimeWithAggregatesFilter<"MemberBattlepassReward"> | Date | string
+  member_id?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
+  season_id?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
+  tier_id?: Prisma.IntWithAggregatesFilter<"MemberBattlepassReward"> | number
+  claimed_at?: Prisma.DateTimeWithAggregatesFilter<"MemberBattlepassReward"> | Date | string
 }
 
 export type MemberBattlepassRewardCreateInput = {
-  claimedAt: Date | string
-  member: Prisma.MemberCreateNestedOneWithoutBattlpassRewardsInput
+  claimed_at: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutMember_battlepass_rewardsInput
   season: Prisma.BattlepassSeasonCreateNestedOneWithoutRewardsInput
   tier: Prisma.BattlepassTierCreateNestedOneWithoutRewardsInput
 }
 
 export type MemberBattlepassRewardUncheckedCreateInput = {
   id?: number
-  memberId: number
-  seasonId: number
-  tierId: number
-  claimedAt: Date | string
+  member_id: number
+  season_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardUpdateInput = {
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  member?: Prisma.MemberUpdateOneRequiredWithoutBattlpassRewardsNestedInput
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutMember_battlepass_rewardsNestedInput
   season?: Prisma.BattlepassSeasonUpdateOneRequiredWithoutRewardsNestedInput
   tier?: Prisma.BattlepassTierUpdateOneRequiredWithoutRewardsNestedInput
 }
 
 export type MemberBattlepassRewardUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardCreateManyInput = {
   id?: number
-  memberId: number
-  seasonId: number
-  tierId: number
-  claimedAt: Date | string
+  member_id: number
+  season_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardUpdateManyMutationInput = {
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardListRelationFilter = {
@@ -344,40 +344,40 @@ export type MemberBattlepassRewardOrderByRelationAggregateInput = {
 
 export type MemberBattlepassRewardCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
-  claimedAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
+  claimed_at?: Prisma.SortOrder
 }
 
 export type MemberBattlepassRewardAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
 }
 
 export type MemberBattlepassRewardMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
-  claimedAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
+  claimed_at?: Prisma.SortOrder
 }
 
 export type MemberBattlepassRewardMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
-  claimedAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
+  claimed_at?: Prisma.SortOrder
 }
 
 export type MemberBattlepassRewardSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  seasonId?: Prisma.SortOrder
-  tierId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  season_id?: Prisma.SortOrder
+  tier_id?: Prisma.SortOrder
 }
 
 export type MemberBattlepassRewardCreateNestedManyWithoutMemberInput = {
@@ -507,16 +507,16 @@ export type MemberBattlepassRewardUncheckedUpdateManyWithoutTierNestedInput = {
 }
 
 export type MemberBattlepassRewardCreateWithoutMemberInput = {
-  claimedAt: Date | string
+  claimed_at: Date | string
   season: Prisma.BattlepassSeasonCreateNestedOneWithoutRewardsInput
   tier: Prisma.BattlepassTierCreateNestedOneWithoutRewardsInput
 }
 
 export type MemberBattlepassRewardUncheckedCreateWithoutMemberInput = {
   id?: number
-  seasonId: number
-  tierId: number
-  claimedAt: Date | string
+  season_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardCreateOrConnectWithoutMemberInput = {
@@ -550,23 +550,23 @@ export type MemberBattlepassRewardScalarWhereInput = {
   OR?: Prisma.MemberBattlepassRewardScalarWhereInput[]
   NOT?: Prisma.MemberBattlepassRewardScalarWhereInput | Prisma.MemberBattlepassRewardScalarWhereInput[]
   id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  memberId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  seasonId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  tierId?: Prisma.IntFilter<"MemberBattlepassReward"> | number
-  claimedAt?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
+  member_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  season_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  tier_id?: Prisma.IntFilter<"MemberBattlepassReward"> | number
+  claimed_at?: Prisma.DateTimeFilter<"MemberBattlepassReward"> | Date | string
 }
 
 export type MemberBattlepassRewardCreateWithoutSeasonInput = {
-  claimedAt: Date | string
-  member: Prisma.MemberCreateNestedOneWithoutBattlpassRewardsInput
+  claimed_at: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutMember_battlepass_rewardsInput
   tier: Prisma.BattlepassTierCreateNestedOneWithoutRewardsInput
 }
 
 export type MemberBattlepassRewardUncheckedCreateWithoutSeasonInput = {
   id?: number
-  memberId: number
-  tierId: number
-  claimedAt: Date | string
+  member_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardCreateOrConnectWithoutSeasonInput = {
@@ -596,16 +596,16 @@ export type MemberBattlepassRewardUpdateManyWithWhereWithoutSeasonInput = {
 }
 
 export type MemberBattlepassRewardCreateWithoutTierInput = {
-  claimedAt: Date | string
-  member: Prisma.MemberCreateNestedOneWithoutBattlpassRewardsInput
+  claimed_at: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutMember_battlepass_rewardsInput
   season: Prisma.BattlepassSeasonCreateNestedOneWithoutRewardsInput
 }
 
 export type MemberBattlepassRewardUncheckedCreateWithoutTierInput = {
   id?: number
-  memberId: number
-  seasonId: number
-  claimedAt: Date | string
+  member_id: number
+  season_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardCreateOrConnectWithoutTierInput = {
@@ -636,93 +636,93 @@ export type MemberBattlepassRewardUpdateManyWithWhereWithoutTierInput = {
 
 export type MemberBattlepassRewardCreateManyMemberInput = {
   id?: number
-  seasonId: number
-  tierId: number
-  claimedAt: Date | string
+  season_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardUpdateWithoutMemberInput = {
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   season?: Prisma.BattlepassSeasonUpdateOneRequiredWithoutRewardsNestedInput
   tier?: Prisma.BattlepassTierUpdateOneRequiredWithoutRewardsNestedInput
 }
 
 export type MemberBattlepassRewardUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardCreateManySeasonInput = {
   id?: number
-  memberId: number
-  tierId: number
-  claimedAt: Date | string
+  member_id: number
+  tier_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardUpdateWithoutSeasonInput = {
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  member?: Prisma.MemberUpdateOneRequiredWithoutBattlpassRewardsNestedInput
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutMember_battlepass_rewardsNestedInput
   tier?: Prisma.BattlepassTierUpdateOneRequiredWithoutRewardsNestedInput
 }
 
 export type MemberBattlepassRewardUncheckedUpdateWithoutSeasonInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardUncheckedUpdateManyWithoutSeasonInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  tierId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tier_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardCreateManyTierInput = {
   id?: number
-  memberId: number
-  seasonId: number
-  claimedAt: Date | string
+  member_id: number
+  season_id: number
+  claimed_at: Date | string
 }
 
 export type MemberBattlepassRewardUpdateWithoutTierInput = {
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  member?: Prisma.MemberUpdateOneRequiredWithoutBattlpassRewardsNestedInput
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutMember_battlepass_rewardsNestedInput
   season?: Prisma.BattlepassSeasonUpdateOneRequiredWithoutRewardsNestedInput
 }
 
 export type MemberBattlepassRewardUncheckedUpdateWithoutTierInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MemberBattlepassRewardUncheckedUpdateManyWithoutTierInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
-  claimedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  season_id?: Prisma.IntFieldUpdateOperationsInput | number
+  claimed_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type MemberBattlepassRewardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  memberId?: boolean
-  seasonId?: boolean
-  tierId?: boolean
-  claimedAt?: boolean
+  member_id?: boolean
+  season_id?: boolean
+  tier_id?: boolean
+  claimed_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
   tier?: boolean | Prisma.BattlepassTierDefaultArgs<ExtArgs>
@@ -730,10 +730,10 @@ export type MemberBattlepassRewardSelect<ExtArgs extends runtime.Types.Extension
 
 export type MemberBattlepassRewardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  memberId?: boolean
-  seasonId?: boolean
-  tierId?: boolean
-  claimedAt?: boolean
+  member_id?: boolean
+  season_id?: boolean
+  tier_id?: boolean
+  claimed_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
   tier?: boolean | Prisma.BattlepassTierDefaultArgs<ExtArgs>
@@ -741,10 +741,10 @@ export type MemberBattlepassRewardSelectCreateManyAndReturn<ExtArgs extends runt
 
 export type MemberBattlepassRewardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  memberId?: boolean
-  seasonId?: boolean
-  tierId?: boolean
-  claimedAt?: boolean
+  member_id?: boolean
+  season_id?: boolean
+  tier_id?: boolean
+  claimed_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
   tier?: boolean | Prisma.BattlepassTierDefaultArgs<ExtArgs>
@@ -752,13 +752,13 @@ export type MemberBattlepassRewardSelectUpdateManyAndReturn<ExtArgs extends runt
 
 export type MemberBattlepassRewardSelectScalar = {
   id?: boolean
-  memberId?: boolean
-  seasonId?: boolean
-  tierId?: boolean
-  claimedAt?: boolean
+  member_id?: boolean
+  season_id?: boolean
+  tier_id?: boolean
+  claimed_at?: boolean
 }
 
-export type MemberBattlepassRewardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "seasonId" | "tierId" | "claimedAt", ExtArgs["result"]["memberBattlepassReward"]>
+export type MemberBattlepassRewardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "member_id" | "season_id" | "tier_id" | "claimed_at", ExtArgs["result"]["memberBattlepassReward"]>
 export type MemberBattlepassRewardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
@@ -784,10 +784,10 @@ export type $MemberBattlepassRewardPayload<ExtArgs extends runtime.Types.Extensi
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    memberId: number
-    seasonId: number
-    tierId: number
-    claimedAt: Date
+    member_id: number
+    season_id: number
+    tier_id: number
+    claimed_at: Date
   }, ExtArgs["result"]["memberBattlepassReward"]>
   composites: {}
 }
@@ -1215,10 +1215,10 @@ export interface Prisma__MemberBattlepassRewardClient<T, Null = never, ExtArgs e
  */
 export interface MemberBattlepassRewardFieldRefs {
   readonly id: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
-  readonly memberId: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
-  readonly seasonId: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
-  readonly tierId: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
-  readonly claimedAt: Prisma.FieldRef<"MemberBattlepassReward", 'DateTime'>
+  readonly member_id: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
+  readonly season_id: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
+  readonly tier_id: Prisma.FieldRef<"MemberBattlepassReward", 'Int'>
+  readonly claimed_at: Prisma.FieldRef<"MemberBattlepassReward", 'DateTime'>
 }
     
 

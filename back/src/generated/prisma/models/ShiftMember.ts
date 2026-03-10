@@ -28,74 +28,74 @@ export type AggregateShiftMember = {
 
 export type ShiftMemberAvgAggregateOutputType = {
   id: number | null
-  shiftId: number | null
-  memberId: number | null
-  positionId: number | null
+  shift_id: number | null
+  member_id: number | null
+  position_id: number | null
 }
 
 export type ShiftMemberSumAggregateOutputType = {
   id: number | null
-  shiftId: number | null
-  memberId: number | null
-  positionId: number | null
+  shift_id: number | null
+  member_id: number | null
+  position_id: number | null
 }
 
 export type ShiftMemberMinAggregateOutputType = {
   id: number | null
-  shiftId: number | null
-  memberId: number | null
-  positionId: number | null
+  shift_id: number | null
+  member_id: number | null
+  position_id: number | null
 }
 
 export type ShiftMemberMaxAggregateOutputType = {
   id: number | null
-  shiftId: number | null
-  memberId: number | null
-  positionId: number | null
+  shift_id: number | null
+  member_id: number | null
+  position_id: number | null
 }
 
 export type ShiftMemberCountAggregateOutputType = {
   id: number
-  shiftId: number
-  memberId: number
-  positionId: number
+  shift_id: number
+  member_id: number
+  position_id: number
   _all: number
 }
 
 
 export type ShiftMemberAvgAggregateInputType = {
   id?: true
-  shiftId?: true
-  memberId?: true
-  positionId?: true
+  shift_id?: true
+  member_id?: true
+  position_id?: true
 }
 
 export type ShiftMemberSumAggregateInputType = {
   id?: true
-  shiftId?: true
-  memberId?: true
-  positionId?: true
+  shift_id?: true
+  member_id?: true
+  position_id?: true
 }
 
 export type ShiftMemberMinAggregateInputType = {
   id?: true
-  shiftId?: true
-  memberId?: true
-  positionId?: true
+  shift_id?: true
+  member_id?: true
+  position_id?: true
 }
 
 export type ShiftMemberMaxAggregateInputType = {
   id?: true
-  shiftId?: true
-  memberId?: true
-  positionId?: true
+  shift_id?: true
+  member_id?: true
+  position_id?: true
 }
 
 export type ShiftMemberCountAggregateInputType = {
   id?: true
-  shiftId?: true
-  memberId?: true
-  positionId?: true
+  shift_id?: true
+  member_id?: true
+  position_id?: true
   _all?: true
 }
 
@@ -187,9 +187,9 @@ export type ShiftMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type ShiftMemberGroupByOutputType = {
   id: number
-  shiftId: number
-  memberId: number
-  positionId: number | null
+  shift_id: number
+  member_id: number
+  position_id: number | null
   _count: ShiftMemberCountAggregateOutputType | null
   _avg: ShiftMemberAvgAggregateOutputType | null
   _sum: ShiftMemberSumAggregateOutputType | null
@@ -217,9 +217,9 @@ export type ShiftMemberWhereInput = {
   OR?: Prisma.ShiftMemberWhereInput[]
   NOT?: Prisma.ShiftMemberWhereInput | Prisma.ShiftMemberWhereInput[]
   id?: Prisma.IntFilter<"ShiftMember"> | number
-  shiftId?: Prisma.IntFilter<"ShiftMember"> | number
-  memberId?: Prisma.IntFilter<"ShiftMember"> | number
-  positionId?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
+  shift_id?: Prisma.IntFilter<"ShiftMember"> | number
+  member_id?: Prisma.IntFilter<"ShiftMember"> | number
+  position_id?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
   shift?: Prisma.XOR<Prisma.ShiftScalarRelationFilter, Prisma.ShiftWhereInput>
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   position?: Prisma.XOR<Prisma.ShiftPositionNullableScalarRelationFilter, Prisma.ShiftPositionWhereInput> | null
@@ -227,9 +227,9 @@ export type ShiftMemberWhereInput = {
 
 export type ShiftMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrderInput | Prisma.SortOrder
   shift?: Prisma.ShiftOrderByWithRelationInput
   member?: Prisma.MemberOrderByWithRelationInput
   position?: Prisma.ShiftPositionOrderByWithRelationInput
@@ -240,9 +240,9 @@ export type ShiftMemberWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ShiftMemberWhereInput | Prisma.ShiftMemberWhereInput[]
   OR?: Prisma.ShiftMemberWhereInput[]
   NOT?: Prisma.ShiftMemberWhereInput | Prisma.ShiftMemberWhereInput[]
-  shiftId?: Prisma.IntFilter<"ShiftMember"> | number
-  memberId?: Prisma.IntFilter<"ShiftMember"> | number
-  positionId?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
+  shift_id?: Prisma.IntFilter<"ShiftMember"> | number
+  member_id?: Prisma.IntFilter<"ShiftMember"> | number
+  position_id?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
   shift?: Prisma.XOR<Prisma.ShiftScalarRelationFilter, Prisma.ShiftWhereInput>
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   position?: Prisma.XOR<Prisma.ShiftPositionNullableScalarRelationFilter, Prisma.ShiftPositionWhereInput> | null
@@ -250,9 +250,9 @@ export type ShiftMemberWhereUniqueInput = Prisma.AtLeast<{
 
 export type ShiftMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ShiftMemberCountOrderByAggregateInput
   _avg?: Prisma.ShiftMemberAvgOrderByAggregateInput
   _max?: Prisma.ShiftMemberMaxOrderByAggregateInput
@@ -265,42 +265,42 @@ export type ShiftMemberScalarWhereWithAggregatesInput = {
   OR?: Prisma.ShiftMemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ShiftMemberScalarWhereWithAggregatesInput | Prisma.ShiftMemberScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ShiftMember"> | number
-  shiftId?: Prisma.IntWithAggregatesFilter<"ShiftMember"> | number
-  memberId?: Prisma.IntWithAggregatesFilter<"ShiftMember"> | number
-  positionId?: Prisma.IntNullableWithAggregatesFilter<"ShiftMember"> | number | null
+  shift_id?: Prisma.IntWithAggregatesFilter<"ShiftMember"> | number
+  member_id?: Prisma.IntWithAggregatesFilter<"ShiftMember"> | number
+  position_id?: Prisma.IntNullableWithAggregatesFilter<"ShiftMember"> | number | null
 }
 
 export type ShiftMemberCreateInput = {
-  shift: Prisma.ShiftCreateNestedOneWithoutShiftMembersInput
-  member: Prisma.MemberCreateNestedOneWithoutShiftMembersInput
-  position?: Prisma.ShiftPositionCreateNestedOneWithoutShiftMembersInput
+  shift: Prisma.ShiftCreateNestedOneWithoutShift_membersInput
+  member: Prisma.MemberCreateNestedOneWithoutShift_membersInput
+  position?: Prisma.ShiftPositionCreateNestedOneWithoutShift_membersInput
 }
 
 export type ShiftMemberUncheckedCreateInput = {
   id?: number
-  shiftId: number
-  memberId: number
-  positionId?: number | null
+  shift_id: number
+  member_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberUpdateInput = {
-  shift?: Prisma.ShiftUpdateOneRequiredWithoutShiftMembersNestedInput
-  member?: Prisma.MemberUpdateOneRequiredWithoutShiftMembersNestedInput
-  position?: Prisma.ShiftPositionUpdateOneWithoutShiftMembersNestedInput
+  shift?: Prisma.ShiftUpdateOneRequiredWithoutShift_membersNestedInput
+  member?: Prisma.MemberUpdateOneRequiredWithoutShift_membersNestedInput
+  position?: Prisma.ShiftPositionUpdateOneWithoutShift_membersNestedInput
 }
 
 export type ShiftMemberUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberCreateManyInput = {
   id?: number
-  shiftId: number
-  memberId: number
-  positionId?: number | null
+  shift_id: number
+  member_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberUpdateManyMutationInput = {
@@ -309,9 +309,9 @@ export type ShiftMemberUpdateManyMutationInput = {
 
 export type ShiftMemberUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberListRelationFilter = {
@@ -326,37 +326,37 @@ export type ShiftMemberOrderByRelationAggregateInput = {
 
 export type ShiftMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrder
 }
 
 export type ShiftMemberAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrder
 }
 
 export type ShiftMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrder
 }
 
 export type ShiftMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrder
 }
 
 export type ShiftMemberSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  shiftId?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  positionId?: Prisma.SortOrder
+  shift_id?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  position_id?: Prisma.SortOrder
 }
 
 export type ShiftMemberCreateNestedManyWithoutMemberInput = {
@@ -486,14 +486,14 @@ export type ShiftMemberUncheckedUpdateManyWithoutPositionNestedInput = {
 }
 
 export type ShiftMemberCreateWithoutMemberInput = {
-  shift: Prisma.ShiftCreateNestedOneWithoutShiftMembersInput
-  position?: Prisma.ShiftPositionCreateNestedOneWithoutShiftMembersInput
+  shift: Prisma.ShiftCreateNestedOneWithoutShift_membersInput
+  position?: Prisma.ShiftPositionCreateNestedOneWithoutShift_membersInput
 }
 
 export type ShiftMemberUncheckedCreateWithoutMemberInput = {
   id?: number
-  shiftId: number
-  positionId?: number | null
+  shift_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberCreateOrConnectWithoutMemberInput = {
@@ -527,20 +527,20 @@ export type ShiftMemberScalarWhereInput = {
   OR?: Prisma.ShiftMemberScalarWhereInput[]
   NOT?: Prisma.ShiftMemberScalarWhereInput | Prisma.ShiftMemberScalarWhereInput[]
   id?: Prisma.IntFilter<"ShiftMember"> | number
-  shiftId?: Prisma.IntFilter<"ShiftMember"> | number
-  memberId?: Prisma.IntFilter<"ShiftMember"> | number
-  positionId?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
+  shift_id?: Prisma.IntFilter<"ShiftMember"> | number
+  member_id?: Prisma.IntFilter<"ShiftMember"> | number
+  position_id?: Prisma.IntNullableFilter<"ShiftMember"> | number | null
 }
 
 export type ShiftMemberCreateWithoutShiftInput = {
-  member: Prisma.MemberCreateNestedOneWithoutShiftMembersInput
-  position?: Prisma.ShiftPositionCreateNestedOneWithoutShiftMembersInput
+  member: Prisma.MemberCreateNestedOneWithoutShift_membersInput
+  position?: Prisma.ShiftPositionCreateNestedOneWithoutShift_membersInput
 }
 
 export type ShiftMemberUncheckedCreateWithoutShiftInput = {
   id?: number
-  memberId: number
-  positionId?: number | null
+  member_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberCreateOrConnectWithoutShiftInput = {
@@ -570,14 +570,14 @@ export type ShiftMemberUpdateManyWithWhereWithoutShiftInput = {
 }
 
 export type ShiftMemberCreateWithoutPositionInput = {
-  shift: Prisma.ShiftCreateNestedOneWithoutShiftMembersInput
-  member: Prisma.MemberCreateNestedOneWithoutShiftMembersInput
+  shift: Prisma.ShiftCreateNestedOneWithoutShift_membersInput
+  member: Prisma.MemberCreateNestedOneWithoutShift_membersInput
 }
 
 export type ShiftMemberUncheckedCreateWithoutPositionInput = {
   id?: number
-  shiftId: number
-  memberId: number
+  shift_id: number
+  member_id: number
 }
 
 export type ShiftMemberCreateOrConnectWithoutPositionInput = {
@@ -608,80 +608,80 @@ export type ShiftMemberUpdateManyWithWhereWithoutPositionInput = {
 
 export type ShiftMemberCreateManyMemberInput = {
   id?: number
-  shiftId: number
-  positionId?: number | null
+  shift_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberUpdateWithoutMemberInput = {
-  shift?: Prisma.ShiftUpdateOneRequiredWithoutShiftMembersNestedInput
-  position?: Prisma.ShiftPositionUpdateOneWithoutShiftMembersNestedInput
+  shift?: Prisma.ShiftUpdateOneRequiredWithoutShift_membersNestedInput
+  position?: Prisma.ShiftPositionUpdateOneWithoutShift_membersNestedInput
 }
 
 export type ShiftMemberUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberCreateManyShiftInput = {
   id?: number
-  memberId: number
-  positionId?: number | null
+  member_id: number
+  position_id?: number | null
 }
 
 export type ShiftMemberUpdateWithoutShiftInput = {
-  member?: Prisma.MemberUpdateOneRequiredWithoutShiftMembersNestedInput
-  position?: Prisma.ShiftPositionUpdateOneWithoutShiftMembersNestedInput
+  member?: Prisma.MemberUpdateOneRequiredWithoutShift_membersNestedInput
+  position?: Prisma.ShiftPositionUpdateOneWithoutShift_membersNestedInput
 }
 
 export type ShiftMemberUncheckedUpdateWithoutShiftInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberUncheckedUpdateManyWithoutShiftInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  positionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  position_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftMemberCreateManyPositionInput = {
   id?: number
-  shiftId: number
-  memberId: number
+  shift_id: number
+  member_id: number
 }
 
 export type ShiftMemberUpdateWithoutPositionInput = {
-  shift?: Prisma.ShiftUpdateOneRequiredWithoutShiftMembersNestedInput
-  member?: Prisma.MemberUpdateOneRequiredWithoutShiftMembersNestedInput
+  shift?: Prisma.ShiftUpdateOneRequiredWithoutShift_membersNestedInput
+  member?: Prisma.MemberUpdateOneRequiredWithoutShift_membersNestedInput
 }
 
 export type ShiftMemberUncheckedUpdateWithoutPositionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ShiftMemberUncheckedUpdateManyWithoutPositionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  shiftId?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  shift_id?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
 
 export type ShiftMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  shiftId?: boolean
-  memberId?: boolean
-  positionId?: boolean
+  shift_id?: boolean
+  member_id?: boolean
+  position_id?: boolean
   shift?: boolean | Prisma.ShiftDefaultArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   position?: boolean | Prisma.ShiftMember$positionArgs<ExtArgs>
@@ -689,9 +689,9 @@ export type ShiftMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type ShiftMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  shiftId?: boolean
-  memberId?: boolean
-  positionId?: boolean
+  shift_id?: boolean
+  member_id?: boolean
+  position_id?: boolean
   shift?: boolean | Prisma.ShiftDefaultArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   position?: boolean | Prisma.ShiftMember$positionArgs<ExtArgs>
@@ -699,9 +699,9 @@ export type ShiftMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type ShiftMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  shiftId?: boolean
-  memberId?: boolean
-  positionId?: boolean
+  shift_id?: boolean
+  member_id?: boolean
+  position_id?: boolean
   shift?: boolean | Prisma.ShiftDefaultArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   position?: boolean | Prisma.ShiftMember$positionArgs<ExtArgs>
@@ -709,12 +709,12 @@ export type ShiftMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type ShiftMemberSelectScalar = {
   id?: boolean
-  shiftId?: boolean
-  memberId?: boolean
-  positionId?: boolean
+  shift_id?: boolean
+  member_id?: boolean
+  position_id?: boolean
 }
 
-export type ShiftMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "shiftId" | "memberId" | "positionId", ExtArgs["result"]["shiftMember"]>
+export type ShiftMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "shift_id" | "member_id" | "position_id", ExtArgs["result"]["shiftMember"]>
 export type ShiftMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   shift?: boolean | Prisma.ShiftDefaultArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
@@ -740,9 +740,9 @@ export type $ShiftMemberPayload<ExtArgs extends runtime.Types.Extensions.Interna
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    shiftId: number
-    memberId: number
-    positionId: number | null
+    shift_id: number
+    member_id: number
+    position_id: number | null
   }, ExtArgs["result"]["shiftMember"]>
   composites: {}
 }
@@ -1170,9 +1170,9 @@ export interface Prisma__ShiftMemberClient<T, Null = never, ExtArgs extends runt
  */
 export interface ShiftMemberFieldRefs {
   readonly id: Prisma.FieldRef<"ShiftMember", 'Int'>
-  readonly shiftId: Prisma.FieldRef<"ShiftMember", 'Int'>
-  readonly memberId: Prisma.FieldRef<"ShiftMember", 'Int'>
-  readonly positionId: Prisma.FieldRef<"ShiftMember", 'Int'>
+  readonly shift_id: Prisma.FieldRef<"ShiftMember", 'Int'>
+  readonly member_id: Prisma.FieldRef<"ShiftMember", 'Int'>
+  readonly position_id: Prisma.FieldRef<"ShiftMember", 'Int'>
 }
     
 

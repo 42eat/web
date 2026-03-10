@@ -384,12 +384,13 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  Member: 'Member',
+  Session: 'Session',
+  Adhesion: 'Adhesion',
   Role: 'Role',
   Permission: 'Permission',
   RolePermission: 'RolePermission',
-  Member: 'Member',
   MemberRole: 'MemberRole',
-  Adhesion: 'Adhesion',
   Shift: 'Shift',
   ShiftMember: 'ShiftMember',
   ShiftPosition: 'ShiftPosition',
@@ -416,10 +417,232 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "role" | "permission" | "rolePermission" | "member" | "memberRole" | "adhesion" | "shift" | "shiftMember" | "shiftPosition" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward"
+    modelProps: "member" | "session" | "adhesion" | "role" | "permission" | "rolePermission" | "memberRole" | "shift" | "shiftMember" | "shiftPosition" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    Member: {
+      payload: Prisma.$MemberPayload<ExtArgs>
+      fields: Prisma.MemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        findFirst: {
+          args: Prisma.MemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        findMany: {
+          args: Prisma.MemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
+        }
+        create: {
+          args: Prisma.MemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        createMany: {
+          args: Prisma.MemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
+        }
+        delete: {
+          args: Prisma.MemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        update: {
+          args: Prisma.MemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.MemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.MemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
+        }
+        aggregate: {
+          args: Prisma.MemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMember>
+        }
+        groupBy: {
+          args: Prisma.MemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    Session: {
+      payload: Prisma.$SessionPayload<ExtArgs>
+      fields: Prisma.SessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findFirst: {
+          args: Prisma.SessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findMany: {
+          args: Prisma.SessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        create: {
+          args: Prisma.SessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        createMany: {
+          args: Prisma.SessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        delete: {
+          args: Prisma.SessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        update: {
+          args: Prisma.SessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        aggregate: {
+          args: Prisma.SessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSession>
+        }
+        groupBy: {
+          args: Prisma.SessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Adhesion: {
+      payload: Prisma.$AdhesionPayload<ExtArgs>
+      fields: Prisma.AdhesionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdhesionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdhesionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        findFirst: {
+          args: Prisma.AdhesionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdhesionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        findMany: {
+          args: Prisma.AdhesionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
+        }
+        create: {
+          args: Prisma.AdhesionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        createMany: {
+          args: Prisma.AdhesionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdhesionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
+        }
+        delete: {
+          args: Prisma.AdhesionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        update: {
+          args: Prisma.AdhesionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdhesionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdhesionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdhesionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdhesionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
+        }
+        aggregate: {
+          args: Prisma.AdhesionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdhesion>
+        }
+        groupBy: {
+          args: Prisma.AdhesionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdhesionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdhesionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdhesionCountAggregateOutputType> | number
+        }
+      }
+    }
     Role: {
       payload: Prisma.$RolePayload<ExtArgs>
       fields: Prisma.RoleFieldRefs
@@ -642,80 +865,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Member: {
-      payload: Prisma.$MemberPayload<ExtArgs>
-      fields: Prisma.MemberFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.MemberFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.MemberFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        findFirst: {
-          args: Prisma.MemberFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.MemberFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        findMany: {
-          args: Prisma.MemberFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
-        }
-        create: {
-          args: Prisma.MemberCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        createMany: {
-          args: Prisma.MemberCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.MemberCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
-        }
-        delete: {
-          args: Prisma.MemberDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        update: {
-          args: Prisma.MemberUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        deleteMany: {
-          args: Prisma.MemberDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.MemberUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.MemberUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>[]
-        }
-        upsert: {
-          args: Prisma.MemberUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$MemberPayload>
-        }
-        aggregate: {
-          args: Prisma.MemberAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateMember>
-        }
-        groupBy: {
-          args: Prisma.MemberGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.MemberGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.MemberCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.MemberCountAggregateOutputType> | number
-        }
-      }
-    }
     MemberRole: {
       payload: Prisma.$MemberRolePayload<ExtArgs>
       fields: Prisma.MemberRoleFieldRefs
@@ -787,80 +936,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MemberRoleCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MemberRoleCountAggregateOutputType> | number
-        }
-      }
-    }
-    Adhesion: {
-      payload: Prisma.$AdhesionPayload<ExtArgs>
-      fields: Prisma.AdhesionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AdhesionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AdhesionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        findFirst: {
-          args: Prisma.AdhesionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AdhesionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        findMany: {
-          args: Prisma.AdhesionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
-        }
-        create: {
-          args: Prisma.AdhesionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        createMany: {
-          args: Prisma.AdhesionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.AdhesionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
-        }
-        delete: {
-          args: Prisma.AdhesionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        update: {
-          args: Prisma.AdhesionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        deleteMany: {
-          args: Prisma.AdhesionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AdhesionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.AdhesionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>[]
-        }
-        upsert: {
-          args: Prisma.AdhesionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdhesionPayload>
-        }
-        aggregate: {
-          args: Prisma.AdhesionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAdhesion>
-        }
-        groupBy: {
-          args: Prisma.AdhesionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AdhesionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AdhesionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AdhesionCountAggregateOutputType> | number
         }
       }
     }
@@ -1717,6 +1792,44 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const MemberScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  login: 'login',
+  nickname: 'nickname',
+  internal_note: 'internal_note',
+  join_date: 'join_date',
+  updated_at: 'updated_at',
+  created_at: 'created_at'
+} as const
+
+export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  member_id: 'member_id',
+  refresh_token: 'refresh_token',
+  user_agent: 'user_agent',
+  ip_address: 'ip_address',
+  created_at: 'created_at',
+  expires_at: 'expires_at'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const AdhesionScalarFieldEnum = {
+  id: 'id',
+  year: 'year',
+  member_id: 'member_id',
+  created_at: 'created_at'
+} as const
+
+export type AdhesionScalarFieldEnum = (typeof AdhesionScalarFieldEnum)[keyof typeof AdhesionScalarFieldEnum]
+
+
 export const RoleScalarFieldEnum = {
   id: 'id',
   role: 'role'
@@ -1728,7 +1841,7 @@ export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof Role
 export const PermissionScalarFieldEnum = {
   id: 'id',
   label: 'label',
-  parentId: 'parentId'
+  parent: 'parent'
 } as const
 
 export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
@@ -1736,51 +1849,27 @@ export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof
 
 export const RolePermissionScalarFieldEnum = {
   id: 'id',
-  roleId: 'roleId',
-  permissionId: 'permissionId'
+  role: 'role',
+  permission: 'permission'
 } as const
 
 export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
 
 
-export const MemberScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  login: 'login',
-  nickname: 'nickname',
-  internalNote: 'internalNote',
-  joinDate: 'joinDate',
-  updatedAt: 'updatedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
-
-
 export const MemberRoleScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  roleId: 'roleId'
+  member: 'member',
+  role: 'role'
 } as const
 
 export type MemberRoleScalarFieldEnum = (typeof MemberRoleScalarFieldEnum)[keyof typeof MemberRoleScalarFieldEnum]
 
 
-export const AdhesionScalarFieldEnum = {
-  id: 'id',
-  year: 'year',
-  memberId: 'memberId',
-  createdAt: 'createdAt'
-} as const
-
-export type AdhesionScalarFieldEnum = (typeof AdhesionScalarFieldEnum)[keyof typeof AdhesionScalarFieldEnum]
-
-
 export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
-  managerId: 'managerId',
-  discordMessageId: 'discordMessageId',
+  manager: 'manager',
+  discord_message_id: 'discord_message_id',
   validated: 'validated'
 } as const
 
@@ -1789,9 +1878,9 @@ export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof Sh
 
 export const ShiftMemberScalarFieldEnum = {
   id: 'id',
-  shiftId: 'shiftId',
-  memberId: 'memberId',
-  positionId: 'positionId'
+  shift_id: 'shift_id',
+  member_id: 'member_id',
+  position_id: 'position_id'
 } as const
 
 export type ShiftMemberScalarFieldEnum = (typeof ShiftMemberScalarFieldEnum)[keyof typeof ShiftMemberScalarFieldEnum]
@@ -1800,7 +1889,7 @@ export type ShiftMemberScalarFieldEnum = (typeof ShiftMemberScalarFieldEnum)[key
 export const ShiftPositionScalarFieldEnum = {
   id: 'id',
   position: 'position',
-  xpMult: 'xpMult'
+  xp_mult: 'xp_mult'
 } as const
 
 export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)[keyof typeof ShiftPositionScalarFieldEnum]
@@ -1809,7 +1898,7 @@ export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)
 export const ShiftAssignmentScalarFieldEnum = {
   id: 'id',
   date: 'date',
-  memberId: 'memberId'
+  member_id: 'member_id'
 } as const
 
 export type ShiftAssignmentScalarFieldEnum = (typeof ShiftAssignmentScalarFieldEnum)[keyof typeof ShiftAssignmentScalarFieldEnum]
@@ -1818,7 +1907,7 @@ export type ShiftAssignmentScalarFieldEnum = (typeof ShiftAssignmentScalarFieldE
 export const StockCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  orderIndex: 'orderIndex'
+  order_index: 'order_index'
 } as const
 
 export type StockCategoryScalarFieldEnum = (typeof StockCategoryScalarFieldEnum)[keyof typeof StockCategoryScalarFieldEnum]
@@ -1827,11 +1916,11 @@ export type StockCategoryScalarFieldEnum = (typeof StockCategoryScalarFieldEnum)
 export const StockItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  categoryId: 'categoryId',
-  expectedQuantity: 'expectedQuantity',
-  missingQuantity: 'missingQuantity',
+  category_id: 'category_id',
+  expected_quantity: 'expected_quantity',
+  missing_quantity: 'missing_quantity',
   unit: 'unit',
-  isActive: 'isActive'
+  is_active: 'is_active'
 } as const
 
 export type StockItemScalarFieldEnum = (typeof StockItemScalarFieldEnum)[keyof typeof StockItemScalarFieldEnum]
@@ -1839,11 +1928,11 @@ export type StockItemScalarFieldEnum = (typeof StockItemScalarFieldEnum)[keyof t
 
 export const VehicleScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  registrationDocUrl: 'registrationDocUrl',
-  fiscalPower: 'fiscalPower',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
+  member_id: 'member_id',
+  registration_doc_url: 'registration_doc_url',
+  fiscal_power: 'fiscal_power',
+  is_active: 'is_active',
+  created_at: 'created_at'
 } as const
 
 export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
@@ -1851,14 +1940,14 @@ export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeo
 
 export const ExpenseTripScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  vehicleId: 'vehicleId',
-  tripDate: 'tripDate',
-  distanceKm: 'distanceKm',
+  member_id: 'member_id',
+  vehicle_id: 'vehicle_id',
+  trip_date: 'trip_date',
+  distance_km: 'distance_km',
   purpose: 'purpose',
-  isPaid: 'isPaid',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt'
+  is_paid: 'is_paid',
+  paid_at: 'paid_at',
+  created_at: 'created_at'
 } as const
 
 export type ExpenseTripScalarFieldEnum = (typeof ExpenseTripScalarFieldEnum)[keyof typeof ExpenseTripScalarFieldEnum]
@@ -1867,8 +1956,8 @@ export type ExpenseTripScalarFieldEnum = (typeof ExpenseTripScalarFieldEnum)[key
 export const BattlepassSeasonScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  startAt: 'startAt',
-  endAt: 'endAt'
+  start_at: 'start_at',
+  end_at: 'end_at'
 } as const
 
 export type BattlepassSeasonScalarFieldEnum = (typeof BattlepassSeasonScalarFieldEnum)[keyof typeof BattlepassSeasonScalarFieldEnum]
@@ -1876,8 +1965,8 @@ export type BattlepassSeasonScalarFieldEnum = (typeof BattlepassSeasonScalarFiel
 
 export const BattlepassTierScalarFieldEnum = {
   id: 'id',
-  seasonId: 'seasonId',
-  tierNumber: 'tierNumber',
+  season_id: 'season_id',
+  tier_number: 'tier_number',
   requirement: 'requirement',
   reward: 'reward'
 } as const
@@ -1887,10 +1976,10 @@ export type BattlepassTierScalarFieldEnum = (typeof BattlepassTierScalarFieldEnu
 
 export const MemberBattlepassRewardScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  seasonId: 'seasonId',
-  tierId: 'tierId',
-  claimedAt: 'claimedAt'
+  member_id: 'member_id',
+  season_id: 'season_id',
+  tier_id: 'tier_id',
+  claimed_at: 'claimed_at'
 } as const
 
 export type MemberBattlepassRewardScalarFieldEnum = (typeof MemberBattlepassRewardScalarFieldEnum)[keyof typeof MemberBattlepassRewardScalarFieldEnum]
@@ -2083,12 +2172,13 @@ export type PrismaClientOptions = ({
   comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
+  member?: Prisma.MemberOmit
+  session?: Prisma.SessionOmit
+  adhesion?: Prisma.AdhesionOmit
   role?: Prisma.RoleOmit
   permission?: Prisma.PermissionOmit
   rolePermission?: Prisma.RolePermissionOmit
-  member?: Prisma.MemberOmit
   memberRole?: Prisma.MemberRoleOmit
-  adhesion?: Prisma.AdhesionOmit
   shift?: Prisma.ShiftOmit
   shiftMember?: Prisma.ShiftMemberOmit
   shiftPosition?: Prisma.ShiftPositionOmit

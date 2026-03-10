@@ -28,60 +28,60 @@ export type AggregatePermission = {
 
 export type PermissionAvgAggregateOutputType = {
   id: number | null
-  parentId: number | null
+  parent: number | null
 }
 
 export type PermissionSumAggregateOutputType = {
   id: number | null
-  parentId: number | null
+  parent: number | null
 }
 
 export type PermissionMinAggregateOutputType = {
   id: number | null
   label: string | null
-  parentId: number | null
+  parent: number | null
 }
 
 export type PermissionMaxAggregateOutputType = {
   id: number | null
   label: string | null
-  parentId: number | null
+  parent: number | null
 }
 
 export type PermissionCountAggregateOutputType = {
   id: number
   label: number
-  parentId: number
+  parent: number
   _all: number
 }
 
 
 export type PermissionAvgAggregateInputType = {
   id?: true
-  parentId?: true
+  parent?: true
 }
 
 export type PermissionSumAggregateInputType = {
   id?: true
-  parentId?: true
+  parent?: true
 }
 
 export type PermissionMinAggregateInputType = {
   id?: true
   label?: true
-  parentId?: true
+  parent?: true
 }
 
 export type PermissionMaxAggregateInputType = {
   id?: true
   label?: true
-  parentId?: true
+  parent?: true
 }
 
 export type PermissionCountAggregateInputType = {
   id?: true
   label?: true
-  parentId?: true
+  parent?: true
   _all?: true
 }
 
@@ -174,7 +174,7 @@ export type PermissionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type PermissionGroupByOutputType = {
   id: number
   label: string
-  parentId: number | null
+  parent: number | null
   _count: PermissionCountAggregateOutputType | null
   _avg: PermissionAvgAggregateOutputType | null
   _sum: PermissionSumAggregateOutputType | null
@@ -203,19 +203,19 @@ export type PermissionWhereInput = {
   NOT?: Prisma.PermissionWhereInput | Prisma.PermissionWhereInput[]
   id?: Prisma.IntFilter<"Permission"> | number
   label?: Prisma.StringFilter<"Permission"> | string
-  parentId?: Prisma.IntNullableFilter<"Permission"> | number | null
-  parent?: Prisma.XOR<Prisma.PermissionNullableScalarRelationFilter, Prisma.PermissionWhereInput> | null
-  children?: Prisma.PermissionListRelationFilter
-  rolePermissions?: Prisma.RolePermissionListRelationFilter
+  parent?: Prisma.IntNullableFilter<"Permission"> | number | null
+  parent_permission?: Prisma.XOR<Prisma.PermissionNullableScalarRelationFilter, Prisma.PermissionWhereInput> | null
+  child_permissions?: Prisma.PermissionListRelationFilter
+  role_permissions?: Prisma.RolePermissionListRelationFilter
 }
 
 export type PermissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
-  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
-  parent?: Prisma.PermissionOrderByWithRelationInput
-  children?: Prisma.PermissionOrderByRelationAggregateInput
-  rolePermissions?: Prisma.RolePermissionOrderByRelationAggregateInput
+  parent?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent_permission?: Prisma.PermissionOrderByWithRelationInput
+  child_permissions?: Prisma.PermissionOrderByRelationAggregateInput
+  role_permissions?: Prisma.RolePermissionOrderByRelationAggregateInput
 }
 
 export type PermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -224,16 +224,16 @@ export type PermissionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PermissionWhereInput[]
   NOT?: Prisma.PermissionWhereInput | Prisma.PermissionWhereInput[]
   label?: Prisma.StringFilter<"Permission"> | string
-  parentId?: Prisma.IntNullableFilter<"Permission"> | number | null
-  parent?: Prisma.XOR<Prisma.PermissionNullableScalarRelationFilter, Prisma.PermissionWhereInput> | null
-  children?: Prisma.PermissionListRelationFilter
-  rolePermissions?: Prisma.RolePermissionListRelationFilter
+  parent?: Prisma.IntNullableFilter<"Permission"> | number | null
+  parent_permission?: Prisma.XOR<Prisma.PermissionNullableScalarRelationFilter, Prisma.PermissionWhereInput> | null
+  child_permissions?: Prisma.PermissionListRelationFilter
+  role_permissions?: Prisma.RolePermissionListRelationFilter
 }, "id">
 
 export type PermissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
-  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PermissionCountOrderByAggregateInput
   _avg?: Prisma.PermissionAvgOrderByAggregateInput
   _max?: Prisma.PermissionMaxOrderByAggregateInput
@@ -247,43 +247,43 @@ export type PermissionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PermissionScalarWhereWithAggregatesInput | Prisma.PermissionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Permission"> | number
   label?: Prisma.StringWithAggregatesFilter<"Permission"> | string
-  parentId?: Prisma.IntNullableWithAggregatesFilter<"Permission"> | number | null
+  parent?: Prisma.IntNullableWithAggregatesFilter<"Permission"> | number | null
 }
 
 export type PermissionCreateInput = {
   label: string
-  parent?: Prisma.PermissionCreateNestedOneWithoutChildrenInput
-  children?: Prisma.PermissionCreateNestedManyWithoutParentInput
-  rolePermissions?: Prisma.RolePermissionCreateNestedManyWithoutPermissionInput
+  parent_permission?: Prisma.PermissionCreateNestedOneWithoutChild_permissionsInput
+  child_permissions?: Prisma.PermissionCreateNestedManyWithoutParent_permissionInput
+  role_permissions?: Prisma.RolePermissionCreateNestedManyWithoutPermission_refInput
 }
 
 export type PermissionUncheckedCreateInput = {
   id?: number
   label: string
-  parentId?: number | null
-  children?: Prisma.PermissionUncheckedCreateNestedManyWithoutParentInput
-  rolePermissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
+  parent?: number | null
+  child_permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutParent_permissionInput
+  role_permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermission_refInput
 }
 
 export type PermissionUpdateInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.PermissionUpdateOneWithoutChildrenNestedInput
-  children?: Prisma.PermissionUpdateManyWithoutParentNestedInput
-  rolePermissions?: Prisma.RolePermissionUpdateManyWithoutPermissionNestedInput
+  parent_permission?: Prisma.PermissionUpdateOneWithoutChild_permissionsNestedInput
+  child_permissions?: Prisma.PermissionUpdateManyWithoutParent_permissionNestedInput
+  role_permissions?: Prisma.RolePermissionUpdateManyWithoutPermission_refNestedInput
 }
 
 export type PermissionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  children?: Prisma.PermissionUncheckedUpdateManyWithoutParentNestedInput
-  rolePermissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
+  parent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  child_permissions?: Prisma.PermissionUncheckedUpdateManyWithoutParent_permissionNestedInput
+  role_permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermission_refNestedInput
 }
 
 export type PermissionCreateManyInput = {
   id?: number
   label: string
-  parentId?: number | null
+  parent?: number | null
 }
 
 export type PermissionUpdateManyMutationInput = {
@@ -293,7 +293,7 @@ export type PermissionUpdateManyMutationInput = {
 export type PermissionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type PermissionNullableScalarRelationFilter = {
@@ -314,29 +314,29 @@ export type PermissionOrderByRelationAggregateInput = {
 export type PermissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
+  parent?: Prisma.SortOrder
 }
 
 export type PermissionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
+  parent?: Prisma.SortOrder
 }
 
 export type PermissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
+  parent?: Prisma.SortOrder
 }
 
 export type PermissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
+  parent?: Prisma.SortOrder
 }
 
 export type PermissionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  parentId?: Prisma.SortOrder
+  parent?: Prisma.SortOrder
 }
 
 export type PermissionScalarRelationFilter = {
@@ -344,47 +344,47 @@ export type PermissionScalarRelationFilter = {
   isNot?: Prisma.PermissionWhereInput
 }
 
-export type PermissionCreateNestedOneWithoutChildrenInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutChildrenInput, Prisma.PermissionUncheckedCreateWithoutChildrenInput>
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutChildrenInput
+export type PermissionCreateNestedOneWithoutChild_permissionsInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutChild_permissionsInput, Prisma.PermissionUncheckedCreateWithoutChild_permissionsInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutChild_permissionsInput
   connect?: Prisma.PermissionWhereUniqueInput
 }
 
-export type PermissionCreateNestedManyWithoutParentInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput> | Prisma.PermissionCreateWithoutParentInput[] | Prisma.PermissionUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParentInput | Prisma.PermissionCreateOrConnectWithoutParentInput[]
-  createMany?: Prisma.PermissionCreateManyParentInputEnvelope
+export type PermissionCreateNestedManyWithoutParent_permissionInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput> | Prisma.PermissionCreateWithoutParent_permissionInput[] | Prisma.PermissionUncheckedCreateWithoutParent_permissionInput[]
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParent_permissionInput | Prisma.PermissionCreateOrConnectWithoutParent_permissionInput[]
+  createMany?: Prisma.PermissionCreateManyParent_permissionInputEnvelope
   connect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
 }
 
-export type PermissionUncheckedCreateNestedManyWithoutParentInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput> | Prisma.PermissionCreateWithoutParentInput[] | Prisma.PermissionUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParentInput | Prisma.PermissionCreateOrConnectWithoutParentInput[]
-  createMany?: Prisma.PermissionCreateManyParentInputEnvelope
+export type PermissionUncheckedCreateNestedManyWithoutParent_permissionInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput> | Prisma.PermissionCreateWithoutParent_permissionInput[] | Prisma.PermissionUncheckedCreateWithoutParent_permissionInput[]
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParent_permissionInput | Prisma.PermissionCreateOrConnectWithoutParent_permissionInput[]
+  createMany?: Prisma.PermissionCreateManyParent_permissionInputEnvelope
   connect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
 }
 
-export type PermissionUpdateOneWithoutChildrenNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutChildrenInput, Prisma.PermissionUncheckedCreateWithoutChildrenInput>
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutChildrenInput
-  upsert?: Prisma.PermissionUpsertWithoutChildrenInput
+export type PermissionUpdateOneWithoutChild_permissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutChild_permissionsInput, Prisma.PermissionUncheckedCreateWithoutChild_permissionsInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutChild_permissionsInput
+  upsert?: Prisma.PermissionUpsertWithoutChild_permissionsInput
   disconnect?: Prisma.PermissionWhereInput | boolean
   delete?: Prisma.PermissionWhereInput | boolean
   connect?: Prisma.PermissionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutChildrenInput, Prisma.PermissionUpdateWithoutChildrenInput>, Prisma.PermissionUncheckedUpdateWithoutChildrenInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutChild_permissionsInput, Prisma.PermissionUpdateWithoutChild_permissionsInput>, Prisma.PermissionUncheckedUpdateWithoutChild_permissionsInput>
 }
 
-export type PermissionUpdateManyWithoutParentNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput> | Prisma.PermissionCreateWithoutParentInput[] | Prisma.PermissionUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParentInput | Prisma.PermissionCreateOrConnectWithoutParentInput[]
-  upsert?: Prisma.PermissionUpsertWithWhereUniqueWithoutParentInput | Prisma.PermissionUpsertWithWhereUniqueWithoutParentInput[]
-  createMany?: Prisma.PermissionCreateManyParentInputEnvelope
+export type PermissionUpdateManyWithoutParent_permissionNestedInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput> | Prisma.PermissionCreateWithoutParent_permissionInput[] | Prisma.PermissionUncheckedCreateWithoutParent_permissionInput[]
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParent_permissionInput | Prisma.PermissionCreateOrConnectWithoutParent_permissionInput[]
+  upsert?: Prisma.PermissionUpsertWithWhereUniqueWithoutParent_permissionInput | Prisma.PermissionUpsertWithWhereUniqueWithoutParent_permissionInput[]
+  createMany?: Prisma.PermissionCreateManyParent_permissionInputEnvelope
   set?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   disconnect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   delete?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   connect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
-  update?: Prisma.PermissionUpdateWithWhereUniqueWithoutParentInput | Prisma.PermissionUpdateWithWhereUniqueWithoutParentInput[]
-  updateMany?: Prisma.PermissionUpdateManyWithWhereWithoutParentInput | Prisma.PermissionUpdateManyWithWhereWithoutParentInput[]
+  update?: Prisma.PermissionUpdateWithWhereUniqueWithoutParent_permissionInput | Prisma.PermissionUpdateWithWhereUniqueWithoutParent_permissionInput[]
+  updateMany?: Prisma.PermissionUpdateManyWithWhereWithoutParent_permissionInput | Prisma.PermissionUpdateManyWithWhereWithoutParent_permissionInput[]
   deleteMany?: Prisma.PermissionScalarWhereInput | Prisma.PermissionScalarWhereInput[]
 }
 
@@ -396,113 +396,113 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type PermissionUncheckedUpdateManyWithoutParentNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput> | Prisma.PermissionCreateWithoutParentInput[] | Prisma.PermissionUncheckedCreateWithoutParentInput[]
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParentInput | Prisma.PermissionCreateOrConnectWithoutParentInput[]
-  upsert?: Prisma.PermissionUpsertWithWhereUniqueWithoutParentInput | Prisma.PermissionUpsertWithWhereUniqueWithoutParentInput[]
-  createMany?: Prisma.PermissionCreateManyParentInputEnvelope
+export type PermissionUncheckedUpdateManyWithoutParent_permissionNestedInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput> | Prisma.PermissionCreateWithoutParent_permissionInput[] | Prisma.PermissionUncheckedCreateWithoutParent_permissionInput[]
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutParent_permissionInput | Prisma.PermissionCreateOrConnectWithoutParent_permissionInput[]
+  upsert?: Prisma.PermissionUpsertWithWhereUniqueWithoutParent_permissionInput | Prisma.PermissionUpsertWithWhereUniqueWithoutParent_permissionInput[]
+  createMany?: Prisma.PermissionCreateManyParent_permissionInputEnvelope
   set?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   disconnect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   delete?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
   connect?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[]
-  update?: Prisma.PermissionUpdateWithWhereUniqueWithoutParentInput | Prisma.PermissionUpdateWithWhereUniqueWithoutParentInput[]
-  updateMany?: Prisma.PermissionUpdateManyWithWhereWithoutParentInput | Prisma.PermissionUpdateManyWithWhereWithoutParentInput[]
+  update?: Prisma.PermissionUpdateWithWhereUniqueWithoutParent_permissionInput | Prisma.PermissionUpdateWithWhereUniqueWithoutParent_permissionInput[]
+  updateMany?: Prisma.PermissionUpdateManyWithWhereWithoutParent_permissionInput | Prisma.PermissionUpdateManyWithWhereWithoutParent_permissionInput[]
   deleteMany?: Prisma.PermissionScalarWhereInput | Prisma.PermissionScalarWhereInput[]
 }
 
-export type PermissionCreateNestedOneWithoutRolePermissionsInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutRolePermissionsInput, Prisma.PermissionUncheckedCreateWithoutRolePermissionsInput>
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutRolePermissionsInput
+export type PermissionCreateNestedOneWithoutRole_permissionsInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutRole_permissionsInput, Prisma.PermissionUncheckedCreateWithoutRole_permissionsInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutRole_permissionsInput
   connect?: Prisma.PermissionWhereUniqueInput
 }
 
-export type PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionCreateWithoutRolePermissionsInput, Prisma.PermissionUncheckedCreateWithoutRolePermissionsInput>
-  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutRolePermissionsInput
-  upsert?: Prisma.PermissionUpsertWithoutRolePermissionsInput
+export type PermissionUpdateOneRequiredWithoutRole_permissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutRole_permissionsInput, Prisma.PermissionUncheckedCreateWithoutRole_permissionsInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutRole_permissionsInput
+  upsert?: Prisma.PermissionUpsertWithoutRole_permissionsInput
   connect?: Prisma.PermissionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutRolePermissionsInput, Prisma.PermissionUpdateWithoutRolePermissionsInput>, Prisma.PermissionUncheckedUpdateWithoutRolePermissionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutRole_permissionsInput, Prisma.PermissionUpdateWithoutRole_permissionsInput>, Prisma.PermissionUncheckedUpdateWithoutRole_permissionsInput>
 }
 
-export type PermissionCreateWithoutChildrenInput = {
+export type PermissionCreateWithoutChild_permissionsInput = {
   label: string
-  parent?: Prisma.PermissionCreateNestedOneWithoutChildrenInput
-  rolePermissions?: Prisma.RolePermissionCreateNestedManyWithoutPermissionInput
+  parent_permission?: Prisma.PermissionCreateNestedOneWithoutChild_permissionsInput
+  role_permissions?: Prisma.RolePermissionCreateNestedManyWithoutPermission_refInput
 }
 
-export type PermissionUncheckedCreateWithoutChildrenInput = {
+export type PermissionUncheckedCreateWithoutChild_permissionsInput = {
   id?: number
   label: string
-  parentId?: number | null
-  rolePermissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
+  parent?: number | null
+  role_permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermission_refInput
 }
 
-export type PermissionCreateOrConnectWithoutChildrenInput = {
+export type PermissionCreateOrConnectWithoutChild_permissionsInput = {
   where: Prisma.PermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutChildrenInput, Prisma.PermissionUncheckedCreateWithoutChildrenInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutChild_permissionsInput, Prisma.PermissionUncheckedCreateWithoutChild_permissionsInput>
 }
 
-export type PermissionCreateWithoutParentInput = {
+export type PermissionCreateWithoutParent_permissionInput = {
   label: string
-  children?: Prisma.PermissionCreateNestedManyWithoutParentInput
-  rolePermissions?: Prisma.RolePermissionCreateNestedManyWithoutPermissionInput
+  child_permissions?: Prisma.PermissionCreateNestedManyWithoutParent_permissionInput
+  role_permissions?: Prisma.RolePermissionCreateNestedManyWithoutPermission_refInput
 }
 
-export type PermissionUncheckedCreateWithoutParentInput = {
+export type PermissionUncheckedCreateWithoutParent_permissionInput = {
   id?: number
   label: string
-  children?: Prisma.PermissionUncheckedCreateNestedManyWithoutParentInput
-  rolePermissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
+  child_permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutParent_permissionInput
+  role_permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermission_refInput
 }
 
-export type PermissionCreateOrConnectWithoutParentInput = {
+export type PermissionCreateOrConnectWithoutParent_permissionInput = {
   where: Prisma.PermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput>
 }
 
-export type PermissionCreateManyParentInputEnvelope = {
-  data: Prisma.PermissionCreateManyParentInput | Prisma.PermissionCreateManyParentInput[]
+export type PermissionCreateManyParent_permissionInputEnvelope = {
+  data: Prisma.PermissionCreateManyParent_permissionInput | Prisma.PermissionCreateManyParent_permissionInput[]
   skipDuplicates?: boolean
 }
 
-export type PermissionUpsertWithoutChildrenInput = {
-  update: Prisma.XOR<Prisma.PermissionUpdateWithoutChildrenInput, Prisma.PermissionUncheckedUpdateWithoutChildrenInput>
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutChildrenInput, Prisma.PermissionUncheckedCreateWithoutChildrenInput>
+export type PermissionUpsertWithoutChild_permissionsInput = {
+  update: Prisma.XOR<Prisma.PermissionUpdateWithoutChild_permissionsInput, Prisma.PermissionUncheckedUpdateWithoutChild_permissionsInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutChild_permissionsInput, Prisma.PermissionUncheckedCreateWithoutChild_permissionsInput>
   where?: Prisma.PermissionWhereInput
 }
 
-export type PermissionUpdateToOneWithWhereWithoutChildrenInput = {
+export type PermissionUpdateToOneWithWhereWithoutChild_permissionsInput = {
   where?: Prisma.PermissionWhereInput
-  data: Prisma.XOR<Prisma.PermissionUpdateWithoutChildrenInput, Prisma.PermissionUncheckedUpdateWithoutChildrenInput>
+  data: Prisma.XOR<Prisma.PermissionUpdateWithoutChild_permissionsInput, Prisma.PermissionUncheckedUpdateWithoutChild_permissionsInput>
 }
 
-export type PermissionUpdateWithoutChildrenInput = {
+export type PermissionUpdateWithoutChild_permissionsInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.PermissionUpdateOneWithoutChildrenNestedInput
-  rolePermissions?: Prisma.RolePermissionUpdateManyWithoutPermissionNestedInput
+  parent_permission?: Prisma.PermissionUpdateOneWithoutChild_permissionsNestedInput
+  role_permissions?: Prisma.RolePermissionUpdateManyWithoutPermission_refNestedInput
 }
 
-export type PermissionUncheckedUpdateWithoutChildrenInput = {
+export type PermissionUncheckedUpdateWithoutChild_permissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rolePermissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
+  parent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  role_permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermission_refNestedInput
 }
 
-export type PermissionUpsertWithWhereUniqueWithoutParentInput = {
+export type PermissionUpsertWithWhereUniqueWithoutParent_permissionInput = {
   where: Prisma.PermissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.PermissionUpdateWithoutParentInput, Prisma.PermissionUncheckedUpdateWithoutParentInput>
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutParentInput, Prisma.PermissionUncheckedCreateWithoutParentInput>
+  update: Prisma.XOR<Prisma.PermissionUpdateWithoutParent_permissionInput, Prisma.PermissionUncheckedUpdateWithoutParent_permissionInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutParent_permissionInput, Prisma.PermissionUncheckedCreateWithoutParent_permissionInput>
 }
 
-export type PermissionUpdateWithWhereUniqueWithoutParentInput = {
+export type PermissionUpdateWithWhereUniqueWithoutParent_permissionInput = {
   where: Prisma.PermissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.PermissionUpdateWithoutParentInput, Prisma.PermissionUncheckedUpdateWithoutParentInput>
+  data: Prisma.XOR<Prisma.PermissionUpdateWithoutParent_permissionInput, Prisma.PermissionUncheckedUpdateWithoutParent_permissionInput>
 }
 
-export type PermissionUpdateManyWithWhereWithoutParentInput = {
+export type PermissionUpdateManyWithWhereWithoutParent_permissionInput = {
   where: Prisma.PermissionScalarWhereInput
-  data: Prisma.XOR<Prisma.PermissionUpdateManyMutationInput, Prisma.PermissionUncheckedUpdateManyWithoutParentInput>
+  data: Prisma.XOR<Prisma.PermissionUpdateManyMutationInput, Prisma.PermissionUncheckedUpdateManyWithoutParent_permissionInput>
 }
 
 export type PermissionScalarWhereInput = {
@@ -511,70 +511,70 @@ export type PermissionScalarWhereInput = {
   NOT?: Prisma.PermissionScalarWhereInput | Prisma.PermissionScalarWhereInput[]
   id?: Prisma.IntFilter<"Permission"> | number
   label?: Prisma.StringFilter<"Permission"> | string
-  parentId?: Prisma.IntNullableFilter<"Permission"> | number | null
+  parent?: Prisma.IntNullableFilter<"Permission"> | number | null
 }
 
-export type PermissionCreateWithoutRolePermissionsInput = {
+export type PermissionCreateWithoutRole_permissionsInput = {
   label: string
-  parent?: Prisma.PermissionCreateNestedOneWithoutChildrenInput
-  children?: Prisma.PermissionCreateNestedManyWithoutParentInput
+  parent_permission?: Prisma.PermissionCreateNestedOneWithoutChild_permissionsInput
+  child_permissions?: Prisma.PermissionCreateNestedManyWithoutParent_permissionInput
 }
 
-export type PermissionUncheckedCreateWithoutRolePermissionsInput = {
+export type PermissionUncheckedCreateWithoutRole_permissionsInput = {
   id?: number
   label: string
-  parentId?: number | null
-  children?: Prisma.PermissionUncheckedCreateNestedManyWithoutParentInput
+  parent?: number | null
+  child_permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutParent_permissionInput
 }
 
-export type PermissionCreateOrConnectWithoutRolePermissionsInput = {
+export type PermissionCreateOrConnectWithoutRole_permissionsInput = {
   where: Prisma.PermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutRolePermissionsInput, Prisma.PermissionUncheckedCreateWithoutRolePermissionsInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutRole_permissionsInput, Prisma.PermissionUncheckedCreateWithoutRole_permissionsInput>
 }
 
-export type PermissionUpsertWithoutRolePermissionsInput = {
-  update: Prisma.XOR<Prisma.PermissionUpdateWithoutRolePermissionsInput, Prisma.PermissionUncheckedUpdateWithoutRolePermissionsInput>
-  create: Prisma.XOR<Prisma.PermissionCreateWithoutRolePermissionsInput, Prisma.PermissionUncheckedCreateWithoutRolePermissionsInput>
+export type PermissionUpsertWithoutRole_permissionsInput = {
+  update: Prisma.XOR<Prisma.PermissionUpdateWithoutRole_permissionsInput, Prisma.PermissionUncheckedUpdateWithoutRole_permissionsInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutRole_permissionsInput, Prisma.PermissionUncheckedCreateWithoutRole_permissionsInput>
   where?: Prisma.PermissionWhereInput
 }
 
-export type PermissionUpdateToOneWithWhereWithoutRolePermissionsInput = {
+export type PermissionUpdateToOneWithWhereWithoutRole_permissionsInput = {
   where?: Prisma.PermissionWhereInput
-  data: Prisma.XOR<Prisma.PermissionUpdateWithoutRolePermissionsInput, Prisma.PermissionUncheckedUpdateWithoutRolePermissionsInput>
+  data: Prisma.XOR<Prisma.PermissionUpdateWithoutRole_permissionsInput, Prisma.PermissionUncheckedUpdateWithoutRole_permissionsInput>
 }
 
-export type PermissionUpdateWithoutRolePermissionsInput = {
+export type PermissionUpdateWithoutRole_permissionsInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.PermissionUpdateOneWithoutChildrenNestedInput
-  children?: Prisma.PermissionUpdateManyWithoutParentNestedInput
+  parent_permission?: Prisma.PermissionUpdateOneWithoutChild_permissionsNestedInput
+  child_permissions?: Prisma.PermissionUpdateManyWithoutParent_permissionNestedInput
 }
 
-export type PermissionUncheckedUpdateWithoutRolePermissionsInput = {
+export type PermissionUncheckedUpdateWithoutRole_permissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  children?: Prisma.PermissionUncheckedUpdateManyWithoutParentNestedInput
+  parent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  child_permissions?: Prisma.PermissionUncheckedUpdateManyWithoutParent_permissionNestedInput
 }
 
-export type PermissionCreateManyParentInput = {
+export type PermissionCreateManyParent_permissionInput = {
   id?: number
   label: string
 }
 
-export type PermissionUpdateWithoutParentInput = {
+export type PermissionUpdateWithoutParent_permissionInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  children?: Prisma.PermissionUpdateManyWithoutParentNestedInput
-  rolePermissions?: Prisma.RolePermissionUpdateManyWithoutPermissionNestedInput
+  child_permissions?: Prisma.PermissionUpdateManyWithoutParent_permissionNestedInput
+  role_permissions?: Prisma.RolePermissionUpdateManyWithoutPermission_refNestedInput
 }
 
-export type PermissionUncheckedUpdateWithoutParentInput = {
+export type PermissionUncheckedUpdateWithoutParent_permissionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
-  children?: Prisma.PermissionUncheckedUpdateManyWithoutParentNestedInput
-  rolePermissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
+  child_permissions?: Prisma.PermissionUncheckedUpdateManyWithoutParent_permissionNestedInput
+  role_permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermission_refNestedInput
 }
 
-export type PermissionUncheckedUpdateManyWithoutParentInput = {
+export type PermissionUncheckedUpdateManyWithoutParent_permissionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -585,13 +585,13 @@ export type PermissionUncheckedUpdateManyWithoutParentInput = {
  */
 
 export type PermissionCountOutputType = {
-  children: number
-  rolePermissions: number
+  child_permissions: number
+  role_permissions: number
 }
 
 export type PermissionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  children?: boolean | PermissionCountOutputTypeCountChildrenArgs
-  rolePermissions?: boolean | PermissionCountOutputTypeCountRolePermissionsArgs
+  child_permissions?: boolean | PermissionCountOutputTypeCountChild_permissionsArgs
+  role_permissions?: boolean | PermissionCountOutputTypeCountRole_permissionsArgs
 }
 
 /**
@@ -607,14 +607,14 @@ export type PermissionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * PermissionCountOutputType without action
  */
-export type PermissionCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PermissionCountOutputTypeCountChild_permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PermissionWhereInput
 }
 
 /**
  * PermissionCountOutputType without action
  */
-export type PermissionCountOutputTypeCountRolePermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PermissionCountOutputTypeCountRole_permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RolePermissionWhereInput
 }
 
@@ -622,58 +622,58 @@ export type PermissionCountOutputTypeCountRolePermissionsArgs<ExtArgs extends ru
 export type PermissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   label?: boolean
-  parentId?: boolean
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
-  children?: boolean | Prisma.Permission$childrenArgs<ExtArgs>
-  rolePermissions?: boolean | Prisma.Permission$rolePermissionsArgs<ExtArgs>
+  parent?: boolean
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
+  child_permissions?: boolean | Prisma.Permission$child_permissionsArgs<ExtArgs>
+  role_permissions?: boolean | Prisma.Permission$role_permissionsArgs<ExtArgs>
   _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["permission"]>
 
 export type PermissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   label?: boolean
-  parentId?: boolean
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
+  parent?: boolean
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
 }, ExtArgs["result"]["permission"]>
 
 export type PermissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   label?: boolean
-  parentId?: boolean
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
+  parent?: boolean
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
 }, ExtArgs["result"]["permission"]>
 
 export type PermissionSelectScalar = {
   id?: boolean
   label?: boolean
-  parentId?: boolean
+  parent?: boolean
 }
 
-export type PermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "parentId", ExtArgs["result"]["permission"]>
+export type PermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "parent", ExtArgs["result"]["permission"]>
 export type PermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
-  children?: boolean | Prisma.Permission$childrenArgs<ExtArgs>
-  rolePermissions?: boolean | Prisma.Permission$rolePermissionsArgs<ExtArgs>
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
+  child_permissions?: boolean | Prisma.Permission$child_permissionsArgs<ExtArgs>
+  role_permissions?: boolean | Prisma.Permission$role_permissionsArgs<ExtArgs>
   _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PermissionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
 }
 export type PermissionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  parent?: boolean | Prisma.Permission$parentArgs<ExtArgs>
+  parent_permission?: boolean | Prisma.Permission$parent_permissionArgs<ExtArgs>
 }
 
 export type $PermissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Permission"
   objects: {
-    parent: Prisma.$PermissionPayload<ExtArgs> | null
-    children: Prisma.$PermissionPayload<ExtArgs>[]
-    rolePermissions: Prisma.$RolePermissionPayload<ExtArgs>[]
+    parent_permission: Prisma.$PermissionPayload<ExtArgs> | null
+    child_permissions: Prisma.$PermissionPayload<ExtArgs>[]
+    role_permissions: Prisma.$RolePermissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     label: string
-    parentId: number | null
+    parent: number | null
   }, ExtArgs["result"]["permission"]>
   composites: {}
 }
@@ -1068,9 +1068,9 @@ readonly fields: PermissionFieldRefs;
  */
 export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  parent<T extends Prisma.Permission$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$parentArgs<ExtArgs>>): Prisma.Prisma__PermissionClient<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  children<T extends Prisma.Permission$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  rolePermissions<T extends Prisma.Permission$rolePermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$rolePermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parent_permission<T extends Prisma.Permission$parent_permissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$parent_permissionArgs<ExtArgs>>): Prisma.Prisma__PermissionClient<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  child_permissions<T extends Prisma.Permission$child_permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$child_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  role_permissions<T extends Prisma.Permission$role_permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$role_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1102,7 +1102,7 @@ export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends runti
 export interface PermissionFieldRefs {
   readonly id: Prisma.FieldRef<"Permission", 'Int'>
   readonly label: Prisma.FieldRef<"Permission", 'String'>
-  readonly parentId: Prisma.FieldRef<"Permission", 'Int'>
+  readonly parent: Prisma.FieldRef<"Permission", 'Int'>
 }
     
 
@@ -1499,9 +1499,9 @@ export type PermissionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Permission.parent
+ * Permission.parent_permission
  */
-export type Permission$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Permission$parent_permissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Permission
    */
@@ -1518,9 +1518,9 @@ export type Permission$parentArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Permission.children
+ * Permission.child_permissions
  */
-export type Permission$childrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Permission$child_permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Permission
    */
@@ -1542,9 +1542,9 @@ export type Permission$childrenArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Permission.rolePermissions
+ * Permission.role_permissions
  */
-export type Permission$rolePermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Permission$role_permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the RolePermission
    */

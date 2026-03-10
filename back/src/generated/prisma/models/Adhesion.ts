@@ -29,34 +29,34 @@ export type AggregateAdhesion = {
 export type AdhesionAvgAggregateOutputType = {
   id: number | null
   year: number | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type AdhesionSumAggregateOutputType = {
   id: number | null
   year: number | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type AdhesionMinAggregateOutputType = {
   id: number | null
   year: number | null
-  memberId: number | null
-  createdAt: Date | null
+  member_id: number | null
+  created_at: Date | null
 }
 
 export type AdhesionMaxAggregateOutputType = {
   id: number | null
   year: number | null
-  memberId: number | null
-  createdAt: Date | null
+  member_id: number | null
+  created_at: Date | null
 }
 
 export type AdhesionCountAggregateOutputType = {
   id: number
   year: number
-  memberId: number
-  createdAt: number
+  member_id: number
+  created_at: number
   _all: number
 }
 
@@ -64,34 +64,34 @@ export type AdhesionCountAggregateOutputType = {
 export type AdhesionAvgAggregateInputType = {
   id?: true
   year?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type AdhesionSumAggregateInputType = {
   id?: true
   year?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type AdhesionMinAggregateInputType = {
   id?: true
   year?: true
-  memberId?: true
-  createdAt?: true
+  member_id?: true
+  created_at?: true
 }
 
 export type AdhesionMaxAggregateInputType = {
   id?: true
   year?: true
-  memberId?: true
-  createdAt?: true
+  member_id?: true
+  created_at?: true
 }
 
 export type AdhesionCountAggregateInputType = {
   id?: true
   year?: true
-  memberId?: true
-  createdAt?: true
+  member_id?: true
+  created_at?: true
   _all?: true
 }
 
@@ -184,8 +184,8 @@ export type AdhesionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type AdhesionGroupByOutputType = {
   id: number
   year: number
-  memberId: number
-  createdAt: Date
+  member_id: number
+  created_at: Date | null
   _count: AdhesionCountAggregateOutputType | null
   _avg: AdhesionAvgAggregateOutputType | null
   _sum: AdhesionSumAggregateOutputType | null
@@ -214,16 +214,16 @@ export type AdhesionWhereInput = {
   NOT?: Prisma.AdhesionWhereInput | Prisma.AdhesionWhereInput[]
   id?: Prisma.IntFilter<"Adhesion"> | number
   year?: Prisma.IntFilter<"Adhesion"> | number
-  memberId?: Prisma.IntFilter<"Adhesion"> | number
-  createdAt?: Prisma.DateTimeFilter<"Adhesion"> | Date | string
+  member_id?: Prisma.IntFilter<"Adhesion"> | number
+  created_at?: Prisma.DateTimeNullableFilter<"Adhesion"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
 }
 
 export type AdhesionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
 }
 
@@ -233,16 +233,16 @@ export type AdhesionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AdhesionWhereInput[]
   NOT?: Prisma.AdhesionWhereInput | Prisma.AdhesionWhereInput[]
   year?: Prisma.IntFilter<"Adhesion"> | number
-  memberId?: Prisma.IntFilter<"Adhesion"> | number
-  createdAt?: Prisma.DateTimeFilter<"Adhesion"> | Date | string
+  member_id?: Prisma.IntFilter<"Adhesion"> | number
+  created_at?: Prisma.DateTimeNullableFilter<"Adhesion"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
 }, "id">
 
 export type AdhesionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AdhesionCountOrderByAggregateInput
   _avg?: Prisma.AdhesionAvgOrderByAggregateInput
   _max?: Prisma.AdhesionMaxOrderByAggregateInput
@@ -256,53 +256,53 @@ export type AdhesionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AdhesionScalarWhereWithAggregatesInput | Prisma.AdhesionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Adhesion"> | number
   year?: Prisma.IntWithAggregatesFilter<"Adhesion"> | number
-  memberId?: Prisma.IntWithAggregatesFilter<"Adhesion"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Adhesion"> | Date | string
+  member_id?: Prisma.IntWithAggregatesFilter<"Adhesion"> | number
+  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Adhesion"> | Date | string | null
 }
 
 export type AdhesionCreateInput = {
   year: number
-  createdAt?: Date | string
+  created_at?: Date | string | null
   member: Prisma.MemberCreateNestedOneWithoutAdhesionsInput
 }
 
 export type AdhesionUncheckedCreateInput = {
   id?: number
   year: number
-  memberId: number
-  createdAt?: Date | string
+  member_id: number
+  created_at?: Date | string | null
 }
 
 export type AdhesionUpdateInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneRequiredWithoutAdhesionsNestedInput
 }
 
 export type AdhesionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AdhesionCreateManyInput = {
   id?: number
   year: number
-  memberId: number
-  createdAt?: Date | string
+  member_id: number
+  created_at?: Date | string | null
 }
 
 export type AdhesionUpdateManyMutationInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AdhesionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AdhesionListRelationFilter = {
@@ -318,34 +318,34 @@ export type AdhesionOrderByRelationAggregateInput = {
 export type AdhesionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type AdhesionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type AdhesionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type AdhesionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type AdhesionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type AdhesionCreateNestedManyWithoutMemberInput = {
@@ -392,13 +392,13 @@ export type AdhesionUncheckedUpdateManyWithoutMemberNestedInput = {
 
 export type AdhesionCreateWithoutMemberInput = {
   year: number
-  createdAt?: Date | string
+  created_at?: Date | string | null
 }
 
 export type AdhesionUncheckedCreateWithoutMemberInput = {
   id?: number
   year: number
-  createdAt?: Date | string
+  created_at?: Date | string | null
 }
 
 export type AdhesionCreateOrConnectWithoutMemberInput = {
@@ -433,31 +433,31 @@ export type AdhesionScalarWhereInput = {
   NOT?: Prisma.AdhesionScalarWhereInput | Prisma.AdhesionScalarWhereInput[]
   id?: Prisma.IntFilter<"Adhesion"> | number
   year?: Prisma.IntFilter<"Adhesion"> | number
-  memberId?: Prisma.IntFilter<"Adhesion"> | number
-  createdAt?: Prisma.DateTimeFilter<"Adhesion"> | Date | string
+  member_id?: Prisma.IntFilter<"Adhesion"> | number
+  created_at?: Prisma.DateTimeNullableFilter<"Adhesion"> | Date | string | null
 }
 
 export type AdhesionCreateManyMemberInput = {
   id?: number
   year: number
-  createdAt?: Date | string
+  created_at?: Date | string | null
 }
 
 export type AdhesionUpdateWithoutMemberInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AdhesionUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AdhesionUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   year?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -465,35 +465,35 @@ export type AdhesionUncheckedUpdateManyWithoutMemberInput = {
 export type AdhesionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   year?: boolean
-  memberId?: boolean
-  createdAt?: boolean
+  member_id?: boolean
+  created_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adhesion"]>
 
 export type AdhesionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   year?: boolean
-  memberId?: boolean
-  createdAt?: boolean
+  member_id?: boolean
+  created_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adhesion"]>
 
 export type AdhesionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   year?: boolean
-  memberId?: boolean
-  createdAt?: boolean
+  member_id?: boolean
+  created_at?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adhesion"]>
 
 export type AdhesionSelectScalar = {
   id?: boolean
   year?: boolean
-  memberId?: boolean
-  createdAt?: boolean
+  member_id?: boolean
+  created_at?: boolean
 }
 
-export type AdhesionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "memberId" | "createdAt", ExtArgs["result"]["adhesion"]>
+export type AdhesionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "member_id" | "created_at", ExtArgs["result"]["adhesion"]>
 export type AdhesionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
@@ -512,8 +512,8 @@ export type $AdhesionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     year: number
-    memberId: number
-    createdAt: Date
+    member_id: number
+    created_at: Date | null
   }, ExtArgs["result"]["adhesion"]>
   composites: {}
 }
@@ -940,8 +940,8 @@ export interface Prisma__AdhesionClient<T, Null = never, ExtArgs extends runtime
 export interface AdhesionFieldRefs {
   readonly id: Prisma.FieldRef<"Adhesion", 'Int'>
   readonly year: Prisma.FieldRef<"Adhesion", 'Int'>
-  readonly memberId: Prisma.FieldRef<"Adhesion", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Adhesion", 'DateTime'>
+  readonly member_id: Prisma.FieldRef<"Adhesion", 'Int'>
+  readonly created_at: Prisma.FieldRef<"Adhesion", 'DateTime'>
 }
     
 

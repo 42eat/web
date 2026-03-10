@@ -28,92 +28,92 @@ export type AggregateStockItem = {
 
 export type StockItemAvgAggregateOutputType = {
   id: number | null
-  categoryId: number | null
-  expectedQuantity: number | null
-  missingQuantity: number | null
+  category_id: number | null
+  expected_quantity: number | null
+  missing_quantity: number | null
 }
 
 export type StockItemSumAggregateOutputType = {
   id: number | null
-  categoryId: number | null
-  expectedQuantity: number | null
-  missingQuantity: number | null
+  category_id: number | null
+  expected_quantity: number | null
+  missing_quantity: number | null
 }
 
 export type StockItemMinAggregateOutputType = {
   id: number | null
   name: string | null
-  categoryId: number | null
-  expectedQuantity: number | null
-  missingQuantity: number | null
+  category_id: number | null
+  expected_quantity: number | null
+  missing_quantity: number | null
   unit: string | null
-  isActive: boolean | null
+  is_active: boolean | null
 }
 
 export type StockItemMaxAggregateOutputType = {
   id: number | null
   name: string | null
-  categoryId: number | null
-  expectedQuantity: number | null
-  missingQuantity: number | null
+  category_id: number | null
+  expected_quantity: number | null
+  missing_quantity: number | null
   unit: string | null
-  isActive: boolean | null
+  is_active: boolean | null
 }
 
 export type StockItemCountAggregateOutputType = {
   id: number
   name: number
-  categoryId: number
-  expectedQuantity: number
-  missingQuantity: number
+  category_id: number
+  expected_quantity: number
+  missing_quantity: number
   unit: number
-  isActive: number
+  is_active: number
   _all: number
 }
 
 
 export type StockItemAvgAggregateInputType = {
   id?: true
-  categoryId?: true
-  expectedQuantity?: true
-  missingQuantity?: true
+  category_id?: true
+  expected_quantity?: true
+  missing_quantity?: true
 }
 
 export type StockItemSumAggregateInputType = {
   id?: true
-  categoryId?: true
-  expectedQuantity?: true
-  missingQuantity?: true
+  category_id?: true
+  expected_quantity?: true
+  missing_quantity?: true
 }
 
 export type StockItemMinAggregateInputType = {
   id?: true
   name?: true
-  categoryId?: true
-  expectedQuantity?: true
-  missingQuantity?: true
+  category_id?: true
+  expected_quantity?: true
+  missing_quantity?: true
   unit?: true
-  isActive?: true
+  is_active?: true
 }
 
 export type StockItemMaxAggregateInputType = {
   id?: true
   name?: true
-  categoryId?: true
-  expectedQuantity?: true
-  missingQuantity?: true
+  category_id?: true
+  expected_quantity?: true
+  missing_quantity?: true
   unit?: true
-  isActive?: true
+  is_active?: true
 }
 
 export type StockItemCountAggregateInputType = {
   id?: true
   name?: true
-  categoryId?: true
-  expectedQuantity?: true
-  missingQuantity?: true
+  category_id?: true
+  expected_quantity?: true
+  missing_quantity?: true
   unit?: true
-  isActive?: true
+  is_active?: true
   _all?: true
 }
 
@@ -206,11 +206,11 @@ export type StockItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type StockItemGroupByOutputType = {
   id: number
   name: string | null
-  categoryId: number | null
-  expectedQuantity: number | null
-  missingQuantity: number | null
+  category_id: number | null
+  expected_quantity: number | null
+  missing_quantity: number | null
   unit: string | null
-  isActive: boolean | null
+  is_active: boolean | null
   _count: StockItemCountAggregateOutputType | null
   _avg: StockItemAvgAggregateOutputType | null
   _sum: StockItemSumAggregateOutputType | null
@@ -239,22 +239,22 @@ export type StockItemWhereInput = {
   NOT?: Prisma.StockItemWhereInput | Prisma.StockItemWhereInput[]
   id?: Prisma.IntFilter<"StockItem"> | number
   name?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  categoryId?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  expectedQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  missingQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  category_id?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  expected_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  missing_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
   unit?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
+  is_active?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
   category?: Prisma.XOR<Prisma.StockCategoryNullableScalarRelationFilter, Prisma.StockCategoryWhereInput> | null
 }
 
 export type StockItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.StockCategoryOrderByWithRelationInput
 }
 
@@ -264,22 +264,22 @@ export type StockItemWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StockItemWhereInput[]
   NOT?: Prisma.StockItemWhereInput | Prisma.StockItemWhereInput[]
   name?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  categoryId?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  expectedQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  missingQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  category_id?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  expected_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  missing_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
   unit?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
+  is_active?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
   category?: Prisma.XOR<Prisma.StockCategoryNullableScalarRelationFilter, Prisma.StockCategoryWhereInput> | null
 }, "id">
 
 export type StockItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.StockItemCountOrderByAggregateInput
   _avg?: Prisma.StockItemAvgOrderByAggregateInput
   _max?: Prisma.StockItemMaxOrderByAggregateInput
@@ -293,77 +293,77 @@ export type StockItemScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StockItemScalarWhereWithAggregatesInput | Prisma.StockItemScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"StockItem"> | number
   name?: Prisma.StringNullableWithAggregatesFilter<"StockItem"> | string | null
-  categoryId?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
-  expectedQuantity?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
-  missingQuantity?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
+  category_id?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
+  expected_quantity?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
+  missing_quantity?: Prisma.IntNullableWithAggregatesFilter<"StockItem"> | number | null
   unit?: Prisma.StringNullableWithAggregatesFilter<"StockItem"> | string | null
-  isActive?: Prisma.BoolNullableWithAggregatesFilter<"StockItem"> | boolean | null
+  is_active?: Prisma.BoolNullableWithAggregatesFilter<"StockItem"> | boolean | null
 }
 
 export type StockItemCreateInput = {
   name?: string | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
-  category?: Prisma.StockCategoryCreateNestedOneWithoutItemsInput
+  is_active?: boolean | null
+  category?: Prisma.StockCategoryCreateNestedOneWithoutStock_itemsInput
 }
 
 export type StockItemUncheckedCreateInput = {
   id?: number
   name?: string | null
-  categoryId?: number | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  category_id?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
+  is_active?: boolean | null
 }
 
 export type StockItemUpdateInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  category?: Prisma.StockCategoryUpdateOneWithoutItemsNestedInput
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  category?: Prisma.StockCategoryUpdateOneWithoutStock_itemsNestedInput
 }
 
 export type StockItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StockItemCreateManyInput = {
   id?: number
   name?: string | null
-  categoryId?: number | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  category_id?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
+  is_active?: boolean | null
 }
 
 export type StockItemUpdateManyMutationInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StockItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StockItemListRelationFilter = {
@@ -379,45 +379,45 @@ export type StockItemOrderByRelationAggregateInput = {
 export type StockItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
 }
 
 export type StockItemAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrder
 }
 
 export type StockItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
 }
 
 export type StockItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrder
   unit?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
 }
 
 export type StockItemSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
-  expectedQuantity?: Prisma.SortOrder
-  missingQuantity?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  expected_quantity?: Prisma.SortOrder
+  missing_quantity?: Prisma.SortOrder
 }
 
 export type StockItemCreateNestedManyWithoutCategoryInput = {
@@ -468,19 +468,19 @@ export type NullableBoolFieldUpdateOperationsInput = {
 
 export type StockItemCreateWithoutCategoryInput = {
   name?: string | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
+  is_active?: boolean | null
 }
 
 export type StockItemUncheckedCreateWithoutCategoryInput = {
   id?: number
   name?: string | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
+  is_active?: boolean | null
 }
 
 export type StockItemCreateOrConnectWithoutCategoryInput = {
@@ -515,46 +515,46 @@ export type StockItemScalarWhereInput = {
   NOT?: Prisma.StockItemScalarWhereInput | Prisma.StockItemScalarWhereInput[]
   id?: Prisma.IntFilter<"StockItem"> | number
   name?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  categoryId?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  expectedQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
-  missingQuantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  category_id?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  expected_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
+  missing_quantity?: Prisma.IntNullableFilter<"StockItem"> | number | null
   unit?: Prisma.StringNullableFilter<"StockItem"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
+  is_active?: Prisma.BoolNullableFilter<"StockItem"> | boolean | null
 }
 
 export type StockItemCreateManyCategoryInput = {
   id?: number
   name?: string | null
-  expectedQuantity?: number | null
-  missingQuantity?: number | null
+  expected_quantity?: number | null
+  missing_quantity?: number | null
   unit?: string | null
-  isActive?: boolean | null
+  is_active?: boolean | null
 }
 
 export type StockItemUpdateWithoutCategoryInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StockItemUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type StockItemUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  missingQuantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expected_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missing_quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_active?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 
@@ -562,47 +562,47 @@ export type StockItemUncheckedUpdateManyWithoutCategoryInput = {
 export type StockItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  categoryId?: boolean
-  expectedQuantity?: boolean
-  missingQuantity?: boolean
+  category_id?: boolean
+  expected_quantity?: boolean
+  missing_quantity?: boolean
   unit?: boolean
-  isActive?: boolean
+  is_active?: boolean
   category?: boolean | Prisma.StockItem$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["stockItem"]>
 
 export type StockItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  categoryId?: boolean
-  expectedQuantity?: boolean
-  missingQuantity?: boolean
+  category_id?: boolean
+  expected_quantity?: boolean
+  missing_quantity?: boolean
   unit?: boolean
-  isActive?: boolean
+  is_active?: boolean
   category?: boolean | Prisma.StockItem$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["stockItem"]>
 
 export type StockItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  categoryId?: boolean
-  expectedQuantity?: boolean
-  missingQuantity?: boolean
+  category_id?: boolean
+  expected_quantity?: boolean
+  missing_quantity?: boolean
   unit?: boolean
-  isActive?: boolean
+  is_active?: boolean
   category?: boolean | Prisma.StockItem$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["stockItem"]>
 
 export type StockItemSelectScalar = {
   id?: boolean
   name?: boolean
-  categoryId?: boolean
-  expectedQuantity?: boolean
-  missingQuantity?: boolean
+  category_id?: boolean
+  expected_quantity?: boolean
+  missing_quantity?: boolean
   unit?: boolean
-  isActive?: boolean
+  is_active?: boolean
 }
 
-export type StockItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "categoryId" | "expectedQuantity" | "missingQuantity" | "unit" | "isActive", ExtArgs["result"]["stockItem"]>
+export type StockItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category_id" | "expected_quantity" | "missing_quantity" | "unit" | "is_active", ExtArgs["result"]["stockItem"]>
 export type StockItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.StockItem$categoryArgs<ExtArgs>
 }
@@ -621,11 +621,11 @@ export type $StockItemPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string | null
-    categoryId: number | null
-    expectedQuantity: number | null
-    missingQuantity: number | null
+    category_id: number | null
+    expected_quantity: number | null
+    missing_quantity: number | null
     unit: string | null
-    isActive: boolean | null
+    is_active: boolean | null
   }, ExtArgs["result"]["stockItem"]>
   composites: {}
 }
@@ -1052,11 +1052,11 @@ export interface Prisma__StockItemClient<T, Null = never, ExtArgs extends runtim
 export interface StockItemFieldRefs {
   readonly id: Prisma.FieldRef<"StockItem", 'Int'>
   readonly name: Prisma.FieldRef<"StockItem", 'String'>
-  readonly categoryId: Prisma.FieldRef<"StockItem", 'Int'>
-  readonly expectedQuantity: Prisma.FieldRef<"StockItem", 'Int'>
-  readonly missingQuantity: Prisma.FieldRef<"StockItem", 'Int'>
+  readonly category_id: Prisma.FieldRef<"StockItem", 'Int'>
+  readonly expected_quantity: Prisma.FieldRef<"StockItem", 'Int'>
+  readonly missing_quantity: Prisma.FieldRef<"StockItem", 'Int'>
   readonly unit: Prisma.FieldRef<"StockItem", 'String'>
-  readonly isActive: Prisma.FieldRef<"StockItem", 'Boolean'>
+  readonly is_active: Prisma.FieldRef<"StockItem", 'Boolean'>
 }
     
 

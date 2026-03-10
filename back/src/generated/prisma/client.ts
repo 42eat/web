@@ -29,8 +29,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Roles
- * const roles = await prisma.role.findMany()
+ * // Fetch zero or more Members
+ * const members = await prisma.member.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -39,6 +39,21 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model Member
+ * 
+ */
+export type Member = Prisma.MemberModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model Adhesion
+ * 
+ */
+export type Adhesion = Prisma.AdhesionModel
 /**
  * Model Role
  * 
@@ -55,20 +70,10 @@ export type Permission = Prisma.PermissionModel
  */
 export type RolePermission = Prisma.RolePermissionModel
 /**
- * Model Member
- * 
- */
-export type Member = Prisma.MemberModel
-/**
  * Model MemberRole
  * 
  */
 export type MemberRole = Prisma.MemberRoleModel
-/**
- * Model Adhesion
- * 
- */
-export type Adhesion = Prisma.AdhesionModel
 /**
  * Model Shift
  * 

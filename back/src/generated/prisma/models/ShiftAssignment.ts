@@ -28,60 +28,60 @@ export type AggregateShiftAssignment = {
 
 export type ShiftAssignmentAvgAggregateOutputType = {
   id: number | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type ShiftAssignmentSumAggregateOutputType = {
   id: number | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type ShiftAssignmentMinAggregateOutputType = {
   id: number | null
   date: Date | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type ShiftAssignmentMaxAggregateOutputType = {
   id: number | null
   date: Date | null
-  memberId: number | null
+  member_id: number | null
 }
 
 export type ShiftAssignmentCountAggregateOutputType = {
   id: number
   date: number
-  memberId: number
+  member_id: number
   _all: number
 }
 
 
 export type ShiftAssignmentAvgAggregateInputType = {
   id?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type ShiftAssignmentSumAggregateInputType = {
   id?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type ShiftAssignmentMinAggregateInputType = {
   id?: true
   date?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type ShiftAssignmentMaxAggregateInputType = {
   id?: true
   date?: true
-  memberId?: true
+  member_id?: true
 }
 
 export type ShiftAssignmentCountAggregateInputType = {
   id?: true
   date?: true
-  memberId?: true
+  member_id?: true
   _all?: true
 }
 
@@ -174,7 +174,7 @@ export type ShiftAssignmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type ShiftAssignmentGroupByOutputType = {
   id: number
   date: Date | null
-  memberId: number
+  member_id: number | null
   _count: ShiftAssignmentCountAggregateOutputType | null
   _avg: ShiftAssignmentAvgAggregateOutputType | null
   _sum: ShiftAssignmentSumAggregateOutputType | null
@@ -203,14 +203,14 @@ export type ShiftAssignmentWhereInput = {
   NOT?: Prisma.ShiftAssignmentWhereInput | Prisma.ShiftAssignmentWhereInput[]
   id?: Prisma.IntFilter<"ShiftAssignment"> | number
   date?: Prisma.DateTimeNullableFilter<"ShiftAssignment"> | Date | string | null
-  memberId?: Prisma.IntFilter<"ShiftAssignment"> | number
-  member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  member_id?: Prisma.IntNullableFilter<"ShiftAssignment"> | number | null
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
 }
 
 export type ShiftAssignmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrderInput | Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
 }
 
@@ -220,14 +220,14 @@ export type ShiftAssignmentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ShiftAssignmentWhereInput[]
   NOT?: Prisma.ShiftAssignmentWhereInput | Prisma.ShiftAssignmentWhereInput[]
   date?: Prisma.DateTimeNullableFilter<"ShiftAssignment"> | Date | string | null
-  memberId?: Prisma.IntFilter<"ShiftAssignment"> | number
-  member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  member_id?: Prisma.IntNullableFilter<"ShiftAssignment"> | number | null
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
 }, "id">
 
 export type ShiftAssignmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ShiftAssignmentCountOrderByAggregateInput
   _avg?: Prisma.ShiftAssignmentAvgOrderByAggregateInput
   _max?: Prisma.ShiftAssignmentMaxOrderByAggregateInput
@@ -241,35 +241,35 @@ export type ShiftAssignmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ShiftAssignmentScalarWhereWithAggregatesInput | Prisma.ShiftAssignmentScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ShiftAssignment"> | number
   date?: Prisma.DateTimeNullableWithAggregatesFilter<"ShiftAssignment"> | Date | string | null
-  memberId?: Prisma.IntWithAggregatesFilter<"ShiftAssignment"> | number
+  member_id?: Prisma.IntNullableWithAggregatesFilter<"ShiftAssignment"> | number | null
 }
 
 export type ShiftAssignmentCreateInput = {
   date?: Date | string | null
-  member: Prisma.MemberCreateNestedOneWithoutShiftAssignmentsInput
+  member?: Prisma.MemberCreateNestedOneWithoutShift_assignmentsInput
 }
 
 export type ShiftAssignmentUncheckedCreateInput = {
   id?: number
   date?: Date | string | null
-  memberId: number
+  member_id?: number | null
 }
 
 export type ShiftAssignmentUpdateInput = {
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  member?: Prisma.MemberUpdateOneRequiredWithoutShiftAssignmentsNestedInput
+  member?: Prisma.MemberUpdateOneWithoutShift_assignmentsNestedInput
 }
 
 export type ShiftAssignmentUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftAssignmentCreateManyInput = {
   id?: number
   date?: Date | string | null
-  memberId: number
+  member_id?: number | null
 }
 
 export type ShiftAssignmentUpdateManyMutationInput = {
@@ -279,7 +279,7 @@ export type ShiftAssignmentUpdateManyMutationInput = {
 export type ShiftAssignmentUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  member_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ShiftAssignmentListRelationFilter = {
@@ -295,29 +295,29 @@ export type ShiftAssignmentOrderByRelationAggregateInput = {
 export type ShiftAssignmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type ShiftAssignmentAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type ShiftAssignmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type ShiftAssignmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type ShiftAssignmentSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  member_id?: Prisma.SortOrder
 }
 
 export type ShiftAssignmentCreateNestedManyWithoutMemberInput = {
@@ -403,7 +403,7 @@ export type ShiftAssignmentScalarWhereInput = {
   NOT?: Prisma.ShiftAssignmentScalarWhereInput | Prisma.ShiftAssignmentScalarWhereInput[]
   id?: Prisma.IntFilter<"ShiftAssignment"> | number
   date?: Prisma.DateTimeNullableFilter<"ShiftAssignment"> | Date | string | null
-  memberId?: Prisma.IntFilter<"ShiftAssignment"> | number
+  member_id?: Prisma.IntNullableFilter<"ShiftAssignment"> | number | null
 }
 
 export type ShiftAssignmentCreateManyMemberInput = {
@@ -430,50 +430,50 @@ export type ShiftAssignmentUncheckedUpdateManyWithoutMemberInput = {
 export type ShiftAssignmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   date?: boolean
-  memberId?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member_id?: boolean
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }, ExtArgs["result"]["shiftAssignment"]>
 
 export type ShiftAssignmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   date?: boolean
-  memberId?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member_id?: boolean
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }, ExtArgs["result"]["shiftAssignment"]>
 
 export type ShiftAssignmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   date?: boolean
-  memberId?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member_id?: boolean
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }, ExtArgs["result"]["shiftAssignment"]>
 
 export type ShiftAssignmentSelectScalar = {
   id?: boolean
   date?: boolean
-  memberId?: boolean
+  member_id?: boolean
 }
 
-export type ShiftAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "memberId", ExtArgs["result"]["shiftAssignment"]>
+export type ShiftAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "member_id", ExtArgs["result"]["shiftAssignment"]>
 export type ShiftAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }
 export type ShiftAssignmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }
 export type ShiftAssignmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.ShiftAssignment$memberArgs<ExtArgs>
 }
 
 export type $ShiftAssignmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ShiftAssignment"
   objects: {
-    member: Prisma.$MemberPayload<ExtArgs>
+    member: Prisma.$MemberPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     date: Date | null
-    memberId: number
+    member_id: number | null
   }, ExtArgs["result"]["shiftAssignment"]>
   composites: {}
 }
@@ -868,7 +868,7 @@ readonly fields: ShiftAssignmentFieldRefs;
  */
 export interface Prisma__ShiftAssignmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  member<T extends Prisma.ShiftAssignment$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShiftAssignment$memberArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -900,7 +900,7 @@ export interface Prisma__ShiftAssignmentClient<T, Null = never, ExtArgs extends 
 export interface ShiftAssignmentFieldRefs {
   readonly id: Prisma.FieldRef<"ShiftAssignment", 'Int'>
   readonly date: Prisma.FieldRef<"ShiftAssignment", 'DateTime'>
-  readonly memberId: Prisma.FieldRef<"ShiftAssignment", 'Int'>
+  readonly member_id: Prisma.FieldRef<"ShiftAssignment", 'Int'>
 }
     
 
@@ -1119,7 +1119,7 @@ export type ShiftAssignmentCreateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * The data needed to create a ShiftAssignment.
    */
-  data: Prisma.XOR<Prisma.ShiftAssignmentCreateInput, Prisma.ShiftAssignmentUncheckedCreateInput>
+  data?: Prisma.XOR<Prisma.ShiftAssignmentCreateInput, Prisma.ShiftAssignmentUncheckedCreateInput>
 }
 
 /**
@@ -1294,6 +1294,25 @@ export type ShiftAssignmentDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many ShiftAssignments to delete.
    */
   limit?: number
+}
+
+/**
+ * ShiftAssignment.member
+ */
+export type ShiftAssignment$memberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Member
+   */
+  select?: Prisma.MemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Member
+   */
+  omit?: Prisma.MemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
 }
 
 /**
