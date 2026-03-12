@@ -8,6 +8,7 @@
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.1",
+		"typescript": "^5.9.3",
 		"wait-on": "^9.0.1"
 	}
 }
