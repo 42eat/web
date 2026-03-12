@@ -1179,6 +1179,11 @@ export type BattlepassSeasonFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` BattlepassSeasons.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of BattlepassSeasons.
+   */
   distinct?: Prisma.BattlepassSeasonScalarFieldEnum | Prisma.BattlepassSeasonScalarFieldEnum[]
 }
 

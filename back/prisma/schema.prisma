@@ -43,7 +43,7 @@ model Session {
   refresh_token String
   user_agent    String?
   ip_address    String?
-  created_at    DateTime
+  created_at    DateTime @default(now())
   expires_at    DateTime
 
   member Member @relation(fields: [member_id], references: [id])

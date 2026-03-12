@@ -1415,6 +1415,11 @@ export type MemberBattlepassRewardFindManyArgs<ExtArgs extends runtime.Types.Ext
    * Skip the first `n` MemberBattlepassRewards.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MemberBattlepassRewards.
+   */
   distinct?: Prisma.MemberBattlepassRewardScalarFieldEnum | Prisma.MemberBattlepassRewardScalarFieldEnum[]
 }
 

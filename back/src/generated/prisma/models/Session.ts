@@ -296,7 +296,7 @@ export type SessionCreateInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
   member: Prisma.MemberCreateNestedOneWithoutSessionsInput
 }
@@ -307,7 +307,7 @@ export type SessionUncheckedCreateInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
 }
 
@@ -336,7 +336,7 @@ export type SessionCreateManyInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
 }
 
@@ -462,7 +462,7 @@ export type SessionCreateWithoutMemberInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
 }
 
@@ -471,7 +471,7 @@ export type SessionUncheckedCreateWithoutMemberInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
 }
 
@@ -519,7 +519,7 @@ export type SessionCreateManyMemberInput = {
   refresh_token: string
   user_agent?: string | null
   ip_address?: string | null
-  created_at: Date | string
+  created_at?: Date | string
   expires_at: Date | string
 }
 
@@ -1245,6 +1245,11 @@ export type SessionFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Sessions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Sessions.
+   */
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
