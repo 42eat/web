@@ -1,9 +1,11 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Member } from '../generated/prisma/client';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
-import type { Response } from 'express'
+import type { Response, Request } from 'express'
 import { LoginDto } from './dto/login.dto';
+import { JwtAuthRefreshGuard } from './jwt-refresh.guard';
+import { type AuthMember, CurrentMember } from 'src/core/decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -11,8 +13,8 @@ export class AuthController {
 
 	@Post('register')
 	@HttpCode(HttpStatus.OK)
-	public async register(@Body() dto: RegisterDto, @Res({ passthrough: true }) res: Response) {
-		const { accessToken, refreshToken } = await this.authService.register(dto);
+	public async register(@Body() dto: RegisterDto, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
+		const { accessToken, refreshToken } = await this.authService.register(dto, req.headers["user-agent"], req.ip);
 
 		res.cookie('refresh_token', refreshToken, {
 			httpOnly: true,
@@ -27,8 +29,8 @@ export class AuthController {
 
 	@Post('login')
 	@HttpCode(HttpStatus.OK)
-	public async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
-		const { accessToken, refreshToken } = await this.authService.login(dto);
+	public async login(@Body() dto: LoginDto, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
+		const { accessToken, refreshToken } = await this.authService.login(dto, req.headers["user-agent"], req.ip);
 
 		res.cookie('refresh_token', refreshToken, {
 			httpOnly: true,
@@ -38,7 +40,22 @@ export class AuthController {
 		})
 
 		return { accessToken };
+	}
 
+	@Post('refresh')
+	@HttpCode(HttpStatus.OK)
+	@UseGuards(JwtAuthRefreshGuard)
+	public async refresh(@Req() req: Request, @CurrentMember() member: AuthMember, @Res({ passthrough: true }) res: Response) {
+		const { accessToken, refreshToken } = await this.authService.refresh(member.id, member.refreshToken ?? "", req.headers["user-agent"], req.ip);
+
+		res.cookie('refresh_token', refreshToken, {
+			httpOnly: true,
+			secure: false, // todo: passer en true quand on aura le https
+			sameSite: 'strict',
+			maxAge: 7 * 24 * 60 * 60 * 1000
+		})
+
+		return { accessToken };
 	}
 
 }

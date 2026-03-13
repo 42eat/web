@@ -17,17 +17,27 @@
 // }
 
 
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { Member } from '../generated/prisma/client';
 import { MembersService } from './members.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { type AuthMember, CurrentMember } from 'src/core/decorators/current-user.decorator';
 
 @Controller('members')
 export class MembersController {
-  constructor(private readonly membersService: MembersService) {}
+	constructor(private readonly membersService: MembersService) {}
 
-  @Get('all')
-  @HttpCode(HttpStatus.OK)
-  public async getAll(): Promise<Member[]> {
-    return this.membersService.getAll();
-  }
+	@Get('all')
+	@UseGuards(JwtAuthGuard)
+	@HttpCode(HttpStatus.OK)
+	public async getAll(): Promise<Member[]> {
+		return this.membersService.getAll();
+	}
+	
+	@Get('profile')
+	@UseGuards(JwtAuthGuard)
+	@HttpCode(HttpStatus.OK)
+	public async getProfile(@CurrentMember() member: AuthMember): Promise<Member> {
+		return this.membersService.getById(member.id);
+	}
 }

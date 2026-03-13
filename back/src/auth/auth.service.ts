@@ -11,7 +11,7 @@ import { SessionsService } from 'src/sessions/sessions.service';
 export class AuthService {
 	constructor(private readonly members: MembersService, private readonly sessions: SessionsService, private readonly jwtService: JwtService) {}
 
-	public async register(dto: RegisterDto) {
+	public async register(dto: RegisterDto, userAgent: string | undefined, ipAddress: string | undefined) {
 		
 		const existing = await this.members.getByEmail(dto.email);
 
@@ -29,12 +29,12 @@ export class AuthService {
 
 		return {
 			accessToken: await this.generateAccessToken(insertedUser.id),
-			refreshToken: await this.generateRefreshToken(insertedUser.id),
+			refreshToken: await this.generateRefreshToken(insertedUser.id, userAgent, ipAddress),
 		}
 	}
 
-	public async login(dto: LoginDto) {
-		
+	public async login(dto: LoginDto, userAgent: string | undefined, ipAddress: string | undefined) {
+
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (!existing || !existing.password) {
@@ -48,28 +48,48 @@ export class AuthService {
 		}
 
 		return {
-			accessToken: "Y'a pas encore",
-			refreshToken: "y'a pas non plus"
+			accessToken: await this.generateAccessToken(existing.id),
+			refreshToken: await this.generateRefreshToken(existing.id, userAgent, ipAddress)
 		}
 	}
 
-	private async generateAccessToken(userId: number) {
+
+	public async refresh(memberId: number, refreshToken: string, userAgent: string | undefined, ipAddress: string | undefined) {
+		
+		let allSessions = await this.sessions.getMemberSessions(memberId);
+		allSessions = allSessions.filter((session) => session.expires_at > new Date());
+
+		for (const session of allSessions) {
+			const isValidSession = await bcrypt.compare(refreshToken, session.refresh_token);
+			if (isValidSession) {
+				await this.sessions.removeSession(session.id);
+
+				return {
+					accessToken: await this.generateAccessToken(memberId),
+					refreshToken: await this.generateRefreshToken(memberId, userAgent, ipAddress)
+				}
+			}
+		}
+		throw new UnauthorizedException(["Invalid refresh token"]);
+	}
+
+	private async generateAccessToken(memberId: number) {
 		return this.jwtService.signAsync(
-			{ sub: userId },
+			{ sub: memberId },
 			{ secret: process.env.JWT_SECRET, expiresIn: '15m' }
 		)
 	}
 
-	private async generateRefreshToken(userId: number) {
+	private async generateRefreshToken(memberId: number, userAgent: string | undefined, ipAddress: string | undefined) {
 
 		const token = await this.jwtService.signAsync(
-			{ sub: userId },
+			{ sub: memberId },
 			{ secret: process.env.JWT_REFRESH_SECRET, expiresIn: '7d' }
 		);
 		const hashedToken = await bcrypt.hash(token, 10);
 		const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-		if(!await this.sessions.create()) {
+		if(!await this.sessions.create(memberId, hashedToken, expiresAt, userAgent ?? "", ipAddress ?? "unknown")) {
 			throw new InternalServerErrorException(["An error occured while creating the session"]);
 		}
 
