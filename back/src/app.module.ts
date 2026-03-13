@@ -6,6 +6,12 @@ import { AuthModule } from "./auth/auth.module";
 import { SessionsModule } from "./sessions/sessions.module";
 
 @Module({
-	imports: [PrismaModule, MembersModule, AuthModule, SessionsModule, ScheduleModule.forRoot()],
+	imports: [
+		PrismaModule,
+		MembersModule,
+		AuthModule,
+		SessionsModule,
+		ScheduleModule.forRoot(),
+	],
 })
 export class AppModule {}

@@ -7,7 +7,9 @@ import { Request } from "express";
 export class RefreshStrategy extends PassportStrategy(Strategy, "jwt-refresh") {
 	constructor() {
 		super({
-			jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.refresh_token]),
+			jwtFromRequest: ExtractJwt.fromExtractors([
+				(req) => req?.cookies?.refresh_token,
+			]),
 			secretOrKey: process.env.JWT_REFRESH_SECRET ?? "",
 			passReqToCallback: true,
 		});

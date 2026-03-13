@@ -19,7 +19,7 @@ export class SessionsService {
 		refreshToken: string,
 		expiresAt: Date,
 		userAgent: string,
-		ipAddress: string
+		ipAddress: string,
 	) {
 		return this.prisma.session.create({
 			data: {

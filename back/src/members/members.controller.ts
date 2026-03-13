@@ -16,10 +16,19 @@
 //   }
 // }
 
-import { Controller, Get, HttpCode, HttpStatus, UseGuards } from "@nestjs/common";
+import {
+	Controller,
+	Get,
+	HttpCode,
+	HttpStatus,
+	UseGuards,
+} from "@nestjs/common";
 import { MembersService } from "./members.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { type AuthMember, CurrentMember } from "../core/decorators/current-user.decorator";
+import {
+	type AuthMember,
+	CurrentMember,
+} from "../core/decorators/current-user.decorator";
 import { plainToInstance } from "class-transformer";
 import { ProfileResponse } from "./response/profile.response";
 import { ApiResponse } from "@nestjs/swagger";
@@ -40,6 +49,9 @@ export class MembersController {
 	@UseGuards(JwtAuthGuard)
 	@HttpCode(HttpStatus.OK)
 	public async getProfile(@CurrentMember() member: AuthMember) {
-		return plainToInstance(ProfileResponse, this.membersService.getById(member.id));
+		return plainToInstance(
+			ProfileResponse,
+			this.membersService.getById(member.id),
+		);
 	}
 }
