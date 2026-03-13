@@ -40,7 +40,7 @@ export type ShiftMinAggregateOutputType = {
   id: number | null
   date: Date | null
   manager: number | null
-  discord_message_id: string | null
+  discordMessageId: string | null
   validated: boolean | null
 }
 
@@ -48,7 +48,7 @@ export type ShiftMaxAggregateOutputType = {
   id: number | null
   date: Date | null
   manager: number | null
-  discord_message_id: string | null
+  discordMessageId: string | null
   validated: boolean | null
 }
 
@@ -56,7 +56,7 @@ export type ShiftCountAggregateOutputType = {
   id: number
   date: number
   manager: number
-  discord_message_id: number
+  discordMessageId: number
   validated: number
   _all: number
 }
@@ -76,7 +76,7 @@ export type ShiftMinAggregateInputType = {
   id?: true
   date?: true
   manager?: true
-  discord_message_id?: true
+  discordMessageId?: true
   validated?: true
 }
 
@@ -84,7 +84,7 @@ export type ShiftMaxAggregateInputType = {
   id?: true
   date?: true
   manager?: true
-  discord_message_id?: true
+  discordMessageId?: true
   validated?: true
 }
 
@@ -92,7 +92,7 @@ export type ShiftCountAggregateInputType = {
   id?: true
   date?: true
   manager?: true
-  discord_message_id?: true
+  discordMessageId?: true
   validated?: true
   _all?: true
 }
@@ -187,7 +187,7 @@ export type ShiftGroupByOutputType = {
   id: number
   date: Date
   manager: number
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
   _count: ShiftCountAggregateOutputType | null
   _avg: ShiftAvgAggregateOutputType | null
@@ -218,20 +218,20 @@ export type ShiftWhereInput = {
   id?: Prisma.IntFilter<"Shift"> | number
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   manager?: Prisma.IntFilter<"Shift"> | number
-  discord_message_id?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringFilter<"Shift"> | string
   validated?: Prisma.BoolFilter<"Shift"> | boolean
-  manager_ref?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  shift_members?: Prisma.ShiftMemberListRelationFilter
+  managerRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  shiftMembers?: Prisma.ShiftMemberListRelationFilter
 }
 
 export type ShiftOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discord_message_id?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrder
   validated?: Prisma.SortOrder
-  manager_ref?: Prisma.MemberOrderByWithRelationInput
-  shift_members?: Prisma.ShiftMemberOrderByRelationAggregateInput
+  managerRef?: Prisma.MemberOrderByWithRelationInput
+  shiftMembers?: Prisma.ShiftMemberOrderByRelationAggregateInput
 }
 
 export type ShiftWhereUniqueInput = Prisma.AtLeast<{
@@ -241,17 +241,17 @@ export type ShiftWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShiftWhereInput | Prisma.ShiftWhereInput[]
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   manager?: Prisma.IntFilter<"Shift"> | number
-  discord_message_id?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringFilter<"Shift"> | string
   validated?: Prisma.BoolFilter<"Shift"> | boolean
-  manager_ref?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  shift_members?: Prisma.ShiftMemberListRelationFilter
+  managerRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  shiftMembers?: Prisma.ShiftMemberListRelationFilter
 }, "id">
 
 export type ShiftOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discord_message_id?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrder
   validated?: Prisma.SortOrder
   _count?: Prisma.ShiftCountOrderByAggregateInput
   _avg?: Prisma.ShiftAvgOrderByAggregateInput
@@ -267,55 +267,55 @@ export type ShiftScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Shift"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"Shift"> | Date | string
   manager?: Prisma.IntWithAggregatesFilter<"Shift"> | number
-  discord_message_id?: Prisma.StringWithAggregatesFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringWithAggregatesFilter<"Shift"> | string
   validated?: Prisma.BoolWithAggregatesFilter<"Shift"> | boolean
 }
 
 export type ShiftCreateInput = {
   date: Date | string
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
-  manager_ref: Prisma.MemberCreateNestedOneWithoutShifts_managedInput
-  shift_members?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
+  managerRef: Prisma.MemberCreateNestedOneWithoutShiftsManagedInput
+  shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUncheckedCreateInput = {
   id?: number
   date: Date | string
   manager: number
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
-  shift_members?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  manager_ref?: Prisma.MemberUpdateOneRequiredWithoutShifts_managedNestedInput
-  shift_members?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
+  managerRef?: Prisma.MemberUpdateOneRequiredWithoutShiftsManagedNestedInput
+  shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  shift_members?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
 }
 
 export type ShiftCreateManyInput = {
   id?: number
   date: Date | string
   manager: number
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
 }
 
 export type ShiftUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -323,7 +323,7 @@ export type ShiftUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -341,7 +341,7 @@ export type ShiftCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discord_message_id?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrder
   validated?: Prisma.SortOrder
 }
 
@@ -354,7 +354,7 @@ export type ShiftMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discord_message_id?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrder
   validated?: Prisma.SortOrder
 }
 
@@ -362,7 +362,7 @@ export type ShiftMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discord_message_id?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrder
   validated?: Prisma.SortOrder
 }
 
@@ -376,45 +376,45 @@ export type ShiftScalarRelationFilter = {
   isNot?: Prisma.ShiftWhereInput
 }
 
-export type ShiftCreateNestedManyWithoutManager_refInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput> | Prisma.ShiftCreateWithoutManager_refInput[] | Prisma.ShiftUncheckedCreateWithoutManager_refInput[]
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManager_refInput | Prisma.ShiftCreateOrConnectWithoutManager_refInput[]
-  createMany?: Prisma.ShiftCreateManyManager_refInputEnvelope
+export type ShiftCreateNestedManyWithoutManagerRefInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput> | Prisma.ShiftCreateWithoutManagerRefInput[] | Prisma.ShiftUncheckedCreateWithoutManagerRefInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManagerRefInput | Prisma.ShiftCreateOrConnectWithoutManagerRefInput[]
+  createMany?: Prisma.ShiftCreateManyManagerRefInputEnvelope
   connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
 }
 
-export type ShiftUncheckedCreateNestedManyWithoutManager_refInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput> | Prisma.ShiftCreateWithoutManager_refInput[] | Prisma.ShiftUncheckedCreateWithoutManager_refInput[]
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManager_refInput | Prisma.ShiftCreateOrConnectWithoutManager_refInput[]
-  createMany?: Prisma.ShiftCreateManyManager_refInputEnvelope
+export type ShiftUncheckedCreateNestedManyWithoutManagerRefInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput> | Prisma.ShiftCreateWithoutManagerRefInput[] | Prisma.ShiftUncheckedCreateWithoutManagerRefInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManagerRefInput | Prisma.ShiftCreateOrConnectWithoutManagerRefInput[]
+  createMany?: Prisma.ShiftCreateManyManagerRefInputEnvelope
   connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
 }
 
-export type ShiftUpdateManyWithoutManager_refNestedInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput> | Prisma.ShiftCreateWithoutManager_refInput[] | Prisma.ShiftUncheckedCreateWithoutManager_refInput[]
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManager_refInput | Prisma.ShiftCreateOrConnectWithoutManager_refInput[]
-  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutManager_refInput | Prisma.ShiftUpsertWithWhereUniqueWithoutManager_refInput[]
-  createMany?: Prisma.ShiftCreateManyManager_refInputEnvelope
+export type ShiftUpdateManyWithoutManagerRefNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput> | Prisma.ShiftCreateWithoutManagerRefInput[] | Prisma.ShiftUncheckedCreateWithoutManagerRefInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManagerRefInput | Prisma.ShiftCreateOrConnectWithoutManagerRefInput[]
+  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutManagerRefInput | Prisma.ShiftUpsertWithWhereUniqueWithoutManagerRefInput[]
+  createMany?: Prisma.ShiftCreateManyManagerRefInputEnvelope
   set?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   disconnect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   delete?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
-  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutManager_refInput | Prisma.ShiftUpdateWithWhereUniqueWithoutManager_refInput[]
-  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutManager_refInput | Prisma.ShiftUpdateManyWithWhereWithoutManager_refInput[]
+  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutManagerRefInput | Prisma.ShiftUpdateWithWhereUniqueWithoutManagerRefInput[]
+  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutManagerRefInput | Prisma.ShiftUpdateManyWithWhereWithoutManagerRefInput[]
   deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
-export type ShiftUncheckedUpdateManyWithoutManager_refNestedInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput> | Prisma.ShiftCreateWithoutManager_refInput[] | Prisma.ShiftUncheckedCreateWithoutManager_refInput[]
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManager_refInput | Prisma.ShiftCreateOrConnectWithoutManager_refInput[]
-  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutManager_refInput | Prisma.ShiftUpsertWithWhereUniqueWithoutManager_refInput[]
-  createMany?: Prisma.ShiftCreateManyManager_refInputEnvelope
+export type ShiftUncheckedUpdateManyWithoutManagerRefNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput> | Prisma.ShiftCreateWithoutManagerRefInput[] | Prisma.ShiftUncheckedCreateWithoutManagerRefInput[]
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutManagerRefInput | Prisma.ShiftCreateOrConnectWithoutManagerRefInput[]
+  upsert?: Prisma.ShiftUpsertWithWhereUniqueWithoutManagerRefInput | Prisma.ShiftUpsertWithWhereUniqueWithoutManagerRefInput[]
+  createMany?: Prisma.ShiftCreateManyManagerRefInputEnvelope
   set?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   disconnect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   delete?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
   connect?: Prisma.ShiftWhereUniqueInput | Prisma.ShiftWhereUniqueInput[]
-  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutManager_refInput | Prisma.ShiftUpdateWithWhereUniqueWithoutManager_refInput[]
-  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutManager_refInput | Prisma.ShiftUpdateManyWithWhereWithoutManager_refInput[]
+  update?: Prisma.ShiftUpdateWithWhereUniqueWithoutManagerRefInput | Prisma.ShiftUpdateWithWhereUniqueWithoutManagerRefInput[]
+  updateMany?: Prisma.ShiftUpdateManyWithWhereWithoutManagerRefInput | Prisma.ShiftUpdateManyWithWhereWithoutManagerRefInput[]
   deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
@@ -422,59 +422,59 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type ShiftCreateNestedOneWithoutShift_membersInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutShift_membersInput, Prisma.ShiftUncheckedCreateWithoutShift_membersInput>
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutShift_membersInput
+export type ShiftCreateNestedOneWithoutShiftMembersInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutShiftMembersInput, Prisma.ShiftUncheckedCreateWithoutShiftMembersInput>
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutShiftMembersInput
   connect?: Prisma.ShiftWhereUniqueInput
 }
 
-export type ShiftUpdateOneRequiredWithoutShift_membersNestedInput = {
-  create?: Prisma.XOR<Prisma.ShiftCreateWithoutShift_membersInput, Prisma.ShiftUncheckedCreateWithoutShift_membersInput>
-  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutShift_membersInput
-  upsert?: Prisma.ShiftUpsertWithoutShift_membersInput
+export type ShiftUpdateOneRequiredWithoutShiftMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.ShiftCreateWithoutShiftMembersInput, Prisma.ShiftUncheckedCreateWithoutShiftMembersInput>
+  connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutShiftMembersInput
+  upsert?: Prisma.ShiftUpsertWithoutShiftMembersInput
   connect?: Prisma.ShiftWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ShiftUpdateToOneWithWhereWithoutShift_membersInput, Prisma.ShiftUpdateWithoutShift_membersInput>, Prisma.ShiftUncheckedUpdateWithoutShift_membersInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShiftUpdateToOneWithWhereWithoutShiftMembersInput, Prisma.ShiftUpdateWithoutShiftMembersInput>, Prisma.ShiftUncheckedUpdateWithoutShiftMembersInput>
 }
 
-export type ShiftCreateWithoutManager_refInput = {
+export type ShiftCreateWithoutManagerRefInput = {
   date: Date | string
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
-  shift_members?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
+  shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
 }
 
-export type ShiftUncheckedCreateWithoutManager_refInput = {
+export type ShiftUncheckedCreateWithoutManagerRefInput = {
   id?: number
   date: Date | string
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
-  shift_members?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
 }
 
-export type ShiftCreateOrConnectWithoutManager_refInput = {
+export type ShiftCreateOrConnectWithoutManagerRefInput = {
   where: Prisma.ShiftWhereUniqueInput
-  create: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput>
 }
 
-export type ShiftCreateManyManager_refInputEnvelope = {
-  data: Prisma.ShiftCreateManyManager_refInput | Prisma.ShiftCreateManyManager_refInput[]
+export type ShiftCreateManyManagerRefInputEnvelope = {
+  data: Prisma.ShiftCreateManyManagerRefInput | Prisma.ShiftCreateManyManagerRefInput[]
   skipDuplicates?: boolean
 }
 
-export type ShiftUpsertWithWhereUniqueWithoutManager_refInput = {
+export type ShiftUpsertWithWhereUniqueWithoutManagerRefInput = {
   where: Prisma.ShiftWhereUniqueInput
-  update: Prisma.XOR<Prisma.ShiftUpdateWithoutManager_refInput, Prisma.ShiftUncheckedUpdateWithoutManager_refInput>
-  create: Prisma.XOR<Prisma.ShiftCreateWithoutManager_refInput, Prisma.ShiftUncheckedCreateWithoutManager_refInput>
+  update: Prisma.XOR<Prisma.ShiftUpdateWithoutManagerRefInput, Prisma.ShiftUncheckedUpdateWithoutManagerRefInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutManagerRefInput, Prisma.ShiftUncheckedCreateWithoutManagerRefInput>
 }
 
-export type ShiftUpdateWithWhereUniqueWithoutManager_refInput = {
+export type ShiftUpdateWithWhereUniqueWithoutManagerRefInput = {
   where: Prisma.ShiftWhereUniqueInput
-  data: Prisma.XOR<Prisma.ShiftUpdateWithoutManager_refInput, Prisma.ShiftUncheckedUpdateWithoutManager_refInput>
+  data: Prisma.XOR<Prisma.ShiftUpdateWithoutManagerRefInput, Prisma.ShiftUncheckedUpdateWithoutManagerRefInput>
 }
 
-export type ShiftUpdateManyWithWhereWithoutManager_refInput = {
+export type ShiftUpdateManyWithWhereWithoutManagerRefInput = {
   where: Prisma.ShiftScalarWhereInput
-  data: Prisma.XOR<Prisma.ShiftUpdateManyMutationInput, Prisma.ShiftUncheckedUpdateManyWithoutManager_refInput>
+  data: Prisma.XOR<Prisma.ShiftUpdateManyMutationInput, Prisma.ShiftUncheckedUpdateManyWithoutManagerRefInput>
 }
 
 export type ShiftScalarWhereInput = {
@@ -484,82 +484,82 @@ export type ShiftScalarWhereInput = {
   id?: Prisma.IntFilter<"Shift"> | number
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   manager?: Prisma.IntFilter<"Shift"> | number
-  discord_message_id?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringFilter<"Shift"> | string
   validated?: Prisma.BoolFilter<"Shift"> | boolean
 }
 
-export type ShiftCreateWithoutShift_membersInput = {
+export type ShiftCreateWithoutShiftMembersInput = {
   date: Date | string
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
-  manager_ref: Prisma.MemberCreateNestedOneWithoutShifts_managedInput
+  managerRef: Prisma.MemberCreateNestedOneWithoutShiftsManagedInput
 }
 
-export type ShiftUncheckedCreateWithoutShift_membersInput = {
+export type ShiftUncheckedCreateWithoutShiftMembersInput = {
   id?: number
   date: Date | string
   manager: number
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
 }
 
-export type ShiftCreateOrConnectWithoutShift_membersInput = {
+export type ShiftCreateOrConnectWithoutShiftMembersInput = {
   where: Prisma.ShiftWhereUniqueInput
-  create: Prisma.XOR<Prisma.ShiftCreateWithoutShift_membersInput, Prisma.ShiftUncheckedCreateWithoutShift_membersInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutShiftMembersInput, Prisma.ShiftUncheckedCreateWithoutShiftMembersInput>
 }
 
-export type ShiftUpsertWithoutShift_membersInput = {
-  update: Prisma.XOR<Prisma.ShiftUpdateWithoutShift_membersInput, Prisma.ShiftUncheckedUpdateWithoutShift_membersInput>
-  create: Prisma.XOR<Prisma.ShiftCreateWithoutShift_membersInput, Prisma.ShiftUncheckedCreateWithoutShift_membersInput>
+export type ShiftUpsertWithoutShiftMembersInput = {
+  update: Prisma.XOR<Prisma.ShiftUpdateWithoutShiftMembersInput, Prisma.ShiftUncheckedUpdateWithoutShiftMembersInput>
+  create: Prisma.XOR<Prisma.ShiftCreateWithoutShiftMembersInput, Prisma.ShiftUncheckedCreateWithoutShiftMembersInput>
   where?: Prisma.ShiftWhereInput
 }
 
-export type ShiftUpdateToOneWithWhereWithoutShift_membersInput = {
+export type ShiftUpdateToOneWithWhereWithoutShiftMembersInput = {
   where?: Prisma.ShiftWhereInput
-  data: Prisma.XOR<Prisma.ShiftUpdateWithoutShift_membersInput, Prisma.ShiftUncheckedUpdateWithoutShift_membersInput>
+  data: Prisma.XOR<Prisma.ShiftUpdateWithoutShiftMembersInput, Prisma.ShiftUncheckedUpdateWithoutShiftMembersInput>
 }
 
-export type ShiftUpdateWithoutShift_membersInput = {
+export type ShiftUpdateWithoutShiftMembersInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  manager_ref?: Prisma.MemberUpdateOneRequiredWithoutShifts_managedNestedInput
+  managerRef?: Prisma.MemberUpdateOneRequiredWithoutShiftsManagedNestedInput
 }
 
-export type ShiftUncheckedUpdateWithoutShift_membersInput = {
+export type ShiftUncheckedUpdateWithoutShiftMembersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
-export type ShiftCreateManyManager_refInput = {
+export type ShiftCreateManyManagerRefInput = {
   id?: number
   date: Date | string
-  discord_message_id: string
+  discordMessageId: string
   validated: boolean
 }
 
-export type ShiftUpdateWithoutManager_refInput = {
+export type ShiftUpdateWithoutManagerRefInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  shift_members?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
+  shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
 }
 
-export type ShiftUncheckedUpdateWithoutManager_refInput = {
+export type ShiftUncheckedUpdateWithoutManagerRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  shift_members?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
 }
 
-export type ShiftUncheckedUpdateManyWithoutManager_refInput = {
+export type ShiftUncheckedUpdateManyWithoutManagerRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discord_message_id?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -569,11 +569,11 @@ export type ShiftUncheckedUpdateManyWithoutManager_refInput = {
  */
 
 export type ShiftCountOutputType = {
-  shift_members: number
+  shiftMembers: number
 }
 
 export type ShiftCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  shift_members?: boolean | ShiftCountOutputTypeCountShift_membersArgs
+  shiftMembers?: boolean | ShiftCountOutputTypeCountShiftMembersArgs
 }
 
 /**
@@ -589,7 +589,7 @@ export type ShiftCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * ShiftCountOutputType without action
  */
-export type ShiftCountOutputTypeCountShift_membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftCountOutputTypeCountShiftMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ShiftMemberWhereInput
 }
 
@@ -598,10 +598,10 @@ export type ShiftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   date?: boolean
   manager?: boolean
-  discord_message_id?: boolean
+  discordMessageId?: boolean
   validated?: boolean
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  shift_members?: boolean | Prisma.Shift$shift_membersArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  shiftMembers?: boolean | Prisma.Shift$shiftMembersArgs<ExtArgs>
   _count?: boolean | Prisma.ShiftCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
@@ -609,52 +609,52 @@ export type ShiftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   date?: boolean
   manager?: boolean
-  discord_message_id?: boolean
+  discordMessageId?: boolean
   validated?: boolean
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   date?: boolean
   manager?: boolean
-  discord_message_id?: boolean
+  discordMessageId?: boolean
   validated?: boolean
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shift"]>
 
 export type ShiftSelectScalar = {
   id?: boolean
   date?: boolean
   manager?: boolean
-  discord_message_id?: boolean
+  discordMessageId?: boolean
   validated?: boolean
 }
 
-export type ShiftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "manager" | "discord_message_id" | "validated", ExtArgs["result"]["shift"]>
+export type ShiftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "manager" | "discordMessageId" | "validated", ExtArgs["result"]["shift"]>
 export type ShiftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  shift_members?: boolean | Prisma.Shift$shift_membersArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  shiftMembers?: boolean | Prisma.Shift$shiftMembersArgs<ExtArgs>
   _count?: boolean | Prisma.ShiftCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ShiftIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
 export type ShiftIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  manager_ref?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  managerRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
 
 export type $ShiftPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Shift"
   objects: {
-    manager_ref: Prisma.$MemberPayload<ExtArgs>
-    shift_members: Prisma.$ShiftMemberPayload<ExtArgs>[]
+    managerRef: Prisma.$MemberPayload<ExtArgs>
+    shiftMembers: Prisma.$ShiftMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     date: Date
     manager: number
-    discord_message_id: string
+    discordMessageId: string
     validated: boolean
   }, ExtArgs["result"]["shift"]>
   composites: {}
@@ -1050,8 +1050,8 @@ readonly fields: ShiftFieldRefs;
  */
 export interface Prisma__ShiftClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  manager_ref<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  shift_members<T extends Prisma.Shift$shift_membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shift$shift_membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  managerRef<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  shiftMembers<T extends Prisma.Shift$shiftMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shift$shiftMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1084,7 +1084,7 @@ export interface ShiftFieldRefs {
   readonly id: Prisma.FieldRef<"Shift", 'Int'>
   readonly date: Prisma.FieldRef<"Shift", 'DateTime'>
   readonly manager: Prisma.FieldRef<"Shift", 'Int'>
-  readonly discord_message_id: Prisma.FieldRef<"Shift", 'String'>
+  readonly discordMessageId: Prisma.FieldRef<"Shift", 'String'>
   readonly validated: Prisma.FieldRef<"Shift", 'Boolean'>
 }
     
@@ -1487,9 +1487,9 @@ export type ShiftDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Shift.shift_members
+ * Shift.shiftMembers
  */
-export type Shift$shift_membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Shift$shiftMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ShiftMember
    */

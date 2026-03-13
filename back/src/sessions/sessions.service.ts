@@ -9,7 +9,7 @@ export class SessionsService {
 	@Cron("0 * * * *")
 	async cleanupExpiredSessions() {
 		const result = await this.prisma.session.deleteMany({
-			where: { expires_at: { lt: new Date() } },
+			where: { expiresAt: { lt: new Date() } },
 		});
 		console.log(`Deleted ${result.count} expired sessions`);
 	}
@@ -23,17 +23,17 @@ export class SessionsService {
 	) {
 		return this.prisma.session.create({
 			data: {
-				member_id: memberId,
-				refresh_token: refreshToken,
-				expires_at: expiresAt,
-				user_agent: userAgent,
-				ip_address: ipAddress,
+				memberId: memberId,
+				refreshToken: refreshToken,
+				expiresAt: expiresAt,
+				userAgent: userAgent,
+				ipAddress: ipAddress,
 			},
 		});
 	}
 
 	public async getMemberSessions(memberId: number) {
-		return this.prisma.session.findMany({ where: { member_id: memberId } });
+		return this.prisma.session.findMany({ where: { memberId: memberId } });
 	}
 
 	public async removeSession(sessionId: number) {
@@ -42,7 +42,7 @@ export class SessionsService {
 
 	async deleteUserExpiredSessions(memberId: number) {
 		return await this.prisma.session.deleteMany({
-			where: { expires_at: { lt: new Date() } },
+			where: { expiresAt: { lt: new Date() } },
 		});
 	}
 }

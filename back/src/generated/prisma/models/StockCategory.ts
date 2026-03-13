@@ -28,60 +28,60 @@ export type AggregateStockCategory = {
 
 export type StockCategoryAvgAggregateOutputType = {
   id: number | null
-  order_index: number | null
+  orderIndex: number | null
 }
 
 export type StockCategorySumAggregateOutputType = {
   id: number | null
-  order_index: number | null
+  orderIndex: number | null
 }
 
 export type StockCategoryMinAggregateOutputType = {
   id: number | null
   name: string | null
-  order_index: number | null
+  orderIndex: number | null
 }
 
 export type StockCategoryMaxAggregateOutputType = {
   id: number | null
   name: string | null
-  order_index: number | null
+  orderIndex: number | null
 }
 
 export type StockCategoryCountAggregateOutputType = {
   id: number
   name: number
-  order_index: number
+  orderIndex: number
   _all: number
 }
 
 
 export type StockCategoryAvgAggregateInputType = {
   id?: true
-  order_index?: true
+  orderIndex?: true
 }
 
 export type StockCategorySumAggregateInputType = {
   id?: true
-  order_index?: true
+  orderIndex?: true
 }
 
 export type StockCategoryMinAggregateInputType = {
   id?: true
   name?: true
-  order_index?: true
+  orderIndex?: true
 }
 
 export type StockCategoryMaxAggregateInputType = {
   id?: true
   name?: true
-  order_index?: true
+  orderIndex?: true
 }
 
 export type StockCategoryCountAggregateInputType = {
   id?: true
   name?: true
-  order_index?: true
+  orderIndex?: true
   _all?: true
 }
 
@@ -174,7 +174,7 @@ export type StockCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type StockCategoryGroupByOutputType = {
   id: number
   name: string | null
-  order_index: number | null
+  orderIndex: number | null
   _count: StockCategoryCountAggregateOutputType | null
   _avg: StockCategoryAvgAggregateOutputType | null
   _sum: StockCategorySumAggregateOutputType | null
@@ -203,15 +203,15 @@ export type StockCategoryWhereInput = {
   NOT?: Prisma.StockCategoryWhereInput | Prisma.StockCategoryWhereInput[]
   id?: Prisma.IntFilter<"StockCategory"> | number
   name?: Prisma.StringNullableFilter<"StockCategory"> | string | null
-  order_index?: Prisma.IntNullableFilter<"StockCategory"> | number | null
-  stock_items?: Prisma.StockItemListRelationFilter
+  orderIndex?: Prisma.IntNullableFilter<"StockCategory"> | number | null
+  stockItems?: Prisma.StockItemListRelationFilter
 }
 
 export type StockCategoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_index?: Prisma.SortOrderInput | Prisma.SortOrder
-  stock_items?: Prisma.StockItemOrderByRelationAggregateInput
+  orderIndex?: Prisma.SortOrderInput | Prisma.SortOrder
+  stockItems?: Prisma.StockItemOrderByRelationAggregateInput
 }
 
 export type StockCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -220,14 +220,14 @@ export type StockCategoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StockCategoryWhereInput[]
   NOT?: Prisma.StockCategoryWhereInput | Prisma.StockCategoryWhereInput[]
   name?: Prisma.StringNullableFilter<"StockCategory"> | string | null
-  order_index?: Prisma.IntNullableFilter<"StockCategory"> | number | null
-  stock_items?: Prisma.StockItemListRelationFilter
+  orderIndex?: Prisma.IntNullableFilter<"StockCategory"> | number | null
+  stockItems?: Prisma.StockItemListRelationFilter
 }, "id">
 
 export type StockCategoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_index?: Prisma.SortOrderInput | Prisma.SortOrder
+  orderIndex?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.StockCategoryCountOrderByAggregateInput
   _avg?: Prisma.StockCategoryAvgOrderByAggregateInput
   _max?: Prisma.StockCategoryMaxOrderByAggregateInput
@@ -241,78 +241,78 @@ export type StockCategoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StockCategoryScalarWhereWithAggregatesInput | Prisma.StockCategoryScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"StockCategory"> | number
   name?: Prisma.StringNullableWithAggregatesFilter<"StockCategory"> | string | null
-  order_index?: Prisma.IntNullableWithAggregatesFilter<"StockCategory"> | number | null
+  orderIndex?: Prisma.IntNullableWithAggregatesFilter<"StockCategory"> | number | null
 }
 
 export type StockCategoryCreateInput = {
   name?: string | null
-  order_index?: number | null
-  stock_items?: Prisma.StockItemCreateNestedManyWithoutCategoryInput
+  orderIndex?: number | null
+  stockItems?: Prisma.StockItemCreateNestedManyWithoutCategoryInput
 }
 
 export type StockCategoryUncheckedCreateInput = {
   id?: number
   name?: string | null
-  order_index?: number | null
-  stock_items?: Prisma.StockItemUncheckedCreateNestedManyWithoutCategoryInput
+  orderIndex?: number | null
+  stockItems?: Prisma.StockItemUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type StockCategoryUpdateInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  stock_items?: Prisma.StockItemUpdateManyWithoutCategoryNestedInput
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stockItems?: Prisma.StockItemUpdateManyWithoutCategoryNestedInput
 }
 
 export type StockCategoryUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  stock_items?: Prisma.StockItemUncheckedUpdateManyWithoutCategoryNestedInput
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stockItems?: Prisma.StockItemUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type StockCategoryCreateManyInput = {
   id?: number
   name?: string | null
-  order_index?: number | null
+  orderIndex?: number | null
 }
 
 export type StockCategoryUpdateManyMutationInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type StockCategoryUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type StockCategoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  orderIndex?: Prisma.SortOrder
 }
 
 export type StockCategoryAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  orderIndex?: Prisma.SortOrder
 }
 
 export type StockCategoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  orderIndex?: Prisma.SortOrder
 }
 
 export type StockCategoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  orderIndex?: Prisma.SortOrder
 }
 
 export type StockCategorySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  orderIndex?: Prisma.SortOrder
 }
 
 export type StockCategoryNullableScalarRelationFilter = {
@@ -320,58 +320,58 @@ export type StockCategoryNullableScalarRelationFilter = {
   isNot?: Prisma.StockCategoryWhereInput | null
 }
 
-export type StockCategoryCreateNestedOneWithoutStock_itemsInput = {
-  create?: Prisma.XOR<Prisma.StockCategoryCreateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedCreateWithoutStock_itemsInput>
-  connectOrCreate?: Prisma.StockCategoryCreateOrConnectWithoutStock_itemsInput
+export type StockCategoryCreateNestedOneWithoutStockItemsInput = {
+  create?: Prisma.XOR<Prisma.StockCategoryCreateWithoutStockItemsInput, Prisma.StockCategoryUncheckedCreateWithoutStockItemsInput>
+  connectOrCreate?: Prisma.StockCategoryCreateOrConnectWithoutStockItemsInput
   connect?: Prisma.StockCategoryWhereUniqueInput
 }
 
-export type StockCategoryUpdateOneWithoutStock_itemsNestedInput = {
-  create?: Prisma.XOR<Prisma.StockCategoryCreateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedCreateWithoutStock_itemsInput>
-  connectOrCreate?: Prisma.StockCategoryCreateOrConnectWithoutStock_itemsInput
-  upsert?: Prisma.StockCategoryUpsertWithoutStock_itemsInput
+export type StockCategoryUpdateOneWithoutStockItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.StockCategoryCreateWithoutStockItemsInput, Prisma.StockCategoryUncheckedCreateWithoutStockItemsInput>
+  connectOrCreate?: Prisma.StockCategoryCreateOrConnectWithoutStockItemsInput
+  upsert?: Prisma.StockCategoryUpsertWithoutStockItemsInput
   disconnect?: Prisma.StockCategoryWhereInput | boolean
   delete?: Prisma.StockCategoryWhereInput | boolean
   connect?: Prisma.StockCategoryWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.StockCategoryUpdateToOneWithWhereWithoutStock_itemsInput, Prisma.StockCategoryUpdateWithoutStock_itemsInput>, Prisma.StockCategoryUncheckedUpdateWithoutStock_itemsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StockCategoryUpdateToOneWithWhereWithoutStockItemsInput, Prisma.StockCategoryUpdateWithoutStockItemsInput>, Prisma.StockCategoryUncheckedUpdateWithoutStockItemsInput>
 }
 
-export type StockCategoryCreateWithoutStock_itemsInput = {
+export type StockCategoryCreateWithoutStockItemsInput = {
   name?: string | null
-  order_index?: number | null
+  orderIndex?: number | null
 }
 
-export type StockCategoryUncheckedCreateWithoutStock_itemsInput = {
+export type StockCategoryUncheckedCreateWithoutStockItemsInput = {
   id?: number
   name?: string | null
-  order_index?: number | null
+  orderIndex?: number | null
 }
 
-export type StockCategoryCreateOrConnectWithoutStock_itemsInput = {
+export type StockCategoryCreateOrConnectWithoutStockItemsInput = {
   where: Prisma.StockCategoryWhereUniqueInput
-  create: Prisma.XOR<Prisma.StockCategoryCreateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedCreateWithoutStock_itemsInput>
+  create: Prisma.XOR<Prisma.StockCategoryCreateWithoutStockItemsInput, Prisma.StockCategoryUncheckedCreateWithoutStockItemsInput>
 }
 
-export type StockCategoryUpsertWithoutStock_itemsInput = {
-  update: Prisma.XOR<Prisma.StockCategoryUpdateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedUpdateWithoutStock_itemsInput>
-  create: Prisma.XOR<Prisma.StockCategoryCreateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedCreateWithoutStock_itemsInput>
+export type StockCategoryUpsertWithoutStockItemsInput = {
+  update: Prisma.XOR<Prisma.StockCategoryUpdateWithoutStockItemsInput, Prisma.StockCategoryUncheckedUpdateWithoutStockItemsInput>
+  create: Prisma.XOR<Prisma.StockCategoryCreateWithoutStockItemsInput, Prisma.StockCategoryUncheckedCreateWithoutStockItemsInput>
   where?: Prisma.StockCategoryWhereInput
 }
 
-export type StockCategoryUpdateToOneWithWhereWithoutStock_itemsInput = {
+export type StockCategoryUpdateToOneWithWhereWithoutStockItemsInput = {
   where?: Prisma.StockCategoryWhereInput
-  data: Prisma.XOR<Prisma.StockCategoryUpdateWithoutStock_itemsInput, Prisma.StockCategoryUncheckedUpdateWithoutStock_itemsInput>
+  data: Prisma.XOR<Prisma.StockCategoryUpdateWithoutStockItemsInput, Prisma.StockCategoryUncheckedUpdateWithoutStockItemsInput>
 }
 
-export type StockCategoryUpdateWithoutStock_itemsInput = {
+export type StockCategoryUpdateWithoutStockItemsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
-export type StockCategoryUncheckedUpdateWithoutStock_itemsInput = {
+export type StockCategoryUncheckedUpdateWithoutStockItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -380,11 +380,11 @@ export type StockCategoryUncheckedUpdateWithoutStock_itemsInput = {
  */
 
 export type StockCategoryCountOutputType = {
-  stock_items: number
+  stockItems: number
 }
 
 export type StockCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stock_items?: boolean | StockCategoryCountOutputTypeCountStock_itemsArgs
+  stockItems?: boolean | StockCategoryCountOutputTypeCountStockItemsArgs
 }
 
 /**
@@ -400,7 +400,7 @@ export type StockCategoryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
 /**
  * StockCategoryCountOutputType without action
  */
-export type StockCategoryCountOutputTypeCountStock_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type StockCategoryCountOutputTypeCountStockItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StockItemWhereInput
 }
 
@@ -408,32 +408,32 @@ export type StockCategoryCountOutputTypeCountStock_itemsArgs<ExtArgs extends run
 export type StockCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  order_index?: boolean
-  stock_items?: boolean | Prisma.StockCategory$stock_itemsArgs<ExtArgs>
+  orderIndex?: boolean
+  stockItems?: boolean | Prisma.StockCategory$stockItemsArgs<ExtArgs>
   _count?: boolean | Prisma.StockCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stockCategory"]>
 
 export type StockCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  order_index?: boolean
+  orderIndex?: boolean
 }, ExtArgs["result"]["stockCategory"]>
 
 export type StockCategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  order_index?: boolean
+  orderIndex?: boolean
 }, ExtArgs["result"]["stockCategory"]>
 
 export type StockCategorySelectScalar = {
   id?: boolean
   name?: boolean
-  order_index?: boolean
+  orderIndex?: boolean
 }
 
-export type StockCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "order_index", ExtArgs["result"]["stockCategory"]>
+export type StockCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "orderIndex", ExtArgs["result"]["stockCategory"]>
 export type StockCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stock_items?: boolean | Prisma.StockCategory$stock_itemsArgs<ExtArgs>
+  stockItems?: boolean | Prisma.StockCategory$stockItemsArgs<ExtArgs>
   _count?: boolean | Prisma.StockCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StockCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -442,12 +442,12 @@ export type StockCategoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $StockCategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "StockCategory"
   objects: {
-    stock_items: Prisma.$StockItemPayload<ExtArgs>[]
+    stockItems: Prisma.$StockItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string | null
-    order_index: number | null
+    orderIndex: number | null
   }, ExtArgs["result"]["stockCategory"]>
   composites: {}
 }
@@ -842,7 +842,7 @@ readonly fields: StockCategoryFieldRefs;
  */
 export interface Prisma__StockCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  stock_items<T extends Prisma.StockCategory$stock_itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StockCategory$stock_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockItems<T extends Prisma.StockCategory$stockItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StockCategory$stockItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -874,7 +874,7 @@ export interface Prisma__StockCategoryClient<T, Null = never, ExtArgs extends ru
 export interface StockCategoryFieldRefs {
   readonly id: Prisma.FieldRef<"StockCategory", 'Int'>
   readonly name: Prisma.FieldRef<"StockCategory", 'String'>
-  readonly order_index: Prisma.FieldRef<"StockCategory", 'Int'>
+  readonly orderIndex: Prisma.FieldRef<"StockCategory", 'Int'>
 }
     
 
@@ -1268,9 +1268,9 @@ export type StockCategoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * StockCategory.stock_items
+ * StockCategory.stockItems
  */
-export type StockCategory$stock_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type StockCategory$stockItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the StockItem
    */

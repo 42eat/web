@@ -28,104 +28,104 @@ export type AggregateExpenseTrip = {
 
 export type ExpenseTripAvgAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  vehicle_id: number | null
-  distance_km: number | null
+  memberId: number | null
+  vehicleId: number | null
+  distanceKm: number | null
 }
 
 export type ExpenseTripSumAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  vehicle_id: number | null
-  distance_km: number | null
+  memberId: number | null
+  vehicleId: number | null
+  distanceKm: number | null
 }
 
 export type ExpenseTripMinAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  vehicle_id: number | null
-  trip_date: Date | null
-  distance_km: number | null
+  memberId: number | null
+  vehicleId: number | null
+  tripDate: Date | null
+  distanceKm: number | null
   purpose: string | null
-  is_paid: boolean | null
-  paid_at: Date | null
-  created_at: Date | null
+  isPaid: boolean | null
+  paidAt: Date | null
+  createdAt: Date | null
 }
 
 export type ExpenseTripMaxAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  vehicle_id: number | null
-  trip_date: Date | null
-  distance_km: number | null
+  memberId: number | null
+  vehicleId: number | null
+  tripDate: Date | null
+  distanceKm: number | null
   purpose: string | null
-  is_paid: boolean | null
-  paid_at: Date | null
-  created_at: Date | null
+  isPaid: boolean | null
+  paidAt: Date | null
+  createdAt: Date | null
 }
 
 export type ExpenseTripCountAggregateOutputType = {
   id: number
-  member_id: number
-  vehicle_id: number
-  trip_date: number
-  distance_km: number
+  memberId: number
+  vehicleId: number
+  tripDate: number
+  distanceKm: number
   purpose: number
-  is_paid: number
-  paid_at: number
-  created_at: number
+  isPaid: number
+  paidAt: number
+  createdAt: number
   _all: number
 }
 
 
 export type ExpenseTripAvgAggregateInputType = {
   id?: true
-  member_id?: true
-  vehicle_id?: true
-  distance_km?: true
+  memberId?: true
+  vehicleId?: true
+  distanceKm?: true
 }
 
 export type ExpenseTripSumAggregateInputType = {
   id?: true
-  member_id?: true
-  vehicle_id?: true
-  distance_km?: true
+  memberId?: true
+  vehicleId?: true
+  distanceKm?: true
 }
 
 export type ExpenseTripMinAggregateInputType = {
   id?: true
-  member_id?: true
-  vehicle_id?: true
-  trip_date?: true
-  distance_km?: true
+  memberId?: true
+  vehicleId?: true
+  tripDate?: true
+  distanceKm?: true
   purpose?: true
-  is_paid?: true
-  paid_at?: true
-  created_at?: true
+  isPaid?: true
+  paidAt?: true
+  createdAt?: true
 }
 
 export type ExpenseTripMaxAggregateInputType = {
   id?: true
-  member_id?: true
-  vehicle_id?: true
-  trip_date?: true
-  distance_km?: true
+  memberId?: true
+  vehicleId?: true
+  tripDate?: true
+  distanceKm?: true
   purpose?: true
-  is_paid?: true
-  paid_at?: true
-  created_at?: true
+  isPaid?: true
+  paidAt?: true
+  createdAt?: true
 }
 
 export type ExpenseTripCountAggregateInputType = {
   id?: true
-  member_id?: true
-  vehicle_id?: true
-  trip_date?: true
-  distance_km?: true
+  memberId?: true
+  vehicleId?: true
+  tripDate?: true
+  distanceKm?: true
   purpose?: true
-  is_paid?: true
-  paid_at?: true
-  created_at?: true
+  isPaid?: true
+  paidAt?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -217,14 +217,14 @@ export type ExpenseTripGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type ExpenseTripGroupByOutputType = {
   id: number
-  member_id: number
-  vehicle_id: number
-  trip_date: Date
-  distance_km: number
+  memberId: number
+  vehicleId: number
+  tripDate: Date
+  distanceKm: number
   purpose: string | null
-  is_paid: boolean
-  paid_at: Date | null
-  created_at: Date | null
+  isPaid: boolean
+  paidAt: Date | null
+  createdAt: Date | null
   _count: ExpenseTripCountAggregateOutputType | null
   _avg: ExpenseTripAvgAggregateOutputType | null
   _sum: ExpenseTripSumAggregateOutputType | null
@@ -252,28 +252,28 @@ export type ExpenseTripWhereInput = {
   OR?: Prisma.ExpenseTripWhereInput[]
   NOT?: Prisma.ExpenseTripWhereInput | Prisma.ExpenseTripWhereInput[]
   id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  member_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  vehicle_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  trip_date?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
-  distance_km?: Prisma.IntFilter<"ExpenseTrip"> | number
+  memberId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  vehicleId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  tripDate?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
+  distanceKm?: Prisma.IntFilter<"ExpenseTrip"> | number
   purpose?: Prisma.StringNullableFilter<"ExpenseTrip"> | string | null
-  is_paid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
-  paid_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
-  created_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  isPaid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
+  paidAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
 }
 
 export type ExpenseTripOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  trip_date?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  tripDate?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
   purpose?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_paid?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPaid?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
   vehicle?: Prisma.VehicleOrderByWithRelationInput
 }
@@ -283,28 +283,28 @@ export type ExpenseTripWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ExpenseTripWhereInput | Prisma.ExpenseTripWhereInput[]
   OR?: Prisma.ExpenseTripWhereInput[]
   NOT?: Prisma.ExpenseTripWhereInput | Prisma.ExpenseTripWhereInput[]
-  member_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  vehicle_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  trip_date?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
-  distance_km?: Prisma.IntFilter<"ExpenseTrip"> | number
+  memberId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  vehicleId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  tripDate?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
+  distanceKm?: Prisma.IntFilter<"ExpenseTrip"> | number
   purpose?: Prisma.StringNullableFilter<"ExpenseTrip"> | string | null
-  is_paid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
-  paid_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
-  created_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  isPaid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
+  paidAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
 }, "id">
 
 export type ExpenseTripOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  trip_date?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  tripDate?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
   purpose?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_paid?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPaid?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ExpenseTripCountOrderByAggregateInput
   _avg?: Prisma.ExpenseTripAvgOrderByAggregateInput
   _max?: Prisma.ExpenseTripMaxOrderByAggregateInput
@@ -317,93 +317,93 @@ export type ExpenseTripScalarWhereWithAggregatesInput = {
   OR?: Prisma.ExpenseTripScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ExpenseTripScalarWhereWithAggregatesInput | Prisma.ExpenseTripScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
-  member_id?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
-  vehicle_id?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
-  trip_date?: Prisma.DateTimeWithAggregatesFilter<"ExpenseTrip"> | Date | string
-  distance_km?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
+  memberId?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
+  vehicleId?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
+  tripDate?: Prisma.DateTimeWithAggregatesFilter<"ExpenseTrip"> | Date | string
+  distanceKm?: Prisma.IntWithAggregatesFilter<"ExpenseTrip"> | number
   purpose?: Prisma.StringNullableWithAggregatesFilter<"ExpenseTrip"> | string | null
-  is_paid?: Prisma.BoolWithAggregatesFilter<"ExpenseTrip"> | boolean
-  paid_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ExpenseTrip"> | Date | string | null
-  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ExpenseTrip"> | Date | string | null
+  isPaid?: Prisma.BoolWithAggregatesFilter<"ExpenseTrip"> | boolean
+  paidAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ExpenseTrip"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ExpenseTrip"> | Date | string | null
 }
 
 export type ExpenseTripCreateInput = {
-  trip_date: Date | string
-  distance_km: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
-  member: Prisma.MemberCreateNestedOneWithoutExpense_tripsInput
-  vehicle: Prisma.VehicleCreateNestedOneWithoutExpense_tripsInput
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
+  member: Prisma.MemberCreateNestedOneWithoutExpenseTripsInput
+  vehicle: Prisma.VehicleCreateNestedOneWithoutExpenseTripsInput
 }
 
 export type ExpenseTripUncheckedCreateInput = {
   id?: number
-  member_id: number
-  vehicle_id: number
-  trip_date: Date | string
-  distance_km: number
+  memberId: number
+  vehicleId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripUpdateInput = {
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  member?: Prisma.MemberUpdateOneRequiredWithoutExpense_tripsNestedInput
-  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutExpense_tripsNestedInput
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  member?: Prisma.MemberUpdateOneRequiredWithoutExpenseTripsNestedInput
+  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutExpenseTripsNestedInput
 }
 
 export type ExpenseTripUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vehicle_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  vehicleId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripCreateManyInput = {
   id?: number
-  member_id: number
-  vehicle_id: number
-  trip_date: Date | string
-  distance_km: number
+  memberId: number
+  vehicleId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripUpdateManyMutationInput = {
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vehicle_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  vehicleId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripListRelationFilter = {
@@ -418,52 +418,52 @@ export type ExpenseTripOrderByRelationAggregateInput = {
 
 export type ExpenseTripCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  trip_date?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  tripDate?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
-  is_paid?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  isPaid?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ExpenseTripAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
 }
 
 export type ExpenseTripMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  trip_date?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  tripDate?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
-  is_paid?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  isPaid?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ExpenseTripMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  trip_date?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  tripDate?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
-  is_paid?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  isPaid?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ExpenseTripSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  vehicle_id?: Prisma.SortOrder
-  distance_km?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  vehicleId?: Prisma.SortOrder
+  distanceKm?: Prisma.SortOrder
 }
 
 export type ExpenseTripCreateNestedManyWithoutMemberInput = {
@@ -551,24 +551,24 @@ export type ExpenseTripUncheckedUpdateManyWithoutVehicleNestedInput = {
 }
 
 export type ExpenseTripCreateWithoutMemberInput = {
-  trip_date: Date | string
-  distance_km: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
-  vehicle: Prisma.VehicleCreateNestedOneWithoutExpense_tripsInput
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
+  vehicle: Prisma.VehicleCreateNestedOneWithoutExpenseTripsInput
 }
 
 export type ExpenseTripUncheckedCreateWithoutMemberInput = {
   id?: number
-  vehicle_id: number
-  trip_date: Date | string
-  distance_km: number
+  vehicleId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripCreateOrConnectWithoutMemberInput = {
@@ -602,35 +602,35 @@ export type ExpenseTripScalarWhereInput = {
   OR?: Prisma.ExpenseTripScalarWhereInput[]
   NOT?: Prisma.ExpenseTripScalarWhereInput | Prisma.ExpenseTripScalarWhereInput[]
   id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  member_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  vehicle_id?: Prisma.IntFilter<"ExpenseTrip"> | number
-  trip_date?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
-  distance_km?: Prisma.IntFilter<"ExpenseTrip"> | number
+  memberId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  vehicleId?: Prisma.IntFilter<"ExpenseTrip"> | number
+  tripDate?: Prisma.DateTimeFilter<"ExpenseTrip"> | Date | string
+  distanceKm?: Prisma.IntFilter<"ExpenseTrip"> | number
   purpose?: Prisma.StringNullableFilter<"ExpenseTrip"> | string | null
-  is_paid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
-  paid_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
-  created_at?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  isPaid?: Prisma.BoolFilter<"ExpenseTrip"> | boolean
+  paidAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"ExpenseTrip"> | Date | string | null
 }
 
 export type ExpenseTripCreateWithoutVehicleInput = {
-  trip_date: Date | string
-  distance_km: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
-  member: Prisma.MemberCreateNestedOneWithoutExpense_tripsInput
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
+  member: Prisma.MemberCreateNestedOneWithoutExpenseTripsInput
 }
 
 export type ExpenseTripUncheckedCreateWithoutVehicleInput = {
   id?: number
-  member_id: number
-  trip_date: Date | string
-  distance_km: number
+  memberId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripCreateOrConnectWithoutVehicleInput = {
@@ -661,147 +661,147 @@ export type ExpenseTripUpdateManyWithWhereWithoutVehicleInput = {
 
 export type ExpenseTripCreateManyMemberInput = {
   id?: number
-  vehicle_id: number
-  trip_date: Date | string
-  distance_km: number
+  vehicleId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripUpdateWithoutMemberInput = {
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutExpense_tripsNestedInput
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutExpenseTripsNestedInput
 }
 
 export type ExpenseTripUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  vehicle_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  vehicleId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  vehicle_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  vehicleId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripCreateManyVehicleInput = {
   id?: number
-  member_id: number
-  trip_date: Date | string
-  distance_km: number
+  memberId: number
+  tripDate: Date | string
+  distanceKm: number
   purpose?: string | null
-  is_paid?: boolean
-  paid_at?: Date | string | null
-  created_at?: Date | string | null
+  isPaid?: boolean
+  paidAt?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type ExpenseTripUpdateWithoutVehicleInput = {
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  member?: Prisma.MemberUpdateOneRequiredWithoutExpense_tripsNestedInput
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  member?: Prisma.MemberUpdateOneRequiredWithoutExpenseTripsNestedInput
 }
 
 export type ExpenseTripUncheckedUpdateWithoutVehicleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ExpenseTripUncheckedUpdateManyWithoutVehicleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  trip_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  distance_km?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  tripDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distanceKm?: Prisma.IntFieldUpdateOperationsInput | number
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
 
 export type ExpenseTripSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  vehicle_id?: boolean
-  trip_date?: boolean
-  distance_km?: boolean
+  memberId?: boolean
+  vehicleId?: boolean
+  tripDate?: boolean
+  distanceKm?: boolean
   purpose?: boolean
-  is_paid?: boolean
-  paid_at?: boolean
-  created_at?: boolean
+  isPaid?: boolean
+  paidAt?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["expenseTrip"]>
 
 export type ExpenseTripSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  vehicle_id?: boolean
-  trip_date?: boolean
-  distance_km?: boolean
+  memberId?: boolean
+  vehicleId?: boolean
+  tripDate?: boolean
+  distanceKm?: boolean
   purpose?: boolean
-  is_paid?: boolean
-  paid_at?: boolean
-  created_at?: boolean
+  isPaid?: boolean
+  paidAt?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["expenseTrip"]>
 
 export type ExpenseTripSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  vehicle_id?: boolean
-  trip_date?: boolean
-  distance_km?: boolean
+  memberId?: boolean
+  vehicleId?: boolean
+  tripDate?: boolean
+  distanceKm?: boolean
   purpose?: boolean
-  is_paid?: boolean
-  paid_at?: boolean
-  created_at?: boolean
+  isPaid?: boolean
+  paidAt?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["expenseTrip"]>
 
 export type ExpenseTripSelectScalar = {
   id?: boolean
-  member_id?: boolean
-  vehicle_id?: boolean
-  trip_date?: boolean
-  distance_km?: boolean
+  memberId?: boolean
+  vehicleId?: boolean
+  tripDate?: boolean
+  distanceKm?: boolean
   purpose?: boolean
-  is_paid?: boolean
-  paid_at?: boolean
-  created_at?: boolean
+  isPaid?: boolean
+  paidAt?: boolean
+  createdAt?: boolean
 }
 
-export type ExpenseTripOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "member_id" | "vehicle_id" | "trip_date" | "distance_km" | "purpose" | "is_paid" | "paid_at" | "created_at", ExtArgs["result"]["expenseTrip"]>
+export type ExpenseTripOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "vehicleId" | "tripDate" | "distanceKm" | "purpose" | "isPaid" | "paidAt" | "createdAt", ExtArgs["result"]["expenseTrip"]>
 export type ExpenseTripInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
@@ -823,14 +823,14 @@ export type $ExpenseTripPayload<ExtArgs extends runtime.Types.Extensions.Interna
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    member_id: number
-    vehicle_id: number
-    trip_date: Date
-    distance_km: number
+    memberId: number
+    vehicleId: number
+    tripDate: Date
+    distanceKm: number
     purpose: string | null
-    is_paid: boolean
-    paid_at: Date | null
-    created_at: Date | null
+    isPaid: boolean
+    paidAt: Date | null
+    createdAt: Date | null
   }, ExtArgs["result"]["expenseTrip"]>
   composites: {}
 }
@@ -1257,14 +1257,14 @@ export interface Prisma__ExpenseTripClient<T, Null = never, ExtArgs extends runt
  */
 export interface ExpenseTripFieldRefs {
   readonly id: Prisma.FieldRef<"ExpenseTrip", 'Int'>
-  readonly member_id: Prisma.FieldRef<"ExpenseTrip", 'Int'>
-  readonly vehicle_id: Prisma.FieldRef<"ExpenseTrip", 'Int'>
-  readonly trip_date: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
-  readonly distance_km: Prisma.FieldRef<"ExpenseTrip", 'Int'>
+  readonly memberId: Prisma.FieldRef<"ExpenseTrip", 'Int'>
+  readonly vehicleId: Prisma.FieldRef<"ExpenseTrip", 'Int'>
+  readonly tripDate: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
+  readonly distanceKm: Prisma.FieldRef<"ExpenseTrip", 'Int'>
   readonly purpose: Prisma.FieldRef<"ExpenseTrip", 'String'>
-  readonly is_paid: Prisma.FieldRef<"ExpenseTrip", 'Boolean'>
-  readonly paid_at: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
-  readonly created_at: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
+  readonly isPaid: Prisma.FieldRef<"ExpenseTrip", 'Boolean'>
+  readonly paidAt: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"ExpenseTrip", 'DateTime'>
 }
     
 

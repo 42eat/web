@@ -88,13 +88,13 @@ export class AuthService {
 	) {
 		let allSessions = await this.sessions.getMemberSessions(memberId);
 		allSessions = allSessions.filter(
-			(session) => session.expires_at > new Date(),
+			(session) => session.expiresAt > new Date(),
 		);
 
 		for (const session of allSessions) {
 			const isValidSession = await bcrypt.compare(
 				refreshToken,
-				session.refresh_token,
+				session.refreshToken,
 			);
 			if (isValidSession) {
 				await this.sessions.removeSession(session.id);

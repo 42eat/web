@@ -93,10 +93,10 @@ export const MemberScalarFieldEnum = {
   password: 'password',
   login: 'login',
   nickname: 'nickname',
-  internal_note: 'internal_note',
-  join_date: 'join_date',
-  updated_at: 'updated_at',
-  created_at: 'created_at'
+  internalNote: 'internalNote',
+  joinDate: 'joinDate',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
@@ -104,12 +104,12 @@ export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof 
 
 export const SessionScalarFieldEnum = {
   id: 'id',
-  member_id: 'member_id',
-  refresh_token: 'refresh_token',
-  user_agent: 'user_agent',
-  ip_address: 'ip_address',
-  created_at: 'created_at',
-  expires_at: 'expires_at'
+  memberId: 'memberId',
+  refreshToken: 'refreshToken',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -118,8 +118,8 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 export const AdhesionScalarFieldEnum = {
   id: 'id',
   year: 'year',
-  member_id: 'member_id',
-  created_at: 'created_at'
+  memberId: 'memberId',
+  createdAt: 'createdAt'
 } as const
 
 export type AdhesionScalarFieldEnum = (typeof AdhesionScalarFieldEnum)[keyof typeof AdhesionScalarFieldEnum]
@@ -164,7 +164,7 @@ export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
   manager: 'manager',
-  discord_message_id: 'discord_message_id',
+  discordMessageId: 'discordMessageId',
   validated: 'validated'
 } as const
 
@@ -173,9 +173,9 @@ export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof Sh
 
 export const ShiftMemberScalarFieldEnum = {
   id: 'id',
-  shift_id: 'shift_id',
-  member_id: 'member_id',
-  position_id: 'position_id'
+  shiftId: 'shiftId',
+  memberId: 'memberId',
+  positionId: 'positionId'
 } as const
 
 export type ShiftMemberScalarFieldEnum = (typeof ShiftMemberScalarFieldEnum)[keyof typeof ShiftMemberScalarFieldEnum]
@@ -184,7 +184,7 @@ export type ShiftMemberScalarFieldEnum = (typeof ShiftMemberScalarFieldEnum)[key
 export const ShiftPositionScalarFieldEnum = {
   id: 'id',
   position: 'position',
-  xp_mult: 'xp_mult'
+  xpMult: 'xpMult'
 } as const
 
 export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)[keyof typeof ShiftPositionScalarFieldEnum]
@@ -193,7 +193,7 @@ export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)
 export const ShiftAssignmentScalarFieldEnum = {
   id: 'id',
   date: 'date',
-  member_id: 'member_id'
+  memberId: 'memberId'
 } as const
 
 export type ShiftAssignmentScalarFieldEnum = (typeof ShiftAssignmentScalarFieldEnum)[keyof typeof ShiftAssignmentScalarFieldEnum]
@@ -202,7 +202,7 @@ export type ShiftAssignmentScalarFieldEnum = (typeof ShiftAssignmentScalarFieldE
 export const StockCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  order_index: 'order_index'
+  orderIndex: 'orderIndex'
 } as const
 
 export type StockCategoryScalarFieldEnum = (typeof StockCategoryScalarFieldEnum)[keyof typeof StockCategoryScalarFieldEnum]
@@ -211,11 +211,11 @@ export type StockCategoryScalarFieldEnum = (typeof StockCategoryScalarFieldEnum)
 export const StockItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  category_id: 'category_id',
-  expected_quantity: 'expected_quantity',
-  missing_quantity: 'missing_quantity',
+  categoryId: 'categoryId',
+  expectedQuantity: 'expectedQuantity',
+  missingQuantity: 'missingQuantity',
   unit: 'unit',
-  is_active: 'is_active'
+  isActive: 'isActive'
 } as const
 
 export type StockItemScalarFieldEnum = (typeof StockItemScalarFieldEnum)[keyof typeof StockItemScalarFieldEnum]
@@ -223,11 +223,11 @@ export type StockItemScalarFieldEnum = (typeof StockItemScalarFieldEnum)[keyof t
 
 export const VehicleScalarFieldEnum = {
   id: 'id',
-  member_id: 'member_id',
-  registration_doc_url: 'registration_doc_url',
-  fiscal_power: 'fiscal_power',
-  is_active: 'is_active',
-  created_at: 'created_at'
+  memberId: 'memberId',
+  registrationDocUrl: 'registrationDocUrl',
+  fiscalPower: 'fiscalPower',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
 } as const
 
 export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
@@ -235,14 +235,14 @@ export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeo
 
 export const ExpenseTripScalarFieldEnum = {
   id: 'id',
-  member_id: 'member_id',
-  vehicle_id: 'vehicle_id',
-  trip_date: 'trip_date',
-  distance_km: 'distance_km',
+  memberId: 'memberId',
+  vehicleId: 'vehicleId',
+  tripDate: 'tripDate',
+  distanceKm: 'distanceKm',
   purpose: 'purpose',
-  is_paid: 'is_paid',
-  paid_at: 'paid_at',
-  created_at: 'created_at'
+  isPaid: 'isPaid',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt'
 } as const
 
 export type ExpenseTripScalarFieldEnum = (typeof ExpenseTripScalarFieldEnum)[keyof typeof ExpenseTripScalarFieldEnum]
@@ -251,8 +251,8 @@ export type ExpenseTripScalarFieldEnum = (typeof ExpenseTripScalarFieldEnum)[key
 export const BattlepassSeasonScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  start_at: 'start_at',
-  end_at: 'end_at'
+  startAt: 'startAt',
+  endAt: 'endAt'
 } as const
 
 export type BattlepassSeasonScalarFieldEnum = (typeof BattlepassSeasonScalarFieldEnum)[keyof typeof BattlepassSeasonScalarFieldEnum]
@@ -260,8 +260,8 @@ export type BattlepassSeasonScalarFieldEnum = (typeof BattlepassSeasonScalarFiel
 
 export const BattlepassTierScalarFieldEnum = {
   id: 'id',
-  season_id: 'season_id',
-  tier_number: 'tier_number',
+  seasonId: 'seasonId',
+  tierNumber: 'tierNumber',
   requirement: 'requirement',
   reward: 'reward'
 } as const
@@ -271,10 +271,10 @@ export type BattlepassTierScalarFieldEnum = (typeof BattlepassTierScalarFieldEnu
 
 export const MemberBattlepassRewardScalarFieldEnum = {
   id: 'id',
-  member_id: 'member_id',
-  season_id: 'season_id',
-  tier_id: 'tier_id',
-  claimed_at: 'claimed_at'
+  memberId: 'memberId',
+  seasonId: 'seasonId',
+  tierId: 'tierId',
+  claimedAt: 'claimedAt'
 } as const
 
 export type MemberBattlepassRewardScalarFieldEnum = (typeof MemberBattlepassRewardScalarFieldEnum)[keyof typeof MemberBattlepassRewardScalarFieldEnum]

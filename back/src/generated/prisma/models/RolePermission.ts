@@ -208,16 +208,16 @@ export type RolePermissionWhereInput = {
   id?: Prisma.IntFilter<"RolePermission"> | number
   role?: Prisma.IntFilter<"RolePermission"> | number
   permission?: Prisma.IntFilter<"RolePermission"> | number
-  role_ref?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
-  permission_ref?: Prisma.XOR<Prisma.PermissionScalarRelationFilter, Prisma.PermissionWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
+  permissionRef?: Prisma.XOR<Prisma.PermissionScalarRelationFilter, Prisma.PermissionWhereInput>
 }
 
 export type RolePermissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrder
   permission?: Prisma.SortOrder
-  role_ref?: Prisma.RoleOrderByWithRelationInput
-  permission_ref?: Prisma.PermissionOrderByWithRelationInput
+  roleRef?: Prisma.RoleOrderByWithRelationInput
+  permissionRef?: Prisma.PermissionOrderByWithRelationInput
 }
 
 export type RolePermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -227,8 +227,8 @@ export type RolePermissionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RolePermissionWhereInput | Prisma.RolePermissionWhereInput[]
   role?: Prisma.IntFilter<"RolePermission"> | number
   permission?: Prisma.IntFilter<"RolePermission"> | number
-  role_ref?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
-  permission_ref?: Prisma.XOR<Prisma.PermissionScalarRelationFilter, Prisma.PermissionWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
+  permissionRef?: Prisma.XOR<Prisma.PermissionScalarRelationFilter, Prisma.PermissionWhereInput>
 }, "id">
 
 export type RolePermissionOrderByWithAggregationInput = {
@@ -252,8 +252,8 @@ export type RolePermissionScalarWhereWithAggregatesInput = {
 }
 
 export type RolePermissionCreateInput = {
-  role_ref: Prisma.RoleCreateNestedOneWithoutRole_permissionsInput
-  permission_ref: Prisma.PermissionCreateNestedOneWithoutRole_permissionsInput
+  roleRef: Prisma.RoleCreateNestedOneWithoutRolePermissionsInput
+  permissionRef: Prisma.PermissionCreateNestedOneWithoutRolePermissionsInput
 }
 
 export type RolePermissionUncheckedCreateInput = {
@@ -263,8 +263,8 @@ export type RolePermissionUncheckedCreateInput = {
 }
 
 export type RolePermissionUpdateInput = {
-  role_ref?: Prisma.RoleUpdateOneRequiredWithoutRole_permissionsNestedInput
-  permission_ref?: Prisma.PermissionUpdateOneRequiredWithoutRole_permissionsNestedInput
+  roleRef?: Prisma.RoleUpdateOneRequiredWithoutRolePermissionsNestedInput
+  permissionRef?: Prisma.PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput
 }
 
 export type RolePermissionUncheckedUpdateInput = {
@@ -329,123 +329,123 @@ export type RolePermissionSumOrderByAggregateInput = {
   permission?: Prisma.SortOrder
 }
 
-export type RolePermissionCreateNestedManyWithoutRole_refInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput> | Prisma.RolePermissionCreateWithoutRole_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutRole_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRole_refInput | Prisma.RolePermissionCreateOrConnectWithoutRole_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyRole_refInputEnvelope
+export type RolePermissionCreateNestedManyWithoutRoleRefInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput> | Prisma.RolePermissionCreateWithoutRoleRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput | Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyRoleRefInputEnvelope
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
 }
 
-export type RolePermissionUncheckedCreateNestedManyWithoutRole_refInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput> | Prisma.RolePermissionCreateWithoutRole_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutRole_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRole_refInput | Prisma.RolePermissionCreateOrConnectWithoutRole_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyRole_refInputEnvelope
+export type RolePermissionUncheckedCreateNestedManyWithoutRoleRefInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput> | Prisma.RolePermissionCreateWithoutRoleRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput | Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyRoleRefInputEnvelope
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
 }
 
-export type RolePermissionUpdateManyWithoutRole_refNestedInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput> | Prisma.RolePermissionCreateWithoutRole_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutRole_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRole_refInput | Prisma.RolePermissionCreateOrConnectWithoutRole_refInput[]
-  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutRole_refInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutRole_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyRole_refInputEnvelope
+export type RolePermissionUpdateManyWithoutRoleRefNestedInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput> | Prisma.RolePermissionCreateWithoutRoleRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput | Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput[]
+  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutRoleRefInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutRoleRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyRoleRefInputEnvelope
   set?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   disconnect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   delete?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
-  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutRole_refInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutRole_refInput[]
-  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutRole_refInput | Prisma.RolePermissionUpdateManyWithWhereWithoutRole_refInput[]
+  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutRoleRefInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutRoleRefInput[]
+  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutRoleRefInput | Prisma.RolePermissionUpdateManyWithWhereWithoutRoleRefInput[]
   deleteMany?: Prisma.RolePermissionScalarWhereInput | Prisma.RolePermissionScalarWhereInput[]
 }
 
-export type RolePermissionUncheckedUpdateManyWithoutRole_refNestedInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput> | Prisma.RolePermissionCreateWithoutRole_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutRole_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRole_refInput | Prisma.RolePermissionCreateOrConnectWithoutRole_refInput[]
-  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutRole_refInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutRole_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyRole_refInputEnvelope
+export type RolePermissionUncheckedUpdateManyWithoutRoleRefNestedInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput> | Prisma.RolePermissionCreateWithoutRoleRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput | Prisma.RolePermissionCreateOrConnectWithoutRoleRefInput[]
+  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutRoleRefInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutRoleRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyRoleRefInputEnvelope
   set?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   disconnect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   delete?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
-  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutRole_refInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutRole_refInput[]
-  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutRole_refInput | Prisma.RolePermissionUpdateManyWithWhereWithoutRole_refInput[]
+  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutRoleRefInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutRoleRefInput[]
+  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutRoleRefInput | Prisma.RolePermissionUpdateManyWithWhereWithoutRoleRefInput[]
   deleteMany?: Prisma.RolePermissionScalarWhereInput | Prisma.RolePermissionScalarWhereInput[]
 }
 
-export type RolePermissionCreateNestedManyWithoutPermission_refInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput> | Prisma.RolePermissionCreateWithoutPermission_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput | Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyPermission_refInputEnvelope
+export type RolePermissionCreateNestedManyWithoutPermissionRefInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput> | Prisma.RolePermissionCreateWithoutPermissionRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput | Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyPermissionRefInputEnvelope
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
 }
 
-export type RolePermissionUncheckedCreateNestedManyWithoutPermission_refInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput> | Prisma.RolePermissionCreateWithoutPermission_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput | Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyPermission_refInputEnvelope
+export type RolePermissionUncheckedCreateNestedManyWithoutPermissionRefInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput> | Prisma.RolePermissionCreateWithoutPermissionRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput | Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyPermissionRefInputEnvelope
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
 }
 
-export type RolePermissionUpdateManyWithoutPermission_refNestedInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput> | Prisma.RolePermissionCreateWithoutPermission_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput | Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput[]
-  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermission_refInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermission_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyPermission_refInputEnvelope
+export type RolePermissionUpdateManyWithoutPermissionRefNestedInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput> | Prisma.RolePermissionCreateWithoutPermissionRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput | Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput[]
+  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermissionRefInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermissionRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyPermissionRefInputEnvelope
   set?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   disconnect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   delete?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
-  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermission_refInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermission_refInput[]
-  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutPermission_refInput | Prisma.RolePermissionUpdateManyWithWhereWithoutPermission_refInput[]
+  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermissionRefInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermissionRefInput[]
+  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutPermissionRefInput | Prisma.RolePermissionUpdateManyWithWhereWithoutPermissionRefInput[]
   deleteMany?: Prisma.RolePermissionScalarWhereInput | Prisma.RolePermissionScalarWhereInput[]
 }
 
-export type RolePermissionUncheckedUpdateManyWithoutPermission_refNestedInput = {
-  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput> | Prisma.RolePermissionCreateWithoutPermission_refInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput[]
-  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput | Prisma.RolePermissionCreateOrConnectWithoutPermission_refInput[]
-  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermission_refInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermission_refInput[]
-  createMany?: Prisma.RolePermissionCreateManyPermission_refInputEnvelope
+export type RolePermissionUncheckedUpdateManyWithoutPermissionRefNestedInput = {
+  create?: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput> | Prisma.RolePermissionCreateWithoutPermissionRefInput[] | Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput[]
+  connectOrCreate?: Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput | Prisma.RolePermissionCreateOrConnectWithoutPermissionRefInput[]
+  upsert?: Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermissionRefInput | Prisma.RolePermissionUpsertWithWhereUniqueWithoutPermissionRefInput[]
+  createMany?: Prisma.RolePermissionCreateManyPermissionRefInputEnvelope
   set?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   disconnect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   delete?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
   connect?: Prisma.RolePermissionWhereUniqueInput | Prisma.RolePermissionWhereUniqueInput[]
-  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermission_refInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermission_refInput[]
-  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutPermission_refInput | Prisma.RolePermissionUpdateManyWithWhereWithoutPermission_refInput[]
+  update?: Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermissionRefInput | Prisma.RolePermissionUpdateWithWhereUniqueWithoutPermissionRefInput[]
+  updateMany?: Prisma.RolePermissionUpdateManyWithWhereWithoutPermissionRefInput | Prisma.RolePermissionUpdateManyWithWhereWithoutPermissionRefInput[]
   deleteMany?: Prisma.RolePermissionScalarWhereInput | Prisma.RolePermissionScalarWhereInput[]
 }
 
-export type RolePermissionCreateWithoutRole_refInput = {
-  permission_ref: Prisma.PermissionCreateNestedOneWithoutRole_permissionsInput
+export type RolePermissionCreateWithoutRoleRefInput = {
+  permissionRef: Prisma.PermissionCreateNestedOneWithoutRolePermissionsInput
 }
 
-export type RolePermissionUncheckedCreateWithoutRole_refInput = {
+export type RolePermissionUncheckedCreateWithoutRoleRefInput = {
   id?: number
   permission: number
 }
 
-export type RolePermissionCreateOrConnectWithoutRole_refInput = {
+export type RolePermissionCreateOrConnectWithoutRoleRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput>
+  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput>
 }
 
-export type RolePermissionCreateManyRole_refInputEnvelope = {
-  data: Prisma.RolePermissionCreateManyRole_refInput | Prisma.RolePermissionCreateManyRole_refInput[]
+export type RolePermissionCreateManyRoleRefInputEnvelope = {
+  data: Prisma.RolePermissionCreateManyRoleRefInput | Prisma.RolePermissionCreateManyRoleRefInput[]
   skipDuplicates?: boolean
 }
 
-export type RolePermissionUpsertWithWhereUniqueWithoutRole_refInput = {
+export type RolePermissionUpsertWithWhereUniqueWithoutRoleRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.RolePermissionUpdateWithoutRole_refInput, Prisma.RolePermissionUncheckedUpdateWithoutRole_refInput>
-  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutRole_refInput, Prisma.RolePermissionUncheckedCreateWithoutRole_refInput>
+  update: Prisma.XOR<Prisma.RolePermissionUpdateWithoutRoleRefInput, Prisma.RolePermissionUncheckedUpdateWithoutRoleRefInput>
+  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutRoleRefInput, Prisma.RolePermissionUncheckedCreateWithoutRoleRefInput>
 }
 
-export type RolePermissionUpdateWithWhereUniqueWithoutRole_refInput = {
+export type RolePermissionUpdateWithWhereUniqueWithoutRoleRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.RolePermissionUpdateWithoutRole_refInput, Prisma.RolePermissionUncheckedUpdateWithoutRole_refInput>
+  data: Prisma.XOR<Prisma.RolePermissionUpdateWithoutRoleRefInput, Prisma.RolePermissionUncheckedUpdateWithoutRoleRefInput>
 }
 
-export type RolePermissionUpdateManyWithWhereWithoutRole_refInput = {
+export type RolePermissionUpdateManyWithWhereWithoutRoleRefInput = {
   where: Prisma.RolePermissionScalarWhereInput
-  data: Prisma.XOR<Prisma.RolePermissionUpdateManyMutationInput, Prisma.RolePermissionUncheckedUpdateManyWithoutRole_refInput>
+  data: Prisma.XOR<Prisma.RolePermissionUpdateManyMutationInput, Prisma.RolePermissionUncheckedUpdateManyWithoutRoleRefInput>
 }
 
 export type RolePermissionScalarWhereInput = {
@@ -457,75 +457,75 @@ export type RolePermissionScalarWhereInput = {
   permission?: Prisma.IntFilter<"RolePermission"> | number
 }
 
-export type RolePermissionCreateWithoutPermission_refInput = {
-  role_ref: Prisma.RoleCreateNestedOneWithoutRole_permissionsInput
+export type RolePermissionCreateWithoutPermissionRefInput = {
+  roleRef: Prisma.RoleCreateNestedOneWithoutRolePermissionsInput
 }
 
-export type RolePermissionUncheckedCreateWithoutPermission_refInput = {
+export type RolePermissionUncheckedCreateWithoutPermissionRefInput = {
   id?: number
   role: number
 }
 
-export type RolePermissionCreateOrConnectWithoutPermission_refInput = {
+export type RolePermissionCreateOrConnectWithoutPermissionRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput>
+  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput>
 }
 
-export type RolePermissionCreateManyPermission_refInputEnvelope = {
-  data: Prisma.RolePermissionCreateManyPermission_refInput | Prisma.RolePermissionCreateManyPermission_refInput[]
+export type RolePermissionCreateManyPermissionRefInputEnvelope = {
+  data: Prisma.RolePermissionCreateManyPermissionRefInput | Prisma.RolePermissionCreateManyPermissionRefInput[]
   skipDuplicates?: boolean
 }
 
-export type RolePermissionUpsertWithWhereUniqueWithoutPermission_refInput = {
+export type RolePermissionUpsertWithWhereUniqueWithoutPermissionRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.RolePermissionUpdateWithoutPermission_refInput, Prisma.RolePermissionUncheckedUpdateWithoutPermission_refInput>
-  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermission_refInput, Prisma.RolePermissionUncheckedCreateWithoutPermission_refInput>
+  update: Prisma.XOR<Prisma.RolePermissionUpdateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedUpdateWithoutPermissionRefInput>
+  create: Prisma.XOR<Prisma.RolePermissionCreateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedCreateWithoutPermissionRefInput>
 }
 
-export type RolePermissionUpdateWithWhereUniqueWithoutPermission_refInput = {
+export type RolePermissionUpdateWithWhereUniqueWithoutPermissionRefInput = {
   where: Prisma.RolePermissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.RolePermissionUpdateWithoutPermission_refInput, Prisma.RolePermissionUncheckedUpdateWithoutPermission_refInput>
+  data: Prisma.XOR<Prisma.RolePermissionUpdateWithoutPermissionRefInput, Prisma.RolePermissionUncheckedUpdateWithoutPermissionRefInput>
 }
 
-export type RolePermissionUpdateManyWithWhereWithoutPermission_refInput = {
+export type RolePermissionUpdateManyWithWhereWithoutPermissionRefInput = {
   where: Prisma.RolePermissionScalarWhereInput
-  data: Prisma.XOR<Prisma.RolePermissionUpdateManyMutationInput, Prisma.RolePermissionUncheckedUpdateManyWithoutPermission_refInput>
+  data: Prisma.XOR<Prisma.RolePermissionUpdateManyMutationInput, Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionRefInput>
 }
 
-export type RolePermissionCreateManyRole_refInput = {
+export type RolePermissionCreateManyRoleRefInput = {
   id?: number
   permission: number
 }
 
-export type RolePermissionUpdateWithoutRole_refInput = {
-  permission_ref?: Prisma.PermissionUpdateOneRequiredWithoutRole_permissionsNestedInput
+export type RolePermissionUpdateWithoutRoleRefInput = {
+  permissionRef?: Prisma.PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput
 }
 
-export type RolePermissionUncheckedUpdateWithoutRole_refInput = {
+export type RolePermissionUncheckedUpdateWithoutRoleRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   permission?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type RolePermissionUncheckedUpdateManyWithoutRole_refInput = {
+export type RolePermissionUncheckedUpdateManyWithoutRoleRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   permission?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type RolePermissionCreateManyPermission_refInput = {
+export type RolePermissionCreateManyPermissionRefInput = {
   id?: number
   role: number
 }
 
-export type RolePermissionUpdateWithoutPermission_refInput = {
-  role_ref?: Prisma.RoleUpdateOneRequiredWithoutRole_permissionsNestedInput
+export type RolePermissionUpdateWithoutPermissionRefInput = {
+  roleRef?: Prisma.RoleUpdateOneRequiredWithoutRolePermissionsNestedInput
 }
 
-export type RolePermissionUncheckedUpdateWithoutPermission_refInput = {
+export type RolePermissionUncheckedUpdateWithoutPermissionRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type RolePermissionUncheckedUpdateManyWithoutPermission_refInput = {
+export type RolePermissionUncheckedUpdateManyWithoutPermissionRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -536,24 +536,24 @@ export type RolePermissionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   role?: boolean
   permission?: boolean
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolePermission"]>
 
 export type RolePermissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   role?: boolean
   permission?: boolean
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolePermission"]>
 
 export type RolePermissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   role?: boolean
   permission?: boolean
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolePermission"]>
 
 export type RolePermissionSelectScalar = {
@@ -564,23 +564,23 @@ export type RolePermissionSelectScalar = {
 
 export type RolePermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "permission", ExtArgs["result"]["rolePermission"]>
 export type RolePermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }
 export type RolePermissionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }
 export type RolePermissionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  role_ref?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
-  permission_ref?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  permissionRef?: boolean | Prisma.PermissionDefaultArgs<ExtArgs>
 }
 
 export type $RolePermissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RolePermission"
   objects: {
-    role_ref: Prisma.$RolePayload<ExtArgs>
-    permission_ref: Prisma.$PermissionPayload<ExtArgs>
+    roleRef: Prisma.$RolePayload<ExtArgs>
+    permissionRef: Prisma.$PermissionPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -980,8 +980,8 @@ readonly fields: RolePermissionFieldRefs;
  */
 export interface Prisma__RolePermissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  role_ref<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  permission_ref<T extends Prisma.PermissionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PermissionDefaultArgs<ExtArgs>>): Prisma.Prisma__PermissionClient<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  roleRef<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  permissionRef<T extends Prisma.PermissionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PermissionDefaultArgs<ExtArgs>>): Prisma.Prisma__PermissionClient<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -28,38 +28,38 @@ export type AggregateBattlepassTier = {
 
 export type BattlepassTierAvgAggregateOutputType = {
   id: number | null
-  season_id: number | null
-  tier_number: number | null
+  seasonId: number | null
+  tierNumber: number | null
   requirement: number | null
 }
 
 export type BattlepassTierSumAggregateOutputType = {
   id: number | null
-  season_id: number | null
-  tier_number: number | null
+  seasonId: number | null
+  tierNumber: number | null
   requirement: number | null
 }
 
 export type BattlepassTierMinAggregateOutputType = {
   id: number | null
-  season_id: number | null
-  tier_number: number | null
+  seasonId: number | null
+  tierNumber: number | null
   requirement: number | null
   reward: string | null
 }
 
 export type BattlepassTierMaxAggregateOutputType = {
   id: number | null
-  season_id: number | null
-  tier_number: number | null
+  seasonId: number | null
+  tierNumber: number | null
   requirement: number | null
   reward: string | null
 }
 
 export type BattlepassTierCountAggregateOutputType = {
   id: number
-  season_id: number
-  tier_number: number
+  seasonId: number
+  tierNumber: number
   requirement: number
   reward: number
   _all: number
@@ -68,38 +68,38 @@ export type BattlepassTierCountAggregateOutputType = {
 
 export type BattlepassTierAvgAggregateInputType = {
   id?: true
-  season_id?: true
-  tier_number?: true
+  seasonId?: true
+  tierNumber?: true
   requirement?: true
 }
 
 export type BattlepassTierSumAggregateInputType = {
   id?: true
-  season_id?: true
-  tier_number?: true
+  seasonId?: true
+  tierNumber?: true
   requirement?: true
 }
 
 export type BattlepassTierMinAggregateInputType = {
   id?: true
-  season_id?: true
-  tier_number?: true
+  seasonId?: true
+  tierNumber?: true
   requirement?: true
   reward?: true
 }
 
 export type BattlepassTierMaxAggregateInputType = {
   id?: true
-  season_id?: true
-  tier_number?: true
+  seasonId?: true
+  tierNumber?: true
   requirement?: true
   reward?: true
 }
 
 export type BattlepassTierCountAggregateInputType = {
   id?: true
-  season_id?: true
-  tier_number?: true
+  seasonId?: true
+  tierNumber?: true
   requirement?: true
   reward?: true
   _all?: true
@@ -193,8 +193,8 @@ export type BattlepassTierGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type BattlepassTierGroupByOutputType = {
   id: number
-  season_id: number
-  tier_number: number
+  seasonId: number
+  tierNumber: number
   requirement: number
   reward: string
   _count: BattlepassTierCountAggregateOutputType | null
@@ -224,8 +224,8 @@ export type BattlepassTierWhereInput = {
   OR?: Prisma.BattlepassTierWhereInput[]
   NOT?: Prisma.BattlepassTierWhereInput | Prisma.BattlepassTierWhereInput[]
   id?: Prisma.IntFilter<"BattlepassTier"> | number
-  season_id?: Prisma.IntFilter<"BattlepassTier"> | number
-  tier_number?: Prisma.IntFilter<"BattlepassTier"> | number
+  seasonId?: Prisma.IntFilter<"BattlepassTier"> | number
+  tierNumber?: Prisma.IntFilter<"BattlepassTier"> | number
   requirement?: Prisma.IntFilter<"BattlepassTier"> | number
   reward?: Prisma.StringFilter<"BattlepassTier"> | string
   season?: Prisma.XOR<Prisma.BattlepassSeasonScalarRelationFilter, Prisma.BattlepassSeasonWhereInput>
@@ -234,8 +234,8 @@ export type BattlepassTierWhereInput = {
 
 export type BattlepassTierOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   season?: Prisma.BattlepassSeasonOrderByWithRelationInput
@@ -247,8 +247,8 @@ export type BattlepassTierWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BattlepassTierWhereInput | Prisma.BattlepassTierWhereInput[]
   OR?: Prisma.BattlepassTierWhereInput[]
   NOT?: Prisma.BattlepassTierWhereInput | Prisma.BattlepassTierWhereInput[]
-  season_id?: Prisma.IntFilter<"BattlepassTier"> | number
-  tier_number?: Prisma.IntFilter<"BattlepassTier"> | number
+  seasonId?: Prisma.IntFilter<"BattlepassTier"> | number
+  tierNumber?: Prisma.IntFilter<"BattlepassTier"> | number
   requirement?: Prisma.IntFilter<"BattlepassTier"> | number
   reward?: Prisma.StringFilter<"BattlepassTier"> | string
   season?: Prisma.XOR<Prisma.BattlepassSeasonScalarRelationFilter, Prisma.BattlepassSeasonWhereInput>
@@ -257,8 +257,8 @@ export type BattlepassTierWhereUniqueInput = Prisma.AtLeast<{
 
 export type BattlepassTierOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   _count?: Prisma.BattlepassTierCountOrderByAggregateInput
@@ -273,14 +273,14 @@ export type BattlepassTierScalarWhereWithAggregatesInput = {
   OR?: Prisma.BattlepassTierScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BattlepassTierScalarWhereWithAggregatesInput | Prisma.BattlepassTierScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
-  season_id?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
-  tier_number?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
+  seasonId?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
+  tierNumber?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
   requirement?: Prisma.IntWithAggregatesFilter<"BattlepassTier"> | number
   reward?: Prisma.StringWithAggregatesFilter<"BattlepassTier"> | string
 }
 
 export type BattlepassTierCreateInput = {
-  tier_number: number
+  tierNumber: number
   requirement: number
   reward: string
   season: Prisma.BattlepassSeasonCreateNestedOneWithoutTiersInput
@@ -289,15 +289,15 @@ export type BattlepassTierCreateInput = {
 
 export type BattlepassTierUncheckedCreateInput = {
   id?: number
-  season_id: number
-  tier_number: number
+  seasonId: number
+  tierNumber: number
   requirement: number
   reward: string
   rewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutTierInput
 }
 
 export type BattlepassTierUpdateInput = {
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   season?: Prisma.BattlepassSeasonUpdateOneRequiredWithoutTiersNestedInput
@@ -306,8 +306,8 @@ export type BattlepassTierUpdateInput = {
 
 export type BattlepassTierUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  season_id?: Prisma.IntFieldUpdateOperationsInput | number
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   rewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutTierNestedInput
@@ -315,22 +315,22 @@ export type BattlepassTierUncheckedUpdateInput = {
 
 export type BattlepassTierCreateManyInput = {
   id?: number
-  season_id: number
-  tier_number: number
+  seasonId: number
+  tierNumber: number
   requirement: number
   reward: string
 }
 
 export type BattlepassTierUpdateManyMutationInput = {
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type BattlepassTierUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  season_id?: Prisma.IntFieldUpdateOperationsInput | number
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -347,39 +347,39 @@ export type BattlepassTierOrderByRelationAggregateInput = {
 
 export type BattlepassTierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
   reward?: Prisma.SortOrder
 }
 
 export type BattlepassTierAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
 }
 
 export type BattlepassTierMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
   reward?: Prisma.SortOrder
 }
 
 export type BattlepassTierMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
   reward?: Prisma.SortOrder
 }
 
 export type BattlepassTierSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  season_id?: Prisma.SortOrder
-  tier_number?: Prisma.SortOrder
+  seasonId?: Prisma.SortOrder
+  tierNumber?: Prisma.SortOrder
   requirement?: Prisma.SortOrder
 }
 
@@ -445,7 +445,7 @@ export type BattlepassTierUpdateOneRequiredWithoutRewardsNestedInput = {
 }
 
 export type BattlepassTierCreateWithoutSeasonInput = {
-  tier_number: number
+  tierNumber: number
   requirement: number
   reward: string
   rewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutTierInput
@@ -453,7 +453,7 @@ export type BattlepassTierCreateWithoutSeasonInput = {
 
 export type BattlepassTierUncheckedCreateWithoutSeasonInput = {
   id?: number
-  tier_number: number
+  tierNumber: number
   requirement: number
   reward: string
   rewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutTierInput
@@ -490,14 +490,14 @@ export type BattlepassTierScalarWhereInput = {
   OR?: Prisma.BattlepassTierScalarWhereInput[]
   NOT?: Prisma.BattlepassTierScalarWhereInput | Prisma.BattlepassTierScalarWhereInput[]
   id?: Prisma.IntFilter<"BattlepassTier"> | number
-  season_id?: Prisma.IntFilter<"BattlepassTier"> | number
-  tier_number?: Prisma.IntFilter<"BattlepassTier"> | number
+  seasonId?: Prisma.IntFilter<"BattlepassTier"> | number
+  tierNumber?: Prisma.IntFilter<"BattlepassTier"> | number
   requirement?: Prisma.IntFilter<"BattlepassTier"> | number
   reward?: Prisma.StringFilter<"BattlepassTier"> | string
 }
 
 export type BattlepassTierCreateWithoutRewardsInput = {
-  tier_number: number
+  tierNumber: number
   requirement: number
   reward: string
   season: Prisma.BattlepassSeasonCreateNestedOneWithoutTiersInput
@@ -505,8 +505,8 @@ export type BattlepassTierCreateWithoutRewardsInput = {
 
 export type BattlepassTierUncheckedCreateWithoutRewardsInput = {
   id?: number
-  season_id: number
-  tier_number: number
+  seasonId: number
+  tierNumber: number
   requirement: number
   reward: string
 }
@@ -528,7 +528,7 @@ export type BattlepassTierUpdateToOneWithWhereWithoutRewardsInput = {
 }
 
 export type BattlepassTierUpdateWithoutRewardsInput = {
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   season?: Prisma.BattlepassSeasonUpdateOneRequiredWithoutTiersNestedInput
@@ -536,21 +536,21 @@ export type BattlepassTierUpdateWithoutRewardsInput = {
 
 export type BattlepassTierUncheckedUpdateWithoutRewardsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  season_id?: Prisma.IntFieldUpdateOperationsInput | number
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type BattlepassTierCreateManySeasonInput = {
   id?: number
-  tier_number: number
+  tierNumber: number
   requirement: number
   reward: string
 }
 
 export type BattlepassTierUpdateWithoutSeasonInput = {
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   rewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutTierNestedInput
@@ -558,7 +558,7 @@ export type BattlepassTierUpdateWithoutSeasonInput = {
 
 export type BattlepassTierUncheckedUpdateWithoutSeasonInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   rewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutTierNestedInput
@@ -566,7 +566,7 @@ export type BattlepassTierUncheckedUpdateWithoutSeasonInput = {
 
 export type BattlepassTierUncheckedUpdateManyWithoutSeasonInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tier_number?: Prisma.IntFieldUpdateOperationsInput | number
+  tierNumber?: Prisma.IntFieldUpdateOperationsInput | number
   requirement?: Prisma.IntFieldUpdateOperationsInput | number
   reward?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -604,8 +604,8 @@ export type BattlepassTierCountOutputTypeCountRewardsArgs<ExtArgs extends runtim
 
 export type BattlepassTierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  season_id?: boolean
-  tier_number?: boolean
+  seasonId?: boolean
+  tierNumber?: boolean
   requirement?: boolean
   reward?: boolean
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
@@ -615,8 +615,8 @@ export type BattlepassTierSelect<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type BattlepassTierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  season_id?: boolean
-  tier_number?: boolean
+  seasonId?: boolean
+  tierNumber?: boolean
   requirement?: boolean
   reward?: boolean
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
@@ -624,8 +624,8 @@ export type BattlepassTierSelectCreateManyAndReturn<ExtArgs extends runtime.Type
 
 export type BattlepassTierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  season_id?: boolean
-  tier_number?: boolean
+  seasonId?: boolean
+  tierNumber?: boolean
   requirement?: boolean
   reward?: boolean
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
@@ -633,13 +633,13 @@ export type BattlepassTierSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
 
 export type BattlepassTierSelectScalar = {
   id?: boolean
-  season_id?: boolean
-  tier_number?: boolean
+  seasonId?: boolean
+  tierNumber?: boolean
   requirement?: boolean
   reward?: boolean
 }
 
-export type BattlepassTierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "season_id" | "tier_number" | "requirement" | "reward", ExtArgs["result"]["battlepassTier"]>
+export type BattlepassTierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "seasonId" | "tierNumber" | "requirement" | "reward", ExtArgs["result"]["battlepassTier"]>
 export type BattlepassTierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   season?: boolean | Prisma.BattlepassSeasonDefaultArgs<ExtArgs>
   rewards?: boolean | Prisma.BattlepassTier$rewardsArgs<ExtArgs>
@@ -660,8 +660,8 @@ export type $BattlepassTierPayload<ExtArgs extends runtime.Types.Extensions.Inte
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    season_id: number
-    tier_number: number
+    seasonId: number
+    tierNumber: number
     requirement: number
     reward: string
   }, ExtArgs["result"]["battlepassTier"]>
@@ -1090,8 +1090,8 @@ export interface Prisma__BattlepassTierClient<T, Null = never, ExtArgs extends r
  */
 export interface BattlepassTierFieldRefs {
   readonly id: Prisma.FieldRef<"BattlepassTier", 'Int'>
-  readonly season_id: Prisma.FieldRef<"BattlepassTier", 'Int'>
-  readonly tier_number: Prisma.FieldRef<"BattlepassTier", 'Int'>
+  readonly seasonId: Prisma.FieldRef<"BattlepassTier", 'Int'>
+  readonly tierNumber: Prisma.FieldRef<"BattlepassTier", 'Int'>
   readonly requirement: Prisma.FieldRef<"BattlepassTier", 'Int'>
   readonly reward: Prisma.FieldRef<"BattlepassTier", 'String'>
 }

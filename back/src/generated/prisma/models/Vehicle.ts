@@ -28,82 +28,82 @@ export type AggregateVehicle = {
 
 export type VehicleAvgAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  fiscal_power: number | null
+  memberId: number | null
+  fiscalPower: number | null
 }
 
 export type VehicleSumAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  fiscal_power: number | null
+  memberId: number | null
+  fiscalPower: number | null
 }
 
 export type VehicleMinAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  registration_doc_url: string | null
-  fiscal_power: number | null
-  is_active: boolean | null
-  created_at: Date | null
+  memberId: number | null
+  registrationDocUrl: string | null
+  fiscalPower: number | null
+  isActive: boolean | null
+  createdAt: Date | null
 }
 
 export type VehicleMaxAggregateOutputType = {
   id: number | null
-  member_id: number | null
-  registration_doc_url: string | null
-  fiscal_power: number | null
-  is_active: boolean | null
-  created_at: Date | null
+  memberId: number | null
+  registrationDocUrl: string | null
+  fiscalPower: number | null
+  isActive: boolean | null
+  createdAt: Date | null
 }
 
 export type VehicleCountAggregateOutputType = {
   id: number
-  member_id: number
-  registration_doc_url: number
-  fiscal_power: number
-  is_active: number
-  created_at: number
+  memberId: number
+  registrationDocUrl: number
+  fiscalPower: number
+  isActive: number
+  createdAt: number
   _all: number
 }
 
 
 export type VehicleAvgAggregateInputType = {
   id?: true
-  member_id?: true
-  fiscal_power?: true
+  memberId?: true
+  fiscalPower?: true
 }
 
 export type VehicleSumAggregateInputType = {
   id?: true
-  member_id?: true
-  fiscal_power?: true
+  memberId?: true
+  fiscalPower?: true
 }
 
 export type VehicleMinAggregateInputType = {
   id?: true
-  member_id?: true
-  registration_doc_url?: true
-  fiscal_power?: true
-  is_active?: true
-  created_at?: true
+  memberId?: true
+  registrationDocUrl?: true
+  fiscalPower?: true
+  isActive?: true
+  createdAt?: true
 }
 
 export type VehicleMaxAggregateInputType = {
   id?: true
-  member_id?: true
-  registration_doc_url?: true
-  fiscal_power?: true
-  is_active?: true
-  created_at?: true
+  memberId?: true
+  registrationDocUrl?: true
+  fiscalPower?: true
+  isActive?: true
+  createdAt?: true
 }
 
 export type VehicleCountAggregateInputType = {
   id?: true
-  member_id?: true
-  registration_doc_url?: true
-  fiscal_power?: true
-  is_active?: true
-  created_at?: true
+  memberId?: true
+  registrationDocUrl?: true
+  fiscalPower?: true
+  isActive?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -195,11 +195,11 @@ export type VehicleGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type VehicleGroupByOutputType = {
   id: number
-  member_id: number
-  registration_doc_url: string | null
-  fiscal_power: number
-  is_active: boolean
-  created_at: Date | null
+  memberId: number
+  registrationDocUrl: string | null
+  fiscalPower: number
+  isActive: boolean
+  createdAt: Date | null
   _count: VehicleCountAggregateOutputType | null
   _avg: VehicleAvgAggregateOutputType | null
   _sum: VehicleSumAggregateOutputType | null
@@ -227,24 +227,24 @@ export type VehicleWhereInput = {
   OR?: Prisma.VehicleWhereInput[]
   NOT?: Prisma.VehicleWhereInput | Prisma.VehicleWhereInput[]
   id?: Prisma.IntFilter<"Vehicle"> | number
-  member_id?: Prisma.IntFilter<"Vehicle"> | number
-  registration_doc_url?: Prisma.StringNullableFilter<"Vehicle"> | string | null
-  fiscal_power?: Prisma.IntFilter<"Vehicle"> | number
-  is_active?: Prisma.BoolFilter<"Vehicle"> | boolean
-  created_at?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  memberId?: Prisma.IntFilter<"Vehicle"> | number
+  registrationDocUrl?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  fiscalPower?: Prisma.IntFilter<"Vehicle"> | number
+  isActive?: Prisma.BoolFilter<"Vehicle"> | boolean
+  createdAt?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  expense_trips?: Prisma.ExpenseTripListRelationFilter
+  expenseTrips?: Prisma.ExpenseTripListRelationFilter
 }
 
 export type VehicleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  registration_doc_url?: Prisma.SortOrderInput | Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  registrationDocUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
-  expense_trips?: Prisma.ExpenseTripOrderByRelationAggregateInput
+  expenseTrips?: Prisma.ExpenseTripOrderByRelationAggregateInput
 }
 
 export type VehicleWhereUniqueInput = Prisma.AtLeast<{
@@ -252,22 +252,22 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VehicleWhereInput | Prisma.VehicleWhereInput[]
   OR?: Prisma.VehicleWhereInput[]
   NOT?: Prisma.VehicleWhereInput | Prisma.VehicleWhereInput[]
-  member_id?: Prisma.IntFilter<"Vehicle"> | number
-  registration_doc_url?: Prisma.StringNullableFilter<"Vehicle"> | string | null
-  fiscal_power?: Prisma.IntFilter<"Vehicle"> | number
-  is_active?: Prisma.BoolFilter<"Vehicle"> | boolean
-  created_at?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  memberId?: Prisma.IntFilter<"Vehicle"> | number
+  registrationDocUrl?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  fiscalPower?: Prisma.IntFilter<"Vehicle"> | number
+  isActive?: Prisma.BoolFilter<"Vehicle"> | boolean
+  createdAt?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  expense_trips?: Prisma.ExpenseTripListRelationFilter
+  expenseTrips?: Prisma.ExpenseTripListRelationFilter
 }, "id">
 
 export type VehicleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  registration_doc_url?: Prisma.SortOrderInput | Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  registrationDocUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VehicleCountOrderByAggregateInput
   _avg?: Prisma.VehicleAvgOrderByAggregateInput
   _max?: Prisma.VehicleMaxOrderByAggregateInput
@@ -280,74 +280,74 @@ export type VehicleScalarWhereWithAggregatesInput = {
   OR?: Prisma.VehicleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VehicleScalarWhereWithAggregatesInput | Prisma.VehicleScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
-  member_id?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
-  registration_doc_url?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
-  fiscal_power?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
-  is_active?: Prisma.BoolWithAggregatesFilter<"Vehicle"> | boolean
-  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  memberId?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  registrationDocUrl?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
+  fiscalPower?: Prisma.IntWithAggregatesFilter<"Vehicle"> | number
+  isActive?: Prisma.BoolWithAggregatesFilter<"Vehicle"> | boolean
+  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
 }
 
 export type VehicleCreateInput = {
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
   member: Prisma.MemberCreateNestedOneWithoutVehiclesInput
-  expense_trips?: Prisma.ExpenseTripCreateNestedManyWithoutVehicleInput
+  expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateInput = {
   id?: number
-  member_id: number
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
-  expense_trips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutVehicleInput
+  memberId: number
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
+  expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUpdateInput = {
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneRequiredWithoutVehiclesNestedInput
-  expense_trips?: Prisma.ExpenseTripUpdateManyWithoutVehicleNestedInput
+  expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expense_trips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutVehicleNestedInput
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleCreateManyInput = {
   id?: number
-  member_id: number
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
+  memberId: number
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
 }
 
 export type VehicleUpdateManyMutationInput = {
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VehicleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VehicleListRelationFilter = {
@@ -362,41 +362,41 @@ export type VehicleOrderByRelationAggregateInput = {
 
 export type VehicleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  registration_doc_url?: Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  registrationDocUrl?: Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type VehicleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
 }
 
 export type VehicleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  registration_doc_url?: Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  registrationDocUrl?: Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type VehicleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  registration_doc_url?: Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  registrationDocUrl?: Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type VehicleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member_id?: Prisma.SortOrder
-  fiscal_power?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  fiscalPower?: Prisma.SortOrder
 }
 
 export type VehicleScalarRelationFilter = {
@@ -446,35 +446,35 @@ export type VehicleUncheckedUpdateManyWithoutMemberNestedInput = {
   deleteMany?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
 }
 
-export type VehicleCreateNestedOneWithoutExpense_tripsInput = {
-  create?: Prisma.XOR<Prisma.VehicleCreateWithoutExpense_tripsInput, Prisma.VehicleUncheckedCreateWithoutExpense_tripsInput>
-  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutExpense_tripsInput
+export type VehicleCreateNestedOneWithoutExpenseTripsInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutExpenseTripsInput, Prisma.VehicleUncheckedCreateWithoutExpenseTripsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutExpenseTripsInput
   connect?: Prisma.VehicleWhereUniqueInput
 }
 
-export type VehicleUpdateOneRequiredWithoutExpense_tripsNestedInput = {
-  create?: Prisma.XOR<Prisma.VehicleCreateWithoutExpense_tripsInput, Prisma.VehicleUncheckedCreateWithoutExpense_tripsInput>
-  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutExpense_tripsInput
-  upsert?: Prisma.VehicleUpsertWithoutExpense_tripsInput
+export type VehicleUpdateOneRequiredWithoutExpenseTripsNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutExpenseTripsInput, Prisma.VehicleUncheckedCreateWithoutExpenseTripsInput>
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutExpenseTripsInput
+  upsert?: Prisma.VehicleUpsertWithoutExpenseTripsInput
   connect?: Prisma.VehicleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutExpense_tripsInput, Prisma.VehicleUpdateWithoutExpense_tripsInput>, Prisma.VehicleUncheckedUpdateWithoutExpense_tripsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutExpenseTripsInput, Prisma.VehicleUpdateWithoutExpenseTripsInput>, Prisma.VehicleUncheckedUpdateWithoutExpenseTripsInput>
 }
 
 export type VehicleCreateWithoutMemberInput = {
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
-  expense_trips?: Prisma.ExpenseTripCreateNestedManyWithoutVehicleInput
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
+  expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleUncheckedCreateWithoutMemberInput = {
   id?: number
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
-  expense_trips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutVehicleInput
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
+  expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutVehicleInput
 }
 
 export type VehicleCreateOrConnectWithoutMemberInput = {
@@ -508,94 +508,94 @@ export type VehicleScalarWhereInput = {
   OR?: Prisma.VehicleScalarWhereInput[]
   NOT?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
   id?: Prisma.IntFilter<"Vehicle"> | number
-  member_id?: Prisma.IntFilter<"Vehicle"> | number
-  registration_doc_url?: Prisma.StringNullableFilter<"Vehicle"> | string | null
-  fiscal_power?: Prisma.IntFilter<"Vehicle"> | number
-  is_active?: Prisma.BoolFilter<"Vehicle"> | boolean
-  created_at?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
+  memberId?: Prisma.IntFilter<"Vehicle"> | number
+  registrationDocUrl?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  fiscalPower?: Prisma.IntFilter<"Vehicle"> | number
+  isActive?: Prisma.BoolFilter<"Vehicle"> | boolean
+  createdAt?: Prisma.DateTimeNullableFilter<"Vehicle"> | Date | string | null
 }
 
-export type VehicleCreateWithoutExpense_tripsInput = {
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
+export type VehicleCreateWithoutExpenseTripsInput = {
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
   member: Prisma.MemberCreateNestedOneWithoutVehiclesInput
 }
 
-export type VehicleUncheckedCreateWithoutExpense_tripsInput = {
+export type VehicleUncheckedCreateWithoutExpenseTripsInput = {
   id?: number
-  member_id: number
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
+  memberId: number
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
 }
 
-export type VehicleCreateOrConnectWithoutExpense_tripsInput = {
+export type VehicleCreateOrConnectWithoutExpenseTripsInput = {
   where: Prisma.VehicleWhereUniqueInput
-  create: Prisma.XOR<Prisma.VehicleCreateWithoutExpense_tripsInput, Prisma.VehicleUncheckedCreateWithoutExpense_tripsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutExpenseTripsInput, Prisma.VehicleUncheckedCreateWithoutExpenseTripsInput>
 }
 
-export type VehicleUpsertWithoutExpense_tripsInput = {
-  update: Prisma.XOR<Prisma.VehicleUpdateWithoutExpense_tripsInput, Prisma.VehicleUncheckedUpdateWithoutExpense_tripsInput>
-  create: Prisma.XOR<Prisma.VehicleCreateWithoutExpense_tripsInput, Prisma.VehicleUncheckedCreateWithoutExpense_tripsInput>
+export type VehicleUpsertWithoutExpenseTripsInput = {
+  update: Prisma.XOR<Prisma.VehicleUpdateWithoutExpenseTripsInput, Prisma.VehicleUncheckedUpdateWithoutExpenseTripsInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutExpenseTripsInput, Prisma.VehicleUncheckedCreateWithoutExpenseTripsInput>
   where?: Prisma.VehicleWhereInput
 }
 
-export type VehicleUpdateToOneWithWhereWithoutExpense_tripsInput = {
+export type VehicleUpdateToOneWithWhereWithoutExpenseTripsInput = {
   where?: Prisma.VehicleWhereInput
-  data: Prisma.XOR<Prisma.VehicleUpdateWithoutExpense_tripsInput, Prisma.VehicleUncheckedUpdateWithoutExpense_tripsInput>
+  data: Prisma.XOR<Prisma.VehicleUpdateWithoutExpenseTripsInput, Prisma.VehicleUncheckedUpdateWithoutExpenseTripsInput>
 }
 
-export type VehicleUpdateWithoutExpense_tripsInput = {
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+export type VehicleUpdateWithoutExpenseTripsInput = {
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneRequiredWithoutVehiclesNestedInput
 }
 
-export type VehicleUncheckedUpdateWithoutExpense_tripsInput = {
+export type VehicleUncheckedUpdateWithoutExpenseTripsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member_id?: Prisma.IntFieldUpdateOperationsInput | number
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VehicleCreateManyMemberInput = {
   id?: number
-  registration_doc_url?: string | null
-  fiscal_power: number
-  is_active?: boolean
-  created_at?: Date | string | null
+  registrationDocUrl?: string | null
+  fiscalPower: number
+  isActive?: boolean
+  createdAt?: Date | string | null
 }
 
 export type VehicleUpdateWithoutMemberInput = {
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expense_trips?: Prisma.ExpenseTripUpdateManyWithoutVehicleNestedInput
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expense_trips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutVehicleNestedInput
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutVehicleNestedInput
 }
 
 export type VehicleUncheckedUpdateManyWithoutMemberInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  registration_doc_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fiscal_power?: Prisma.IntFieldUpdateOperationsInput | number
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  registrationDocUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fiscalPower?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -604,11 +604,11 @@ export type VehicleUncheckedUpdateManyWithoutMemberInput = {
  */
 
 export type VehicleCountOutputType = {
-  expense_trips: number
+  expenseTrips: number
 }
 
 export type VehicleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  expense_trips?: boolean | VehicleCountOutputTypeCountExpense_tripsArgs
+  expenseTrips?: boolean | VehicleCountOutputTypeCountExpenseTripsArgs
 }
 
 /**
@@ -624,56 +624,56 @@ export type VehicleCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * VehicleCountOutputType without action
  */
-export type VehicleCountOutputTypeCountExpense_tripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type VehicleCountOutputTypeCountExpenseTripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ExpenseTripWhereInput
 }
 
 
 export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  registration_doc_url?: boolean
-  fiscal_power?: boolean
-  is_active?: boolean
-  created_at?: boolean
+  memberId?: boolean
+  registrationDocUrl?: boolean
+  fiscalPower?: boolean
+  isActive?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  expense_trips?: boolean | Prisma.Vehicle$expense_tripsArgs<ExtArgs>
+  expenseTrips?: boolean | Prisma.Vehicle$expenseTripsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
 export type VehicleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  registration_doc_url?: boolean
-  fiscal_power?: boolean
-  is_active?: boolean
-  created_at?: boolean
+  memberId?: boolean
+  registrationDocUrl?: boolean
+  fiscalPower?: boolean
+  isActive?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
 export type VehicleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member_id?: boolean
-  registration_doc_url?: boolean
-  fiscal_power?: boolean
-  is_active?: boolean
-  created_at?: boolean
+  memberId?: boolean
+  registrationDocUrl?: boolean
+  fiscalPower?: boolean
+  isActive?: boolean
+  createdAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
 export type VehicleSelectScalar = {
   id?: boolean
-  member_id?: boolean
-  registration_doc_url?: boolean
-  fiscal_power?: boolean
-  is_active?: boolean
-  created_at?: boolean
+  memberId?: boolean
+  registrationDocUrl?: boolean
+  fiscalPower?: boolean
+  isActive?: boolean
+  createdAt?: boolean
 }
 
-export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "member_id" | "registration_doc_url" | "fiscal_power" | "is_active" | "created_at", ExtArgs["result"]["vehicle"]>
+export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "registrationDocUrl" | "fiscalPower" | "isActive" | "createdAt", ExtArgs["result"]["vehicle"]>
 export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  expense_trips?: boolean | Prisma.Vehicle$expense_tripsArgs<ExtArgs>
+  expenseTrips?: boolean | Prisma.Vehicle$expenseTripsArgs<ExtArgs>
   _count?: boolean | Prisma.VehicleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VehicleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -687,15 +687,15 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Vehicle"
   objects: {
     member: Prisma.$MemberPayload<ExtArgs>
-    expense_trips: Prisma.$ExpenseTripPayload<ExtArgs>[]
+    expenseTrips: Prisma.$ExpenseTripPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    member_id: number
-    registration_doc_url: string | null
-    fiscal_power: number
-    is_active: boolean
-    created_at: Date | null
+    memberId: number
+    registrationDocUrl: string | null
+    fiscalPower: number
+    isActive: boolean
+    createdAt: Date | null
   }, ExtArgs["result"]["vehicle"]>
   composites: {}
 }
@@ -1091,7 +1091,7 @@ readonly fields: VehicleFieldRefs;
 export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  expense_trips<T extends Prisma.Vehicle$expense_tripsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$expense_tripsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpenseTripPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenseTrips<T extends Prisma.Vehicle$expenseTripsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$expenseTripsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpenseTripPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1122,11 +1122,11 @@ export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface VehicleFieldRefs {
   readonly id: Prisma.FieldRef<"Vehicle", 'Int'>
-  readonly member_id: Prisma.FieldRef<"Vehicle", 'Int'>
-  readonly registration_doc_url: Prisma.FieldRef<"Vehicle", 'String'>
-  readonly fiscal_power: Prisma.FieldRef<"Vehicle", 'Int'>
-  readonly is_active: Prisma.FieldRef<"Vehicle", 'Boolean'>
-  readonly created_at: Prisma.FieldRef<"Vehicle", 'DateTime'>
+  readonly memberId: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly registrationDocUrl: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly fiscalPower: Prisma.FieldRef<"Vehicle", 'Int'>
+  readonly isActive: Prisma.FieldRef<"Vehicle", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"Vehicle", 'DateTime'>
 }
     
 
@@ -1528,9 +1528,9 @@ export type VehicleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Vehicle.expense_trips
+ * Vehicle.expenseTrips
  */
-export type Vehicle$expense_tripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Vehicle$expenseTripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ExpenseTrip
    */

@@ -1,21 +1,21 @@
 import { Expose, Exclude } from "class-transformer";
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 @Exclude()
 export class ProfileResponse {
 	@Expose()
-	@ApiProperty()
-	email: string;
+	@ApiProperty({type: Number, maximum: 456})
+	email: number;
 
 	@Expose()
-	@ApiProperty()
+	@ApiProperty({ nullable: true })
 	login: string | null;
 
 	@Expose()
-	@ApiProperty()
-	nickname: string | null;
+	@ApiPropertyOptional()
+	nickname: string;
 
 	@Expose()
-	@ApiProperty()
-	join_date: Date | null;
+	@ApiPropertyOptional()
+	joinDate: Date;
 }
