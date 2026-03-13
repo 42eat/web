@@ -16,28 +16,30 @@
 //   }
 // }
 
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from "@nestjs/common";
+import { MembersService } from "./members.service";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { type AuthMember, CurrentMember } from "../core/decorators/current-user.decorator";
+import { plainToInstance } from "class-transformer";
+import { ProfileResponse } from "./response/profile.response";
+import { ApiResponse } from "@nestjs/swagger";
 
-import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
-import { Member } from '../generated/prisma/client';
-import { MembersService } from './members.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { type AuthMember, CurrentMember } from 'src/core/decorators/current-user.decorator';
-
-@Controller('members')
+@Controller("members")
 export class MembersController {
 	constructor(private readonly membersService: MembersService) {}
 
-	@Get('all')
+	@Get("all")
 	@UseGuards(JwtAuthGuard)
 	@HttpCode(HttpStatus.OK)
-	public async getAll(): Promise<Member[]> {
+	public async getAll() {
 		return this.membersService.getAll();
 	}
-	
-	@Get('profile')
+
+	@Get("profile")
+	@ApiResponse({ type: ProfileResponse })
 	@UseGuards(JwtAuthGuard)
 	@HttpCode(HttpStatus.OK)
-	public async getProfile(@CurrentMember() member: AuthMember): Promise<Member> {
-		return this.membersService.getById(member.id);
+	public async getProfile(@CurrentMember() member: AuthMember) {
+		return plainToInstance(ProfileResponse, this.membersService.getById(member.id));
 	}
 }

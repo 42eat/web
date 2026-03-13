@@ -1,2 +1,2 @@
-export * from './contract/users.contract';
+export * from './contract/user.contract';
 export * from './types/member';
