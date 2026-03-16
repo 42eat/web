@@ -1,10 +1,10 @@
 {
 	"name": "42eat-web",
 	"scripts": {
-		"dev:front": "npm run dev --filter front",
-		"dev:back": "npm run dev --filter back",
-		"dev": "concurrently -n back,front -c blue,green \"npm run dev --filter server\" \"wait-on tcp:localhost:3001 && npm run dev --filter client\"",
-		"build": "concurrently -n back,front -c blue,green \"npm run build --filter client\" \"npm run build --filter server\""
+		"dev:front": "pnpm --filter ./front run dev",
+		"dev:back": "pnpm --filter ./back run start:dev ",
+		"dev": "concurrently -n back,front -c blue,green \"pnpm run dev:back\" \"wait-on tcp:localhost:3001 && pnpm run dev:front\"",
+		"build": "concurrently -n back,front -c blue,green \"pnpm run build --filter ./front\" \"pnpm run build --filter ./back\""
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.1",

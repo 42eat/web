@@ -19,14 +19,14 @@ import {
 } from "../core/decorators/current-user.decorator";
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { AuthResponse } from "./response/auth.response";
+import { TsRestHandler } from "@ts-rest/nest";
+import { authContract } from "@42eat-web/shared"
 
 @Controller("auth")
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
-	@Post("register")
-	@ApiResponse({ type: AuthResponse })
-	@ApiBody({ type: RegisterDto })
+	@TsRestHandler(authContract.register)
 	@HttpCode(HttpStatus.OK)
 	public async register(
 		@Body() dto: RegisterDto,
@@ -50,8 +50,6 @@ export class AuthController {
 	}
 
 	@Post("login")
-	@ApiResponse({ type: AuthResponse })
-	@ApiBody({ type: LoginDto })
 	@HttpCode(HttpStatus.OK)
 	public async login(
 		@Body() dto: LoginDto,
@@ -75,8 +73,6 @@ export class AuthController {
 	}
 
 	@Post("refresh")
-	@ApiResponse({ type: AuthResponse })
-	@ApiBody({})
 	@HttpCode(HttpStatus.OK)
 	@UseGuards(JwtAuthRefreshGuard)
 	public async refresh(

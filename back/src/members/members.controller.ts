@@ -31,7 +31,7 @@ import {
 } from "../core/decorators/current-user.decorator";
 import { plainToInstance } from "class-transformer";
 import { ProfileResponse } from "./response/profile.response";
-import { ApiResponse } from "@nestjs/swagger";
+import { ApiBody, ApiResponse } from "@nestjs/swagger";
 
 @Controller("members")
 export class MembersController {

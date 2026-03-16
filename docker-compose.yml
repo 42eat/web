@@ -12,3 +12,8 @@ services:
 
 volumes:
   postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /tmp/42eat-db
+      o: bind
