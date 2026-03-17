@@ -1,11 +1,12 @@
 {
 	"name": "42eat-web",
 	"scripts": {
-		"dev:front": "pnpm --filter ./front run dev",
-		"dev:back": "pnpm --filter ./back run start:dev ",
-		"dev": "concurrently -n back,front -c blue,green \"pnpm run dev:back\" \"wait-on tcp:localhost:3001 && pnpm run dev:front\"",
-		"build": "concurrently -n back,front -c blue,green \"pnpm run build --filter ./front\" \"pnpm run build --filter ./back\""
-	},
+  "dev:shared": "pnpm --filter @42eat-web/shared run dev",
+  "dev:front": "pnpm --filter @42eat-web/front run dev",
+  "dev:back": "pnpm --filter @42eat-web/back run start:dev",
+  "dev": "concurrently -n shared,back,front -c yellow,blue,green \"pnpm run dev:shared\" \"pnpm run dev:back\" \"wait-on tcp:localhost:3001 && pnpm run dev:front\"",
+  "build": "pnpm --filter @42eat-web/shared run build && concurrently -n back,front -c blue,green \"pnpm --filter @42eat-web/back run build\" \"pnpm --filter @42eat-web/front run build\""
+},
 	"devDependencies": {
 		"concurrently": "^9.2.1",
 		"typescript": "^5.9.3",

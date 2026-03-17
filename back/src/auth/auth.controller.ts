@@ -46,8 +46,8 @@ export class AuthController {
 		return { accessToken };
 	}
 
-	@Post("login")
-	@HttpCode(HttpStatus.OK)
+
+	@TsRestHandler(authContract.login)
 	public async login(
 		@Body() dto: LoginDto,
 		@Req() req: Request,
@@ -69,12 +69,11 @@ export class AuthController {
 		return { accessToken };
 	}
 
-	@Post("refresh")
-	@HttpCode(HttpStatus.OK)
+	@TsRestHandler(authContract.refresh)
 	@UseGuards(JwtAuthRefreshGuard)
 	public async refresh(
-		@Req() req: Request,
 		@CurrentMember() member: AuthMember,
+		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
 		const { accessToken, refreshToken } = await this.authService.refresh(

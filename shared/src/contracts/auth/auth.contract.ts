@@ -1,4 +1,5 @@
 import { initContract } from '@ts-rest/core'
+import { z } from 'zod'
 import { AuthResponseSchema } from './schemas/auth-response.schema'
 import { LoginSchema } from './schemas/login.schema'
 import { RegisterSchema } from './schemas/register.schema'
@@ -21,7 +22,7 @@ export const authContract = c.router({
 	refresh: {
 		method: 'POST',
 		path: '/refresh',
-		body: c.noBody(),
+		body: z.void(),
 		responses: { 200: AuthResponseSchema }
 	}
 }, { pathPrefix: '/auth' })
