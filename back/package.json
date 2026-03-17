@@ -6,10 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "build": "pnpm --filter @42eat-web/shared build && nest build",
+    "start": "pnpm --filter @42eat-web/shared build && nest start",
+    "start:dev": "pnpm --filter @42eat-web/shared build && nest start --watch",
+    "start:debug": "pnpm --filter @42eat-web/shared build && nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --ignore-pattern \"src/generated/prisma/**\" --fix",
     "generate:openapi": "nest start --entryFile scripts/generate-openapi && npx openapi-typescript ../shared/openapi.json -o ../shared/src/types/api.d.ts",
@@ -41,7 +41,8 @@
     "passport-jwt": "^4.0.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

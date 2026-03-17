@@ -18,7 +18,7 @@ export class MembersService {
 	public async getById(id: number): Promise<Member> {
 		const member = await this.prisma.member.findUnique({ where: { id: id } });
 		if (!member) {
-			throw new InternalServerErrorException(["Cannot load the user profile"]);
+			throw new InternalServerErrorException("Cannot load the user profile");
 		}
 		return member;
 	}

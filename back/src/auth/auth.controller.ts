@@ -1,12 +1,12 @@
 import {
-	Body,
 	Controller,
+	Post,
+	UseGuards,
 	HttpCode,
 	HttpStatus,
-	Post,
+	Body,
 	Req,
 	Res,
-	UseGuards,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { RegisterDto } from "./dto/register.dto";
@@ -17,17 +17,14 @@ import {
 	type AuthMember,
 	CurrentMember,
 } from "../core/decorators/current-user.decorator";
-import { ApiBody, ApiResponse } from "@nestjs/swagger";
-import { AuthResponse } from "./response/auth.response";
 import { TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared"
 
-@Controller("auth")
+@Controller()
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	@TsRestHandler(authContract.register)
-	@HttpCode(HttpStatus.OK)
 	public async register(
 		@Body() dto: RegisterDto,
 		@Req() req: Request,

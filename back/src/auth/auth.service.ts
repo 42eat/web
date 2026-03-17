@@ -27,7 +27,7 @@ export class AuthService {
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (existing) {
-			throw new ConflictException(["Email alredy used"]);
+			throw new ConflictException("Email alredy used");
 		}
 
 		const hashedPassword = await bcrypt.hash(dto.password, 10);
@@ -35,9 +35,7 @@ export class AuthService {
 		const insertedUser = await this.members.create(dto.email, hashedPassword);
 
 		if (!insertedUser) {
-			throw new InternalServerErrorException([
-				"An error occured while creating the user",
-			]);
+			throw new InternalServerErrorException("An error occured while creating the user");
 		}
 
 		return {
@@ -67,7 +65,7 @@ export class AuthService {
 		);
 
 		if (!isValidPassword) {
-			throw new UnauthorizedException(["Invalid credentials"]);
+			throw new UnauthorizedException("Invalid credentials");
 		}
 
 		return {
@@ -109,7 +107,7 @@ export class AuthService {
 				};
 			}
 		}
-		throw new UnauthorizedException(["Invalid refresh token"]);
+		throw new UnauthorizedException("Invalid refresh token");
 	}
 
 	private async generateAccessToken(memberId: number) {
@@ -140,9 +138,7 @@ export class AuthService {
 				ipAddress ?? "unknown",
 			))
 		) {
-			throw new InternalServerErrorException([
-				"An error occured while creating the session",
-			]);
+			throw new InternalServerErrorException("An error occured while creating the session",);
 		}
 
 		return token;
