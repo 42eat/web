@@ -1,22 +1,8 @@
-import {
-	Controller,
-	Post,
-	UseGuards,
-	HttpCode,
-	HttpStatus,
-	Body,
-	Req,
-	Res,
-} from "@nestjs/common";
+import { Controller, UseGuards, Req, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { RegisterDto } from "./dto/register.dto";
 import type { Response, Request } from "express";
-import { LoginDto } from "./dto/login.dto";
 import { JwtAuthRefreshGuard } from "./jwt-refresh.guard";
-import {
-	type AuthMember,
-	CurrentMember,
-} from "../core/decorators/current-user.decorator";
+import { type AuthMember, CurrentMember } from "../core/decorators/current-user.decorator";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared"
 
