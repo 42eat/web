@@ -17,7 +17,7 @@ import {
 	type AuthMember,
 	CurrentMember,
 } from "../core/decorators/current-user.decorator";
-import { TsRestHandler } from "@ts-rest/nest";
+import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared"
 
 @Controller()
@@ -26,47 +26,49 @@ export class AuthController {
 
 	@TsRestHandler(authContract.register)
 	public async register(
-		@Body() dto: RegisterDto,
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
-		const { accessToken, refreshToken } = await this.authService.register(
-			dto,
-			req.headers["user-agent"],
-			req.ip,
-		);
+		return tsRestHandler(authContract.register, async ({ body }) => {
+			const { accessToken, refreshToken } = await this.authService.register(
+				body,
+				req.headers["user-agent"],
+				req.ip,
+			);
 
-		res.cookie("refresh_token", refreshToken, {
-			httpOnly: true,
-			secure: false, // todo: passer en true quand on aura le https
-			sameSite: "strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
+			res.cookie("refresh_token", refreshToken, {
+				httpOnly: true,
+				secure: false, // todo: passer en true quand on aura le https
+				sameSite: "strict",
+				maxAge: 7 * 24 * 60 * 60 * 1000,
+			});
+			
+			return { status: 200, body: { accessToken } };
 		});
-
-		return { accessToken };
 	}
 
 
 	@TsRestHandler(authContract.login)
 	public async login(
-		@Body() dto: LoginDto,
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
-		const { accessToken, refreshToken } = await this.authService.login(
-			dto,
-			req.headers["user-agent"],
-			req.ip,
-		);
+		return tsRestHandler(authContract.register, async ({ body }) => {
+			const { accessToken, refreshToken } = await this.authService.login(
+				body,
+				req.headers["user-agent"],
+				req.ip,
+			);
 
-		res.cookie("refresh_token", refreshToken, {
-			httpOnly: true,
-			secure: false, // todo: passer en true quand on aura le https
-			sameSite: "strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
+			res.cookie("refresh_token", refreshToken, {
+				httpOnly: true,
+				secure: false, // todo: passer en true quand on aura le https
+				sameSite: "strict",
+				maxAge: 7 * 24 * 60 * 60 * 1000,
+			});
+
+			return { status: 200, body: { accessToken } };
 		});
-
-		return { accessToken };
 	}
 
 	@TsRestHandler(authContract.refresh)
@@ -76,20 +78,22 @@ export class AuthController {
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
-		const { accessToken, refreshToken } = await this.authService.refresh(
-			member.id,
-			member.refreshToken ?? "",
-			req.headers["user-agent"],
-			req.ip,
-		);
+		return tsRestHandler(authContract.register, async () => {
+			const { accessToken, refreshToken } = await this.authService.refresh(
+				member.id,
+				member.refreshToken ?? "",
+				req.headers["user-agent"],
+				req.ip,
+			);
 
-		res.cookie("refresh_token", refreshToken, {
-			httpOnly: true,
-			secure: false, // todo: passer en true quand on aura le https
-			sameSite: "strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
+			res.cookie("refresh_token", refreshToken, {
+				httpOnly: true,
+				secure: false, // todo: passer en true quand on aura le https
+				sameSite: "strict",
+				maxAge: 7 * 24 * 60 * 60 * 1000,
+			});
+
+			return { status: 200, body: { accessToken } };
 		});
-
-		return { accessToken };
 	}
 }

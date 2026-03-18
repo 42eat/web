@@ -23,7 +23,6 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		}
 
 		const status = exception?.status ?? 500
-		console.log(exception)
 		return response.status(status).json({
 			statusCode: status,
 			error: exception?.response?.error ?? 'Internal Server Error',
