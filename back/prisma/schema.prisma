@@ -1,0 +1,254 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Auth & Members ───────────────────────────────────────────────────────────
+
+model Member {
+  id           Int       @id @default(autoincrement())
+  email        String?   @unique
+  password     String?
+  login        String?   @unique
+  nickname     String?
+  internalNote String?   @map("internal_note")
+  joinDate     DateTime? @map("join_date")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  createdAt    DateTime? @default(now()) @map("created_at")
+
+  adhesions              Adhesion[]
+  memberRoles            MemberRole[]
+  shiftsManaged          Shift[]                  @relation("ShiftManager")
+  shiftMembers           ShiftMember[]
+  shiftAssignments       ShiftAssignment[]
+  vehicles               Vehicle[]
+  expenseTrips           ExpenseTrip[]
+  memberBattlepassRewards MemberBattlepassReward[]
+  sessions               Session[]
+
+  @@map("members")
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  memberId     Int      @map("member_id")
+  refreshToken String   @map("refresh_token")
+  userAgent    String?  @map("user_agent")
+  ipAddress    String?  @map("ip_address")
+  createdAt    DateTime @default(now()) @map("created_at")
+  expiresAt    DateTime @map("expires_at")
+
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@map("sessions")
+}
+
+model Adhesion {
+  id        Int       @id @default(autoincrement())
+  year      Int
+  memberId  Int       @map("member_id")
+  createdAt DateTime? @default(now()) @map("created_at")
+
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@map("adhesion")
+}
+
+// ─── Roles & Permissions ──────────────────────────────────────────────────────
+
+model Role {
+  id   Int    @id @default(autoincrement())
+  role String @unique
+
+  rolePermissions RolePermission[]
+  memberRoles     MemberRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id     Int    @id @default(autoincrement())
+  label  String
+  parent Int?
+
+  parentPermission  Permission?      @relation("PermissionParent", fields: [parent], references: [id])
+  childPermissions  Permission[]     @relation("PermissionParent")
+  rolePermissions   RolePermission[]
+
+  @@map("permission")
+}
+
+model RolePermission {
+  id         Int @id @default(autoincrement())
+  role       Int
+  permission Int
+
+  roleRef       Role       @relation(fields: [role], references: [id])
+  permissionRef Permission @relation(fields: [permission], references: [id])
+
+  @@map("role_permissions")
+}
+
+model MemberRole {
+  id     Int  @id @default(autoincrement())
+  member Int?
+  role   Int?
+
+  memberRef Member? @relation(fields: [member], references: [id])
+  roleRef   Role?   @relation(fields: [role], references: [id])
+
+  @@map("member_roles")
+}
+
+// ─── Shifts ───────────────────────────────────────────────────────────────────
+
+model Shift {
+  id               Int      @id @default(autoincrement())
+  date             DateTime
+  manager          Int
+  discordMessageId String   @map("discord_message_id")
+  validated        Boolean
+
+  managerRef   Member        @relation("ShiftManager", fields: [manager], references: [id])
+  shiftMembers ShiftMember[]
+
+  @@map("shifts")
+}
+
+model ShiftMember {
+  id         Int  @id @default(autoincrement())
+  shiftId    Int  @map("shift_id")
+  memberId   Int  @map("member_id")
+  positionId Int? @map("position_id")
+
+  shift    Shift          @relation(fields: [shiftId], references: [id])
+  member   Member         @relation(fields: [memberId], references: [id])
+  position ShiftPosition? @relation(fields: [positionId], references: [id])
+
+  @@map("shift_members")
+}
+
+model ShiftPosition {
+  id       Int    @id @default(autoincrement())
+  position String @unique
+  xpMult   Float? @default(1) @map("xp_mult")
+
+  shiftMembers ShiftMember[]
+
+  @@map("shift_positions")
+}
+
+model ShiftAssignment {
+  id       Int       @id @default(autoincrement())
+  date     DateTime?
+  memberId Int?      @map("member_id")
+
+  member Member? @relation(fields: [memberId], references: [id])
+
+  @@map("shift_assignment")
+}
+
+// ─── Stock ────────────────────────────────────────────────────────────────────
+
+model StockCategory {
+  id         Int     @id @default(autoincrement())
+  name       String?
+  orderIndex Int?    @map("order_index")
+
+  stockItems StockItem[]
+
+  @@map("stock_category")
+}
+
+model StockItem {
+  id               Int      @id @default(autoincrement())
+  name             String?
+  categoryId       Int?     @map("category_id")
+  expectedQuantity Int?     @map("expected_quantity")
+  missingQuantity  Int?     @map("missing_quantity")
+  unit             String?
+  isActive         Boolean? @map("is_active")
+
+  category StockCategory? @relation(fields: [categoryId], references: [id])
+
+  @@map("stock_item")
+}
+
+// ─── Vehicles & Mileage Expenses ─────────────────────────────────────────────
+
+model Vehicle {
+  id                 Int       @id @default(autoincrement())
+  memberId           Int       @map("member_id")
+  registrationDocUrl String?   @map("registration_doc_url")
+  fiscalPower        Int       @map("fiscal_power")
+  isActive           Boolean   @default(true) @map("is_active")
+  createdAt          DateTime? @map("created_at")
+
+  member       Member        @relation(fields: [memberId], references: [id])
+  expenseTrips ExpenseTrip[]
+
+  @@map("vehicle")
+}
+
+model ExpenseTrip {
+  id         Int       @id @default(autoincrement())
+  memberId   Int       @map("member_id")
+  vehicleId  Int       @map("vehicle_id")
+  tripDate   DateTime  @map("trip_date")
+  distanceKm Int       @map("distance_km")
+  purpose    String?
+  isPaid     Boolean   @default(false) @map("is_paid")
+  paidAt     DateTime? @map("paid_at")
+  createdAt  DateTime? @map("created_at")
+
+  member  Member  @relation(fields: [memberId], references: [id])
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@map("expense_trip")
+}
+
+// ─── Battlepass ───────────────────────────────────────────────────────────────
+
+model BattlepassSeason {
+  id      Int      @id @default(autoincrement())
+  name    String
+  startAt DateTime @map("start_at")
+  endAt   DateTime @map("end_at")
+
+  tiers   BattlepassTier[]
+  rewards MemberBattlepassReward[]
+
+  @@map("battlepass_seasons")
+}
+
+model BattlepassTier {
+  id         Int    @id @default(autoincrement())
+  seasonId   Int    @map("season_id")
+  tierNumber Int    @map("tier_number")
+  requirement Int
+  reward     String
+
+  season  BattlepassSeason         @relation(fields: [seasonId], references: [id])
+  rewards MemberBattlepassReward[]
+
+  @@map("battlepass_tiers")
+}
+
+model MemberBattlepassReward {
+  id        Int      @id @default(autoincrement())
+  memberId  Int      @map("member_id")
+  seasonId  Int      @map("season_id")
+  tierId    Int      @map("tier_id")
+  claimedAt DateTime @map("claimed_at")
+
+  member Member           @relation(fields: [memberId], references: [id])
+  season BattlepassSeason @relation(fields: [seasonId], references: [id])
+  tier   BattlepassTier   @relation(fields: [tierId], references: [id])
+
+  @@map("member_battlepass_rewards")
+}

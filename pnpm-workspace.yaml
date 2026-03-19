@@ -1,0 +1,12 @@
+packages:
+  - front
+  - back
+  - shared
+
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/engines'
+  - '@scarf/scarf'
+  - esbuild
+  - prisma
+  - unrs-resolver
