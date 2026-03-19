@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { Member } from "../generated/prisma/client";
 import { PrismaService } from "../core/prisma/prisma.service";
-import { equal } from "assert";
 
 @Injectable()
 export class MembersService {

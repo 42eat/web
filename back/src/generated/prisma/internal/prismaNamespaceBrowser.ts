@@ -17,8 +17,8 @@
 
 import * as runtime from "@prisma/client/runtime/index-browser"
 
-export type * from '../models.js'
-export type * from './prismaNamespace.js'
+export type * from '../models'
+export type * from './prismaNamespace'
 
 export const Decimal = runtime.Decimal
 
@@ -55,7 +55,6 @@ export const ModelName = {
   Session: 'Session',
   Adhesion: 'Adhesion',
   Role: 'Role',
-  Permission: 'Permission',
   RolePermission: 'RolePermission',
   MemberRole: 'MemberRole',
   Shift: 'Shift',
@@ -133,18 +132,9 @@ export const RoleScalarFieldEnum = {
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
-export const PermissionScalarFieldEnum = {
-  id: 'id',
-  label: 'label',
-  parent: 'parent'
-} as const
-
-export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
-
-
 export const RolePermissionScalarFieldEnum = {
   id: 'id',
-  role: 'role',
+  roleId: 'roleId',
   permission: 'permission'
 } as const
 
@@ -153,8 +143,8 @@ export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnu
 
 export const MemberRoleScalarFieldEnum = {
   id: 'id',
-  member: 'member',
-  role: 'role'
+  memberId: 'memberId',
+  roleId: 'roleId'
 } as const
 
 export type MemberRoleScalarFieldEnum = (typeof MemberRoleScalarFieldEnum)[keyof typeof MemberRoleScalarFieldEnum]
