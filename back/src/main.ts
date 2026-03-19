@@ -1,6 +1,8 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { appContract } from '@42eat-web/shared'
+import { SwaggerModule } from "@nestjs/swagger";
+import { generateOpenApi } from '@ts-rest/open-api'
 import cookieParser from "cookie-parser";
 import { TsRestValidationFilter } from "./core/filters/ts-rest-validation.filter";
 
@@ -10,9 +12,13 @@ async function bootstrap() {
 	app.use(cookieParser());
 	app.useGlobalFilters(new TsRestValidationFilter())
 
-	const config = new DocumentBuilder().setTitle("My API").build();
-	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup("api", app, document);
+	const document = generateOpenApi(appContract, {
+		info: {
+			title: '42eat API',
+			version: '1.0.0',
+		},
+	})
+	SwaggerModule.setup('api', app, document)
 
 	await app.listen(process.env.PORT ?? 3001);
 }

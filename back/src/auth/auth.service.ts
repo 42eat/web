@@ -5,11 +5,12 @@ import {
 	UnauthorizedException,
 } from "@nestjs/common";
 import { MembersService } from "../members/members.service";
-import { RegisterDto } from "./dto/register.dto";
+import { RegisterDto } from "@42eat-web/shared";
 import * as bcrypt from "bcrypt";
-import { LoginDto } from "./dto/login.dto";
+import { LoginDto } from "@42eat-web/shared";
 import { JwtService } from "@nestjs/jwt";
 import { SessionsService } from "../sessions/sessions.service";
+import { createJwtPayload } from "./jwt.payload";
 
 @Injectable()
 export class AuthService {
@@ -112,7 +113,7 @@ export class AuthService {
 
 	private async generateAccessToken(memberId: number) {
 		return this.jwtService.signAsync(
-			{ sub: memberId },
+			createJwtPayload(memberId),
 			{ secret: process.env.JWT_SECRET, expiresIn: "15m" },
 		);
 	}

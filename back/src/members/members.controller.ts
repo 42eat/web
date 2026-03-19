@@ -1,21 +1,3 @@
-// import { Controller } from '@nestjs/common';
-// import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
-// import { usersContract } from "@42eat-web/shared";
-// import { UsersService } from './users.service';
-
-// @Controller()
-// export class UsersController {
-//   constructor(private readonly usersService: UsersService) {}
-
-//   @TsRestHandler(usersContract.getAll)
-//   public async getAll() {
-//     return tsRestHandler(usersContract.getAll, async () => {
-//       const members = await this.usersService.getAll();
-//       return { status: 200 as const, body: members };
-//     });
-//   }
-// }
-
 import { Controller, UseGuards } from "@nestjs/common";
 import { MembersService } from "./members.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
