@@ -418,10 +418,6 @@ export type ShiftUncheckedUpdateManyWithoutManagerRefNestedInput = {
   deleteMany?: Prisma.ShiftScalarWhereInput | Prisma.ShiftScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ShiftCreateNestedOneWithoutShiftMembersInput = {
   create?: Prisma.XOR<Prisma.ShiftCreateWithoutShiftMembersInput, Prisma.ShiftUncheckedCreateWithoutShiftMembersInput>
   connectOrCreate?: Prisma.ShiftCreateOrConnectWithoutShiftMembersInput

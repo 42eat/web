@@ -2,16 +2,19 @@ import { Controller, UseGuards, Req, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import type { Response, Request } from "express";
 import { JwtAuthRefreshGuard } from "./jwt-refresh.guard";
-import { type AuthMember, CurrentMember } from "../core/decorators/current-user.decorator";
+import {
+	type AuthMember,
+	CurrentMember,
+} from "../core/decorators/current-member.decorator";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
-import { authContract } from "@42eat-web/shared"
+import { authContract } from "@42eat-web/shared";
 
 @Controller()
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	@TsRestHandler(authContract.register)
-	public async register(
+	public register(
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
@@ -28,17 +31,13 @@ export class AuthController {
 				sameSite: "strict",
 				maxAge: 7 * 24 * 60 * 60 * 1000,
 			});
-			
+
 			return { status: 200, body: { accessToken } };
 		});
 	}
 
-
 	@TsRestHandler(authContract.login)
-	public async login(
-		@Req() req: Request,
-		@Res({ passthrough: true }) res: Response,
-	) {
+	public login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
 		return tsRestHandler(authContract.register, async ({ body }) => {
 			const { accessToken, refreshToken } = await this.authService.login(
 				body,
@@ -59,7 +58,7 @@ export class AuthController {
 
 	@TsRestHandler(authContract.refresh)
 	@UseGuards(JwtAuthRefreshGuard)
-	public async refresh(
+	public refresh(
 		@CurrentMember() member: AuthMember,
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,

@@ -62,8 +62,9 @@ model Adhesion {
 // ─── Roles & Permissions ──────────────────────────────────────────────────────
 
 model Role {
-  id   Int    @id @default(autoincrement())
-  role String @unique
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  superRole Boolean @default(false) @map("super_role")
 
   rolePermissions RolePermission[]
   memberRoles     MemberRole[]
@@ -86,8 +87,8 @@ model MemberRole {
   memberId Int  @map("member_id")
   roleId   Int  @map("role_id")
 
-  memberRef Member? @relation(fields: [memberId], references: [id])
-  roleRef   Role?   @relation(fields: [roleId], references: [id])
+  memberRef Member @relation(fields: [memberId], references: [id])
+  roleRef   Role   @relation(fields: [roleId], references: [id])
 
   @@map("member_roles")
 }

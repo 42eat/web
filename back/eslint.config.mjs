@@ -33,6 +33,9 @@ export default tseslint.config(
         endOfLine: "auto",
         useTabs: true,
       }],
+			"object-curly-newline": ["error", { "consistent": true }],
+			"array-bracket-newline": ["error", { "consistent": true }],
+			"function-paren-newline": ["error", "consistent"]
     },
   },
 );

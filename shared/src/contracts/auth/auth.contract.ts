@@ -22,7 +22,7 @@ export const authContract = c.router({
 	refresh: {
 		method: 'POST',
 		path: '/refresh',
-		body: z.void(),
+		body: null,
 		responses: { 200: AuthResponseSchema }
 	}
 }, { pathPrefix: '/auth' })

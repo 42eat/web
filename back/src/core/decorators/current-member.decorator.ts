@@ -7,7 +7,7 @@ export interface AuthMember {
 
 export const CurrentMember = createParamDecorator(
 	(data: unknown, ctx: ExecutionContext): AuthMember => {
-		const request = ctx.switchToHttp().getRequest();
+		const request = ctx.switchToHttp().getRequest<{ user: AuthMember }>();
 		return request.user;
 	},
 );

@@ -126,7 +126,8 @@ export type AdhesionScalarFieldEnum = (typeof AdhesionScalarFieldEnum)[keyof typ
 
 export const RoleScalarFieldEnum = {
   id: 'id',
-  role: 'role'
+  name: 'name',
+  superRole: 'superRole'
 } as const
 
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
