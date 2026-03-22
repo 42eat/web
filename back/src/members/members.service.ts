@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Member } from "../generated/prisma/client";
 import { PrismaService } from "../core/prisma/prisma.service";
+import { Permission } from "@42eat-web/shared";
 
 @Injectable()
 export class MembersService {
@@ -33,7 +34,7 @@ export class MembersService {
 				roleRef: true,
 			},
 		});
-		return memberRoles.map(role => role.roleRef);
+		return memberRoles.map((role) => role.roleRef);
 	}
 
 	public async getMemberRolesDetailed(memberId: number) {
@@ -49,12 +50,11 @@ export class MembersService {
 				},
 			},
 		});
-		return memberRoles
-			.map(({ roleRef }) => ({
-				...roleRef,
-				permissions: roleRef.rolePermissions.map(rp => rp.permission),
-				rolePermissions: undefined,
-			}))
+		return memberRoles.map(({ roleRef }) => ({
+			...roleRef,
+			permissions: roleRef.rolePermissions.map((rp) => rp.permission),
+			rolePermissions: undefined,
+		}));
 	}
 
 	public async addRoleToMember(memberId: number, roleId: number) {
@@ -73,5 +73,34 @@ export class MembersService {
 				roleId: roleId,
 			},
 		});
+	}
+
+	private async doMemberBypassPermission(memberId: number) {
+		const memberSuperRole = await this.prisma.memberRole.findFirst({
+			where: {
+				memberId: memberId,
+				roleRef: { superRole: true },
+			},
+		});
+		return memberSuperRole !== null;
+	}
+
+	public async doMemberHavePermission(
+		memberId: number,
+		permission: Permission,
+	) {
+		if (await this.doMemberBypassPermission(memberId)) return true;
+
+		const memberPerm = await this.prisma.memberRole.findFirst({
+			where: {
+				memberId: memberId,
+				roleRef: {
+					rolePermissions: {
+						some: { permission },
+					},
+				},
+			},
+		});
+		return memberPerm !== null;
 	}
 }

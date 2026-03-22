@@ -78,7 +78,10 @@ export class MembersController {
 		return tsRestHandler(
 			membersContract.removeMemberRole,
 			async ({ params }) => {
-				await this.membersService.removeRoleFromMember(params.id, params.roleId);
+				await this.membersService.removeRoleFromMember(
+					params.id,
+					params.roleId,
+				);
 				return { status: 204, body: null };
 			},
 		);

@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { MemberSchema } from '../../members/schemas/member.schema';
+import { permissionValues } from '../../../core/permissions';
 
 
 export const CreateRoleSchema = z.object({
@@ -37,4 +38,10 @@ export type RolesListDetailedResponse = z.infer<typeof RolesListDetailedResponse
 
 export const RoleMembersResponseSchema = z.array(MemberSchema)
 export type RoleMembersResponse = z.infer<typeof RoleMembersResponseSchema>
+
+
+export const PermissionListSchema = z.array(
+	z.enum(permissionValues)
+);
+export type PermissionListDto = z.infer<typeof PermissionListSchema>
 

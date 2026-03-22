@@ -2,16 +2,21 @@ import {
 	Injectable,
 	CanActivate,
 	ExecutionContext,
+	UnauthorizedException,
 	// UnauthorizedException,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { RequirePermission } from "../decorators/require-permission.decorator";
 import { JwtAuthGuard } from "../../auth/jwt-auth.guard";
 import { AuthMember } from "../decorators/current-member.decorator";
+import { MembersService } from "../../members/members.service";
 
 @Injectable()
 export class PermissionGuard extends JwtAuthGuard implements CanActivate {
-	constructor(private reflector: Reflector) {
+	constructor(
+		private reflector: Reflector,
+		private readonly members: MembersService,
+	) {
 		super();
 	}
 
@@ -28,11 +33,15 @@ export class PermissionGuard extends JwtAuthGuard implements CanActivate {
 		const request = context.switchToHttp().getRequest<{ user: AuthMember }>();
 		const user: AuthMember = request.user;
 
-		console.log(user);
+		// console.log(user);
+		// console.log(permission);
 
-		// throw new UnauthorizedException("T'as pas la perm fdp");
+		if (await this.members.doMemberHavePermission(user.id, permission)) {
+			return true;
+		}
 
-		// verif dans la db si l'user lié a user.id a la perm et throw si c'est pas le cas
-		return true;
+		throw new UnauthorizedException(
+			"You dont have the required permission for this route",
+		);
 	}
 }

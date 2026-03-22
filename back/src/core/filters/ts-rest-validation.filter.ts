@@ -1,4 +1,10 @@
-import { ArgumentsHost, Catch, ConflictException, ExceptionFilter, NotFoundException } from "@nestjs/common";
+import {
+	ArgumentsHost,
+	Catch,
+	ConflictException,
+	ExceptionFilter,
+	NotFoundException,
+} from "@nestjs/common";
 import { Response } from "express";
 import { Prisma } from "../../generated/prisma/client";
 
@@ -22,14 +28,32 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		const response = ctx.getResponse<Response>();
 
 		if (exception instanceof Prisma.PrismaClientKnownRequestError) {
-			if (exception.code === 'P2002') {
-				throw new ConflictException('This element already exists')
+			if (exception.code === "P2002") {
+				return response.status(409).json({
+					statusCode: 409,
+					error: "Conflict",
+					message: "This element already exists",
+				});
 			}
-			if (exception.code === 'P2003') {
-				throw new NotFoundException('Related resource not found')
+
+			if (exception.code === "P2003") {
+				const meta = exception.meta as {
+					driverAdapterError?: {
+						cause?: {
+							originalMessage?: string;
+						};
+					};
+				};
+
+				return response.status(404).json({
+					statusCode: 404,
+					error: "Not found",
+					message: "Related resource not found",
+					detail: meta?.driverAdapterError?.cause?.originalMessage,
+				});
 			}
 		}
-		
+
 		if (
 			exception?.response?.bodyResult ||
 			exception?.response?.paramsResult ||
@@ -50,7 +74,6 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		}
 
 		const status = exception?.status ?? 500;
-		console.log(exception);
 		return response.status(status).json({
 			statusCode: status,
 			error: exception?.response?.error ?? "Internal Server Error",

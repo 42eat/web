@@ -1,5 +1,5 @@
 import { initContract } from '@ts-rest/core'
-import { CreateRoleSchema, EditRoleSchema, RoleMembersResponseSchema, RoleResponseSchema, RolesListDetailedResponseSchema, RolesListResponseSchema } from './schemas/role.schema'
+import { CreateRoleSchema, EditRoleSchema, PermissionListSchema, RoleMembersResponseSchema, RoleResponseSchema, RolesListDetailedResponseSchema, RolesListResponseSchema } from './schemas/role.schema'
 import { IdParamSchema } from '../schemas/common.schema'
 
 const c = initContract()
@@ -45,6 +45,27 @@ export const rolesContract = c.router({
 		path: '/:id/members',
 		pathParams: IdParamSchema,
 		responses: { 200: RoleMembersResponseSchema }
+	},
+	addRolePermissions: {
+		method: 'POST',
+		path: '/:id/permissions',
+		body: PermissionListSchema,
+		pathParams: IdParamSchema,
+		responses: { 204: null }
+	},
+	removeRolePermissions: {
+		method: 'DELETE',
+		path: '/:id/permissions',
+		body: PermissionListSchema,
+		pathParams: IdParamSchema,
+		responses: { 204: null }
+	},
+	setRolePermissions: {
+		method: 'PUT',
+		path: '/:id/permissions',
+		body: PermissionListSchema,
+		pathParams: IdParamSchema,
+		responses: { 204: null }
 	},
 }, { pathPrefix: '/roles' })
 

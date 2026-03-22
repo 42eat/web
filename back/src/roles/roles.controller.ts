@@ -83,4 +83,40 @@ export class RolesController {
 			};
 		});
 	}
+
+	@TsRestHandler(rolesContract.addRolePermissions)
+	@RequirePermission(PERMISSIONS.ROLES.EDIT_PERMISSIONS)
+	public addRolePermissions() {
+		return tsRestHandler(
+			rolesContract.addRolePermissions,
+			async ({ params, body }) => {
+				await this.rolesService.addRolePermissions(params.id, body);
+				return { status: 204, body: null };
+			},
+		);
+	}
+
+	@TsRestHandler(rolesContract.removeRolePermissions)
+	@RequirePermission(PERMISSIONS.ROLES.EDIT_PERMISSIONS)
+	public removeRolePermissions() {
+		return tsRestHandler(
+			rolesContract.removeRolePermissions,
+			async ({ params, body }) => {
+				await this.rolesService.removeRolePermissions(params.id, body);
+				return { status: 204, body: null };
+			},
+		);
+	}
+
+	@TsRestHandler(rolesContract.setRolePermissions)
+	@RequirePermission(PERMISSIONS.ROLES.EDIT_PERMISSIONS)
+	public setRolePermissions() {
+		return tsRestHandler(
+			rolesContract.setRolePermissions,
+			async ({ params, body }) => {
+				await this.rolesService.setRolePermissions(params.id, body);
+				return { status: 204, body: null };
+			},
+		);
+	}
 }

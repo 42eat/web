@@ -12,25 +12,27 @@ async function bootstrap() {
 	app.use(cookieParser());
 	app.useGlobalFilters(new TsRestValidationFilter());
 
-	const document = generateOpenApi(appContract, {
-		info: {
-			title: "42eat API",
-			version: "1.0.0",
-		},
-		components: {
-			securitySchemes: {
-				bearerAuth: {
-					type: "http",
-					scheme: "bearer",
-					bearerFormat: "JWT",
+	if (process.env.NODE_ENV == "dev") {
+		const document = generateOpenApi(appContract, {
+			info: {
+				title: "42eat API",
+				version: "1.0.0",
+			},
+			components: {
+				securitySchemes: {
+					bearerAuth: {
+						type: "http",
+						scheme: "bearer",
+						bearerFormat: "JWT",
+					},
 				},
 			},
-		},
-		security: [{ bearerAuth: [] }]
-	});
-	SwaggerModule.setup("api", app, document);
+			security: [{ bearerAuth: [] }],
+		});
+		SwaggerModule.setup("api", app, document);
+	}
 
 	await app.listen(process.env.PORT ?? 3001);
 }
 
-bootstrap();
+bootstrap().catch((e) => console.error(e));

@@ -4,6 +4,7 @@ import {
 	NotFoundException,
 } from "@nestjs/common";
 import { PrismaService } from "../core/prisma/prisma.service";
+import { Permission } from "@42eat-web/shared";
 
 @Injectable()
 export class RolesService {
@@ -93,6 +94,32 @@ export class RolesService {
 			},
 		});
 
-		return roleMembers;
+		return roleMembers.map((member) => member.memberRef);
+	}
+
+	public async addRolePermissions(roleId: number, permissions: Permission[]) {
+		await this.prisma.rolePermission.createMany({
+			data: permissions.map((permission) => ({ roleId, permission })),
+			skipDuplicates: true,
+		});
+	}
+
+	public async removeRolePermissions(
+		roleId: number,
+		permissions: Permission[],
+	) {
+		await this.prisma.rolePermission.deleteMany({
+			where: { roleId: roleId, permission: { in: permissions } },
+		});
+	}
+
+	public async setRolePermissions(roleId: number, permissions: Permission[]) {
+		await this.prisma.$transaction([
+			this.prisma.rolePermission.deleteMany({ where: { roleId } }),
+			this.prisma.rolePermission.createMany({
+				data: permissions.map((permission) => ({ roleId, permission })),
+				skipDuplicates: true,
+			}),
+		]);
 	}
 }

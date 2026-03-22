@@ -79,6 +79,7 @@ model RolePermission {
 
   roleRef Role @relation(fields: [roleId], references: [id])
 
+	@@unique([roleId, permission])
   @@map("role_permissions")
 }
 
@@ -90,6 +91,7 @@ model MemberRole {
   memberRef Member @relation(fields: [memberId], references: [id])
   roleRef   Role   @relation(fields: [roleId], references: [id])
 
+	@@unique([memberId, roleId])
   @@map("member_roles")
 }
 

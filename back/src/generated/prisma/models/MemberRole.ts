@@ -222,6 +222,7 @@ export type MemberRoleOrderByWithRelationInput = {
 
 export type MemberRoleWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  memberId_roleId?: Prisma.MemberRoleMemberIdRoleIdCompoundUniqueInput
   AND?: Prisma.MemberRoleWhereInput | Prisma.MemberRoleWhereInput[]
   OR?: Prisma.MemberRoleWhereInput[]
   NOT?: Prisma.MemberRoleWhereInput | Prisma.MemberRoleWhereInput[]
@@ -229,7 +230,7 @@ export type MemberRoleWhereUniqueInput = Prisma.AtLeast<{
   roleId?: Prisma.IntFilter<"MemberRole"> | number
   memberRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   roleRef?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
-}, "id">
+}, "id" | "memberId_roleId">
 
 export type MemberRoleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -297,6 +298,11 @@ export type MemberRoleListRelationFilter = {
 
 export type MemberRoleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type MemberRoleMemberIdRoleIdCompoundUniqueInput = {
+  memberId: number
+  roleId: number
 }
 
 export type MemberRoleCountOrderByAggregateInput = {
