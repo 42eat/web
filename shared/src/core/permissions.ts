@@ -17,6 +17,9 @@ export const PERMISSIONS = {
 		LIST_DETAILED: "roles:list_detailed",
 		LIST_MEMBERS: "roles:list_members",
 	},
+	PERMISSIONS: {
+		LIST: "permissions:list",
+	}
 } as const;
 
 type PermissionValues<T> = T extends object

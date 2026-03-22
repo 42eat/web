@@ -2,6 +2,7 @@ export { appContract } from './contracts/app.contract'
 export { authContract } from './contracts/auth/auth.contract'
 export { membersContract } from './contracts/members/members.contract'
 export { rolesContract } from './contracts/roles/roles.contract'
+export { permissionsContract } from './contracts/permissions/permissions.contract'
 
 export { LoginSchema, type LoginDto } from './contracts/auth/schemas/login.schema'
 export { RegisterSchema, type RegisterDto } from './contracts/auth/schemas/register.schema'

@@ -7,6 +7,7 @@ import { SessionsModule } from "./sessions/sessions.module";
 import { APP_GUARD } from "@nestjs/core";
 import { PermissionGuard } from "./core/guards/permission.guard";
 import { RolesModule } from "./roles/roles.module";
+import { PermissionsModule } from "./permissions/permissions.module";
 
 @Module({
 	providers: [
@@ -21,6 +22,7 @@ import { RolesModule } from "./roles/roles.module";
 		AuthModule,
 		RolesModule,
 		SessionsModule,
+		PermissionsModule,
 		ScheduleModule.forRoot(),
 	],
 })

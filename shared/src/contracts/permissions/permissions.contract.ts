@@ -4,12 +4,12 @@ import { PermissionsResponseSchema } from './schemas/permission.schema'
 
 const c = initContract()
 
-export const permissonsContract = c.router({
+export const permissionsContract = c.router({
 	getPermissionList: {
 		method: 'GET',
 		path: '/',
 		responses: { 200: PermissionsResponseSchema }
 	},
-}, { pathPrefix: '/roles' })
+}, { pathPrefix: '/permissions' })
 
 

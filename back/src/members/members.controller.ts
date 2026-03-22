@@ -18,13 +18,6 @@ import { PERMISSIONS } from "@42eat-web/shared";
 export class MembersController {
 	constructor(private readonly membersService: MembersService) {}
 
-	// @Get("all")
-	// @UseGuards(JwtAuthGuard)
-	// @HttpCode(HttpStatus.OK)
-	// public async getAll() {
-	// 	return this.membersService.getAll();
-	// }
-
 	@TsRestHandler(membersContract.profile)
 	@RequirePermission(PERMISSIONS.MEMBERS.MY_PROFILE)
 	public profile(@CurrentMember() authMember: AuthMember) {
