@@ -2,8 +2,6 @@ packages:
   - front
   - back
   - shared
-ignoredBuiltDependencies:
-  - bcrypt
 
 onlyBuiltDependencies:
   - '@nestjs/core'
