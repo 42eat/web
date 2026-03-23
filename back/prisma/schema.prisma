@@ -62,8 +62,9 @@ model Adhesion {
 // ─── Roles & Permissions ──────────────────────────────────────────────────────
 
 model Role {
-  id   Int    @id @default(autoincrement())
-  role String @unique
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  superRole Boolean @default(false) @map("super_role")
 
   rolePermissions RolePermission[]
   memberRoles     MemberRole[]
@@ -71,37 +72,26 @@ model Role {
   @@map("roles")
 }
 
-model Permission {
-  id     Int    @id @default(autoincrement())
-  label  String
-  parent Int?
-
-  parentPermission  Permission?      @relation("PermissionParent", fields: [parent], references: [id])
-  childPermissions  Permission[]     @relation("PermissionParent")
-  rolePermissions   RolePermission[]
-
-  @@map("permission")
-}
-
 model RolePermission {
-  id         Int @id @default(autoincrement())
-  role       Int
-  permission Int
+  id         Int    @id @default(autoincrement())
+  roleId     Int    @map("role_id")
+  permission String
 
-  roleRef       Role       @relation(fields: [role], references: [id])
-  permissionRef Permission @relation(fields: [permission], references: [id])
+  roleRef Role @relation(fields: [roleId], references: [id])
 
+	@@unique([roleId, permission])
   @@map("role_permissions")
 }
 
 model MemberRole {
-  id     Int  @id @default(autoincrement())
-  member Int?
-  role   Int?
+  id       Int  @id @default(autoincrement())
+  memberId Int  @map("member_id")
+  roleId   Int  @map("role_id")
 
-  memberRef Member? @relation(fields: [member], references: [id])
-  roleRef   Role?   @relation(fields: [role], references: [id])
+  memberRef Member @relation(fields: [memberId], references: [id])
+  roleRef   Role   @relation(fields: [roleId], references: [id])
 
+	@@unique([memberId, roleId])
   @@map("member_roles")
 }
 

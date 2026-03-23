@@ -36,7 +36,9 @@ export class AuthService {
 		const insertedUser = await this.members.create(dto.email, hashedPassword);
 
 		if (!insertedUser) {
-			throw new InternalServerErrorException("An error occured while creating the user");
+			throw new InternalServerErrorException(
+				"An error occured while creating the user",
+			);
 		}
 
 		return {
@@ -112,10 +114,10 @@ export class AuthService {
 	}
 
 	private async generateAccessToken(memberId: number) {
-		return this.jwtService.signAsync(
-			createJwtPayload(memberId),
-			{ secret: process.env.JWT_SECRET, expiresIn: "15m" },
-		);
+		return this.jwtService.signAsync(createJwtPayload(memberId), {
+			secret: process.env.JWT_SECRET,
+			expiresIn: "15m",
+		});
 	}
 
 	private async generateRefreshToken(
@@ -139,7 +141,9 @@ export class AuthService {
 				ipAddress ?? "unknown",
 			))
 		) {
-			throw new InternalServerErrorException("An error occured while creating the session",);
+			throw new InternalServerErrorException(
+				"An error occured while creating the session",
+			);
 		}
 
 		return token;

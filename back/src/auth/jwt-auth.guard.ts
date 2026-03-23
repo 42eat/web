@@ -7,6 +7,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 		if (err || !user) {
 			throw new UnauthorizedException("Invalid or missing token");
 		}
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return user;
 	}
 }
