@@ -40,7 +40,7 @@ export class SessionsService {
 		return this.prisma.session.delete({ where: { id: sessionId } });
 	}
 
-	async deleteUserExpiredSessions(memberId: number) {
+	async deleteUserExpiredSessions() {
 		return await this.prisma.session.deleteMany({
 			where: { expiresAt: { lt: new Date() } },
 		});

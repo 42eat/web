@@ -1,10 +1,4 @@
-import {
-	ArgumentsHost,
-	Catch,
-	ConflictException,
-	ExceptionFilter,
-	NotFoundException,
-} from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
 import { Response } from "express";
 import { Prisma } from "../../generated/prisma/client";
 
