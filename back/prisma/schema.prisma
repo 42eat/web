@@ -11,15 +11,16 @@ datasource db {
 // ─── Auth & Members ───────────────────────────────────────────────────────────
 
 model Member {
-  id           Int       @id @default(autoincrement())
-  email        String?   @unique
-  password     String?
-  login        String?   @unique
-  nickname     String?
-  internalNote String?   @map("internal_note")
-  joinDate     DateTime? @map("join_date")
-  updatedAt    DateTime? @updatedAt @map("updated_at")
-  createdAt    DateTime? @default(now()) @map("created_at")
+  id             Int       @id @default(autoincrement())
+  email          String?   @unique
+  password       String?
+  login          String?   @unique
+  nickname       String?
+  internalNote   String?   @map("internal_note")
+  joinDate       DateTime? @map("join_date")
+  emailValidated Boolean   @map("email_validated") @default(false)
+  updatedAt      DateTime? @updatedAt @map("updated_at")
+  createdAt      DateTime? @default(now()) @map("created_at")
 
   adhesions              Adhesion[]
   memberRoles            MemberRole[]

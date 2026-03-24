@@ -1,6 +1,7 @@
 import { initContract } from '@ts-rest/core'
 import { CreateRoleSchema, EditRoleSchema, PermissionListSchema, RoleMembersResponseSchema, RoleResponseSchema, RolesListDetailedResponseSchema, RolesListResponseSchema } from './schemas/role.schema'
 import { IdParamSchema } from '../schemas/common.schema'
+import { Error403Schema } from '../schemas/error403'
 
 const c = initContract()
 
