@@ -1,36 +1,36 @@
 import { ISendMailOptions, MailerService } from "@nestjs-modules/mailer";
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
 @Injectable()
 export class MailService {
 	constructor(private readonly mailerService: MailerService) {}
 
-	async sendEmail(params: {
-		subject: string;
-		template: string;
-		context: ISendMailOptions["context"];
-	}) {
+	async sendEmail(
+		emailsList: string[],
+		subject: string,
+		template: string,
+		context: ISendMailOptions["context"],
+	) {
 		try {
-			const emailsList: string[] = [
-				// "lilefebv@student.42lyon.fr",
-				// "ehosta@student.42lyon.fr",
-				// "ebini@student.42lyon.fr",
-				// "ethebaul@student.42lyon.fr",
-				// "ticasali@student.42lyon.fr",
-			];
-
-			const sendMailParams = {
+			const sendMailParams: ISendMailOptions = {
 				to: emailsList,
-				from: "test@42eat.fr",
-				subject: params.subject,
-				template: params.template,
-				context: params.context,
+				subject: subject,
+				template: template,
+				context: context,
+				headers: {
+					"List-Unsubscribe": `<mailto:${process.env.SMTP_USER}?subject=unsubscribe>`,
+					"List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+					"X-Mailer": "42eat",
+					"X-Priority": "3",
+					"X-MSMail-Priority": "Normal",
+					"Content-Type": "text/html; charset=UTF-8",
+				},
 			};
 			await this.mailerService.sendMail(sendMailParams);
 		} catch (error) {
-			console.error(
-				`Error while sending mail : ${JSON.stringify(params)}`,
-				error,
+			console.error(error);
+			throw new InternalServerErrorException(
+				"An error occured while sending the email",
 			);
 		}
 	}

@@ -43,7 +43,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 		const user = await this.prisma.role.upsert({
 			where: { name: "user" },
 			update: {},
-			create: { name: "user", superRole: false },
+			create: { name: "user", superRole: false, defaultRole: true },
 		});
 
 		// ─── Permissions ─────────────────────────────────────────────────────────────

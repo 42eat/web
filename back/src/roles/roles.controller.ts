@@ -19,7 +19,11 @@ export class RolesController {
 	@RequirePermission(PERMISSIONS.ROLES.CREATE)
 	public createRole() {
 		return tsRestHandler(rolesContract.createRole, async ({ body }) => {
-			await this.rolesService.createRole(body.name);
+			await this.rolesService.createRole(
+				body.name,
+				body.defaultRole,
+				body.displayColor,
+			);
 			return { status: 204, body: null };
 		});
 	}
@@ -28,7 +32,12 @@ export class RolesController {
 	@RequirePermission(PERMISSIONS.ROLES.EDIT)
 	public editRole() {
 		return tsRestHandler(rolesContract.editRole, async ({ body, params }) => {
-			await this.rolesService.editRole(params.id, body.name);
+			await this.rolesService.editRole(
+				params.id,
+				body.name,
+				body.defaultRole,
+				body.displayColor,
+			);
 			return { status: 204, body: null };
 		});
 	}

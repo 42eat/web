@@ -10,19 +10,27 @@ import { Permission } from "@42eat-web/shared";
 export class RolesService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	public async createRole(name: string) {
-		const role = await this.prisma.role.create({ data: { name } });
+	public async createRole(
+		name: string,
+		defaultRole: boolean | undefined,
+		displayColor: string | undefined,
+	) {
+		const role = await this.prisma.role.create({
+			data: { name, defaultRole, displayColor },
+		});
 		return role;
 	}
 
-	public async editRole(roleId: number, name: string) {
+	public async editRole(
+		roleId: number,
+		name: string | undefined,
+		defaultRole: boolean | undefined,
+		displayColor: string | undefined,
+	) {
 		const role = await this.prisma.role.update({
 			where: { id: roleId },
-			data: { name },
+			data: { name, defaultRole, displayColor },
 		});
-		if (!role) {
-			throw new NotFoundException("Cannot edit this role");
-		}
 		return role;
 	}
 
@@ -121,5 +129,12 @@ export class RolesService {
 				skipDuplicates: true,
 			}),
 		]);
+	}
+
+	public async getDefaultRoles() {
+		return this.prisma.role.findMany({
+			where: { defaultRole: true },
+			select: { id: true },
+		});
 	}
 }

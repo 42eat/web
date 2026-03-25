@@ -14,15 +14,19 @@ import { join } from "path";
 					port: +(process.env.SMTP_PORT ?? 465),
 					secure: true,
 					tls: {
-						rejectUnauthorized: false,
+						rejectUnauthorized: true,
 					},
 					auth: {
 						user: process.env.SMTP_USER,
 						pass: process.env.SMTP_PASS,
 					},
+					pool: {
+						maxConnections: 5,
+						maxMessages: 100,
+					},
 				},
 				defaults: {
-					from: process.env.SMTP_USER,
+					from: `42's Foyer <${process.env.SMTP_USER}>`,
 				},
 				template: {
 					dir: join(process.cwd(), "dist", "core", "mail", "templates"),

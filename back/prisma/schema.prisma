@@ -63,9 +63,11 @@ model Adhesion {
 // ─── Roles & Permissions ──────────────────────────────────────────────────────
 
 model Role {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique
-  superRole Boolean @default(false) @map("super_role")
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  superRole    Boolean @default(false) @map("super_role")
+  defaultRole  Boolean @default(false) @map("default_role")
+  displayColor String? @map("display_color")
 
   rolePermissions RolePermission[]
   memberRoles     MemberRole[]

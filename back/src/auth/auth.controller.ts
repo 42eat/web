@@ -1,13 +1,14 @@
 import { Controller, UseGuards, Req, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import type { Response, Request } from "express";
-import { JwtAuthRefreshGuard } from "./jwt-refresh.guard";
+import { JwtAuthRefreshGuard } from "../core/guards/jwt-refresh.guard";
 import {
 	type AuthMember,
 	CurrentMember,
 } from "../core/decorators/current-member.decorator";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared";
+import { JwtAuthGuardWithoutEmailVerif } from "../core/guards/jwt-auth.guard";
 
 @Controller()
 export class AuthController {
@@ -79,6 +80,23 @@ export class AuthController {
 			});
 
 			return { status: 200, body: { accessToken } };
+		});
+	}
+
+	@TsRestHandler(authContract.confirmEmail)
+	public confirmEmail() {
+		return tsRestHandler(authContract.confirmEmail, async ({ body }) => {
+			await this.authService.confirmEmail(body.token);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.askNewConfirmationEmail)
+	@UseGuards(JwtAuthGuardWithoutEmailVerif)
+	public askNewConfirmationEmail(@CurrentMember() member: AuthMember) {
+		return tsRestHandler(authContract.askNewConfirmationEmail, async () => {
+			await this.authService.askNewConfirmationEmail(member.id);
+			return { status: 204, body: null };
 		});
 	}
 }

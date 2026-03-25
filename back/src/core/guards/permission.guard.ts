@@ -1,15 +1,10 @@
-import {
-	Injectable,
-	CanActivate,
-	ExecutionContext,
-	UnauthorizedException,
-	// UnauthorizedException,
-} from "@nestjs/common";
+import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { RequirePermission } from "../decorators/require-permission.decorator";
-import { JwtAuthGuard } from "../../auth/jwt-auth.guard";
+import { JwtAuthGuard } from "./jwt-auth.guard";
 import { AuthMember } from "../decorators/current-member.decorator";
 import { MembersService } from "../../members/members.service";
+import { AppUnauthorizedException } from "../error/unauthorized";
 
 @Injectable()
 export class PermissionGuard extends JwtAuthGuard implements CanActivate {
@@ -40,7 +35,8 @@ export class PermissionGuard extends JwtAuthGuard implements CanActivate {
 			return true;
 		}
 
-		throw new UnauthorizedException(
+		throw new AppUnauthorizedException(
+			"INVALID_PERMISSION",
 			"You dont have the required permission for this route",
 		);
 	}

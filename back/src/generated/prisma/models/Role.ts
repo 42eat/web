@@ -38,18 +38,24 @@ export type RoleMinAggregateOutputType = {
   id: number | null
   name: string | null
   superRole: boolean | null
+  defaultRole: boolean | null
+  displayColor: string | null
 }
 
 export type RoleMaxAggregateOutputType = {
   id: number | null
   name: string | null
   superRole: boolean | null
+  defaultRole: boolean | null
+  displayColor: string | null
 }
 
 export type RoleCountAggregateOutputType = {
   id: number
   name: number
   superRole: number
+  defaultRole: number
+  displayColor: number
   _all: number
 }
 
@@ -66,18 +72,24 @@ export type RoleMinAggregateInputType = {
   id?: true
   name?: true
   superRole?: true
+  defaultRole?: true
+  displayColor?: true
 }
 
 export type RoleMaxAggregateInputType = {
   id?: true
   name?: true
   superRole?: true
+  defaultRole?: true
+  displayColor?: true
 }
 
 export type RoleCountAggregateInputType = {
   id?: true
   name?: true
   superRole?: true
+  defaultRole?: true
+  displayColor?: true
   _all?: true
 }
 
@@ -171,6 +183,8 @@ export type RoleGroupByOutputType = {
   id: number
   name: string
   superRole: boolean
+  defaultRole: boolean
+  displayColor: string | null
   _count: RoleCountAggregateOutputType | null
   _avg: RoleAvgAggregateOutputType | null
   _sum: RoleSumAggregateOutputType | null
@@ -200,6 +214,8 @@ export type RoleWhereInput = {
   id?: Prisma.IntFilter<"Role"> | number
   name?: Prisma.StringFilter<"Role"> | string
   superRole?: Prisma.BoolFilter<"Role"> | boolean
+  defaultRole?: Prisma.BoolFilter<"Role"> | boolean
+  displayColor?: Prisma.StringNullableFilter<"Role"> | string | null
   rolePermissions?: Prisma.RolePermissionListRelationFilter
   memberRoles?: Prisma.MemberRoleListRelationFilter
 }
@@ -208,6 +224,8 @@ export type RoleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   superRole?: Prisma.SortOrder
+  defaultRole?: Prisma.SortOrder
+  displayColor?: Prisma.SortOrderInput | Prisma.SortOrder
   rolePermissions?: Prisma.RolePermissionOrderByRelationAggregateInput
   memberRoles?: Prisma.MemberRoleOrderByRelationAggregateInput
 }
@@ -219,6 +237,8 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.RoleWhereInput[]
   NOT?: Prisma.RoleWhereInput | Prisma.RoleWhereInput[]
   superRole?: Prisma.BoolFilter<"Role"> | boolean
+  defaultRole?: Prisma.BoolFilter<"Role"> | boolean
+  displayColor?: Prisma.StringNullableFilter<"Role"> | string | null
   rolePermissions?: Prisma.RolePermissionListRelationFilter
   memberRoles?: Prisma.MemberRoleListRelationFilter
 }, "id" | "name">
@@ -227,6 +247,8 @@ export type RoleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   superRole?: Prisma.SortOrder
+  defaultRole?: Prisma.SortOrder
+  displayColor?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RoleCountOrderByAggregateInput
   _avg?: Prisma.RoleAvgOrderByAggregateInput
   _max?: Prisma.RoleMaxOrderByAggregateInput
@@ -241,11 +263,15 @@ export type RoleScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Role"> | number
   name?: Prisma.StringWithAggregatesFilter<"Role"> | string
   superRole?: Prisma.BoolWithAggregatesFilter<"Role"> | boolean
+  defaultRole?: Prisma.BoolWithAggregatesFilter<"Role"> | boolean
+  displayColor?: Prisma.StringNullableWithAggregatesFilter<"Role"> | string | null
 }
 
 export type RoleCreateInput = {
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   rolePermissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleRefInput
   memberRoles?: Prisma.MemberRoleCreateNestedManyWithoutRoleRefInput
 }
@@ -254,6 +280,8 @@ export type RoleUncheckedCreateInput = {
   id?: number
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   rolePermissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleRefInput
   memberRoles?: Prisma.MemberRoleUncheckedCreateNestedManyWithoutRoleRefInput
 }
@@ -261,6 +289,8 @@ export type RoleUncheckedCreateInput = {
 export type RoleUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rolePermissions?: Prisma.RolePermissionUpdateManyWithoutRoleRefNestedInput
   memberRoles?: Prisma.MemberRoleUpdateManyWithoutRoleRefNestedInput
 }
@@ -269,6 +299,8 @@ export type RoleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rolePermissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleRefNestedInput
   memberRoles?: Prisma.MemberRoleUncheckedUpdateManyWithoutRoleRefNestedInput
 }
@@ -277,23 +309,31 @@ export type RoleCreateManyInput = {
   id?: number
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
 }
 
 export type RoleUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RoleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   superRole?: Prisma.SortOrder
+  defaultRole?: Prisma.SortOrder
+  displayColor?: Prisma.SortOrder
 }
 
 export type RoleAvgOrderByAggregateInput = {
@@ -304,12 +344,16 @@ export type RoleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   superRole?: Prisma.SortOrder
+  defaultRole?: Prisma.SortOrder
+  displayColor?: Prisma.SortOrder
 }
 
 export type RoleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   superRole?: Prisma.SortOrder
+  defaultRole?: Prisma.SortOrder
+  displayColor?: Prisma.SortOrder
 }
 
 export type RoleSumOrderByAggregateInput = {
@@ -319,10 +363,6 @@ export type RoleSumOrderByAggregateInput = {
 export type RoleScalarRelationFilter = {
   is?: Prisma.RoleWhereInput
   isNot?: Prisma.RoleWhereInput
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type RoleCreateNestedOneWithoutRolePermissionsInput = {
@@ -356,6 +396,8 @@ export type RoleUpdateOneRequiredWithoutMemberRolesNestedInput = {
 export type RoleCreateWithoutRolePermissionsInput = {
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   memberRoles?: Prisma.MemberRoleCreateNestedManyWithoutRoleRefInput
 }
 
@@ -363,6 +405,8 @@ export type RoleUncheckedCreateWithoutRolePermissionsInput = {
   id?: number
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   memberRoles?: Prisma.MemberRoleUncheckedCreateNestedManyWithoutRoleRefInput
 }
 
@@ -385,6 +429,8 @@ export type RoleUpdateToOneWithWhereWithoutRolePermissionsInput = {
 export type RoleUpdateWithoutRolePermissionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberRoles?: Prisma.MemberRoleUpdateManyWithoutRoleRefNestedInput
 }
 
@@ -392,12 +438,16 @@ export type RoleUncheckedUpdateWithoutRolePermissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberRoles?: Prisma.MemberRoleUncheckedUpdateManyWithoutRoleRefNestedInput
 }
 
 export type RoleCreateWithoutMemberRolesInput = {
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   rolePermissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleRefInput
 }
 
@@ -405,6 +455,8 @@ export type RoleUncheckedCreateWithoutMemberRolesInput = {
   id?: number
   name: string
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: string | null
   rolePermissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleRefInput
 }
 
@@ -427,6 +479,8 @@ export type RoleUpdateToOneWithWhereWithoutMemberRolesInput = {
 export type RoleUpdateWithoutMemberRolesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rolePermissions?: Prisma.RolePermissionUpdateManyWithoutRoleRefNestedInput
 }
 
@@ -434,6 +488,8 @@ export type RoleUncheckedUpdateWithoutMemberRolesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   superRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultRole?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  displayColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rolePermissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleRefNestedInput
 }
 
@@ -481,6 +537,8 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   name?: boolean
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: boolean
   rolePermissions?: boolean | Prisma.Role$rolePermissionsArgs<ExtArgs>
   memberRoles?: boolean | Prisma.Role$memberRolesArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -490,21 +548,27 @@ export type RoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   name?: boolean
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: boolean
 }, ExtArgs["result"]["role"]>
 
 export type RoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: boolean
 }, ExtArgs["result"]["role"]>
 
 export type RoleSelectScalar = {
   id?: boolean
   name?: boolean
   superRole?: boolean
+  defaultRole?: boolean
+  displayColor?: boolean
 }
 
-export type RoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "superRole", ExtArgs["result"]["role"]>
+export type RoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "superRole" | "defaultRole" | "displayColor", ExtArgs["result"]["role"]>
 export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rolePermissions?: boolean | Prisma.Role$rolePermissionsArgs<ExtArgs>
   memberRoles?: boolean | Prisma.Role$memberRolesArgs<ExtArgs>
@@ -523,6 +587,8 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     name: string
     superRole: boolean
+    defaultRole: boolean
+    displayColor: string | null
   }, ExtArgs["result"]["role"]>
   composites: {}
 }
@@ -951,6 +1017,8 @@ export interface RoleFieldRefs {
   readonly id: Prisma.FieldRef<"Role", 'Int'>
   readonly name: Prisma.FieldRef<"Role", 'String'>
   readonly superRole: Prisma.FieldRef<"Role", 'Boolean'>
+  readonly defaultRole: Prisma.FieldRef<"Role", 'Boolean'>
+  readonly displayColor: Prisma.FieldRef<"Role", 'String'>
 }
     
 

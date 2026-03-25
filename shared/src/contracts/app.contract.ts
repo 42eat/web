@@ -3,7 +3,7 @@ import { authContract } from './auth/auth.contract'
 import { membersContract } from './members/members.contract'
 import { rolesContract } from './roles/roles.contract'
 import { permissionsContract } from './permissions/permissions.contract'
-import { Error403Schema } from './schemas/error403'
+import { Error401Schema } from './schemas/error401'
 
 const c = initContract()
 
@@ -16,7 +16,7 @@ export const appContract = c.router(
 	},
 	{
     commonResponses: {
-      403: Error403Schema,
+      401: Error401Schema,
     },
   }
 );

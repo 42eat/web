@@ -17,3 +17,5 @@ export {
 
 export { PERMISSIONS } from './core/permissions'
 export { type Permission } from './core/permissions'
+
+export { type code401, validCode401 } from './contracts/schemas/error401'
