@@ -36,10 +36,13 @@ export class MembersService {
 			data: { email, password, nickname },
 		});
 
-		// const defaultRoles = this.roles.getDefaultRoles();
-		// await this.prisma.memberRole.createMany({
-		// 	data: defaultRoles.map((roleId) => ({ roleId, memberId: newMember.id })),
-		// });
+		const defaultRoles = await this.roles.getDefaultRoles();
+		await this.prisma.memberRole.createMany({
+			data: defaultRoles.map((role) => ({
+				roleId: role.id,
+				memberId: newMember.id,
+			})),
+		});
 
 		return newMember;
 	}

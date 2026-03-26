@@ -174,6 +174,8 @@ export class AuthService {
 
 	private async sendEmailValidation(member: Member) {
 		if (!member.email) throw new ForbiddenException("you cannot do this");
+		if (member.emailValidated)
+			throw new ForbiddenException("your email is already validated");
 
 		await this.mailService.sendEmail(
 			[member.email],

@@ -61,6 +61,8 @@ export class RolesService {
 			id: role.id,
 			name: role.name,
 			superRole: role.superRole,
+			defaultRole: role.defaultRole,
+			displayColor: role.displayColor,
 			permissions: role.rolePermissions.map((rp) => rp.permission),
 		};
 	}
@@ -72,6 +74,8 @@ export class RolesService {
 			id: role.id,
 			name: role.name,
 			superRole: role.superRole,
+			defaultRole: role.defaultRole,
+			displayColor: role.displayColor,
 		}));
 	}
 
@@ -90,6 +94,8 @@ export class RolesService {
 			id: role.id,
 			name: role.name,
 			superRole: role.superRole,
+			defaultRole: role.defaultRole,
+			displayColor: role.displayColor,
 			permissions: role.rolePermissions.map((rp) => rp.permission),
 		}));
 	}
