@@ -57,9 +57,10 @@ export class RolesService {
 
 		if (!role) throw new NotFoundException("Role does not exist");
 
+		const { rolePermissions, ...rest } = role;
 		return {
-			...role,
-			permissions: role.rolePermissions.map((rp) => rp.permission),
+			...rest,
+			permissions: rolePermissions.map((rp) => rp.permission),
 		};
 	}
 
@@ -80,9 +81,9 @@ export class RolesService {
 			},
 		});
 
-		return roles.map((role) => ({
-			...role,
-			permissions: role.rolePermissions.map((rp) => rp.permission),
+		return roles.map(({ rolePermissions, ...rest }) => ({
+			...rest,
+			permissions: rolePermissions.map((rp) => rp.permission),
 		}));
 	}
 

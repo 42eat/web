@@ -14,7 +14,7 @@ import { createJwtPayload } from "./jwt.payload";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
-import { TooManyrequestsException } from "../core/error/to-many-request";
+import { TooManyRequestsException } from "../core/error/to-many-request";
 
 @Injectable()
 export class AuthService {
@@ -74,7 +74,7 @@ export class AuthService {
 
 		if (!existing || !existing.password) {
 			throw new AppUnauthorizedException(
-				"INVALID_CREDITENTIALS",
+				"INVALID_CREDENTIALS",
 				"Invalid credentials",
 			);
 		}
@@ -86,7 +86,7 @@ export class AuthService {
 
 		if (!isValidPassword) {
 			throw new AppUnauthorizedException(
-				"INVALID_CREDITENTIALS",
+				"INVALID_CREDENTIALS",
 				"Invalid credentials",
 			);
 		}
@@ -131,7 +131,7 @@ export class AuthService {
 			}
 		}
 		throw new AppUnauthorizedException(
-			"INVALID_CREDITENTIALS",
+			"INVALID_REFRESH_TOKEN",
 			"Invalid refresh token",
 		);
 	}
@@ -183,7 +183,7 @@ export class AuthService {
 
 		const lastSent = this.resendCooldowns.get(member.id);
 		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {
-			throw new TooManyrequestsException(
+			throw new TooManyRequestsException(
 				"Please wait before requesting a new email",
 			);
 		}
@@ -196,7 +196,7 @@ export class AuthService {
 				username: member.nickname,
 				token: await this.jwtService.signAsync(
 					{ sub: member.id },
-					{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "7d" },
+					{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },
 				),
 				baseUrl: process.env.BASE_URL,
 				baseFrontUrl: process.env.BASE_FRONT_URL,

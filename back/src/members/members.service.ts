@@ -70,11 +70,14 @@ export class MembersService {
 				},
 			},
 		});
-		return memberRoles.map(({ roleRef }) => ({
-			...roleRef,
-			permissions: roleRef.rolePermissions.map((rp) => rp.permission),
-			rolePermissions: undefined,
-		}));
+
+		return memberRoles.map(({ roleRef }) => {
+			const { rolePermissions, ...rest } = roleRef;
+			return {
+				...rest,
+				permissions: rolePermissions.map((rp) => rp.permission),
+			};
+		});
 	}
 
 	public async addRoleToMember(memberId: number, roleId: number) {
