@@ -2,10 +2,14 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { Member } from "../generated/prisma/client";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { Permission } from "@42eat-web/shared";
+import { RolesService } from "../roles/roles.service";
 
 @Injectable()
 export class MembersService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly roles: RolesService,
+	) {}
 
 	public async getAll(): Promise<Member[]> {
 		return this.prisma.member.findMany();
@@ -23,8 +27,24 @@ export class MembersService {
 		return member;
 	}
 
-	public async create(email: string, password: string): Promise<Member | null> {
-		return this.prisma.member.create({ data: { email, password } });
+	public async create(
+		email: string,
+		password: string,
+		displayName: string | null = null,
+	): Promise<Member | null> {
+		const newMember = await this.prisma.member.create({
+			data: { email, password, displayName },
+		});
+
+		const defaultRoles = await this.roles.getDefaultRoles();
+		await this.prisma.memberRole.createMany({
+			data: defaultRoles.map((role) => ({
+				roleId: role.id,
+				memberId: newMember.id,
+			})),
+		});
+
+		return newMember;
 	}
 
 	public async getMemberRoles(memberId: number) {
@@ -50,11 +70,14 @@ export class MembersService {
 				},
 			},
 		});
-		return memberRoles.map(({ roleRef }) => ({
-			...roleRef,
-			permissions: roleRef.rolePermissions.map((rp) => rp.permission),
-			rolePermissions: undefined,
-		}));
+
+		return memberRoles.map(({ roleRef }) => {
+			const { rolePermissions, ...rest } = roleRef;
+			return {
+				...rest,
+				permissions: rolePermissions.map((rp) => rp.permission),
+			};
+		});
 	}
 
 	public async addRoleToMember(memberId: number, roleId: number) {
@@ -102,5 +125,12 @@ export class MembersService {
 			},
 		});
 		return memberPerm !== null;
+	}
+
+	public async verifyEmail(memberId: number) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { emailValidated: true },
+		});
 	}
 }

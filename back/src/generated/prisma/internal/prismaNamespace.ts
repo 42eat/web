@@ -1722,9 +1722,10 @@ export const MemberScalarFieldEnum = {
   email: 'email',
   password: 'password',
   login: 'login',
-  nickname: 'nickname',
+  displayName: 'displayName',
   internalNote: 'internalNote',
   joinDate: 'joinDate',
+  emailValidated: 'emailValidated',
   updatedAt: 'updatedAt',
   createdAt: 'createdAt'
 } as const
@@ -1758,7 +1759,9 @@ export type AdhesionScalarFieldEnum = (typeof AdhesionScalarFieldEnum)[keyof typ
 export const RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  superRole: 'superRole'
+  superRole: 'superRole',
+  defaultRole: 'defaultRole',
+  displayColor: 'displayColor'
 } as const
 
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]

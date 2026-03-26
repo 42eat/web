@@ -1,13 +1,14 @@
 import { Controller, UseGuards, Req, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import type { Response, Request } from "express";
-import { JwtAuthRefreshGuard } from "./jwt-refresh.guard";
+import { JwtAuthRefreshGuard } from "../core/guards/jwt-refresh.guard";
 import {
 	type AuthMember,
 	CurrentMember,
 } from "../core/decorators/current-member.decorator";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared";
+import { JwtAuthGuardWithoutEmailVerif } from "../core/guards/jwt-auth.guard";
 
 @Controller()
 export class AuthController {
@@ -27,7 +28,7 @@ export class AuthController {
 
 			res.cookie("refresh_token", refreshToken, {
 				httpOnly: true,
-				secure: false, // todo: passer en true quand on aura le https
+				secure: process.env.NODE_ENV == "prod",
 				sameSite: "strict",
 				maxAge: 7 * 24 * 60 * 60 * 1000,
 			});
@@ -38,7 +39,7 @@ export class AuthController {
 
 	@TsRestHandler(authContract.login)
 	public login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-		return tsRestHandler(authContract.register, async ({ body }) => {
+		return tsRestHandler(authContract.login, async ({ body }) => {
 			const { accessToken, refreshToken } = await this.authService.login(
 				body,
 				req.headers["user-agent"],
@@ -47,7 +48,7 @@ export class AuthController {
 
 			res.cookie("refresh_token", refreshToken, {
 				httpOnly: true,
-				secure: false, // todo: passer en true quand on aura le https
+				secure: process.env.NODE_ENV == "prod",
 				sameSite: "strict",
 				maxAge: 7 * 24 * 60 * 60 * 1000,
 			});
@@ -63,7 +64,7 @@ export class AuthController {
 		@Req() req: Request,
 		@Res({ passthrough: true }) res: Response,
 	) {
-		return tsRestHandler(authContract.register, async () => {
+		return tsRestHandler(authContract.refresh, async () => {
 			const { accessToken, refreshToken } = await this.authService.refresh(
 				member.id,
 				member.refreshToken ?? "",
@@ -73,12 +74,29 @@ export class AuthController {
 
 			res.cookie("refresh_token", refreshToken, {
 				httpOnly: true,
-				secure: false, // todo: passer en true quand on aura le https
+				secure: process.env.NODE_ENV == "prod",
 				sameSite: "strict",
 				maxAge: 7 * 24 * 60 * 60 * 1000,
 			});
 
 			return { status: 200, body: { accessToken } };
+		});
+	}
+
+	@TsRestHandler(authContract.confirmEmail)
+	public confirmEmail() {
+		return tsRestHandler(authContract.confirmEmail, async ({ body }) => {
+			await this.authService.confirmEmail(body.token);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.askNewConfirmationEmail)
+	@UseGuards(JwtAuthGuardWithoutEmailVerif)
+	public askNewConfirmationEmail(@CurrentMember() member: AuthMember) {
+		return tsRestHandler(authContract.askNewConfirmationEmail, async () => {
+			await this.authService.askNewConfirmationEmail(member.id);
+			return { status: 204, body: null };
 		});
 	}
 }

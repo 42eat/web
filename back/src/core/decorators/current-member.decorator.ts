@@ -2,6 +2,7 @@ import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 
 export interface AuthMember {
 	id: number;
+	emailValidated: boolean;
 	refreshToken?: string;
 }
 

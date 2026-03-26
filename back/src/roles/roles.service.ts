@@ -10,19 +10,27 @@ import { Permission } from "@42eat-web/shared";
 export class RolesService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	public async createRole(name: string) {
-		const role = await this.prisma.role.create({ data: { name } });
+	public async createRole(
+		name: string,
+		defaultRole: boolean | undefined,
+		displayColor: string | undefined,
+	) {
+		const role = await this.prisma.role.create({
+			data: { name, defaultRole, displayColor },
+		});
 		return role;
 	}
 
-	public async editRole(roleId: number, name: string) {
+	public async editRole(
+		roleId: number,
+		name: string | undefined,
+		defaultRole: boolean | undefined,
+		displayColor: string | undefined,
+	) {
 		const role = await this.prisma.role.update({
 			where: { id: roleId },
-			data: { name },
+			data: { name, defaultRole, displayColor },
 		});
-		if (!role) {
-			throw new NotFoundException("Cannot edit this role");
-		}
 		return role;
 	}
 
@@ -49,22 +57,17 @@ export class RolesService {
 
 		if (!role) throw new NotFoundException("Role does not exist");
 
+		const { rolePermissions, ...rest } = role;
 		return {
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-			permissions: role.rolePermissions.map((rp) => rp.permission),
+			...rest,
+			permissions: rolePermissions.map((rp) => rp.permission),
 		};
 	}
 
 	public async getRoles() {
 		const roles = await this.prisma.role.findMany();
 
-		return roles.map((role) => ({
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-		}));
+		return roles;
 	}
 
 	public async getRolesDetailed() {
@@ -78,11 +81,9 @@ export class RolesService {
 			},
 		});
 
-		return roles.map((role) => ({
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-			permissions: role.rolePermissions.map((rp) => rp.permission),
+		return roles.map(({ rolePermissions, ...rest }) => ({
+			...rest,
+			permissions: rolePermissions.map((rp) => rp.permission),
 		}));
 	}
 
@@ -121,5 +122,12 @@ export class RolesService {
 				skipDuplicates: true,
 			}),
 		]);
+	}
+
+	public async getDefaultRoles() {
+		return this.prisma.role.findMany({
+			where: { defaultRole: true },
+			select: { id: true },
+		});
 	}
 }

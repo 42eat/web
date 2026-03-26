@@ -4,7 +4,7 @@ CREATE TABLE "members" (
     "email" TEXT,
     "password" TEXT,
     "login" TEXT,
-    "nickname" TEXT,
+    "displayName" TEXT,
     "internal_note" TEXT,
     "join_date" TIMESTAMP(3),
     "updated_at" TIMESTAMP(3),

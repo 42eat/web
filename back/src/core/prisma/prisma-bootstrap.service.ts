@@ -43,7 +43,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 		const user = await this.prisma.role.upsert({
 			where: { name: "user" },
 			update: {},
-			create: { name: "user", superRole: false },
+			create: { name: "user", superRole: false, defaultRole: true },
 		});
 
 		// ─── Permissions ─────────────────────────────────────────────────────────────
@@ -81,19 +81,31 @@ export class DatabaseBootstrapService implements OnModuleInit {
 		const liamMember = await this.prisma.member.upsert({
 			where: { email: "liam@test.com" },
 			update: {},
-			create: { email: "liam@test.com", password: hashedPassword },
+			create: {
+				email: "liam@test.com",
+				password: hashedPassword,
+				emailValidated: true,
+			},
 		});
 
 		const chantalMember = await this.prisma.member.upsert({
 			where: { email: "chantal@test.com" },
 			update: {},
-			create: { email: "chantal@test.com", password: hashedPassword },
+			create: {
+				email: "chantal@test.com",
+				password: hashedPassword,
+				emailValidated: true,
+			},
 		});
 
 		const machinMember = await this.prisma.member.upsert({
 			where: { email: "machin@test.com" },
 			update: {},
-			create: { email: "machin@test.com", password: hashedPassword },
+			create: {
+				email: "machin@test.com",
+				password: hashedPassword,
+				emailValidated: true,
+			},
 		});
 
 		console.log(

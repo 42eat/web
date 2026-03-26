@@ -1,10 +1,5 @@
-import {
-	ArgumentsHost,
-	Catch,
-	ConflictException,
-	ExceptionFilter,
-	NotFoundException,
-} from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
+import { code401, validCode401 } from "@42eat-web/shared";
 import { Response } from "express";
 import { Prisma } from "../../generated/prisma/client";
 
@@ -16,6 +11,7 @@ interface TsRestException {
 		headersResult?: { issues: { message: string }[] };
 		error?: string;
 		message?: string | string[];
+		code?: string;
 	};
 	status?: number;
 	message?: string;
@@ -27,7 +23,12 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
 
+		// Format prisma errors
 		if (exception instanceof Prisma.PrismaClientKnownRequestError) {
+			// Global conflict management -> no need to do 2 query each time
+			// (one to verify if the element exist, the other to set),
+			// we can just do one insert query and if there is a conflict
+			// the interceptor return a beautiful error
 			if (exception.code === "P2002") {
 				return response.status(409).json({
 					statusCode: 409,
@@ -36,6 +37,10 @@ export class TsRestValidationFilter implements ExceptionFilter {
 				});
 			}
 
+			// Same as the conflict but for the not found exception. For example, I try to add the role
+			// x to the user y, and x or y doesn't exist in db, prisma will throw an error.
+			// This interceptor format the error for the api, and so we don't have to check for x and y before
+			// adding our row.
 			if (exception.code === "P2003") {
 				const meta = exception.meta as {
 					driverAdapterError?: {
@@ -54,6 +59,10 @@ export class TsRestValidationFilter implements ExceptionFilter {
 			}
 		}
 
+		// Format the zod errors
+		// Actually, with ts rest we have zod schema to validate the user input,
+		// but the error isn't really practicaly usable in the front end, so this
+		// part of the interceptor simplify it in a much more usable way
 		if (
 			exception?.response?.bodyResult ||
 			exception?.response?.paramsResult ||
@@ -74,6 +83,25 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		}
 
 		const status = exception?.status ?? 500;
+
+		// In the case of an unauthorized error, I ensure the type is valid
+		// for the front
+		if (status === 401) {
+			const responseCode = exception?.response?.code;
+			const code: code401 =
+				responseCode && validCode401.includes(responseCode as code401)
+					? (responseCode as code401)
+					: "INVALID_PERMISSION";
+
+			return response.status(401).json({
+				statusCode: 401,
+				error: "Unauthorized",
+				message: exception?.response?.message ?? "Unauthorized",
+				code,
+			});
+		}
+
+		// Just return the error if it was something else
 		return response.status(status).json({
 			statusCode: status,
 			error: exception?.response?.error ?? "Internal Server Error",

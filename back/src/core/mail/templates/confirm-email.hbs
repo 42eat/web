@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Confirm your email - 42's Foyer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #131313;
+      font-family: 'DM Sans', sans-serif;
+      color: #e8e4dc;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      background-color: #131313;
+      padding: 48px 16px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      background-color: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 40px 48px 32px;
+      border-bottom: 1px solid #2a2a2a;
+      text-align: center;
+    }
+
+    .logo-wrapper {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .logo-wrapper img {
+      width: 48px;
+      height: 48px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .brand-name {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: #f0ece4;
+      line-height: 1.1;
+    }
+
+    .body {
+      padding: 40px 48px;
+    }
+
+    .headline {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #f0ece4;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #9e9b94;
+      margin-bottom: 12px;
+    }
+
+    .text strong {
+      color: #e8e4dc;
+      font-weight: 500;
+    }
+
+    .cta-wrapper {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #f0ece4;
+      color: #131313;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      padding: 14px 36px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .fallback {
+      background-color: #131313;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-top: 24px;
+    }
+
+    .fallback-label {
+      font-size: 12px;
+      color: #5a5752;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .fallback-url {
+      font-size: 12px;
+      color: #7a7670;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #2a2a2a;
+      margin: 32px 0;
+    }
+
+    .expiry {
+      font-size: 13px;
+      color: #5a5752;
+      line-height: 1.6;
+    }
+
+    .footer {
+      padding: 24px 48px 32px;
+      border-top: 1px solid #2a2a2a;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #3e3c38;
+      line-height: 1.7;
+    }
+
+    .footer-text a {
+      color: #5a5752;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+
+      <div class="header">
+        <div class="logo-wrapper">
+          <img src="{{baseFrontUrl}}/logo.svg" alt="42's Foyer" width="48" height="48" />
+        </div>
+        <div class="brand-name">42's Foyer</div>
+      </div>
+
+      <div class="body">
+        <p class="headline">Confirm your email address</p>
+
+        <p class="text">
+          Hey <strong>{{username}}</strong>, welcome to 42's Foyer.
+        </p>
+        <p class="text">
+          Tap the button below to verify your email address and finish setting up your account.
+          This link is only valid for <strong>15 minutes</strong>.
+        </p>
+
+        <div class="cta-wrapper">
+          <a href="{{baseFrontUrl}}/auth/confirm-email?token={{token}}" class="cta-button">
+            Confirm my email
+          </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="expiry">
+          Didn't create an account? You can safely ignore this email - nothing will happen.
+        </p>
+      </div>
+
+      <div class="footer">
+        <p class="footer-text">
+          © {{year}} 42 eat · This is an automated message, please do not reply.<br />
+          <a href="{{baseFrontUrl}}/privacy">Privacy policy</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
