@@ -15,7 +15,7 @@ model Member {
   email          String    @unique
   password       String?
   login          String?   @unique
-  nickname       String?
+  displayName    String?   @map("display_name")
   internalNote   String?   @map("internal_note")
   joinDate       DateTime? @map("join_date")
   emailValidated Boolean   @map("email_validated") @default(false)

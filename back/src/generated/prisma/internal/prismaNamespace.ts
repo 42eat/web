@@ -1722,7 +1722,7 @@ export const MemberScalarFieldEnum = {
   email: 'email',
   password: 'password',
   login: 'login',
-  nickname: 'nickname',
+  displayName: 'displayName',
   internalNote: 'internalNote',
   joinDate: 'joinDate',
   emailValidated: 'emailValidated',

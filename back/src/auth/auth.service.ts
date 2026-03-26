@@ -55,7 +55,7 @@ export class AuthService {
 		const insertedUser = await this.members.create(
 			dto.email,
 			hashedPassword,
-			dto.nickname,
+			dto.displayName,
 		);
 
 		if (!insertedUser) {
@@ -211,7 +211,7 @@ export class AuthService {
 			"Confirm your email - 42's Foyer",
 			"confirm-email",
 			{
-				username: member.nickname,
+				username: member.displayName,
 				token: await this.jwtService.signAsync(
 					{ sub: member.id },
 					{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },

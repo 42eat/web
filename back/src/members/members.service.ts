@@ -30,10 +30,10 @@ export class MembersService {
 	public async create(
 		email: string,
 		password: string,
-		nickname: string | null = null,
+		displayName: string | null = null,
 	): Promise<Member | null> {
 		const newMember = await this.prisma.member.create({
-			data: { email, password, nickname },
+			data: { email, password, displayName },
 		});
 
 		const defaultRoles = await this.roles.getDefaultRoles();
