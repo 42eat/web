@@ -5,7 +5,10 @@ import { AuthMember } from "../decorators/current-member.decorator";
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {
-	handleRequest<TUser = AuthMember>(err: any, user: AuthMember | null) {
+	handleRequest<TUser = AuthMember>(
+		err: Error | null,
+		user: AuthMember | null,
+	) {
 		if (err || !user) {
 			throw new AppUnauthorizedException(
 				"INVALID_TOKEN",
@@ -26,7 +29,10 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 
 @Injectable()
 export class JwtAuthGuardWithoutEmailVerif extends AuthGuard("jwt") {
-	handleRequest<TUser = AuthMember>(err: any, user: AuthMember | null) {
+	handleRequest<TUser = AuthMember>(
+		err: Error | null,
+		user: AuthMember | null,
+	) {
 		if (err || !user) {
 			throw new AppUnauthorizedException(
 				"INVALID_TOKEN",

@@ -5,7 +5,10 @@ import { AuthMember } from "../decorators/current-member.decorator";
 
 @Injectable()
 export class JwtAuthRefreshGuard extends AuthGuard("jwt-refresh") {
-	handleRequest<TUser = AuthMember>(err: any, user: AuthMember | null) {
+	handleRequest<TUser = AuthMember>(
+		err: Error | null,
+		user: AuthMember | null,
+	) {
 		if (err || !user) {
 			throw new AppUnauthorizedException(
 				"INVALID_REFRESH_TOKEN",

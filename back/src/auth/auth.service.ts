@@ -15,6 +15,7 @@ import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
 import { TooManyRequestsException } from "../core/error/to-many-request";
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class AuthService {
@@ -27,6 +28,16 @@ export class AuthService {
 
 	// Cooldown to send a new confirmation email
 	private resendCooldowns = new Map<number, Date>();
+
+	@Cron("0 * * * *")
+	private cleanupOldCooldowns() {
+		const now = Date.now();
+		for (const [memberId, date] of this.resendCooldowns.entries()) {
+			if (now - date.getTime() > 2 * 60 * 1000) {
+				this.resendCooldowns.delete(memberId);
+			}
+		}
+	}
 
 	public async register(
 		dto: RegisterDto,
@@ -72,10 +83,17 @@ export class AuthService {
 	) {
 		const existing = await this.members.getByEmail(dto.email);
 
-		if (!existing || !existing.password) {
+		if (!existing) {
 			throw new AppUnauthorizedException(
 				"INVALID_CREDENTIALS",
 				"Invalid credentials",
+			);
+		}
+
+		if (!existing.password) {
+			throw new AppUnauthorizedException(
+				"INVALID_CREDENTIALS",
+				"This email is related to an intra login only",
 			);
 		}
 

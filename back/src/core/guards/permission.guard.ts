@@ -28,9 +28,6 @@ export class PermissionGuard extends JwtAuthGuard implements CanActivate {
 		const request = context.switchToHttp().getRequest<{ user: AuthMember }>();
 		const user: AuthMember = request.user;
 
-		// console.log(user);
-		// console.log(permission);
-
 		if (await this.members.doMemberHavePermission(user.id, permission)) {
 			return true;
 		}

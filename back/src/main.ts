@@ -5,9 +5,12 @@ import { SwaggerModule } from "@nestjs/swagger";
 import { generateOpenApi } from "@ts-rest/open-api";
 import cookieParser from "cookie-parser";
 import { TsRestValidationFilter } from "./core/filters/ts-rest-validation.filter";
+import { NestExpressApplication } from "@nestjs/platform-express";
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+	app.set("trust proxy", 1);
 
 	app.use(cookieParser());
 	app.useGlobalFilters(new TsRestValidationFilter());
