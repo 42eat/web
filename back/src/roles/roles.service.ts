@@ -58,11 +58,7 @@ export class RolesService {
 		if (!role) throw new NotFoundException("Role does not exist");
 
 		return {
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-			defaultRole: role.defaultRole,
-			displayColor: role.displayColor,
+			...role,
 			permissions: role.rolePermissions.map((rp) => rp.permission),
 		};
 	}
@@ -70,13 +66,7 @@ export class RolesService {
 	public async getRoles() {
 		const roles = await this.prisma.role.findMany();
 
-		return roles.map((role) => ({
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-			defaultRole: role.defaultRole,
-			displayColor: role.displayColor,
-		}));
+		return roles;
 	}
 
 	public async getRolesDetailed() {
@@ -91,11 +81,7 @@ export class RolesService {
 		});
 
 		return roles.map((role) => ({
-			id: role.id,
-			name: role.name,
-			superRole: role.superRole,
-			defaultRole: role.defaultRole,
-			displayColor: role.displayColor,
+			...role,
 			permissions: role.rolePermissions.map((rp) => rp.permission),
 		}));
 	}

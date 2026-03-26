@@ -14,6 +14,7 @@ import { createJwtPayload } from "./jwt.payload";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
+import { TooManyrequestsException } from "../core/error/to-many-request";
 
 @Injectable()
 export class AuthService {
@@ -23,6 +24,9 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
 	) {}
+
+	// Cooldown to send a new confirmation email
+	private resendCooldowns = new Map<number, Date>();
 
 	public async register(
 		dto: RegisterDto,
@@ -177,6 +181,13 @@ export class AuthService {
 		if (member.emailValidated)
 			throw new ForbiddenException("your email is already validated");
 
+		const lastSent = this.resendCooldowns.get(member.id);
+		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {
+			throw new TooManyrequestsException(
+				"Please wait before requesting a new email",
+			);
+		}
+
 		await this.mailService.sendEmail(
 			[member.email],
 			"Confirm your email - 42's Foyer",
@@ -192,6 +203,8 @@ export class AuthService {
 				year: new Date().getFullYear(),
 			},
 		);
+
+		this.resendCooldowns.set(member.id, new Date());
 	}
 
 	public async confirmEmail(token: string) {
