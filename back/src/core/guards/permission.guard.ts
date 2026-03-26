@@ -37,7 +37,7 @@ export class PermissionGuard extends JwtAuthGuard implements CanActivate {
 
 		throw new AppUnauthorizedException(
 			"INVALID_PERMISSION",
-			"You dont have the required permission for this route",
+			"You don't have the required permission for this route",
 		);
 	}
 }

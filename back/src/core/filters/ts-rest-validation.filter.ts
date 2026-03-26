@@ -39,7 +39,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 
 			// Same as the conflict but for the not found exception. For example, I try to add the role
 			// x to the user y, and x or y doesn't exist in db, prisma will throw an error.
-			// This interceptor format the error for the api, and so we dont have to check for x and y before
+			// This interceptor format the error for the api, and so we don't have to check for x and y before
 			// adding our row.
 			if (exception.code === "P2003") {
 				const meta = exception.meta as {

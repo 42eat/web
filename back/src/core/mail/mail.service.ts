@@ -30,7 +30,7 @@ export class MailService {
 		} catch (error) {
 			console.error(error);
 			throw new InternalServerErrorException(
-				"An error occured while sending the email",
+				"An error occurred while sending the email",
 			);
 		}
 	}
