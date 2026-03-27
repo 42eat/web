@@ -5,6 +5,7 @@ packages:
 
 onlyBuiltDependencies:
   - '@nestjs/core'
+  - '@parcel/watcher'
   - '@prisma/engines'
   - '@scarf/scarf'
   - esbuild
