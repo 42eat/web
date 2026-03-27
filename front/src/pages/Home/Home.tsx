@@ -1,6 +1,6 @@
 
 export default function Home() {
-	return <div>
-
+	return <div style={{background: "red"}}>
+		HOME, SWEET HOME ...
 	</div>
 }
