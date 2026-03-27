@@ -2,13 +2,9 @@
   "name": "@42eat-web/shared",
   "private": true,
   "version": "0.0.0",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    ".": "./src/index.ts"
   },
   "files": [
     "dist"
@@ -22,5 +18,3 @@
     "zod": "^3.22.4"
   }
 }
-
-
