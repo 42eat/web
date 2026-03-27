@@ -1,0 +1,44 @@
+.text-input {
+	display: flex;
+	flex-direction: column;
+
+	input {
+		padding: 0.75rem 1rem;
+		border-radius: 0.75rem;
+		font-size: 1rem;
+		outline: none;
+		transition:
+			border-color 0.2s,
+			background-color 0.2s;
+		border: solid 1px var(--input-outline-main);
+		background-color: var(--input-background);
+		font-weight: 600;
+		color: var(--input-value);
+
+		&[aria-invalid="true"] {
+			border-color: var(--input-outline-invalid);
+		}
+
+		&::placeholder {
+			font-weight: bold;
+			color: var(--input-placeholder);
+		}
+
+		&:hover {
+			border-color: var(--input-outline-hover);
+			background-color: var(--input-background-hover);
+		}
+
+		&:focus {
+			border-color: var(--input-outline-active);
+			background-color: var(--input-background-active);
+		}
+	}
+
+	.invalid-message {
+		margin-top: .2rem;
+		margin-bottom: 0;
+		margin-inline: .3rem;
+		color: var(--input-invalid);
+	}
+}

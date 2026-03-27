@@ -1,0 +1,44 @@
+:root {
+	/* Input */
+
+	--input-accent: var(--text-accent);
+	--input-background: var(--background-card);
+	--input-icon: var(--text-primary);
+	--input-value: var(--text-primary);
+	--input-invalid: var(--text-danger);
+	--input-placeholder: var(--text-muted);
+	--input-background-hover: var(--background-overlay);
+	--input-background-active: var(--background-overlay);
+	--input-outline-main: var(--text-muted);
+	--input-outline-hover: var(--pink-50);
+	--input-outline-active: var(--text-accent);
+	--input-outline-invalid: var(--text-danger);
+
+	/* Logo */
+
+	--logo-main: var(--neutral-0);
+	--logo-neon: var(--pink-100);
+	--logo-neon-halo: var(--pink-300);
+
+	/* Link */
+
+	--link-main: var(--text-accent);
+	--link-hover: var(--text-accent-hover);
+
+	/* Button */
+
+	--button-primary-background: var(--background-accent);
+	--button-primary-background-hover: var(--background-accent-hover);
+	--button-primary-background-active: var(--background-accent-active);
+
+	--button-ghost-background: var(--background-overlay);
+	--button-ghost-background-hover: var(--background-overlay);
+	--button-ghost-background-active: var(--background-overlay);
+
+	--button-danger-background: var(--background-danger);
+	--button-danger-background-hover: var(--background-danger-hover);
+	--button-danger-background-active: var(--background-danger-active);
+
+	--button-text: var(--text-primary);
+	--button-text-disabled: color-mix(in oklab, var(--text-primary) 80%, transparent);
+}
