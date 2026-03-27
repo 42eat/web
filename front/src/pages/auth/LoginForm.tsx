@@ -1,25 +1,27 @@
 import { A } from "@solidjs/router";
-
-import "./LoginForm.scss"
 import Button from "../../components/ui/Button";
 import TextInput from "~/components/ui/TextInput";
 import { client } from "~/api/client";
 import { createSignal } from "solid-js";
 import { authActions } from "~/store/auth.store";
 
+import "./LoginForm.scss"
+import { createMutationState } from "@tanstack/solid-query";
+
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
 	const [password, setPassword] = createSignal("");
+
 	const loginMutation = client.auth.login.createMutation();
 
-	const handleSubmit = (e: Event) => {
+	const handleSubmit = async (e: SubmitEvent) => {
 		e.preventDefault();
 		loginMutation.mutate({ body: { email: username(), password: password() } }, {
 			onSuccess: (data) => {
 				authActions.login(data.body.accessToken);
 			},
-			onError: () => {
-
+			onError: (e) => {
+				console.error(e);
 			}
 		})
 	}

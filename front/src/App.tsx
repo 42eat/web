@@ -5,7 +5,7 @@ import { AppRouter } from "./routes";
 const client = new QueryClient();
 
 const App: Component = () => {
-	return <QueryClientProvider client={client}>{AppRouter}</QueryClientProvider>;
+	return <QueryClientProvider client={client}><AppRouter/></QueryClientProvider>;
 };
 
 export default App;
