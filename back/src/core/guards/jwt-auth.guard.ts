@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { AppUnauthorizedException } from "../error/unauthorized";
 import { AuthMember } from "../decorators/current-member.decorator";
+import { AppForbiddenException } from "../error/forbidden";
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {
@@ -17,7 +18,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 		}
 
 		if (!user.emailValidated) {
-			throw new AppUnauthorizedException(
+			throw new AppForbiddenException(
 				"EMAIL_NOT_VERIFIED",
 				"You need to verify your email in order to use the app",
 			);
