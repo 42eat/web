@@ -193,14 +193,14 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1(solid-js@1.9.11)
       '@tanstack/solid-query':
-        specifier: ^5.95.0
-        version: 5.95.0(solid-js@1.9.11)
+        specifier: ^4.0.0
+        version: 4.43.0(solid-js@1.9.11)
       '@ts-rest/core':
         specifier: ^3.52.1
         version: 3.52.1(@types/node@24.12.0)(zod@3.25.76)
       '@ts-rest/solid-query':
         specifier: ^3.52.1
-        version: 3.52.1(@tanstack/solid-query@5.95.0(solid-js@1.9.11))(@ts-rest/core@3.52.1(@types/node@24.12.0)(zod@3.25.76))(zod@3.25.76)
+        version: 3.52.1(@tanstack/solid-query@4.43.0(solid-js@1.9.11))(@ts-rest/core@3.52.1(@types/node@24.12.0)(zod@3.25.76))(zod@3.25.76)
       solid-js:
         specifier: ^1.9.5
         version: 1.9.11
@@ -1539,13 +1539,13 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
-  '@tanstack/query-core@5.95.0':
-    resolution: {integrity: sha512-H1/CWCe8tGL3YIVeo770Z6kPbt0B3M1d/iQXIIK1qlFiFt6G2neYdkHgLapOC8uMYNt9DmHjmGukEKgdMk1P+A==}
+  '@tanstack/query-core@4.43.0':
+    resolution: {integrity: sha512-m1QeUUIpNXDYxmfuuWNFZLky0EwVmbE0hj8ulZ2nIGA1183raJgDCn0IKlxug80NotRqzodxAaoYTKHbE1/P/Q==}
 
-  '@tanstack/solid-query@5.95.0':
-    resolution: {integrity: sha512-h0boybHdi6fPoSho8onCw0Sac2ahl4TKxgcgzuB4Vd0OGUrFNTEyi3qkN5KllAtny6WtCXVrMJMUuUd0C7NTtw==}
+  '@tanstack/solid-query@4.43.0':
+    resolution: {integrity: sha512-P8oXVa92hPuGgyHY0tFG7FE+iQabQ/tjJAOoUEUVHtdOcP0ygtQgXmqTZjJNP5ZDMb3rIvuUqJ7pxG238VTrXw==}
     peerDependencies:
-      solid-js: ^1.6.0
+      solid-js: ^1.5.7
 
   '@tokenizer/inflate@0.4.1':
     resolution: {integrity: sha512-2mAv+8pkG6GIZiF1kNg1jAjh27IDxEPKwdGul3snfztFerfPGI1LjDezZp3i7BElXompqEtPmoPx6c2wgtWsOA==}
@@ -6307,11 +6307,11 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.3
 
-  '@tanstack/query-core@5.95.0': {}
+  '@tanstack/query-core@4.43.0': {}
 
-  '@tanstack/solid-query@5.95.0(solid-js@1.9.11)':
+  '@tanstack/solid-query@4.43.0(solid-js@1.9.11)':
     dependencies:
-      '@tanstack/query-core': 5.95.0
+      '@tanstack/query-core': 4.43.0
       solid-js: 1.9.11
 
   '@tokenizer/inflate@0.4.1':
@@ -6349,9 +6349,9 @@ snapshots:
       openapi3-ts: 2.0.2
       zod: 3.25.76
 
-  '@ts-rest/solid-query@3.52.1(@tanstack/solid-query@5.95.0(solid-js@1.9.11))(@ts-rest/core@3.52.1(@types/node@24.12.0)(zod@3.25.76))(zod@3.25.76)':
+  '@ts-rest/solid-query@3.52.1(@tanstack/solid-query@4.43.0(solid-js@1.9.11))(@ts-rest/core@3.52.1(@types/node@24.12.0)(zod@3.25.76))(zod@3.25.76)':
     dependencies:
-      '@tanstack/solid-query': 5.95.0(solid-js@1.9.11)
+      '@tanstack/solid-query': 4.43.0(solid-js@1.9.11)
       '@ts-rest/core': 3.52.1(@types/node@24.12.0)(zod@3.25.76)
     optionalDependencies:
       zod: 3.25.76

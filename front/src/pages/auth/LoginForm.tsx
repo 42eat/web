@@ -6,13 +6,14 @@ import { createSignal } from "solid-js";
 import { authActions } from "~/store/auth.store";
 
 import "./LoginForm.scss"
-import { createMutationState } from "@tanstack/solid-query";
 
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
 	const [password, setPassword] = createSignal("");
 
+	console.log("test")
 	const loginMutation = client.auth.login.createMutation();
+	console.log("test2");
 
 	const handleSubmit = async (e: SubmitEvent) => {
 		e.preventDefault();
