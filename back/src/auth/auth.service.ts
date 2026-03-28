@@ -92,7 +92,7 @@ export class AuthService {
 
 		if (!existing.password) {
 			throw new AppUnauthorizedException(
-				"INVALID_CREDENTIALS",
+				"INTRA_ONLY_ACCOUNT",
 				"This email is related to an intra login only",
 			);
 		}
