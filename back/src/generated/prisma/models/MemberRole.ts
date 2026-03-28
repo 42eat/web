@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model MemberRole
@@ -28,64 +28,64 @@ export type AggregateMemberRole = {
 
 export type MemberRoleAvgAggregateOutputType = {
   id: number | null
-  member: number | null
-  role: number | null
+  memberId: number | null
+  roleId: number | null
 }
 
 export type MemberRoleSumAggregateOutputType = {
   id: number | null
-  member: number | null
-  role: number | null
+  memberId: number | null
+  roleId: number | null
 }
 
 export type MemberRoleMinAggregateOutputType = {
   id: number | null
-  member: number | null
-  role: number | null
+  memberId: number | null
+  roleId: number | null
 }
 
 export type MemberRoleMaxAggregateOutputType = {
   id: number | null
-  member: number | null
-  role: number | null
+  memberId: number | null
+  roleId: number | null
 }
 
 export type MemberRoleCountAggregateOutputType = {
   id: number
-  member: number
-  role: number
+  memberId: number
+  roleId: number
   _all: number
 }
 
 
 export type MemberRoleAvgAggregateInputType = {
   id?: true
-  member?: true
-  role?: true
+  memberId?: true
+  roleId?: true
 }
 
 export type MemberRoleSumAggregateInputType = {
   id?: true
-  member?: true
-  role?: true
+  memberId?: true
+  roleId?: true
 }
 
 export type MemberRoleMinAggregateInputType = {
   id?: true
-  member?: true
-  role?: true
+  memberId?: true
+  roleId?: true
 }
 
 export type MemberRoleMaxAggregateInputType = {
   id?: true
-  member?: true
-  role?: true
+  memberId?: true
+  roleId?: true
 }
 
 export type MemberRoleCountAggregateInputType = {
   id?: true
-  member?: true
-  role?: true
+  memberId?: true
+  roleId?: true
   _all?: true
 }
 
@@ -177,8 +177,8 @@ export type MemberRoleGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type MemberRoleGroupByOutputType = {
   id: number
-  member: number | null
-  role: number | null
+  memberId: number
+  roleId: number
   _count: MemberRoleCountAggregateOutputType | null
   _avg: MemberRoleAvgAggregateOutputType | null
   _sum: MemberRoleSumAggregateOutputType | null
@@ -206,35 +206,36 @@ export type MemberRoleWhereInput = {
   OR?: Prisma.MemberRoleWhereInput[]
   NOT?: Prisma.MemberRoleWhereInput | Prisma.MemberRoleWhereInput[]
   id?: Prisma.IntFilter<"MemberRole"> | number
-  member?: Prisma.IntNullableFilter<"MemberRole"> | number | null
-  role?: Prisma.IntNullableFilter<"MemberRole"> | number | null
-  memberRef?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
-  roleRef?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+  memberId?: Prisma.IntFilter<"MemberRole"> | number
+  roleId?: Prisma.IntFilter<"MemberRole"> | number
+  memberRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
 }
 
 export type MemberRoleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
   memberRef?: Prisma.MemberOrderByWithRelationInput
   roleRef?: Prisma.RoleOrderByWithRelationInput
 }
 
 export type MemberRoleWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  memberId_roleId?: Prisma.MemberRoleMemberIdRoleIdCompoundUniqueInput
   AND?: Prisma.MemberRoleWhereInput | Prisma.MemberRoleWhereInput[]
   OR?: Prisma.MemberRoleWhereInput[]
   NOT?: Prisma.MemberRoleWhereInput | Prisma.MemberRoleWhereInput[]
-  member?: Prisma.IntNullableFilter<"MemberRole"> | number | null
-  role?: Prisma.IntNullableFilter<"MemberRole"> | number | null
-  memberRef?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
-  roleRef?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
-}, "id">
+  memberId?: Prisma.IntFilter<"MemberRole"> | number
+  roleId?: Prisma.IntFilter<"MemberRole"> | number
+  memberRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
+}, "id" | "memberId_roleId">
 
 export type MemberRoleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
   _count?: Prisma.MemberRoleCountOrderByAggregateInput
   _avg?: Prisma.MemberRoleAvgOrderByAggregateInput
   _max?: Prisma.MemberRoleMaxOrderByAggregateInput
@@ -247,36 +248,36 @@ export type MemberRoleScalarWhereWithAggregatesInput = {
   OR?: Prisma.MemberRoleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MemberRoleScalarWhereWithAggregatesInput | Prisma.MemberRoleScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"MemberRole"> | number
-  member?: Prisma.IntNullableWithAggregatesFilter<"MemberRole"> | number | null
-  role?: Prisma.IntNullableWithAggregatesFilter<"MemberRole"> | number | null
+  memberId?: Prisma.IntWithAggregatesFilter<"MemberRole"> | number
+  roleId?: Prisma.IntWithAggregatesFilter<"MemberRole"> | number
 }
 
 export type MemberRoleCreateInput = {
-  memberRef?: Prisma.MemberCreateNestedOneWithoutMemberRolesInput
-  roleRef?: Prisma.RoleCreateNestedOneWithoutMemberRolesInput
+  memberRef: Prisma.MemberCreateNestedOneWithoutMemberRolesInput
+  roleRef: Prisma.RoleCreateNestedOneWithoutMemberRolesInput
 }
 
 export type MemberRoleUncheckedCreateInput = {
   id?: number
-  member?: number | null
-  role?: number | null
+  memberId: number
+  roleId: number
 }
 
 export type MemberRoleUpdateInput = {
-  memberRef?: Prisma.MemberUpdateOneWithoutMemberRolesNestedInput
-  roleRef?: Prisma.RoleUpdateOneWithoutMemberRolesNestedInput
+  memberRef?: Prisma.MemberUpdateOneRequiredWithoutMemberRolesNestedInput
+  roleRef?: Prisma.RoleUpdateOneRequiredWithoutMemberRolesNestedInput
 }
 
 export type MemberRoleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  role?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MemberRoleCreateManyInput = {
   id?: number
-  member?: number | null
-  role?: number | null
+  memberId: number
+  roleId: number
 }
 
 export type MemberRoleUpdateManyMutationInput = {
@@ -285,8 +286,8 @@ export type MemberRoleUpdateManyMutationInput = {
 
 export type MemberRoleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  role?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MemberRoleListRelationFilter = {
@@ -299,34 +300,39 @@ export type MemberRoleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type MemberRoleMemberIdRoleIdCompoundUniqueInput = {
+  memberId: number
+  roleId: number
+}
+
 export type MemberRoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
 }
 
 export type MemberRoleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
 }
 
 export type MemberRoleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
 }
 
 export type MemberRoleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
 }
 
 export type MemberRoleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  member?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  memberId?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
 }
 
 export type MemberRoleCreateNestedManyWithoutMemberRefInput = {
@@ -414,12 +420,12 @@ export type MemberRoleUncheckedUpdateManyWithoutRoleRefNestedInput = {
 }
 
 export type MemberRoleCreateWithoutMemberRefInput = {
-  roleRef?: Prisma.RoleCreateNestedOneWithoutMemberRolesInput
+  roleRef: Prisma.RoleCreateNestedOneWithoutMemberRolesInput
 }
 
 export type MemberRoleUncheckedCreateWithoutMemberRefInput = {
   id?: number
-  role?: number | null
+  roleId: number
 }
 
 export type MemberRoleCreateOrConnectWithoutMemberRefInput = {
@@ -453,17 +459,17 @@ export type MemberRoleScalarWhereInput = {
   OR?: Prisma.MemberRoleScalarWhereInput[]
   NOT?: Prisma.MemberRoleScalarWhereInput | Prisma.MemberRoleScalarWhereInput[]
   id?: Prisma.IntFilter<"MemberRole"> | number
-  member?: Prisma.IntNullableFilter<"MemberRole"> | number | null
-  role?: Prisma.IntNullableFilter<"MemberRole"> | number | null
+  memberId?: Prisma.IntFilter<"MemberRole"> | number
+  roleId?: Prisma.IntFilter<"MemberRole"> | number
 }
 
 export type MemberRoleCreateWithoutRoleRefInput = {
-  memberRef?: Prisma.MemberCreateNestedOneWithoutMemberRolesInput
+  memberRef: Prisma.MemberCreateNestedOneWithoutMemberRolesInput
 }
 
 export type MemberRoleUncheckedCreateWithoutRoleRefInput = {
   id?: number
-  member?: number | null
+  memberId: number
 }
 
 export type MemberRoleCreateOrConnectWithoutRoleRefInput = {
@@ -494,98 +500,98 @@ export type MemberRoleUpdateManyWithWhereWithoutRoleRefInput = {
 
 export type MemberRoleCreateManyMemberRefInput = {
   id?: number
-  role?: number | null
+  roleId: number
 }
 
 export type MemberRoleUpdateWithoutMemberRefInput = {
-  roleRef?: Prisma.RoleUpdateOneWithoutMemberRolesNestedInput
+  roleRef?: Prisma.RoleUpdateOneRequiredWithoutMemberRolesNestedInput
 }
 
 export type MemberRoleUncheckedUpdateWithoutMemberRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MemberRoleUncheckedUpdateManyWithoutMemberRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MemberRoleCreateManyRoleRefInput = {
   id?: number
-  member?: number | null
+  memberId: number
 }
 
 export type MemberRoleUpdateWithoutRoleRefInput = {
-  memberRef?: Prisma.MemberUpdateOneWithoutMemberRolesNestedInput
+  memberRef?: Prisma.MemberUpdateOneRequiredWithoutMemberRolesNestedInput
 }
 
 export type MemberRoleUncheckedUpdateWithoutRoleRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MemberRoleUncheckedUpdateManyWithoutRoleRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  member?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  memberId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
 
 export type MemberRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member?: boolean
-  role?: boolean
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberId?: boolean
+  roleId?: boolean
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["memberRole"]>
 
 export type MemberRoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member?: boolean
-  role?: boolean
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberId?: boolean
+  roleId?: boolean
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["memberRole"]>
 
 export type MemberRoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  member?: boolean
-  role?: boolean
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberId?: boolean
+  roleId?: boolean
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["memberRole"]>
 
 export type MemberRoleSelectScalar = {
   id?: boolean
-  member?: boolean
-  role?: boolean
+  memberId?: boolean
+  roleId?: boolean
 }
 
-export type MemberRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "member" | "role", ExtArgs["result"]["memberRole"]>
+export type MemberRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "roleId", ExtArgs["result"]["memberRole"]>
 export type MemberRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }
 export type MemberRoleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }
 export type MemberRoleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  memberRef?: boolean | Prisma.MemberRole$memberRefArgs<ExtArgs>
-  roleRef?: boolean | Prisma.MemberRole$roleRefArgs<ExtArgs>
+  memberRef?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
 }
 
 export type $MemberRolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MemberRole"
   objects: {
-    memberRef: Prisma.$MemberPayload<ExtArgs> | null
-    roleRef: Prisma.$RolePayload<ExtArgs> | null
+    memberRef: Prisma.$MemberPayload<ExtArgs>
+    roleRef: Prisma.$RolePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    member: number | null
-    role: number | null
+    memberId: number
+    roleId: number
   }, ExtArgs["result"]["memberRole"]>
   composites: {}
 }
@@ -980,8 +986,8 @@ readonly fields: MemberRoleFieldRefs;
  */
 export interface Prisma__MemberRoleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  memberRef<T extends Prisma.MemberRole$memberRefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberRole$memberRefArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  roleRef<T extends Prisma.MemberRole$roleRefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberRole$roleRefArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  memberRef<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  roleRef<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1012,8 +1018,8 @@ export interface Prisma__MemberRoleClient<T, Null = never, ExtArgs extends runti
  */
 export interface MemberRoleFieldRefs {
   readonly id: Prisma.FieldRef<"MemberRole", 'Int'>
-  readonly member: Prisma.FieldRef<"MemberRole", 'Int'>
-  readonly role: Prisma.FieldRef<"MemberRole", 'Int'>
+  readonly memberId: Prisma.FieldRef<"MemberRole", 'Int'>
+  readonly roleId: Prisma.FieldRef<"MemberRole", 'Int'>
 }
     
 
@@ -1237,7 +1243,7 @@ export type MemberRoleCreateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * The data needed to create a MemberRole.
    */
-  data?: Prisma.XOR<Prisma.MemberRoleCreateInput, Prisma.MemberRoleUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.MemberRoleCreateInput, Prisma.MemberRoleUncheckedCreateInput>
 }
 
 /**
@@ -1412,44 +1418,6 @@ export type MemberRoleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many MemberRoles to delete.
    */
   limit?: number
-}
-
-/**
- * MemberRole.memberRef
- */
-export type MemberRole$memberRefArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Member
-   */
-  select?: Prisma.MemberSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Member
-   */
-  omit?: Prisma.MemberOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MemberInclude<ExtArgs> | null
-  where?: Prisma.MemberWhereInput
-}
-
-/**
- * MemberRole.roleRef
- */
-export type MemberRole$roleRefArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Role
-   */
-  select?: Prisma.RoleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Role
-   */
-  omit?: Prisma.RoleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoleInclude<ExtArgs> | null
-  where?: Prisma.RoleWhereInput
 }
 
 /**

@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { AuthResponseSchema } from './schemas/auth-response.schema'
 import { LoginSchema } from './schemas/login.schema'
 import { RegisterSchema } from './schemas/register.schema'
+import { ConfirmEmailSchema } from './schemas/confirm-email.schema'
 
 const c = initContract()
 
@@ -17,12 +18,24 @@ export const authContract = c.router({
 		method: 'POST',
 		path: '/login',
 		body: LoginSchema,
-		responses: { 200: AuthResponseSchema }
+		responses: { 200: AuthResponseSchema  }
 	},
 	refresh: {
 		method: 'POST',
 		path: '/refresh',
-		body: z.void(),
-		responses: { 200: AuthResponseSchema }
+		body: null,
+		responses: { 200: AuthResponseSchema  }
+	},
+	confirmEmail: {
+		method: 'POST',
+		path: '/confirm-email',
+		body: ConfirmEmailSchema,
+		responses: { 204: null  }
+	},
+	askNewConfirmationEmail: {
+		method: 'POST',
+		path: '/new-confirm-email',
+		body: null,
+		responses: { 204: null  }
 	}
 }, { pathPrefix: '/auth' })

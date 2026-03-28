@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model Session
@@ -448,10 +448,6 @@ export type SessionUncheckedUpdateManyWithoutMemberNestedInput = {
   update?: Prisma.SessionUpdateWithWhereUniqueWithoutMemberInput | Prisma.SessionUpdateWithWhereUniqueWithoutMemberInput[]
   updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMemberInput | Prisma.SessionUpdateManyWithWhereWithoutMemberInput[]
   deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
