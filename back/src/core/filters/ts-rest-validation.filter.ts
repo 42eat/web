@@ -25,6 +25,7 @@ interface TsRestException {
 @Catch()
 export class TsRestValidationFilter implements ExceptionFilter {
 	catch(exception: TsRestException, host: ArgumentsHost) {
+		console.log(typeof exception);
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
 
