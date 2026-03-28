@@ -1,10 +1,7 @@
-import {
-	ForbiddenException,
-	Injectable,
-	NotFoundException,
-} from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { Permission } from "@42eat-web/shared";
+import { AppForbiddenException } from "../core/error/forbidden";
 
 @Injectable()
 export class RolesService {
@@ -38,7 +35,8 @@ export class RolesService {
 		const role = await this.prisma.role.findUnique({ where: { id: roleId } });
 
 		if (!role) throw new NotFoundException("Role does not exist");
-		if (role.superRole) throw new ForbiddenException("Cannot delete this role");
+		if (role.superRole)
+			throw new AppForbiddenException("FORBIDDEN", "Cannot delete this role");
 
 		return this.prisma.role.delete({ where: { id: roleId } });
 	}

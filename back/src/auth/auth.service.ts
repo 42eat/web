@@ -1,6 +1,5 @@
 import {
 	ConflictException,
-	ForbiddenException,
 	Injectable,
 	InternalServerErrorException,
 } from "@nestjs/common";
@@ -16,6 +15,7 @@ import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
 import { TooManyRequestsException } from "../core/error/to-many-request";
 import { Cron } from "@nestjs/schedule";
+import { AppForbiddenException } from "../core/error/forbidden";
 
 @Injectable()
 export class AuthService {
@@ -195,9 +195,13 @@ export class AuthService {
 	}
 
 	private async sendEmailValidation(member: Member) {
-		if (!member.email) throw new ForbiddenException("you cannot do this");
+		if (!member.email)
+			throw new AppForbiddenException("FORBIDDEN", "you cannot do this");
 		if (member.emailValidated)
-			throw new ForbiddenException("your email is already validated");
+			throw new AppForbiddenException(
+				"FORBIDDEN",
+				"your email is already validated",
+			);
 
 		const lastSent = this.resendCooldowns.get(member.id);
 		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {

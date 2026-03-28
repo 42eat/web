@@ -29,3 +29,4 @@ export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
 
 export { type code401, validCode401 } from "./contracts/schemas/error401";
+export { type code403, validCode403 } from "./contracts/schemas/error403";
