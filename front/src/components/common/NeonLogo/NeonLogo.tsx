@@ -6,10 +6,6 @@ const DIFUSE_BLUR_RATIO = 0.8;
 
 export default function NeonLogo() {
 
-	let observer: ResizeObserver | undefined;
-
-	onCleanup(() => observer?.disconnect());
-
 	return <svg width="40" height="48" viewBox="0 0 40 48" overflow="visible" fill="none" class="neon-logo" xmlns="http://www.w3.org/2000/svg">
 		<defs>
 			<filter id="neon-diffused" primitiveUnits="objectBoundingBox" x="-60%" y="-60%" width="200%" height="200%">

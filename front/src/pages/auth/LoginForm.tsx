@@ -8,8 +8,8 @@ import { authActions } from "~/store/auth.store";
 import "./LoginForm.scss"
 
 export default function LoginForm() {
-	const [username, setUsername] = createSignal("a@a.fr");
-	const [password, setPassword] = createSignal("dzq");
+	const [username, setUsername] = createSignal("");
+	const [password, setPassword] = createSignal("");
 	const [error, setError] = createSignal<JSXElement>(null);
 
 	const loginMutation = client.auth.login.createMutation();
