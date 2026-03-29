@@ -5,7 +5,7 @@ import LoginForm from "./pages/auth/LoginForm";
 import Home from "./pages/Home";
 import RegisterForm from "./pages/auth/RegisterForm";
 import AuthGuard from "./components/guards/AuthGuard";
-import Landing from "./pages/Landing/Landing";
+import Landing from "./pages/Landing";
 import GuestGuard from "./components/guards/GuestGuard";
 
 export const AppRouter: Component = () => {
