@@ -1,0 +1,52 @@
+@mixin theme-dark {
+	--background-page: var(--neutral-950);
+	--background-surface: var(--neutral-900);
+	--background-card: var(--neutral-800);
+	--background-overlay: var(--neutral-700);
+	--text-primary: var(--neutral-0);
+	--text-muted: var(--neutral-400);
+	--text-accent: var(--pink-200);
+	--text-accent-hover: var(--pink-300);
+	--text-danger: var(--red-300);
+	--background-accent: var(--pink-500);
+	--background-accent-hover: var(--pink-400);
+	--background-accent-active: var(--pink-600);
+	--background-danger: var(--red-500);
+	--mix-hover: white;
+	--mix-active: black;
+	--mix-disabled: transparent;
+}
+
+@mixin theme-light {
+	--background-page: #FFF;
+	--background-surface: var(--neutral-900);
+	--background-card: var(--neutral-800);
+	--background-overlay: var(--neutral-700);
+	--text-primary: var(--neutral-0);
+	--text-muted: var(--neutral-400);
+	--text-accent: var(--pink-200);
+	--text-accent-hover: var(--pink-300);
+	--background-accent: var(--pink-500);
+	--background-danger: var(--red-500);
+	--mix-hover: black;
+	--mix-active: white;
+	--mix-disabled: transparent;
+}
+
+:root[data-theme="dark"] {
+	@include theme-dark;
+}
+:root[data-theme="auto"] {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark;
+	}
+}
+
+:root[data-theme="light"] {
+	@include theme-light;
+}
+:root[data-theme="auto"] {
+	@media (prefers-color-scheme: light) {
+		@include theme-light;
+	}
+}

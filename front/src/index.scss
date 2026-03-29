@@ -1,0 +1,72 @@
+@use "styles/tokens/primitives";
+@use "styles/tokens/semantic";
+@use "styles/tokens/components";
+@use "styles/variables" as vars;
+
+@use "@fontsource-variable/inter";
+@use "@fontsource/instrument-serif";
+
+:root {
+	height: 100vh;
+	width: 100vw;
+}
+
+body {
+	margin: 0;
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+
+	font-weight: 600;
+
+	font-family:
+		vars.$font-stack,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		"Roboto",
+		"Oxygen",
+		"Ubuntu",
+		"Cantarell",
+		"Fira Sans",
+		"Droid Sans",
+		"Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	color: var(--text-primary);
+	background-color: var(--background-page);
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	transition: color .2s;
+	color: var(--link-main);
+	outline: none;
+}
+
+a:hover {
+	color: var(--link-hover);
+}
+
+a:focus-visible {
+	color: var(--link-hover);
+	text-decoration: underline;
+}
+
+code {
+	font-family:
+		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+	outline: none;
+	border: none;
+}

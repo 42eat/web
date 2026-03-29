@@ -8,7 +8,7 @@
 	"scripts": {
 		"build": "nest build",
 		"start": "nest start",
-		"start:dev": "nest start --watch",
+		"start:dev": "nodemon",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --ignore-pattern \"src/generated/prisma/**\" --fix",
@@ -67,6 +67,7 @@
 		"eslint-plugin-prettier": "^5.5.5",
 		"globals": "^16.0.0",
 		"jest": "^30.0.0",
+		"nodemon": "^3.1.14",
 		"prettier": "^3.8.1",
 		"prisma": "^7.4.2",
 		"source-map-support": "^0.5.21",
