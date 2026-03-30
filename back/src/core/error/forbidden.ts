@@ -1,8 +1,8 @@
-import { code403 } from "@42eat-web/shared";
+import { Code403 } from "@42eat-web/shared";
 import { ForbiddenException } from "@nestjs/common";
 
 export class AppForbiddenException extends ForbiddenException {
-	constructor(code: code403, message?: string) {
+	constructor(code: Code403, message?: string) {
 		super({ message: message ?? "Forbidden", code });
 	}
 }

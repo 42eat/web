@@ -4,29 +4,13 @@ export { membersContract } from "./contracts/members/members.contract";
 export { rolesContract } from "./contracts/roles/roles.contract";
 export { permissionsContract } from "./contracts/permissions/permissions.contract";
 
-export {
-	LoginSchema,
-	type LoginDto,
-} from "./contracts/auth/schemas/login.schema";
-export {
-	RegisterSchema,
-	type RegisterDto,
-} from "./contracts/auth/schemas/register.schema";
-export {
-	MemberSchema,
-	type MemberDto,
-} from "./contracts/members/schemas/member.schema";
-export {
-	CreateRoleSchema,
-	type CreateRoleDto,
-	RoleMembersResponseSchema,
-	RoleResponseSchema,
-	RolesListDetailedResponseSchema,
-	RolesListResponseSchema,
-} from "./contracts/roles/schemas/role.schema";
+export { loginSchema, type LoginDto } from "./contracts/auth/schemas/login.schema";
+export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/register.schema";
+export { memberSchema, type MemberDto } from "./contracts/members/schemas/member.schema";
+export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
 
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
 
-export { type code401, validCode401 } from "./contracts/schemas/error401";
-export { type code403, validCode403 } from "./contracts/schemas/error403";
+export { type Code401, validCode401 } from "./contracts/schemas/error401";
+export { type Code403, validCode403 } from "./contracts/schemas/error403";

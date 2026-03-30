@@ -1,8 +1,8 @@
 import { initContract } from "@ts-rest/core";
-import { AuthResponseSchema } from "./schemas/auth-response.schema";
-import { LoginSchema } from "./schemas/login.schema";
-import { RegisterSchema } from "./schemas/register.schema";
-import { ConfirmEmailSchema } from "./schemas/confirm-email.schema";
+import { authResponseSchema } from "./schemas/auth-response.schema";
+import { loginSchema } from "./schemas/login.schema";
+import { registerSchema } from "./schemas/register.schema";
+import { confirmEmailSchema } from "./schemas/confirm-email.schema";
 
 const c = initContract();
 
@@ -11,25 +11,25 @@ export const authContract = c.router(
 		register: {
 			method: "POST",
 			path: "/register",
-			body: RegisterSchema,
-			responses: { 200: AuthResponseSchema },
+			body: registerSchema,
+			responses: { 200: authResponseSchema },
 		},
 		login: {
 			method: "POST",
 			path: "/login",
-			body: LoginSchema,
-			responses: { 200: AuthResponseSchema },
+			body: loginSchema,
+			responses: { 200: authResponseSchema },
 		},
 		refresh: {
 			method: "POST",
 			path: "/refresh",
 			body: null,
-			responses: { 200: AuthResponseSchema },
+			responses: { 200: authResponseSchema },
 		},
 		confirmEmail: {
 			method: "POST",
 			path: "/confirm-email",
-			body: ConfirmEmailSchema,
+			body: confirmEmailSchema,
 			responses: { 204: null },
 		},
 		askNewConfirmationEmail: {
