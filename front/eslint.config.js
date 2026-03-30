@@ -14,8 +14,15 @@ export default [
 			},
 		},
 		rules: {
+			"@stylistic/object-curly-newline": ["error", { "consistent": true }],
+			"@stylistic/array-bracket-newline": ["error", "consistent"],
+			"@stylistic/function-paren-newline": ["error", "consistent"],
+			"@stylistic/object-curly-newline": ["error", {
+				"ImportDeclaration": { "consistent": true },
+				"ExportDeclaration": { "consistent": true },
+			}],
 			"@stylistic/jsx-wrap-multilines": ["error", {
-				declaration: "ignore",
+				declaration: "consistent",
 				assignment: "ignore",
 				return: "ignore",
 				arrow: "ignore",
