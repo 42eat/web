@@ -1,23 +1,23 @@
 import { z } from "zod";
-import { MemberSchema } from "../../members/schemas/member.schema";
+import { memberSchema } from "../../members/schemas/member.schema";
 import { permissionValues } from "../../../core/permissions";
 import { colorRegex } from "../../schemas/color";
 
-export const CreateRoleSchema = z.object({
+export const createRoleSchema = z.object({
 	name: z.string(),
 	defaultRole: z.boolean().optional(),
 	displayColor: z.string().regex(colorRegex, "Invalid hex color").optional(),
 });
-export type CreateRoleDto = z.infer<typeof CreateRoleSchema>;
+export type CreateRoleDto = z.infer<typeof createRoleSchema>;
 
-export const EditRoleSchema = z.object({
+export const editRoleSchema = z.object({
 	name: z.string().optional(),
 	defaultRole: z.boolean().optional(),
 	displayColor: z.string().regex(colorRegex, "Invalid hex color").optional(),
 });
-export type EditRoleDto = z.infer<typeof EditRoleSchema>;
+export type EditRoleDto = z.infer<typeof editRoleSchema>;
 
-export const RoleResponseSchema = z.object({
+export const roleResponseSchema = z.object({
 	id: z.number(),
 	name: z.string(),
 	superRole: z.boolean(),
@@ -25,9 +25,9 @@ export const RoleResponseSchema = z.object({
 	displayColor: z.string().regex(colorRegex, "Invalid hex color").nullable(),
 	permissions: z.array(z.string()),
 });
-export type RoleResponse = z.infer<typeof RoleResponseSchema>;
+export type RoleResponse = z.infer<typeof roleResponseSchema>;
 
-export const RolesListResponseSchema = z.array(
+export const rolesListResponseSchema = z.array(
 	z.object({
 		id: z.number(),
 		name: z.string(),
@@ -36,15 +36,15 @@ export const RolesListResponseSchema = z.array(
 		displayColor: z.string().regex(colorRegex, "Invalid hex color").nullable(),
 	}),
 );
-export type RolesListResponse = z.infer<typeof RolesListResponseSchema>;
+export type RolesListResponse = z.infer<typeof rolesListResponseSchema>;
 
-export const RolesListDetailedResponseSchema = z.array(RoleResponseSchema);
+export const rolesListDetailedResponseSchema = z.array(roleResponseSchema);
 export type RolesListDetailedResponse = z.infer<
-	typeof RolesListDetailedResponseSchema
+	typeof rolesListDetailedResponseSchema
 >;
 
-export const RoleMembersResponseSchema = z.array(MemberSchema);
-export type RoleMembersResponse = z.infer<typeof RoleMembersResponseSchema>;
+export const roleMembersResponseSchema = z.array(memberSchema);
+export type RoleMembersResponse = z.infer<typeof roleMembersResponseSchema>;
 
-export const PermissionListSchema = z.array(z.enum(permissionValues));
-export type PermissionListDto = z.infer<typeof PermissionListSchema>;
+export const permissionListSchema = z.array(z.enum(permissionValues));
+export type PermissionListDto = z.infer<typeof permissionListSchema>;

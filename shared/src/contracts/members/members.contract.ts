@@ -1,14 +1,14 @@
 import { initContract } from "@ts-rest/core";
 import {
-	AddRoleMemberSchema,
+	addRoleMemberSchema,
 	DeleteRoleParamSchema,
-	MemberSchema,
+	memberSchema,
 } from "./schemas/member.schema";
 import {
-	RolesListDetailedResponseSchema,
-	RolesListResponseSchema,
+	rolesListDetailedResponseSchema,
+	rolesListResponseSchema,
 } from "../roles/schemas/role.schema";
-import { IdParamSchema } from "../schemas/common.schema";
+import { idParamSchema } from "../schemas/common.schema";
 
 const c = initContract();
 
@@ -17,25 +17,25 @@ export const membersContract = c.router(
 		profile: {
 			method: "GET",
 			path: "/profile",
-			responses: { 200: MemberSchema },
+			responses: { 200: memberSchema },
 		},
 		getMemberRoles: {
 			method: "GET",
 			path: "/:id/roles",
-			pathParams: IdParamSchema,
-			responses: { 200: RolesListResponseSchema },
+			pathParams: idParamSchema,
+			responses: { 200: rolesListResponseSchema },
 		},
 		getMemberRolesDetailed: {
 			method: "GET",
 			path: "/:id/roles/detailed",
-			pathParams: IdParamSchema,
-			responses: { 200: RolesListDetailedResponseSchema },
+			pathParams: idParamSchema,
+			responses: { 200: rolesListDetailedResponseSchema },
 		},
 		addMemberRole: {
 			method: "POST",
 			path: "/:id/roles",
-			pathParams: IdParamSchema,
-			body: AddRoleMemberSchema,
+			pathParams: idParamSchema,
+			body: addRoleMemberSchema,
 			responses: { 204: null },
 		},
 		removeMemberRole: {

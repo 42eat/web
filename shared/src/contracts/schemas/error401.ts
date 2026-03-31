@@ -1,17 +1,31 @@
 import { z } from "zod";
 
-export const validCode401 = <const>[
-	"INVALID_CREDENTIALS",
+function error401SchemaVariant(enumArray: readonly [string, ...string[]]) {
+	return z.object({
+		statusCode: z.literal(401),
+		error: z.string(),
+		message: z.string(),
+		code: z.enum(enumArray),
+	})
+}
+
+export const baseCode401 = [
 	"INVALID_REFRESH_TOKEN",
 	"INVALID_TOKEN",
-	"INTRA_ONLY_ACCOUNT",
 	"UNAUTHORIZED",
-];
-export type code401 = (typeof validCode401)[number];
+] as const;
 
-export const Error401Schema = z.object({
-	statusCode: z.literal(401),
-	error: z.string(),
-	message: z.string(),
-	code: z.enum(validCode401),
-});
+export const authCode401 = [
+	"INVALID_CREDENTIALS",
+	"INTRA_ONLY_ACCOUNT",
+] as const;
+
+export const code401 = [...baseCode401, ...authCode401] as const;
+
+export type BaseCode401 = (typeof baseCode401)[number];
+export type AuthCode401 = (typeof authCode401)[number];
+export type Code401 = (typeof code401)[number];
+
+export const error401BaseSchema = error401SchemaVariant(baseCode401);
+export const error401AuthSchema = error401SchemaVariant(authCode401);
+export const error401Schema = error401SchemaVariant(code401);

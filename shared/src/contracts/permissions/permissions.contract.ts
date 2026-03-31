@@ -1,5 +1,5 @@
 import { initContract } from "@ts-rest/core";
-import { PermissionsResponseSchema } from "./schemas/permission.schema";
+import { permissionsResponseSchema } from "./schemas/permission.schema";
 
 const c = initContract();
 
@@ -8,7 +8,7 @@ export const permissionsContract = c.router(
 		getPermissionList: {
 			method: "GET",
 			path: "/",
-			responses: { 200: PermissionsResponseSchema },
+			responses: { 200: permissionsResponseSchema },
 		},
 	},
 	{ pathPrefix: "/permissions" },
