@@ -29,7 +29,7 @@ import { join } from "path";
 					from: `42's Foyer <${process.env.SMTP_USER}>`,
 				},
 				template: {
-					dir: join(process.cwd(), "dist", "core", "mail", "templates"),
+					dir: join(__dirname, "templates"),
 					adapter: new HandlebarsAdapter(),
 					options: {
 						strict: true,

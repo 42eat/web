@@ -7,9 +7,10 @@ import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { RefreshStrategy } from "./strategies/refresh.strategy";
 import { MailModule } from "../core/mail/mail.module";
+import { TokensModule } from "../tokens/tokens.module";
 
 @Module({
-	imports: [MembersModule, SessionsModule, JwtModule, MailModule],
+	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule],
 	providers: [AuthService, JwtStrategy, RefreshStrategy],
 	controllers: [AuthController],
 	exports: [AuthService],

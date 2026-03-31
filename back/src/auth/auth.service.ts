@@ -16,6 +16,7 @@ import { Member } from "../generated/prisma/client";
 import { TooManyRequestsException } from "../core/error/to-many-request";
 import { Cron } from "@nestjs/schedule";
 import { AppForbiddenException } from "../core/error/forbidden";
+import { TokensService } from "../tokens/tokens.service";
 
 @Injectable()
 export class AuthService {
@@ -24,6 +25,7 @@ export class AuthService {
 		private readonly sessions: SessionsService,
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
+		private readonly tokensService: TokensService,
 	) {}
 
 	// Cooldown to send a new confirmation email
@@ -216,10 +218,7 @@ export class AuthService {
 			"confirm-email",
 			{
 				username: member.displayName,
-				token: await this.jwtService.signAsync(
-					{ sub: member.id },
-					{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },
-				),
+				token: await this.tokensService.createConfirmEmailToken(member.id),
 				baseUrl: process.env.BASE_URL,
 				baseFrontUrl: process.env.BASE_FRONT_URL,
 				year: new Date().getFullYear(),
@@ -231,12 +230,9 @@ export class AuthService {
 
 	public async confirmEmail(token: string) {
 		try {
-			const payload = await this.jwtService.verifyAsync<{ sub: number }>(
-				token,
-				{ secret: process.env.JWT_EMAIL_SECRET },
-			);
+			const payload = await this.tokensService.isValidToken(token, "EMAIL_VERIFICATION");
 
-			await this.members.verifyEmail(payload.sub);
+			await this.members.verifyEmail(payload.memberId);
 		} catch {
 			throw new AppUnauthorizedException(
 				"INVALID_TOKEN",
