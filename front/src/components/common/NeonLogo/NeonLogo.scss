@@ -6,7 +6,6 @@
 		stroke: var(--logo-neon-halo);
 		filter: url(#neon-diffused);
 		will-change: filter;
-		shape-rendering: optimizeSpeed;
 	}
 	.neon-center {
 		stroke-width: 0.25px;
