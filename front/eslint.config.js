@@ -14,6 +14,9 @@ export default [
 			},
 		},
 		rules: {
+			"@stylistic/indent": ["error", "tab"],
+			"@stylistic/no-tabs": "off",
+			"@stylistic/linebreak-style": ["error", "unix"],
 			"@stylistic/object-curly-newline": ["error", { "consistent": true }],
 			"@stylistic/array-bracket-newline": ["error", "consistent"],
 			"@stylistic/function-paren-newline": ["error", "consistent"],

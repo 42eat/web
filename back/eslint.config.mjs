@@ -1,7 +1,7 @@
 // @ts-check
 import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
+import stylistic from "@stylistic/eslint-plugin";
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -10,7 +10,6 @@ export default tseslint.config(
 	},
 	eslint.configs.recommended,
 	...tseslint.configs.recommendedTypeChecked,
-	eslintPluginPrettierRecommended,
 	{
 		languageOptions: {
 			globals: {
@@ -25,15 +24,21 @@ export default tseslint.config(
 		},
 	},
 	{
-
+		plugins: {
+			"@stylistic": stylistic
+		},
 		rules: {
+			"@stylistic/indent": ["error", "tab"],
+			"@stylistic/no-tabs": "off",
+			"@stylistic/linebreak-style": ["error", "unix"],
+			"@stylistic/array-bracket-newline": ["error", "consistent"],
+			"@stylistic/function-paren-newline": ["error", "consistent"],
+			"@stylistic/object-curly-newline": ["error", {
+				"consistent": true,
+			}],
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-floating-promises": "warn",
 			"@typescript-eslint/no-unsafe-argument": "warn",
-			"prettier/prettier": ["error", {
-				endOfLine: "auto",
-				useTabs: true,
-			}],
 			"@typescript-eslint/naming-convention": [
 				'error',
 				{

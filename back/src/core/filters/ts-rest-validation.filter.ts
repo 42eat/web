@@ -1,10 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
-import {
-	Code401,
-	Code403,
-	validCode401,
-	validCode403,
-} from "@42eat-web/shared";
+import { Code401, Code403, code401, code403 } from "@42eat-web/shared";
 import { Response } from "express";
 import { Prisma } from "../../generated/prisma/client";
 
@@ -95,7 +90,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		if (status === 401) {
 			const responseCode = exception?.response?.code;
 			const code: Code401 =
-				responseCode && validCode401.includes(responseCode as Code401)
+				responseCode && code401.includes(responseCode as Code401)
 					? (responseCode as Code401)
 					: "UNAUTHORIZED";
 
@@ -108,7 +103,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		} else if (status === 403) {
 			const responseCode = exception?.response?.code;
 			const code: Code403 =
-				responseCode && validCode403.includes(responseCode as Code403)
+				responseCode && code403.includes(responseCode as Code403)
 					? (responseCode as Code403)
 					: "FORBIDDEN";
 

@@ -12,5 +12,5 @@ export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleRe
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
 
-export { type Code401, validCode401 } from "./contracts/schemas/error401";
-export { type Code403, validCode403 } from "./contracts/schemas/error403";
+export { type Code401, code401 } from "./contracts/schemas/error401";
+export { type Code403, code403 } from "./contracts/schemas/error403";
