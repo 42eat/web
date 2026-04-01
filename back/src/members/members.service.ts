@@ -4,6 +4,7 @@ import { PrismaService } from "../core/prisma/prisma.service";
 import { Permission } from "@42eat-web/shared";
 import { RolesService } from "../roles/roles.service";
 import * as bcrypt from "bcrypt";
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class MembersService {
@@ -11,6 +12,16 @@ export class MembersService {
 		private readonly prisma: PrismaService,
 		private readonly roles: RolesService,
 	) {}
+
+	@Cron("0 * * * *")
+	async clearUnverifiedMembers() {
+		await this.prisma.member.deleteMany({
+			where: {
+				emailValidated: false,
+				createdAt: { lt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+			},
+		});
+	}
 
 	public async getAll(): Promise<Member[]> {
 		return this.prisma.member.findMany();
