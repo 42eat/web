@@ -160,7 +160,11 @@ export class AuthController {
 	@UseGuards(JwtAuthGuard)
 	public requestEmailReset(@CurrentMember() member: AuthMember) {
 		return tsRestHandler(authContract.requestEmailReset, async ({ body }) => {
-			await this.authService.requestEmailReset(member.id, body.newEmail);
+			await this.authService.requestEmailReset(
+				member.id,
+				body.password,
+				body.newEmail,
+			);
 			return { status: 204, body: null };
 		});
 	}

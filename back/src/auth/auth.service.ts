@@ -314,11 +314,23 @@ export class AuthService {
 		);
 	}
 
-	public async requestEmailReset(memberId: number, newEmail: string) {
+	public async requestEmailReset(
+		memberId: number,
+		password: string,
+		newEmail: string,
+	) {
 		const member = await this.members.getById(memberId);
 
-		if (!member)
+		if (!member) {
 			throw new AppForbiddenException("FORBIDDEN", "This shouldn't append");
+		}
+
+		if (
+			!member.password ||
+			!(await bcrypt.compare(password, member.password))
+		) {
+			throw new AppForbiddenException("FORBIDDEN", "Invalid password");
+		}
 
 		await this.sendChangeEmail(member, newEmail);
 	}

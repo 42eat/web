@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const requestEmailResetSchema = z.object({
+	password: z.string(),
 	newEmail: z.string().email(),
 });
 
