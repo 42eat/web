@@ -195,13 +195,11 @@ export class AuthService {
 	}
 
 	private async sendEmailValidation(member: Member) {
-		if (!member.email)
-			throw new AppForbiddenException("FORBIDDEN", "you cannot do this");
-		if (member.emailValidated)
-			throw new AppForbiddenException(
-				"FORBIDDEN",
-				"your email is already validated",
-			);
+		if (!member.email) throw new AppForbiddenException("FORBIDDEN", "you cannot do this");
+		if (member.emailValidated) throw new AppForbiddenException(
+			"FORBIDDEN",
+			"your email is already validated",
+		);
 
 		const lastSent = this.resendCooldowns.get(member.id);
 		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {

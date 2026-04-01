@@ -6,7 +6,7 @@ function error401SchemaVariant(enumArray: readonly [string, ...string[]]) {
 		error: z.string(),
 		message: z.string(),
 		code: z.enum(enumArray),
-	})
+	});
 }
 
 export const baseCode401 = [
