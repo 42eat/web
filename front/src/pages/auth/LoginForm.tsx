@@ -4,10 +4,9 @@ import TextInput from "~/components/ui/TextInput";
 import { client } from "~/api/client";
 import { createSignal, JSXElement, Show } from "solid-js";
 import { authActions } from "~/store/auth.store";
-import { LoginSchema as loginSchema } from "@42eat-web/shared";
+import { loginSchema } from "@42eat-web/shared";
 
 import "./LoginForm.scss"
-import { LoginSchema } from "@42eat-web/shared";
 
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
@@ -22,7 +21,7 @@ export default function LoginForm() {
 		e.preventDefault();
 
 		const usernameValue = username();
-		if (!LoginSchema.shape.email.safeParse(usernameValue).success) {
+		if (!loginSchema.shape.email.safeParse(usernameValue).success) {
 			return usernameInput.setCustomValidity("Please enter a valid email")
 		}
 		loginMutation.mutate({ body: { email: usernameValue, password: password() } }, {
@@ -41,9 +40,10 @@ export default function LoginForm() {
 						default:
 							setError(e.body.message);
 					}
-				} else {
+				} else if (e.status === 403) {
 					setError(e.body.message ?? "An error occured. There is nothing to do :/");
 				}
+				setError("An error occured. There is nothing to do :/");
 			}
 		})
 	};

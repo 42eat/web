@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "vite",
 		"dev": "vite",
-		"build": "vite build",
+		"build": "tsc --noEmit && vite build",
 		"serve": "vite preview",
 		"fix": "eslint --fix-dry-run --format=json {buffer_path}"
 	},
