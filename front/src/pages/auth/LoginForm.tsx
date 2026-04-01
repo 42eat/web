@@ -6,6 +6,7 @@ import { createSignal, JSXElement, Show } from "solid-js";
 import { authActions } from "~/store/auth.store";
 
 import "./LoginForm.scss"
+import { LoginSchema } from "@42eat-web/shared";
 
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
@@ -14,10 +15,16 @@ export default function LoginForm() {
 
 	const loginMutation = client.auth.login.createMutation();
 
+	let usernameInput!: HTMLInputElement;
 
 	const handleSubmit = async (e: SubmitEvent) => {
 		e.preventDefault();
-		loginMutation.mutate({ body: { email: username(), password: password() } }, {
+
+		const usernameValue = username();
+		if (!LoginSchema.shape.email.safeParse(usernameValue).success) {
+			return usernameInput.setCustomValidity("Please enter a valid email")
+		}
+		loginMutation.mutate({ body: { email: usernameValue, password: password() } }, {
 			onSuccess: (data) => {
 				authActions.login(data.body.accessToken);
 			},
@@ -42,8 +49,8 @@ export default function LoginForm() {
 
 	return <form onSubmit={handleSubmit} id="login-form">
 		<div class="login-inputs">
-			<TextInput type="email" placeholder="Email" required invalidMessage="Valid email required" value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
-			<TextInput type="password" placeholder="Password" required invalidMessage="Password required" value={password()} onInput={(e) => setPassword((e.target as HTMLInputElement).value)} />
+			<TextInput ref={usernameInput} type="number" placeholder="Email" required value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
+			<TextInput type="password" placeholder="Password" required value={password()} onInput={(e) => setPassword((e.target as HTMLInputElement).value)} />
 			<Show when={error()}>
 				<p class="invalid-message" role="alert">
 					{error()}
