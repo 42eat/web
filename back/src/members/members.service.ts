@@ -3,6 +3,7 @@ import { Member } from "../generated/prisma/client";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { Permission } from "@42eat-web/shared";
 import { RolesService } from "../roles/roles.service";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class MembersService {
@@ -33,7 +34,7 @@ export class MembersService {
 		displayName: string | null = null,
 	): Promise<Member | null> {
 		const newMember = await this.prisma.member.create({
-			data: { email, password, displayName },
+			data: { email, password: await bcrypt.hash(password, 10), displayName },
 		});
 
 		const defaultRoles = await this.roles.getDefaultRoles();
@@ -131,6 +132,13 @@ export class MembersService {
 		await this.prisma.member.update({
 			where: { id: memberId },
 			data: { emailValidated: true },
+		});
+	}
+
+	public async setPassword(memberId: number, password: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { password: await bcrypt.hash(password, 10) },
 		});
 	}
 }

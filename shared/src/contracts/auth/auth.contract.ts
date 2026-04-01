@@ -3,6 +3,7 @@ import { authResponseSchema } from "./schemas/auth-response.schema";
 import { loginSchema } from "./schemas/login.schema";
 import { registerSchema } from "./schemas/register.schema";
 import { confirmEmailSchema } from "./schemas/confirm-email.schema";
+import { changePasswordSchema, requestPasswordResetSchema, resetPasswordSchema } from "./schemas/password.schema";
 
 const c = initContract();
 
@@ -36,6 +37,24 @@ export const authContract = c.router(
 			method: "POST",
 			path: "/new-confirm-email",
 			body: null,
+			responses: { 204: null },
+		},
+		changePassword: {
+			method: "PATCH",
+			path: "/password",
+			body: changePasswordSchema,
+			responses: { 204: null },
+		},
+		requestPasswordReset: {
+			method: "POST",
+			path: "/password/request-reset",
+			body: requestPasswordResetSchema,
+			responses: { 204: null },
+		},
+		resetPassword: {
+			method: "POST",
+			path: "/password/reset",
+			body: resetPasswordSchema,
 			responses: { 204: null },
 		},
 	},

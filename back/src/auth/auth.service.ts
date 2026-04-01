@@ -13,8 +13,6 @@ import { createJwtPayload } from "./jwt.payload";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
-import { TooManyRequestsException } from "../core/error/to-many-request";
-import { Cron } from "@nestjs/schedule";
 import { AppForbiddenException } from "../core/error/forbidden";
 import { TokensService } from "../tokens/tokens.service";
 
@@ -28,18 +26,19 @@ export class AuthService {
 		private readonly tokensService: TokensService,
 	) {}
 
-	// Cooldown to send a new confirmation email
-	private resendCooldowns = new Map<number, Date>();
+	// This will be replaced by nodejs throttler
+	// // Cooldown to send a new confirmation email
+	// private resendCooldowns = new Map<number, Date>();
 
-	@Cron("0 * * * *")
-	private cleanupOldCooldowns() {
-		const now = Date.now();
-		for (const [memberId, date] of this.resendCooldowns.entries()) {
-			if (now - date.getTime() > 2 * 60 * 1000) {
-				this.resendCooldowns.delete(memberId);
-			}
-		}
-	}
+	// @Cron("0 * * * *")
+	// private cleanupOldCooldowns() {
+	// 	const now = Date.now();
+	// 	for (const [memberId, date] of this.resendCooldowns.entries()) {
+	// 		if (now - date.getTime() > 2 * 60 * 1000) {
+	// 			this.resendCooldowns.delete(memberId);
+	// 		}
+	// 	}
+	// }
 
 	public async register(
 		dto: RegisterDto,
@@ -52,11 +51,9 @@ export class AuthService {
 			throw new ConflictException("Email alredy used");
 		}
 
-		const hashedPassword = await bcrypt.hash(dto.password, 10);
-
 		const insertedUser = await this.members.create(
 			dto.email,
-			hashedPassword,
+			dto.password,
 			dto.displayName,
 		);
 
@@ -197,20 +194,11 @@ export class AuthService {
 	}
 
 	private async sendEmailValidation(member: Member) {
-		if (!member.email)
-			throw new AppForbiddenException("FORBIDDEN", "you cannot do this");
 		if (member.emailValidated)
 			throw new AppForbiddenException(
 				"FORBIDDEN",
 				"your email is already validated",
 			);
-
-		const lastSent = this.resendCooldowns.get(member.id);
-		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {
-			throw new TooManyRequestsException(
-				"Please wait before requesting a new email",
-			);
-		}
 
 		await this.mailService.sendEmail(
 			[member.email],
@@ -219,30 +207,82 @@ export class AuthService {
 			{
 				username: member.displayName,
 				token: await this.tokensService.createConfirmEmailToken(member.id),
-				baseUrl: process.env.BASE_URL,
 				baseFrontUrl: process.env.BASE_FRONT_URL,
 				year: new Date().getFullYear(),
 			},
 		);
-
-		this.resendCooldowns.set(member.id, new Date());
 	}
 
 	public async confirmEmail(token: string) {
-		try {
-			const payload = await this.tokensService.isValidToken(token, "EMAIL_VERIFICATION");
+		const payload = await this.tokensService.isValidToken(
+			token,
+			"EMAIL_VERIFICATION",
+		);
 
-			await this.members.verifyEmail(payload.memberId);
-		} catch {
-			throw new AppUnauthorizedException(
-				"INVALID_TOKEN",
-				"Invalid or expired token",
-			);
-		}
+		await this.members.verifyEmail(payload.memberId);
 	}
 
 	public async askNewConfirmationEmail(memberId: number) {
 		const member = await this.members.getById(memberId);
 		await this.sendEmailValidation(member);
+	}
+
+	private async sendResetPasswordEmail(member: Member) {
+		await this.mailService.sendEmail(
+			[member.email],
+			"Reset your password - 42's Foyer",
+			"reset-password",
+			{
+				token: await this.tokensService.createResetPasswordToken(member.id),
+				baseFrontUrl: process.env.BASE_FRONT_URL,
+				year: new Date().getFullYear(),
+			},
+		);
+	}
+
+	public async requestPasswordReset(email: string) {
+		const member = await this.members.getByEmail(email);
+
+		// Pas d'erreur pour eviter que quelqu'un puisse sonder les email en db
+		if (member) {
+			await this.sendResetPasswordEmail(member);
+		}
+	}
+
+	public async resetPassword(token: string, password: string) {
+		const payload = await this.tokensService.isValidToken(
+			token,
+			"PASSWORD_RESET",
+		);
+
+		await this.members.setPassword(payload.memberId, password);
+	}
+
+	public async changePassword(
+		memberId: number,
+		oldPassword: string,
+		newPassword: string,
+	) {
+		const existing = await this.members.getById(memberId);
+		if (!existing) {
+			throw new AppForbiddenException(
+				"FORBIDDEN",
+				"You shouln't have an error unless your account have been deleted or something like that",
+			);
+		}
+
+		if (!existing.password) {
+			throw new AppForbiddenException(
+				"FORBIDDEN",
+				"You shouln't be able to call this route with an intra only account",
+			);
+		}
+
+		if (!(await bcrypt.compare(oldPassword, existing.password))) {
+			// Seule erreur a gerer coté front car les autres ne devraient pas pouvoir arriver
+			throw new AppForbiddenException("FORBIDDEN", "Invalid password");
+		}
+
+		await this.members.setPassword(memberId, newPassword);
 	}
 }

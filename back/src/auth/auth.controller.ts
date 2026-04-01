@@ -8,7 +8,10 @@ import {
 } from "../core/decorators/current-member.decorator";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { authContract } from "@42eat-web/shared";
-import { JwtAuthGuardWithoutEmailVerif } from "../core/guards/jwt-auth.guard";
+import {
+	JwtAuthGuard,
+	JwtAuthGuardWithoutEmailVerif,
+} from "../core/guards/jwt-auth.guard";
 
 @Controller()
 export class AuthController {
@@ -96,6 +99,38 @@ export class AuthController {
 	public askNewConfirmationEmail(@CurrentMember() member: AuthMember) {
 		return tsRestHandler(authContract.askNewConfirmationEmail, async () => {
 			await this.authService.askNewConfirmationEmail(member.id);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.changePassword)
+	@UseGuards(JwtAuthGuard)
+	public changePassword(@CurrentMember() member: AuthMember) {
+		return tsRestHandler(authContract.changePassword, async ({ body }) => {
+			await this.authService.changePassword(
+				member.id,
+				body.oldPassword,
+				body.newPassword,
+			);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.requestPasswordReset)
+	public requestPasswordReset() {
+		return tsRestHandler(
+			authContract.requestPasswordReset,
+			async ({ body }) => {
+				await this.authService.requestPasswordReset(body.email);
+				return { status: 204, body: null };
+			},
+		);
+	}
+
+	@TsRestHandler(authContract.resetPassword)
+	public resetPassword() {
+		return tsRestHandler(authContract.resetPassword, async ({ body }) => {
+			await this.authService.resetPassword(body.token, body.newPassword);
 			return { status: 204, body: null };
 		});
 	}
