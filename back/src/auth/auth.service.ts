@@ -24,7 +24,7 @@ export class AuthService {
 		private readonly sessions: SessionsService,
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
-	) {}
+	) { }
 
 	// Cooldown to send a new confirmation email
 	private resendCooldowns = new Map<number, Date>();
@@ -196,10 +196,7 @@ export class AuthService {
 
 	private async sendEmailValidation(member: Member) {
 		if (!member.email) throw new AppForbiddenException("FORBIDDEN", "you cannot do this");
-		if (member.emailValidated) throw new AppForbiddenException(
-			"FORBIDDEN",
-			"your email is already validated",
-		);
+		if (member.emailValidated) throw new AppForbiddenException("FORBIDDEN", "your email is already validated");
 
 		const lastSent = this.resendCooldowns.get(member.id);
 		if (lastSent && Date.now() - lastSent.getTime() < 60_000) {
@@ -208,21 +205,16 @@ export class AuthService {
 			);
 		}
 
-		await this.mailService.sendEmail(
-			[member.email],
-			"Confirm your email - 42's Foyer",
-			"confirm-email",
-			{
-				username: member.displayName,
-				token: await this.jwtService.signAsync(
-					{ sub: member.id },
-					{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },
-				),
-				baseUrl: process.env.BASE_URL,
-				baseFrontUrl: process.env.BASE_FRONT_URL,
-				year: new Date().getFullYear(),
-			},
-		);
+		await this.mailService.sendEmail([member.email], "Confirm your email - 42's Foyer", "confirm-email", {
+			username: member.displayName,
+			token: await this.jwtService.signAsync(
+				{ sub: member.id },
+				{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },
+			),
+			baseUrl: process.env.BASE_URL,
+			baseFrontUrl: process.env.BASE_FRONT_URL,
+			year: new Date().getFullYear(),
+		});
 
 		this.resendCooldowns.set(member.id, new Date());
 	}
