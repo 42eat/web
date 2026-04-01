@@ -49,7 +49,7 @@ export default function LoginForm() {
 
 	return <form onSubmit={handleSubmit} id="login-form">
 		<div class="login-inputs">
-			<TextInput ref={usernameInput} type="number" placeholder="Email" required value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
+			<TextInput ref={usernameInput} type="email" placeholder="Email" required value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
 			<TextInput type="password" placeholder="Password" required value={password()} onInput={(e) => setPassword((e.target as HTMLInputElement).value)} />
 			<Show when={error()}>
 				<p class="invalid-message" role="alert">
