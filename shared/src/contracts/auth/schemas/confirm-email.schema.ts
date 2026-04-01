@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const ConfirmEmailSchema = z.object({
+export const confirmEmailSchema = z.object({
 	token: z.string(),
 });
 
-export type ConfirmEmailDto = z.infer<typeof ConfirmEmailSchema>;
+export type ConfirmEmailDto = z.infer<typeof confirmEmailSchema>;

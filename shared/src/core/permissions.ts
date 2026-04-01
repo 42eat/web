@@ -28,6 +28,4 @@ type PermissionValues<T> = T extends object
 
 export type Permission = PermissionValues<typeof PERMISSIONS>;
 
-export const permissionValues = Object.values(PERMISSIONS).flatMap((group) =>
-	Object.values(group),
-) as [Permission, ...Permission[]];
+export const permissionValues = Object.values(PERMISSIONS).flatMap((group) => Object.values(group)) as [Permission, ...Permission[]];

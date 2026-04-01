@@ -4,6 +4,7 @@ import TextInput from "~/components/ui/TextInput";
 import { client } from "~/api/client";
 import { createSignal, JSXElement, Show } from "solid-js";
 import { authActions } from "~/store/auth.store";
+import { LoginSchema as loginSchema } from "@42eat-web/shared";
 
 import "./LoginForm.scss"
 import { LoginSchema } from "@42eat-web/shared";
@@ -38,10 +39,10 @@ export default function LoginForm() {
 							setError("Invalid credential combination");
 							break;
 						default:
-							setError("An error occured. There is nothing to do :/");
+							setError(e.body.message);
 					}
 				} else {
-					setError("An error occured. There is nothing to do :/");
+					setError(e.body.message ?? "An error occured. There is nothing to do :/");
 				}
 			}
 		})

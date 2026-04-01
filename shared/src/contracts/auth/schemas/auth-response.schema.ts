@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const AuthResponseSchema = z.object({
+export const authResponseSchema = z.object({
 	accessToken: z.string(),
 });
 
-export type AuthResponse = z.infer<typeof AuthResponseSchema>;
+export type AuthResponse = z.infer<typeof authResponseSchema>;

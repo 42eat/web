@@ -5,10 +5,10 @@ import { PERMISSIONS } from "@42eat-web/shared";
 import { RolesService } from "./roles.service";
 import {
 	rolesContract,
-	RoleMembersResponseSchema,
-	RoleResponseSchema,
-	RolesListDetailedResponseSchema,
-	RolesListResponseSchema,
+	roleMembersResponseSchema,
+	roleResponseSchema,
+	rolesListDetailedResponseSchema,
+	rolesListResponseSchema,
 } from "@42eat-web/shared";
 
 @Controller()
@@ -58,7 +58,7 @@ export class RolesController {
 			const roles = await this.rolesService.getRolesDetailed();
 			return {
 				status: 200,
-				body: RolesListDetailedResponseSchema.parse(roles),
+				body: rolesListDetailedResponseSchema.parse(roles),
 			};
 		});
 	}
@@ -68,7 +68,7 @@ export class RolesController {
 	public getRole() {
 		return tsRestHandler(rolesContract.getRole, async ({ params }) => {
 			const role = await this.rolesService.getRole(params.id);
-			return { status: 200, body: RoleResponseSchema.parse(role) };
+			return { status: 200, body: roleResponseSchema.parse(role) };
 		});
 	}
 
@@ -77,7 +77,7 @@ export class RolesController {
 	public getRoles() {
 		return tsRestHandler(rolesContract.listRoles, async () => {
 			const roles = await this.rolesService.getRoles();
-			return { status: 200, body: RolesListResponseSchema.parse(roles) };
+			return { status: 200, body: rolesListResponseSchema.parse(roles) };
 		});
 	}
 
@@ -88,7 +88,7 @@ export class RolesController {
 			const roles = await this.rolesService.getRoleMembers(params.id);
 			return {
 				status: 200,
-				body: RoleMembersResponseSchema.parse(roles),
+				body: roleMembersResponseSchema.parse(roles),
 			};
 		});
 	}

@@ -15,6 +15,6 @@ const toZodObject = <T extends Record<string, Record<string, string>>>(
 		),
 	);
 
-export const PermissionsResponseSchema = toZodObject(PERMISSIONS);
+export const permissionsResponseSchema = toZodObject(PERMISSIONS);
 
-export type PermissionsResponse = z.infer<typeof PermissionsResponseSchema>;
+export type PermissionsResponse = z.infer<typeof permissionsResponseSchema>;
