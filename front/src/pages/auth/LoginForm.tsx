@@ -6,7 +6,7 @@ import { createSignal, JSXElement, Show } from "solid-js";
 import { authActions } from "~/store/auth.store";
 import { loginSchema } from "@42eat-web/shared";
 
-import "./LoginForm.scss"
+import "./LoginForm.scss";
 
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
@@ -17,12 +17,12 @@ export default function LoginForm() {
 
 	let usernameInput!: HTMLInputElement;
 
-	const handleSubmit = async (e: SubmitEvent) => {
+	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
 
 		const usernameValue = username();
 		if (!loginSchema.shape.email.safeParse(usernameValue).success) {
-			return usernameInput.setCustomValidity("Please enter a valid email")
+			return usernameInput.setCustomValidity("Please enter a valid email");
 		}
 		loginMutation.mutate({ body: { email: usernameValue, password: password() } }, {
 			onSuccess: (data) => {
@@ -44,8 +44,8 @@ export default function LoginForm() {
 					setError(e.body.message ?? "An error occured. There is nothing to do :/");
 				}
 				setError("An error occured. There is nothing to do :/");
-			}
-		})
+			},
+		});
 	};
 
 	return <form onSubmit={handleSubmit} id="login-form">
@@ -68,5 +68,5 @@ export default function LoginForm() {
 			<hr />
 		</div>
 		<Button class="ft-login-button" onClick={console.log}>Login with <p>42</p> Intra</Button>
-	</form>
+	</form>;
 }

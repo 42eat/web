@@ -1,15 +1,15 @@
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
-import devtools from 'solid-devtools/vite';
-import solidSvg from "vite-plugin-solid-svg"
+import { defineConfig } from "vite";
+import solidPlugin from "vite-plugin-solid";
+import devtools from "solid-devtools/vite";
+import solidSvg from "vite-plugin-solid-svg";
 import path from "path";
 
 export default defineConfig({
 	plugins: [devtools(), solidPlugin(), solidSvg()],
 	resolve: {
 		alias: {
-			"~": path.resolve(__dirname, "src")
-		}
+			"~": path.resolve(__dirname, "src"),
+		},
 	},
 	server: {
 		port: 3000,
@@ -17,11 +17,11 @@ export default defineConfig({
 			"/api": {
 				target: "http://localhost:3001",
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, "")
-			}
-		}
+				rewrite: (path) => path.replace(/^\/api/, ""),
+			},
+		},
 	},
 	build: {
-		target: 'esnext',
+		target: "esnext",
 	},
 });

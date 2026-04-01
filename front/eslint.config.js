@@ -2,6 +2,7 @@ import globals from "globals"
 import tseslint from "typescript-eslint";
 import stylistic from "@stylistic/eslint-plugin"
 import { localPlugin } from "@42eat-web/shared/eslint-plugin";
+import solid from "eslint-plugin-solid"
 import eslint from "@eslint/js"
 
 export default tseslint.config(
@@ -19,13 +20,14 @@ export default tseslint.config(
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
-	// },
-	// {
 		plugins: {
 			"@stylistic": stylistic,
-			"local": localPlugin
+			"local": localPlugin,
+			// solid
 		},
+		extends: [solid.configs["flat/typescript"]],
 		rules: {
+			"no-unassigned-vars": "off",
 			"@stylistic/indent": ["error", "tab"],
 			"@stylistic/indent-binary-ops": ["error", "tab"],
 			"@stylistic/no-tabs": "off",
