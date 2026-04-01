@@ -5,6 +5,13 @@ import { TokenPurpose } from "../generated/prisma/enums";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { Cron } from "@nestjs/schedule";
 
+export type TokenCreationParam<T extends TokenPurpose> = T extends "EMAIL_RESET"
+	? {
+			memberId: number;
+			data: { newEmail: string };
+		}
+	: { memberId: number };
+
 @Injectable()
 export class TokensService {
 	constructor(private readonly prisma: PrismaService) {}
@@ -46,7 +53,10 @@ export class TokensService {
 		return token;
 	}
 
-	public async isValidToken(tokenStr: string, purpose: TokenPurpose) {
+	public async isValidToken<T extends TokenPurpose>(
+		tokenStr: string,
+		purpose: T,
+	): Promise<TokenCreationParam<T>> {
 		const token = await this.prisma.token.findUnique({
 			where: { token: tokenStr },
 		});
@@ -59,7 +69,11 @@ export class TokensService {
 				"Invalid ou expired token",
 			);
 		}
-
-		return { memberId: token.memberId, data: token.data };
+		if (purpose === "EMAIL_RESET")
+			return {
+				memberId: token.memberId,
+				data: token.data,
+			} as TokenCreationParam<"EMAIL_RESET">;
+		return { memberId: token.memberId } as TokenCreationParam<typeof purpose>;
 	}
 }

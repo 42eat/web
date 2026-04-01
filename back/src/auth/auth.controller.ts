@@ -17,6 +17,27 @@ import {
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
+	private setRefreshTokenCookie(res: Response, token: string | null) {
+		const isProd = process.env.NODE_ENV === "prod";
+
+		const options = {
+			httpOnly: true,
+			secure: isProd,
+			sameSite: "strict" as const,
+			path: "/",
+		};
+
+		if (!token) {
+			res.cookie("refresh_token", "", { ...options, expires: new Date(0) });
+			return;
+		}
+
+		res.cookie("refresh_token", token, {
+			...options,
+			maxAge: 1000 * 60 * 60 * 24 * 7,
+		});
+	}
+
 	@TsRestHandler(authContract.register)
 	public register(
 		@Req() req: Request,
@@ -29,12 +50,7 @@ export class AuthController {
 				req.ip,
 			);
 
-			res.cookie("refresh_token", refreshToken, {
-				httpOnly: true,
-				secure: process.env.NODE_ENV == "prod",
-				sameSite: "strict",
-				maxAge: 7 * 24 * 60 * 60 * 1000,
-			});
+			this.setRefreshTokenCookie(res, refreshToken);
 
 			return { status: 200, body: { accessToken } };
 		});
@@ -49,14 +65,24 @@ export class AuthController {
 				req.ip,
 			);
 
-			res.cookie("refresh_token", refreshToken, {
-				httpOnly: true,
-				secure: process.env.NODE_ENV == "prod",
-				sameSite: "strict",
-				maxAge: 7 * 24 * 60 * 60 * 1000,
-			});
+			this.setRefreshTokenCookie(res, refreshToken);
 
 			return { status: 200, body: { accessToken } };
+		});
+	}
+
+	@TsRestHandler(authContract.logout)
+	@UseGuards(JwtAuthRefreshGuard)
+	public logout(
+		@CurrentMember() member: AuthMember,
+		@Res({ passthrough: true }) res: Response,
+	) {
+		return tsRestHandler(authContract.logout, async () => {
+			await this.authService.logout(member.id, member.refreshToken);
+
+			this.setRefreshTokenCookie(res, null);
+
+			return { status: 204, body: null };
 		});
 	}
 
@@ -75,12 +101,7 @@ export class AuthController {
 				req.ip,
 			);
 
-			res.cookie("refresh_token", refreshToken, {
-				httpOnly: true,
-				secure: process.env.NODE_ENV == "prod",
-				sameSite: "strict",
-				maxAge: 7 * 24 * 60 * 60 * 1000,
-			});
+			this.setRefreshTokenCookie(res, refreshToken);
 
 			return { status: 200, body: { accessToken } };
 		});
@@ -131,6 +152,23 @@ export class AuthController {
 	public resetPassword() {
 		return tsRestHandler(authContract.resetPassword, async ({ body }) => {
 			await this.authService.resetPassword(body.token, body.newPassword);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.requestEmailReset)
+	@UseGuards(JwtAuthGuard)
+	public requestEmailReset(@CurrentMember() member: AuthMember) {
+		return tsRestHandler(authContract.requestEmailReset, async ({ body }) => {
+			await this.authService.requestEmailReset(member.id, body.newEmail);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.resetEmail)
+	public resetEmail() {
+		return tsRestHandler(authContract.resetEmail, async ({ body }) => {
+			await this.authService.resetEmail(body.token);
 			return { status: 204, body: null };
 		});
 	}

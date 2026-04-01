@@ -285,4 +285,46 @@ export class AuthService {
 
 		await this.members.setPassword(memberId, newPassword);
 	}
+
+	public async logout(memberId: number, refreshToken: string | undefined) {
+		const allSessions = await this.sessions.getMemberSessions(memberId);
+
+		if (!refreshToken) return;
+
+		for (const session of allSessions) {
+			if (await bcrypt.compare(refreshToken, session.refreshToken)) {
+				await this.sessions.removeSession(session.id);
+			}
+		}
+	}
+
+	private async sendChangeEmail(member: Member, newEmail: string) {
+		await this.mailService.sendEmail(
+			[member.email],
+			"Change your email - 42's Foyer",
+			"reset-email",
+			{
+				token: await this.tokensService.createResetEmailToken(
+					member.id,
+					newEmail,
+				),
+				baseFrontUrl: process.env.BASE_FRONT_URL,
+				year: new Date().getFullYear(),
+			},
+		);
+	}
+
+	public async requestEmailReset(memberId: number, newEmail: string) {
+		const member = await this.members.getById(memberId);
+
+		if (!member)
+			throw new AppForbiddenException("FORBIDDEN", "This shouldn't append");
+
+		await this.sendChangeEmail(member, newEmail);
+	}
+
+	public async resetEmail(token: string) {
+		const payload = await this.tokensService.isValidToken(token, "EMAIL_RESET");
+		await this.members.setEmail(payload.memberId, payload.data.newEmail);
+	}
 }

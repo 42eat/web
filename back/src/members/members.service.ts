@@ -141,4 +141,10 @@ export class MembersService {
 			data: { password: await bcrypt.hash(password, 10) },
 		});
 	}
+	public async setEmail(memberId: number, email: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { email },
+		});
+	}
 }
