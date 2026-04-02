@@ -24,7 +24,7 @@ export class AuthService {
 		private readonly sessions: SessionsService,
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
-	) { }
+	) {}
 
 	// Cooldown to send a new confirmation email
 	private resendCooldowns = new Map<number, Date>();

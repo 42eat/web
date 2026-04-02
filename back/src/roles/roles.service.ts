@@ -5,7 +5,7 @@ import { AppForbiddenException } from "../core/error/forbidden";
 
 @Injectable()
 export class RolesService {
-	constructor(private readonly prisma: PrismaService) { }
+	constructor(private readonly prisma: PrismaService) {}
 
 	public async createRole(
 		name: string,
