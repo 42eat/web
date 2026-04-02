@@ -7,9 +7,9 @@ import { Cron } from "@nestjs/schedule";
 
 export type TokenCreationParam<T extends TokenPurpose> = T extends "EMAIL_RESET"
 	? {
-			memberId: number;
-			data: { newEmail: string };
-		}
+		memberId: number;
+		data: { newEmail: string };
+	}
 	: { memberId: number };
 
 @Injectable()
@@ -69,11 +69,12 @@ export class TokensService {
 				"Invalid ou expired token",
 			);
 		}
-		if (purpose === "EMAIL_RESET")
+		if (purpose === "EMAIL_RESET") {
 			return {
 				memberId: token.memberId,
 				data: token.data,
 			} as TokenCreationParam<"EMAIL_RESET">;
+		}
 		return { memberId: token.memberId } as TokenCreationParam<typeof purpose>;
 	}
 }

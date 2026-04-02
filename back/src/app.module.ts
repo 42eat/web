@@ -9,8 +9,8 @@ import { PermissionGuard } from "./core/guards/permission.guard";
 import { RolesModule } from "./roles/roles.module";
 import { PermissionsModule } from "./permissions/permissions.module";
 import { MailModule } from "./core/mail/mail.module";
-import { TokensService } from './tokens/tokens.service';
-import { TokensModule } from './tokens/tokens.module';
+import { TokensService } from "./tokens/tokens.service";
+import { TokensModule } from "./tokens/tokens.module";
 
 @Module({
 	providers: [

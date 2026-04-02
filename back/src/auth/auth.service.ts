@@ -58,9 +58,7 @@ export class AuthService {
 		);
 
 		if (!insertedUser) {
-			throw new InternalServerErrorException(
-				"An error occured while creating the user",
-			);
+			throw new InternalServerErrorException("An error occured while creating the user");
 		}
 
 		await this.sendEmailValidation(insertedUser);
@@ -90,10 +88,7 @@ export class AuthService {
 		}
 
 		if (!existing.password) {
-			throw new AppUnauthorizedException(
-				"INTRA_ONLY_ACCOUNT",
-				"This email is related to an intra login only",
-			);
+			throw new AppUnauthorizedException("INTRA_ONLY_ACCOUNT", "This email is related to an intra login only");
 		}
 
 		const isValidPassword = await bcrypt.compare(
@@ -102,10 +97,7 @@ export class AuthService {
 		);
 
 		if (!isValidPassword) {
-			throw new AppUnauthorizedException(
-				"INVALID_CREDENTIALS",
-				"Invalid credentials",
-			);
+			throw new AppUnauthorizedException("INVALID_CREDENTIALS", "Invalid credentials");
 		}
 
 		return {
@@ -147,10 +139,7 @@ export class AuthService {
 				};
 			}
 		}
-		throw new AppUnauthorizedException(
-			"INVALID_REFRESH_TOKEN",
-			"Invalid refresh token",
-		);
+		throw new AppUnauthorizedException("INVALID_REFRESH_TOKEN", "Invalid refresh token");
 	}
 
 	private async generateAccessToken(memberId: number) {
@@ -185,9 +174,7 @@ export class AuthService {
 				ipAddress ?? "unknown",
 			))
 		) {
-			throw new InternalServerErrorException(
-				"An error occured while creating the session",
-			);
+			throw new InternalServerErrorException("An error occured while creating the session");
 		}
 
 		return token;
@@ -321,10 +308,7 @@ export class AuthService {
 			throw new AppForbiddenException("FORBIDDEN", "This shouldn't append");
 		}
 
-		if (
-			!member.password ||
-			!(await bcrypt.compare(password, member.password))
-		) {
+		if (!member.password || !(await bcrypt.compare(password, member.password))) {
 			throw new AppForbiddenException("FORBIDDEN", "Invalid password");
 		}
 
