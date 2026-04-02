@@ -1,13 +1,13 @@
 import { createSignal, JSX, Show, splitProps, createUniqueId } from "solid-js";
 
-import "./TextInput.scss"
+import "./TextInput.scss";
 
 type TextInputProps = Omit<JSX.IntrinsicElements["input"], "onInvalid" | "onInput" | "type"> & {
-	type?: "text" | "email" | "password" | "tel" | "url" | "search"
-	invalid?: boolean,
-	onInvalid?: ((event: Event) => void),
-	onInput?: ((event: Event) => void),
-}
+	type?: "text" | "email" | "password" | "tel" | "url" | "search";
+	invalid?: boolean;
+	onInvalid?: ((event: Event) => void);
+	onInput?: ((event: Event) => void);
+};
 
 type InvalidHandler = JSX.EventHandlerUnion<HTMLInputElement, Event, JSX.EventHandler<HTMLInputElement, Event>>;
 type InputHandler = JSX.EventHandlerUnion<HTMLInputElement, InputEvent>;
@@ -39,23 +39,25 @@ export default function TextInput(props: TextInputProps) {
 		input.setCustomValidity("");
 
 		if (event.defaultPrevented) return;
-		event.preventDefault()
-	}
+		event.preventDefault();
+	};
 
 	const handleInput: InputHandler = (event) => {
 		if (local.onInput) local.onInput(event);
 		if (event.defaultPrevented) return;
 		setInvalidMessage("");
-	}
+	};
 
-	const isInvalid = () => !!invalidMessage()
+	const isInvalid = () => !!invalidMessage();
 
 	return <div class={`text-input ${local.class ?? ""}`}>
-		<input onInvalid={handleInvalid} onInput={handleInput} aria-invalid={isInvalid()} aria-describedby={isInvalid() ? ariaMessageId : undefined} {...rest} />
+		<input onInvalid={handleInvalid} onInput={handleInput} aria-invalid={isInvalid()} aria-describedby={isInvalid()
+			? ariaMessageId
+			: undefined} {...rest} />
 		<Show when={isInvalid()}>
 			<p class="invalid-message" id={ariaMessageId}>
 				{invalidMessage()}
 			</p>
 		</Show>
-	</div>
+	</div>;
 }
