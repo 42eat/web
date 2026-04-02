@@ -3,6 +3,8 @@ import { Member } from "../generated/prisma/client";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { Permission } from "@42eat-web/shared";
 import { RolesService } from "../roles/roles.service";
+import * as bcrypt from "bcrypt";
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class MembersService {
@@ -10,6 +12,16 @@ export class MembersService {
 		private readonly prisma: PrismaService,
 		private readonly roles: RolesService,
 	) {}
+
+	@Cron("0 * * * *")
+	async clearUnverifiedMembers() {
+		await this.prisma.member.deleteMany({
+			where: {
+				emailValidated: false,
+				createdAt: { lt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+			},
+		});
+	}
 
 	public async getAll(): Promise<Member[]> {
 		return this.prisma.member.findMany();
@@ -33,7 +45,7 @@ export class MembersService {
 		displayName: string | null = null,
 	): Promise<Member | null> {
 		const newMember = await this.prisma.member.create({
-			data: { email, password, displayName },
+			data: { email, password: await bcrypt.hash(password, 10), displayName },
 		});
 
 		const defaultRoles = await this.roles.getDefaultRoles();
@@ -131,6 +143,20 @@ export class MembersService {
 		await this.prisma.member.update({
 			where: { id: memberId },
 			data: { emailValidated: true },
+		});
+	}
+
+	public async setPassword(memberId: number, password: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { password: await bcrypt.hash(password, 10) },
+		});
+	}
+
+	public async setEmail(memberId: number, email: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { email },
 		});
 	}
 }

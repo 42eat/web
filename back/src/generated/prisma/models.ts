@@ -10,6 +10,7 @@
  */
 export type * from './models/Member'
 export type * from './models/Session'
+export type * from './models/Token'
 export type * from './models/Adhesion'
 export type * from './models/Role'
 export type * from './models/RolePermission'

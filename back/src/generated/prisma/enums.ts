@@ -9,7 +9,10 @@
 * 🟢 You can import this file directly.
 */
 
+export const TokenPurpose = {
+  EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
+  EMAIL_RESET: 'EMAIL_RESET',
+  PASSWORD_RESET: 'PASSWORD_RESET'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type TokenPurpose = (typeof TokenPurpose)[keyof typeof TokenPurpose]

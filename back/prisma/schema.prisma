@@ -31,6 +31,7 @@ model Member {
   expenseTrips           ExpenseTrip[]
   memberBattlepassRewards MemberBattlepassReward[]
   sessions               Session[]
+  tokens                 Token[]
 
   @@map("members")
 }
@@ -47,6 +48,26 @@ model Session {
   member Member @relation(fields: [memberId], references: [id])
 
   @@map("sessions")
+}
+
+enum TokenPurpose {
+  EMAIL_VERIFICATION
+  EMAIL_RESET
+  PASSWORD_RESET
+}
+
+model Token {
+  id        Int       @id @default(autoincrement())
+  token     String    @unique
+  purpose   TokenPurpose
+  memberId  Int       @map("member_id")
+  data      Json?
+  expiresAt DateTime  @map("expires_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  member    Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@map("tokens")
 }
 
 model Adhesion {

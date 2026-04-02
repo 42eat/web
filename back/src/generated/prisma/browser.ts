@@ -28,6 +28,11 @@ export type Member = Prisma.MemberModel
  */
 export type Session = Prisma.SessionModel
 /**
+ * Model Token
+ * 
+ */
+export type Token = Prisma.TokenModel
+/**
  * Model Adhesion
  * 
  */

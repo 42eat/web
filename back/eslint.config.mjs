@@ -6,7 +6,7 @@ import { localPlugin } from "@42eat-web/shared/eslint-plugin";
 
 export default tseslint.config(
 	{
-		ignores: ["eslint.config.mjs"]
+		ignores: ["eslint.config.mjs", "dist", "src/generated"]
 	},
 	eslint.configs.recommended,
 	...tseslint.configs.recommendedTypeChecked,
