@@ -11,12 +11,17 @@ import { PermissionsModule } from "./permissions/permissions.module";
 import { MailModule } from "./core/mail/mail.module";
 import { TokensService } from "./tokens/tokens.service";
 import { TokensModule } from "./tokens/tokens.module";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 
 @Module({
 	providers: [
 		{
 			provide: APP_GUARD,
 			useClass: PermissionGuard,
+		},
+		{
+			provide: APP_GUARD,
+			useClass: ThrottlerGuard,
 		},
 		TokensService,
 	],
@@ -30,6 +35,9 @@ import { TokensModule } from "./tokens/tokens.module";
 		MailModule,
 		ScheduleModule.forRoot(),
 		TokensModule,
+		ThrottlerModule.forRoot({
+			throttlers: [{ ttl: 60000, limit: 100 }],
+		}),
 	],
 })
 export class AppModule {}

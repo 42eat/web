@@ -22,7 +22,6 @@ export class TsRestValidationFilter implements ExceptionFilter {
 	catch(exception: TsRestException, host: ArgumentsHost) {
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
-		console.log(response.constructor.name);
 
 		// Format prisma errors
 		if (exception instanceof Prisma.PrismaClientKnownRequestError) {
@@ -116,7 +115,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		// Just return the error if it was something else
 		return response.status(status).json({
 			statusCode: status,
-			error: exception?.response?.error ?? "Internal Server Error",
+			error: exception?.response?.error ?? "",
 			message: exception?.response?.message
 				?? exception?.message
 				?? "Internal Server Error",
