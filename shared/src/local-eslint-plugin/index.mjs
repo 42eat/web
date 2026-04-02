@@ -5,10 +5,12 @@ compatible with TS just for this. However if the plugin grow (which I doubt a lo
 it may be interesting to consider to change this.
 */
 
-import { objectNewlineKeyValue } from "./rules/object-newline-key-value/index.mjs";
+import { blockSpacingBetterRule } from "./rules/block-spacing-better/index.mjs";
+import { objectNewlineKeyValueRule } from "./rules/object-newline-key-value/index.mjs";
 
 export const localPlugin = {
 	rules: {
-		"object-newline-key-value": objectNewlineKeyValue
+		"object-newline-key-value": objectNewlineKeyValueRule,
+		"block-spacing-better": blockSpacingBetterRule
 	}
 }

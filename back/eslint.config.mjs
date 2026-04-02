@@ -33,6 +33,7 @@ export default tseslint.config(
 			"local": localPlugin,
 		},
 		rules: {
+			"no-empty": ["error", { allowEmptyCatch: true }],
 			"@stylistic/indent": ["error", "tab"],
 			"@stylistic/indent-binary-ops": ["error", "tab"],
 			"@stylistic/no-tabs": "off",
@@ -54,10 +55,11 @@ export default tseslint.config(
 			}],
 			"@stylistic/nonblock-statement-body-position": ["error", "beside"],
 			"@stylistic/space-before-blocks": "error",
-			"@stylistic/brace-style": "error",
+			"@stylistic/brace-style": ["error", "1tbs", { allowSingleLine: true }],
 			"@stylistic/arrow-parens": ["error", "always"],
 			"@stylistic/arrow-spacing": "error",
-			"@stylistic/block-spacing": "error",
+			"@stylistic/block-spacing": "off",
+			"local/block-spacing-better": "error",
 			"@stylistic/implicit-arrow-linebreak": ["error", "beside"],
 
 			"@stylistic/comma-dangle": ["error", "always-multiline"],
@@ -88,7 +90,7 @@ export default tseslint.config(
 			"@stylistic/no-multi-spaces": "error",
 			"@stylistic/no-multiple-empty-lines": ["error", { max: 2 }],
 			"@stylistic/no-trailing-spaces": "error",
-			"@stylistic/max-statements-per-line": ["error", { max: 1 }],
+			"@stylistic/max-statements-per-line": ["error", { max: 2 }],
 			"@stylistic/rest-spread-spacing": ["error", "never"],
 			"@stylistic/semi-spacing": "error",
 			"@stylistic/space-in-parens": ["error", "never"],
@@ -113,6 +115,11 @@ export default tseslint.config(
 					format: ["PascalCase"],
 				},
 			],
+			"@typescript-eslint/no-unused-vars": ["error", {
+				argsIgnorePattern: "^_",
+				varsIgnorePattern: "^_",
+				caughtErrorsIgnorePattern: "^_",
+			}]
 		},
 	},
 );

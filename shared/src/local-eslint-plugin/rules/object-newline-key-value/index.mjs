@@ -1,5 +1,5 @@
 /** @type {import("eslint").Rule.RuleModule} */
-export const objectNewlineKeyValue = {
+export const objectNewlineKeyValueRule = {
 	meta: {
 		type: "layout",
 		fixable: "whitespace",
