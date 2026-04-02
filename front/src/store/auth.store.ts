@@ -9,7 +9,7 @@ function setToken(token: string) {
 }
 
 export const authActions = {
-	login: setToken
+	login: setToken,
 };
 
 export { auth };

@@ -35,8 +35,7 @@ export class RolesService {
 		const role = await this.prisma.role.findUnique({ where: { id: roleId } });
 
 		if (!role) throw new NotFoundException("Role does not exist");
-		if (role.superRole)
-			throw new AppForbiddenException("FORBIDDEN", "Cannot delete this role");
+		if (role.superRole) throw new AppForbiddenException("FORBIDDEN", "Cannot delete this role");
 
 		return this.prisma.role.delete({ where: { id: roleId } });
 	}

@@ -69,8 +69,8 @@ export class DatabaseBootstrapService implements OnModuleInit {
 			skipDuplicates: true,
 		});
 
-		console.log(`Roles created : bigboss (superRole), manager, user`);
-		console.log(`  bigboss     : every permissions (superRole)`);
+		console.log("Roles created : bigboss (superRole), manager, user");
+		console.log("  bigboss     : every permissions (superRole)");
 		console.log(`  manager     : ${MANAGER_PERMISSIONS.length} permissions`);
 		console.log(`  user        : ${USER_PERMISSIONS.length} permissions`);
 
@@ -109,7 +109,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 		});
 
 		console.log(
-			`Users created : liam@test.com, chantal@test.com, machin@test.com`,
+			"Users created : liam@test.com, chantal@test.com, machin@test.com",
 		);
 
 		// ─── Member roles ─────────────────────────────────────────────────────────────
@@ -138,7 +138,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 			create: { memberId: machinMember.id, roleId: user.id },
 		});
 
-		console.log(`Roles asignated : liam→bigboss, chantal→manager, machin→user`);
+		console.log("Roles asignated : liam→bigboss, chantal→manager, machin→user");
 		console.log("Seed finished!");
 	}
 }

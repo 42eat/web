@@ -4,9 +4,9 @@ import TextInput from "~/components/ui/TextInput";
 import { client } from "~/api/client";
 import { createSignal, JSXElement, Show } from "solid-js";
 import { authActions } from "~/store/auth.store";
-import { LoginSchema as loginSchema } from "@42eat-web/shared";
+import { loginSchema } from "@42eat-web/shared";
 
-import "./LoginForm.scss"
+import "./LoginForm.scss";
 
 export default function LoginForm() {
 	const [username, setUsername] = createSignal("");
@@ -15,10 +15,16 @@ export default function LoginForm() {
 
 	const loginMutation = client.auth.login.createMutation();
 
+	let usernameInput!: HTMLInputElement;
 
-	const handleSubmit = async (e: SubmitEvent) => {
+	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
-		loginMutation.mutate({ body: { email: username(), password: password() } }, {
+
+		const usernameValue = username();
+		if (!loginSchema.shape.email.safeParse(usernameValue).success) {
+			return usernameInput.setCustomValidity("Please enter a valid email");
+		}
+		loginMutation.mutate({ body: { email: usernameValue, password: password() } }, {
 			onSuccess: (data) => {
 				authActions.login(data.body.accessToken);
 			},
@@ -34,17 +40,18 @@ export default function LoginForm() {
 						default:
 							setError(e.body.message);
 					}
-				} else {
+				} else if (e.status === 403) {
 					setError(e.body.message ?? "An error occured. There is nothing to do :/");
 				}
-			}
-		})
+				setError("An error occured. There is nothing to do :/");
+			},
+		});
 	};
 
 	return <form onSubmit={handleSubmit} id="login-form">
 		<div class="login-inputs">
-			<TextInput type="email" placeholder="Email" required invalidMessage="Valid email required" value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
-			<TextInput type="password" placeholder="Password" required invalidMessage="Password required" value={password()} onInput={(e) => setPassword((e.target as HTMLInputElement).value)} />
+			<TextInput ref={usernameInput} type="email" placeholder="Email" required value={username()} onInput={(e) => setUsername((e.target as HTMLInputElement).value)} />
+			<TextInput type="password" placeholder="Password" required value={password()} onInput={(e) => setPassword((e.target as HTMLInputElement).value)} />
 			<Show when={error()}>
 				<p class="invalid-message" role="alert">
 					{error()}
@@ -61,5 +68,5 @@ export default function LoginForm() {
 			<hr />
 		</div>
 		<Button class="ft-login-button" onClick={console.log}>Login with <p>42</p> Intra</Button>
-	</form>
+	</form>;
 }

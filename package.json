@@ -1,12 +1,14 @@
 {
 	"name": "42eat-web",
 	"scripts": {
-  "dev:shared": "pnpm --filter @42eat-web/shared run dev",
-  "dev:front": "pnpm --filter @42eat-web/front run dev",
-  "dev:back": "pnpm --filter @42eat-web/back run start:dev",
-  "dev": "concurrently -n back,front -c blue,green \"pnpm run dev:back\" \"wait-on tcp:localhost:3001 && pnpm run dev:front\"",
-  "build": "pnpm --filter @42eat-web/shared run build && concurrently -n back,front -c blue,green \"pnpm --filter @42eat-web/back run build\" \"pnpm --filter @42eat-web/front run build\""
-},
+		"dev:shared": "pnpm --filter @42eat-web/shared run dev",
+		"dev:front": "pnpm --filter @42eat-web/front run dev",
+		"dev:back": "pnpm --filter @42eat-web/back run start:dev",
+		"dev": "concurrently -n back,front -c blue,green \"pnpm run dev:back\" \"wait-on tcp:localhost:3001 && pnpm run dev:front\"",
+		"lint": "concurrently -n back,front,shared -c blue,green,pink \"pnpm --filter @42eat-web/back run lint\" \"pnpm --filter @42eat-web/front run lint\" \"pnpm --filter @42eat-web/shared run lint\"",
+		"check": "concurrently -n back,front,shared -c blue,green,pink \"pnpm --filter @42eat-web/back run check\" \"pnpm --filter @42eat-web/front run check\" \"pnpm --filter @42eat-web/shared run check\"",
+		"build": "pnpm --filter @42eat-web/shared run build && concurrently -n back,front -c blue,green \"pnpm --filter @42eat-web/back run build\" \"pnpm --filter @42eat-web/front run build\""
+	},
 	"devDependencies": {
 		"concurrently": "^9.2.1",
 		"typescript": "^5.9.3",

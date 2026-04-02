@@ -21,4 +21,4 @@ export const AppRouter: Component = () => {
 			<Route path="/home" component={Home} />
 		</Route>
 	</Router>;
-}
+};
