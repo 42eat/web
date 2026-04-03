@@ -12,6 +12,7 @@ import {
 	JwtAuthGuard,
 	JwtAuthGuardWithoutEmailVerif,
 } from "../core/guards/jwt-auth.guard";
+import { Throttle } from "@nestjs/throttler";
 
 @Controller()
 export class AuthController {
@@ -38,6 +39,7 @@ export class AuthController {
 		});
 	}
 
+	@Throttle({ default: { limit: 3, ttl: 60000 } })
 	@TsRestHandler(authContract.register)
 	public register(
 		@Req() req: Request,
@@ -56,6 +58,7 @@ export class AuthController {
 		});
 	}
 
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
 	@TsRestHandler(authContract.login)
 	public login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
 		return tsRestHandler(authContract.login, async ({ body }) => {
@@ -115,6 +118,7 @@ export class AuthController {
 		});
 	}
 
+	@Throttle({ default: { limit: 1, ttl: 60000 } })
 	@TsRestHandler(authContract.askNewConfirmationEmail)
 	@UseGuards(JwtAuthGuardWithoutEmailVerif)
 	public askNewConfirmationEmail(@CurrentMember() member: AuthMember) {
@@ -137,6 +141,7 @@ export class AuthController {
 		});
 	}
 
+	@Throttle({ default: { limit: 1, ttl: 60000 } })
 	@TsRestHandler(authContract.requestPasswordReset)
 	public requestPasswordReset() {
 		return tsRestHandler(
@@ -156,6 +161,7 @@ export class AuthController {
 		});
 	}
 
+	@Throttle({ default: { limit: 1, ttl: 60000 } })
 	@TsRestHandler(authContract.requestEmailReset)
 	@UseGuards(JwtAuthGuard)
 	public requestEmailReset(@CurrentMember() member: AuthMember) {
