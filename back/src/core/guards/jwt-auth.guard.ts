@@ -17,12 +17,12 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 			);
 		}
 
-		// if (!user.emailValidated) {
-		// 	throw new AppForbiddenException(
-		// 		"EMAIL_NOT_VERIFIED",
-		// 		"You need to verify your email in order to use the app",
-		// 	);
-		// }
+		if (!user.emailValidated) {
+			throw new AppForbiddenException(
+				"EMAIL_NOT_VERIFIED",
+				"You need to verify your email in order to use the app",
+			);
+		}
 
 		return user as TUser;
 	}
