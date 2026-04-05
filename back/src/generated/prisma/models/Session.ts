@@ -1241,11 +1241,6 @@ export type SessionFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Sessions.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Sessions.
-   */
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 

@@ -1235,11 +1235,6 @@ export type TokenFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Skip the first `n` Tokens.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Tokens.
-   */
   distinct?: Prisma.TokenScalarFieldEnum | Prisma.TokenScalarFieldEnum[]
 }
 

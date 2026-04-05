@@ -107,3 +107,8 @@ export type BattlepassTier = Prisma.BattlepassTierModel
  * 
  */
 export type MemberBattlepassReward = Prisma.MemberBattlepassRewardModel
+/**
+ * Model AppConfig
+ * 
+ */
+export type AppConfig = Prisma.AppConfigModel

@@ -1461,11 +1461,6 @@ export type ExpenseTripFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` ExpenseTrips.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ExpenseTrips.
-   */
   distinct?: Prisma.ExpenseTripScalarFieldEnum | Prisma.ExpenseTripScalarFieldEnum[]
 }
 

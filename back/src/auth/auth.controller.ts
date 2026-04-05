@@ -182,4 +182,28 @@ export class AuthController {
 			return { status: 204, body: null };
 		});
 	}
+
+	@TsRestHandler(authContract.getLogin42url)
+	public redirectAuth42(@Res() res: Response) {
+		return tsRestHandler(authContract.getLogin42url, async () => {
+			const url = this.authService.get42LoginUrl();
+			res.redirect(url);
+			return { status: 302, body: null };
+		});
+	}
+
+	@TsRestHandler(authContract.auth42)
+	public auth42(@Res({ passthrough: true }) res: Response) {
+		return tsRestHandler(authContract.auth42, async ({ body }) => {
+			const { accessToken, refreshToken } = await this.authService.auth42(
+				body.code,
+				body.state,
+			);
+
+			this.setRefreshTokenCookie(res, refreshToken);
+
+			return { status: 200, body: { accessToken } };
+		});
+	}
+
 }

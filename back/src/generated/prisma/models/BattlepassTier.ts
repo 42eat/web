@@ -1290,11 +1290,6 @@ export type BattlepassTierFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` BattlepassTiers.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of BattlepassTiers.
-   */
   distinct?: Prisma.BattlepassTierScalarFieldEnum | Prisma.BattlepassTierScalarFieldEnum[]
 }
 

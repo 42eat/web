@@ -5,6 +5,7 @@ import { registerSchema } from "./schemas/register.schema";
 import { confirmEmailSchema } from "./schemas/confirm-email.schema";
 import { changePasswordSchema, requestPasswordResetSchema, resetPasswordSchema } from "./schemas/password.schema";
 import { requestEmailResetSchema, resetEmailSchema } from "./schemas/email.schema";
+import { auth42Schema } from "./schemas/42login.schema";
 
 const c = initContract();
 
@@ -75,6 +76,17 @@ export const authContract = c.router(
 			path: "/email/reset",
 			body: resetEmailSchema,
 			responses: { 204: null },
+		},
+		getLogin42url: {
+			method: "GET",
+			path: "/42",
+			responses: { 302: null },
+		},
+		auth42: {
+			method: "POST",
+			path: "/42/auth",
+			body: auth42Schema,
+			responses: { 200: authResponseSchema },
 		},
 	},
 	{ pathPrefix: "/auth" },

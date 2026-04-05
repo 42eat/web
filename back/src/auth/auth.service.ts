@@ -6,6 +6,7 @@ import {
 import { MembersService } from "../members/members.service";
 import { RegisterDto } from "@42eat-web/shared";
 import * as bcrypt from "bcrypt";
+import { randomBytes } from "crypto";
 import { LoginDto } from "@42eat-web/shared";
 import { JwtService } from "@nestjs/jwt";
 import { SessionsService } from "../sessions/sessions.service";
@@ -54,6 +55,7 @@ export class AuthService {
 		const insertedUser = await this.members.create(
 			dto.email,
 			dto.password,
+			null,
 			dto.displayName,
 		);
 
@@ -319,4 +321,81 @@ export class AuthService {
 		const payload = await this.tokensService.isValidToken(token, "EMAIL_RESET");
 		await this.members.setEmail(payload.memberId, payload.data.newEmail);
 	}
+
+	private pendingStates = new Set<string>();
+
+	public get42LoginUrl() {
+		const state = randomBytes(16).toString("hex");
+		this.pendingStates.add(state);
+
+		setTimeout(() => this.pendingStates.delete(state), 10 * 60 * 1000);
+
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${process.env.API42_CLIENT_UID}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/callback&response_type=code&scope=public&state=${state}`;
+		return url;
+	}
+
+	public async auth42(code: string, state: string) {
+		if (!this.pendingStates.has(state)) {
+			throw new AppUnauthorizedException("UNAUTHORIZED", "Invalid state");
+		}
+		this.pendingStates.delete(state);
+
+		const tokenResponse = await fetch("https://api.intra.42.fr/oauth/token", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				grant_type: "authorization_code",
+				client_id: process.env.API42_CLIENT_UID,
+				client_secret: process.env.API42_CLIENT_SECRET,
+				code,
+				redirect_uri: process.env.BASE_FRONT_URL + "/auth/42/callback",
+			}),
+		});
+
+		const access_token = (await tokenResponse.json() as { access_token: string })?.access_token;
+
+		if (!access_token) {
+			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to authenticate with 42");
+		}
+
+		const userResponse = await fetch("https://api.intra.42.fr/v2/me", {
+			headers: { Authorization: `Bearer ${access_token}` },
+		});
+		const userData = await userResponse.json() as { login: string; email: string };
+
+		if (!userData || !userData.login) {
+			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
+		}
+
+		let member = await this.members.getByLogin(userData.login);
+
+		if (!member) {
+			member = await this.members.getByEmail(userData.email);
+		}
+
+		// console.log(userData);
+
+		if (!member) {
+			member = await this.members.create(
+				userData.email,
+				null,
+				userData.login,
+				null,
+			);
+		}
+
+		if (!member) {
+			throw new InternalServerErrorException("An error occured while creating the user");
+		}
+
+		return {
+			accessToken: await this.generateAccessToken(member.id),
+			refreshToken: await this.generateRefreshToken(
+				member.id,
+				"userAgent",
+				"ipAddress", // TODO: a mettre
+			),
+		};
+	}
+
 }

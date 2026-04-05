@@ -31,6 +31,10 @@ export class MembersService {
 		return this.prisma.member.findUnique({ where: { email: email } });
 	}
 
+	public async getByLogin(login: string): Promise<Member | null> {
+		return this.prisma.member.findUnique({ where: { login: login } });
+	}
+
 	public async getById(id: number): Promise<Member> {
 		const member = await this.prisma.member.findUnique({ where: { id: id } });
 		if (!member) {
@@ -41,12 +45,20 @@ export class MembersService {
 
 	public async create(
 		email: string,
-		password: string,
+		password: string | null,
+		login: string | null,
 		displayName: string | null = null,
 	): Promise<Member | null> {
-		const newMember = await this.prisma.member.create({
-			data: { email, password: await bcrypt.hash(password, 10), displayName },
-		});
+		let newMember: Member;
+		if (email === null) {
+			newMember = await this.prisma.member.create({
+				data: { email, login },
+			});
+		} else {
+			newMember = await this.prisma.member.create({
+				data: { email, password: await bcrypt.hash(password ?? "", 10), displayName },
+			});
+		}
 
 		const defaultRoles = await this.roles.getDefaultRoles();
 		await this.prisma.memberRole.createMany({

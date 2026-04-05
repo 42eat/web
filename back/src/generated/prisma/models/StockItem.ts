@@ -1253,11 +1253,6 @@ export type StockItemFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` StockItems.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of StockItems.
-   */
   distinct?: Prisma.StockItemScalarFieldEnum | Prisma.StockItemScalarFieldEnum[]
 }
 
