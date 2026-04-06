@@ -16,6 +16,7 @@ import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
 import { AppForbiddenException } from "../core/error/forbidden";
 import { TokensService } from "../tokens/tokens.service";
+import { AppConfigService } from "../config/config.service";
 
 @Injectable()
 export class AuthService {
@@ -25,6 +26,7 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
 		private readonly tokensService: TokensService,
+		private readonly appConfig: AppConfigService,
 	) {}
 
 	// This will be replaced by nodejs throttler
@@ -52,10 +54,9 @@ export class AuthService {
 			throw new ConflictException("Email alredy used");
 		}
 
-		const insertedUser = await this.members.create(
+		const insertedUser = await this.members.createFromRegister(
 			dto.email,
 			dto.password,
-			null,
 			dto.displayName,
 		);
 
@@ -340,13 +341,20 @@ export class AuthService {
 		}
 		this.pendingStates.delete(state);
 
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+		const api42_client_secret = await this.appConfig.get("42api-secret");
+
+		if (!api42_client_uid || !api42_client_secret) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
 		const tokenResponse = await fetch("https://api.intra.42.fr/oauth/token", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				grant_type: "authorization_code",
-				client_id: process.env.API42_CLIENT_UID,
-				client_secret: process.env.API42_CLIENT_SECRET,
+				client_id: api42_client_uid,
+				client_secret: api42_client_secret,
 				code,
 				redirect_uri: process.env.BASE_FRONT_URL + "/auth/42/callback",
 			}),
@@ -376,11 +384,9 @@ export class AuthService {
 		// console.log(userData);
 
 		if (!member) {
-			member = await this.members.create(
+			member = await this.members.createFromIntra(
 				userData.email,
-				null,
 				userData.login,
-				null,
 			);
 		}
 
