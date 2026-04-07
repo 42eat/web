@@ -186,18 +186,23 @@ export class AuthController {
 	@TsRestHandler(authContract.getLogin42url)
 	public redirectAuth42(@Res() res: Response) {
 		return tsRestHandler(authContract.getLogin42url, async () => {
-			const url = this.authService.get42LoginUrl();
+			const url = await this.authService.get42LoginUrl();
 			res.redirect(url);
 			return { status: 302, body: null };
 		});
 	}
 
 	@TsRestHandler(authContract.auth42)
-	public auth42(@Res({ passthrough: true }) res: Response) {
+	public auth42(
+		@Req() req: Request,
+		@Res({ passthrough: true }) res: Response,
+	) {
 		return tsRestHandler(authContract.auth42, async ({ body }) => {
 			const { accessToken, refreshToken } = await this.authService.auth42(
 				body.code,
 				body.state,
+				req.headers["user-agent"],
+				req.ip,
 			);
 
 			this.setRefreshTokenCookie(res, refreshToken);

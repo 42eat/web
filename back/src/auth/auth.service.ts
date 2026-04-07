@@ -17,6 +17,16 @@ import { Member } from "../generated/prisma/client";
 import { AppForbiddenException } from "../core/error/forbidden";
 import { TokensService } from "../tokens/tokens.service";
 import { AppConfigService } from "../config/config.service";
+import z from "zod";
+
+const TokenResponseSchema = z.object({
+	access_token: z.string(),
+});
+
+const Me42ResponseSchema = z.object({
+	login: z.string(),
+	email: z.string(),
+});
 
 @Injectable()
 export class AuthService {
@@ -325,17 +335,28 @@ export class AuthService {
 
 	private pendingStates = new Set<string>();
 
-	public get42LoginUrl() {
+	public async get42LoginUrl() {
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+
+		if (!api42_client_uid) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
 		const state = randomBytes(16).toString("hex");
 		this.pendingStates.add(state);
 
 		setTimeout(() => this.pendingStates.delete(state), 10 * 60 * 1000);
 
-		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${process.env.API42_CLIENT_UID}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/callback&response_type=code&scope=public&state=${state}`;
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/callback&response_type=code&scope=public&state=${state}`;
 		return url;
 	}
 
-	public async auth42(code: string, state: string) {
+	public async auth42(
+		code: string,
+		state: string,
+		userAgent: string | undefined,
+		ipAddress: string | undefined,
+	) {
 		if (!this.pendingStates.has(state)) {
 			throw new AppUnauthorizedException("UNAUTHORIZED", "Invalid state");
 		}
@@ -360,16 +381,16 @@ export class AuthService {
 			}),
 		});
 
-		const access_token = (await tokenResponse.json() as { access_token: string })?.access_token;
+		const tokenData = TokenResponseSchema.parse(await tokenResponse.json());
 
-		if (!access_token) {
+		if (!tokenData.access_token) {
 			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to authenticate with 42");
 		}
 
 		const userResponse = await fetch("https://api.intra.42.fr/v2/me", {
-			headers: { Authorization: `Bearer ${access_token}` },
+			headers: { Authorization: `Bearer ${tokenData.access_token}` },
 		});
-		const userData = await userResponse.json() as { login: string; email: string };
+		const userData = Me42ResponseSchema.parse(await userResponse.json());
 
 		if (!userData || !userData.login) {
 			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
@@ -380,8 +401,6 @@ export class AuthService {
 		if (!member) {
 			member = await this.members.getByEmail(userData.email);
 		}
-
-		// console.log(userData);
 
 		if (!member) {
 			member = await this.members.createFromIntra(
@@ -398,8 +417,8 @@ export class AuthService {
 			accessToken: await this.generateAccessToken(member.id),
 			refreshToken: await this.generateRefreshToken(
 				member.id,
-				"userAgent",
-				"ipAddress", // TODO: a mettre
+				userAgent ?? "",
+				ipAddress ?? "unknown",
 			),
 		};
 	}
