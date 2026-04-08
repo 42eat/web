@@ -5,12 +5,10 @@ import { TokenPurpose } from "../generated/prisma/enums";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { Cron } from "@nestjs/schedule";
 
-export type TokenCreationParam<T extends TokenPurpose> = T extends "EMAIL_RESET"
-	? {
-		memberId: number;
-		data: { newEmail: string };
-	}
-	: { memberId: number };
+export type TokenCreationParam<T extends TokenPurpose>
+	= T extends "EMAIL_RESET" ? { memberId: number; data: { newEmail: string } }
+		: T extends "STATE_42AUTH" ? null
+			: { memberId: number };
 
 @Injectable()
 export class TokensService {
@@ -35,8 +33,16 @@ export class TokensService {
 		return await this.createToken(memberId, "EMAIL_RESET", { newEmail });
 	}
 
+	public async create42AuthStateToken() {
+		return await this.createToken(null, "STATE_42AUTH");
+	}
+
+	public async create42LinkStateToken(memberId: number) {
+		return await this.createToken(memberId, "STATE_42LINK");
+	}
+
 	private async createToken(
-		memberId: number,
+		memberId: number | null,
 		tokenPurpose: TokenPurpose,
 		data: object | undefined = undefined,
 	) {
@@ -66,15 +72,15 @@ export class TokensService {
 		if (!token || purpose != token.purpose || token.expiresAt < new Date()) {
 			throw new AppUnauthorizedException(
 				"UNAUTHORIZED",
-				"Invalid ou expired token",
+				"Invalid or expired token",
 			);
 		}
-		if (purpose === "EMAIL_RESET") {
-			return {
-				memberId: token.memberId,
-				data: token.data,
-			} as TokenCreationParam<"EMAIL_RESET">;
-		}
-		return { memberId: token.memberId } as TokenCreationParam<typeof purpose>;
+		return (
+			purpose === "EMAIL_RESET"
+				? { memberId: token.memberId, data: token.data }
+				: purpose === "STATE_42AUTH"
+					? null
+					: { memberId: token.memberId }
+		) as TokenCreationParam<typeof purpose>;
 	}
 }

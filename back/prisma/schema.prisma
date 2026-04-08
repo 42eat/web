@@ -54,18 +54,20 @@ enum TokenPurpose {
   EMAIL_VERIFICATION
   EMAIL_RESET
   PASSWORD_RESET
+  STATE_42AUTH
+  STATE_42LINK
 }
 
 model Token {
   id        Int       @id @default(autoincrement())
   token     String    @unique
   purpose   TokenPurpose
-  memberId  Int       @map("member_id")
+  memberId  Int?      @map("member_id")
   data      Json?
   expiresAt DateTime  @map("expires_at")
   createdAt DateTime  @default(now()) @map("created_at")
 
-  member    Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member    Member?   @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   @@map("tokens")
 }
@@ -265,4 +267,14 @@ model MemberBattlepassReward {
   tier   BattlepassTier   @relation(fields: [tierId], references: [id])
 
   @@map("member_battlepass_rewards")
+}
+
+// ─── Settings ─────────────────────────────────────────────────────────────────
+
+model AppConfig {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("app_config")
 }

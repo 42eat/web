@@ -580,10 +580,12 @@ export type MemberCreateNestedOneWithoutTokensInput = {
   connect?: Prisma.MemberWhereUniqueInput
 }
 
-export type MemberUpdateOneRequiredWithoutTokensNestedInput = {
+export type MemberUpdateOneWithoutTokensNestedInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutTokensInput, Prisma.MemberUncheckedCreateWithoutTokensInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTokensInput
   upsert?: Prisma.MemberUpsertWithoutTokensInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
   connect?: Prisma.MemberWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutTokensInput, Prisma.MemberUpdateWithoutTokensInput>, Prisma.MemberUncheckedUpdateWithoutTokensInput>
 }

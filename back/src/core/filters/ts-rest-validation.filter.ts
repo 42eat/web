@@ -23,6 +23,10 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
 
+		if (process.env.NODE_ENV === "dev") {
+			console.error(exception);
+		}
+
 		// Format prisma errors
 		if (exception instanceof Prisma.PrismaClientKnownRequestError) {
 			// Global conflict management -> no need to do 2 query each time

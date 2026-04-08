@@ -31,6 +31,10 @@ export class MembersService {
 		return this.prisma.member.findUnique({ where: { email: email } });
 	}
 
+	public async getByLogin(login: string): Promise<Member | null> {
+		return this.prisma.member.findUnique({ where: { login: login } });
+	}
+
 	public async getById(id: number): Promise<Member> {
 		const member = await this.prisma.member.findUnique({ where: { id: id } });
 		if (!member) {
@@ -39,7 +43,20 @@ export class MembersService {
 		return member;
 	}
 
-	public async create(
+	public async createFromIntra(
+		email: string,
+		login: string,
+	): Promise<Member | null> {
+		const newMember = await this.prisma.member.create({
+			data: { email, login, emailValidated: true },
+		});
+
+		await this.setDefaultMemberRoles(newMember.id);
+
+		return newMember;
+	}
+
+	public async createFromRegister(
 		email: string,
 		password: string,
 		displayName: string | null = null,
@@ -48,15 +65,19 @@ export class MembersService {
 			data: { email, password: await bcrypt.hash(password, 10), displayName },
 		});
 
+		await this.setDefaultMemberRoles(newMember.id);
+
+		return newMember;
+	}
+
+	private async setDefaultMemberRoles(memberId: number) {
 		const defaultRoles = await this.roles.getDefaultRoles();
 		await this.prisma.memberRole.createMany({
 			data: defaultRoles.map((role) => ({
 				roleId: role.id,
-				memberId: newMember.id,
+				memberId,
 			})),
 		});
-
-		return newMember;
 	}
 
 	public async getMemberRoles(memberId: number) {
@@ -157,6 +178,13 @@ export class MembersService {
 		await this.prisma.member.update({
 			where: { id: memberId },
 			data: { email },
+		});
+	}
+
+	public async setLogin(memberId: number, login: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { login },
 		});
 	}
 }

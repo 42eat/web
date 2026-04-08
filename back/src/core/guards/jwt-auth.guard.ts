@@ -43,3 +43,13 @@ export class JwtAuthGuardWithoutEmailVerif extends AuthGuard("jwt") {
 		return user as TUser;
 	}
 }
+
+@Injectable()
+export class JwtAuthOptionalGuard extends AuthGuard("jwt") {
+	handleRequest<TUser = AuthMember>(
+		err: Error | null,
+		user: AuthMember | null,
+	) {
+		return user as TUser;
+	}
+}

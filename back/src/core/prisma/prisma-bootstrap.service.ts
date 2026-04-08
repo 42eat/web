@@ -26,6 +26,20 @@ export class DatabaseBootstrapService implements OnModuleInit {
 	public async onModuleInit(): Promise<void> {
 		console.log("Seeding...");
 
+		// ─── App config ─────────────────────────────────────────────────────────────
+
+		await this.prisma.appConfig.upsert({
+			where: { key: "42api-uid" },
+			update: { value: process.env.API42_CLIENT_UID ?? "" },
+			create: { key: "42api-uid", value: process.env.API42_CLIENT_UID ?? "" },
+		});
+
+		await this.prisma.appConfig.upsert({
+			where: { key: "42api-secret" },
+			update: { value: process.env.API42_CLIENT_SECRET ?? "" },
+			create: { key: "42api-secret", value: process.env.API42_CLIENT_SECRET ?? "" },
+		});
+
 		// ─── Roles ───────────────────────────────────────────────────────────────────
 
 		const bigboss = await this.prisma.role.upsert({

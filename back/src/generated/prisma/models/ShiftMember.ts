@@ -443,14 +443,6 @@ export type ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput = {
   deleteMany?: Prisma.ShiftMemberScalarWhereInput | Prisma.ShiftMemberScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ShiftMemberCreateNestedManyWithoutPositionInput = {
   create?: Prisma.XOR<Prisma.ShiftMemberCreateWithoutPositionInput, Prisma.ShiftMemberUncheckedCreateWithoutPositionInput> | Prisma.ShiftMemberCreateWithoutPositionInput[] | Prisma.ShiftMemberUncheckedCreateWithoutPositionInput[]
   connectOrCreate?: Prisma.ShiftMemberCreateOrConnectWithoutPositionInput | Prisma.ShiftMemberCreateOrConnectWithoutPositionInput[]

@@ -11,6 +11,7 @@ import { authContract } from "@42eat-web/shared";
 import {
 	JwtAuthGuard,
 	JwtAuthGuardWithoutEmailVerif,
+	JwtAuthOptionalGuard,
 } from "../core/guards/jwt-auth.guard";
 import { Throttle } from "@nestjs/throttler";
 
@@ -182,4 +183,67 @@ export class AuthController {
 			return { status: 204, body: null };
 		});
 	}
+
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@UseGuards(JwtAuthOptionalGuard)
+	@TsRestHandler(authContract.redirectLogin42url)
+	public redirectAuth42(@Res() res: Response, @CurrentMember() member?: AuthMember) {
+		return tsRestHandler(authContract.redirectLogin42url, async () => {
+			let url: string;
+			if (member) url = await this.authService.get42LinkUrl(member.id);
+			else url = await this.authService.get42LoginUrl();
+
+			res.redirect(url);
+			return { status: 302, body: null };
+		});
+	}
+
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@UseGuards(JwtAuthOptionalGuard)
+	@TsRestHandler(authContract.getLogin42url)
+	public getAuth42Url(@CurrentMember() member?: AuthMember) {
+		return tsRestHandler(authContract.getLogin42url, async () => {
+			let url: string;
+			if (member) url = await this.authService.get42LinkUrl(member.id);
+			else url = await this.authService.get42LoginUrl();
+
+			return { status: 200, body: { url } };
+		});
+	}
+
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@TsRestHandler(authContract.auth42)
+	public auth42(
+		@Req() req: Request,
+		@Res({ passthrough: true }) res: Response,
+	) {
+		return tsRestHandler(authContract.auth42, async ({ body }) => {
+			const { accessToken, refreshToken } = await this.authService.auth42(
+				body.code,
+				body.state,
+				req.headers["user-agent"],
+				req.ip,
+			);
+
+			this.setRefreshTokenCookie(res, refreshToken);
+
+			return { status: 200, body: { accessToken } };
+		});
+	}
+
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@UseGuards(JwtAuthGuard)
+	@TsRestHandler(authContract.link42)
+	public link42(@CurrentMember() member: AuthMember) {
+		return tsRestHandler(authContract.link42, async ({ body }) => {
+			await this.authService.link42(
+				member.id,
+				body.code,
+				body.state,
+			);
+
+			return { status: 204, body: null };
+		});
+	}
+
 }

@@ -68,7 +68,8 @@ export const ModelName = {
   ExpenseTrip: 'ExpenseTrip',
   BattlepassSeason: 'BattlepassSeason',
   BattlepassTier: 'BattlepassTier',
-  MemberBattlepassReward: 'MemberBattlepassReward'
+  MemberBattlepassReward: 'MemberBattlepassReward',
+  AppConfig: 'AppConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -286,6 +287,15 @@ export const MemberBattlepassRewardScalarFieldEnum = {
 } as const
 
 export type MemberBattlepassRewardScalarFieldEnum = (typeof MemberBattlepassRewardScalarFieldEnum)[keyof typeof MemberBattlepassRewardScalarFieldEnum]
+
+
+export const AppConfigScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
 
 
 export const SortOrder = {

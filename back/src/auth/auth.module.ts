@@ -8,9 +8,10 @@ import { JwtStrategy } from "./strategies/jwt.strategy";
 import { RefreshStrategy } from "./strategies/refresh.strategy";
 import { MailModule } from "../core/mail/mail.module";
 import { TokensModule } from "../tokens/tokens.module";
+import { AppConfigModule } from "../config/config.controller";
 
 @Module({
-	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule],
+	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule, AppConfigModule],
 	providers: [AuthService, JwtStrategy, RefreshStrategy],
 	controllers: [AuthController],
 	exports: [AuthService],

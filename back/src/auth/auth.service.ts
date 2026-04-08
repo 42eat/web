@@ -15,6 +15,17 @@ import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
 import { AppForbiddenException } from "../core/error/forbidden";
 import { TokensService } from "../tokens/tokens.service";
+import { AppConfigService } from "../config/config.service";
+import z from "zod";
+
+const TokenResponseSchema = z.object({
+	access_token: z.string(),
+});
+
+const Me42ResponseSchema = z.object({
+	login: z.string(),
+	email: z.string(),
+});
 
 @Injectable()
 export class AuthService {
@@ -24,6 +35,7 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 		private readonly mailService: MailService,
 		private readonly tokensService: TokensService,
+		private readonly appConfig: AppConfigService,
 	) {}
 
 	// This will be replaced by nodejs throttler
@@ -48,10 +60,10 @@ export class AuthService {
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (existing) {
-			throw new ConflictException("Email alredy used");
+			throw new ConflictException("Email already used");
 		}
 
-		const insertedUser = await this.members.create(
+		const insertedUser = await this.members.createFromRegister(
 			dto.email,
 			dto.password,
 			dto.displayName,
@@ -250,14 +262,14 @@ export class AuthService {
 		if (!existing) {
 			throw new AppForbiddenException(
 				"FORBIDDEN",
-				"You shouln't have an error unless your account have been deleted or something like that",
+				"You shouldn't have an error unless your account have been deleted or something like that",
 			);
 		}
 
 		if (!existing.password) {
 			throw new AppForbiddenException(
 				"FORBIDDEN",
-				"You shouln't be able to call this route with an intra only account",
+				"You shouldn't be able to call this route with an intra only account",
 			);
 		}
 
@@ -305,7 +317,7 @@ export class AuthService {
 		const member = await this.members.getById(memberId);
 
 		if (!member) {
-			throw new AppForbiddenException("FORBIDDEN", "This shouldn't append");
+			throw new AppForbiddenException("FORBIDDEN", "This shouldn't happen");
 		}
 
 		if (!member.password || !(await bcrypt.compare(password, member.password))) {
@@ -319,4 +331,150 @@ export class AuthService {
 		const payload = await this.tokensService.isValidToken(token, "EMAIL_RESET");
 		await this.members.setEmail(payload.memberId, payload.data.newEmail);
 	}
+
+	public async get42LoginUrl() {
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+
+		if (!api42_client_uid) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
+		const state = await this.tokensService.create42AuthStateToken();
+
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/auth-callback&response_type=code&scope=public&state=${state}`;
+		return url;
+	}
+
+	public async get42LinkUrl(memberId: number) {
+		const member = await this.members.getById(memberId);
+
+		if (member && member.login) {
+			throw new AppForbiddenException("FORBIDDEN", "You already have a linked login");
+		}
+
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+
+		if (!api42_client_uid) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
+		const state = await this.tokensService.create42LinkStateToken(memberId);
+
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/link-callback&response_type=code&scope=public&state=${state}`;
+		return url;
+	}
+
+	public async auth42(
+		code: string,
+		state: string,
+		userAgent: string | undefined,
+		ipAddress: string | undefined,
+	) {
+		await this.tokensService.isValidToken(state, "STATE_42AUTH");
+
+		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/auth-callback");
+
+		if (!userData || !userData.login) {
+			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
+		}
+
+		let member = await this.members.getByLogin(userData.login);
+
+		// JSP si faut laisser ca ou pas en terme de secu et d'utilité
+		// if (!member) {
+		// 	member = await this.members.getByEmail(userData.email);
+		// 	if (member && !member.emailValidated) {
+		// 		throw new AppForbiddenException("EMAIL_NOT_VERIFIED", "You cannot login with 42 to an account that doesn't have a validated email");
+		// 	}
+		// }
+
+		if (!member) {
+			member = await this.members.createFromIntra(
+				userData.email,
+				userData.login,
+			);
+		}
+
+		if (!member) {
+			throw new InternalServerErrorException("An error occured while creating the user");
+		}
+
+		if (!member?.login) {
+			await this.members.setLogin(member.id, userData.login);
+		}
+
+		return {
+			accessToken: await this.generateAccessToken(member.id),
+			refreshToken: await this.generateRefreshToken(
+				member.id,
+				userAgent ?? "",
+				ipAddress ?? "unknown",
+			),
+		};
+	}
+
+	public async link42(
+		memberId: number,
+		code: string,
+		state: string,
+	) {
+		const state_member = await this.tokensService.isValidToken(state, "STATE_42LINK");
+
+		if (state_member.memberId !== memberId) {
+			throw new AppForbiddenException("FORBIDDEN", "This is not your token");
+		}
+
+		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/link-callback");
+
+		const existingMember = await this.members.getByLogin(userData.login);
+
+		if (existingMember) {
+			throw new ConflictException("This login is already linked to an account");
+		}
+
+		await this.members.setLogin(memberId, userData.login);
+	}
+
+	private async get42UserInfo(code: string, redirectUri: string) {
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+		const api42_client_secret = await this.appConfig.get("42api-secret");
+
+		if (!api42_client_uid || !api42_client_secret) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
+		try {
+			const tokenResponse = await fetch("https://api.intra.42.fr/oauth/token", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					grant_type: "authorization_code",
+					client_id: api42_client_uid,
+					client_secret: api42_client_secret,
+					code,
+					redirect_uri: redirectUri,
+				}),
+			});
+
+			const tokenData = TokenResponseSchema.parse(await tokenResponse.json());
+
+			if (!tokenData.access_token) {
+				throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to authenticate with 42");
+			}
+
+			const userResponse = await fetch("https://api.intra.42.fr/v2/me", {
+				headers: { Authorization: `Bearer ${tokenData.access_token}` },
+			});
+			const userData = Me42ResponseSchema.parse(await userResponse.json());
+
+			if (!userData) {
+				throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
+			}
+			return userData;
+
+		} catch (_e) {
+			throw new InternalServerErrorException("An error occured while fetching data from 42's api");
+		}
+	}
+
 }
