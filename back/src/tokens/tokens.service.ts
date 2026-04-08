@@ -37,6 +37,10 @@ export class TokensService {
 		return await this.createToken(null, "STATE_42AUTH");
 	}
 
+	public async create42LinkStateToken(memberId: number) {
+		return await this.createToken(memberId, "STATE_42LINK");
+	}
+
 	private async createToken(
 		memberId: number | null,
 		tokenPurpose: TokenPurpose,

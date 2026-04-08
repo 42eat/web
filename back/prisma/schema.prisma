@@ -55,6 +55,7 @@ enum TokenPurpose {
   EMAIL_RESET
   PASSWORD_RESET
   STATE_42AUTH
+  STATE_42LINK
 }
 
 model Token {

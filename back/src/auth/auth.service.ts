@@ -341,7 +341,26 @@ export class AuthService {
 
 		const state = await this.tokensService.create42AuthStateToken();
 
-		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/callback&response_type=code&scope=public&state=${state}`;
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/auth-callback&response_type=code&scope=public&state=${state}`;
+		return url;
+	}
+
+	public async get42LinkUrl(memberId: number) {
+		const member = await this.members.getById(memberId);
+
+		if (member && member.login) {
+			throw new AppForbiddenException("FORBIDDEN", "You already have a linked login");
+		}
+
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+
+		if (!api42_client_uid) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
+		const state = await this.tokensService.create42LinkStateToken(memberId);
+
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/link-callback&response_type=code&scope=public&state=${state}`;
 		return url;
 	}
 
@@ -353,35 +372,7 @@ export class AuthService {
 	) {
 		await this.tokensService.isValidToken(state, "STATE_42AUTH");
 
-		const api42_client_uid = await this.appConfig.get("42api-uid");
-		const api42_client_secret = await this.appConfig.get("42api-secret");
-
-		if (!api42_client_uid || !api42_client_secret) {
-			throw new InternalServerErrorException("API 42 credentials are not set");
-		}
-
-		const tokenResponse = await fetch("https://api.intra.42.fr/oauth/token", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				grant_type: "authorization_code",
-				client_id: api42_client_uid,
-				client_secret: api42_client_secret,
-				code,
-				redirect_uri: process.env.BASE_FRONT_URL + "/auth/42/callback",
-			}),
-		});
-
-		const tokenData = TokenResponseSchema.parse(await tokenResponse.json());
-
-		if (!tokenData.access_token) {
-			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to authenticate with 42");
-		}
-
-		const userResponse = await fetch("https://api.intra.42.fr/v2/me", {
-			headers: { Authorization: `Bearer ${tokenData.access_token}` },
-		});
-		const userData = Me42ResponseSchema.parse(await userResponse.json());
+		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/auth-callback");
 
 		if (!userData || !userData.login) {
 			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
@@ -420,6 +411,70 @@ export class AuthService {
 				ipAddress ?? "unknown",
 			),
 		};
+	}
+
+	public async link42(
+		memberId: number,
+		code: string,
+		state: string,
+	) {
+		const state_member = await this.tokensService.isValidToken(state, "STATE_42LINK");
+
+		if (state_member.memberId !== memberId) {
+			throw new AppForbiddenException("FORBIDDEN", "This is not your token");
+		}
+
+		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/link-callback");
+
+		const existingMember = await this.members.getByLogin(userData.login);
+
+		if (existingMember) {
+			throw new ConflictException("This login is already linked to an account");
+		}
+
+		await this.members.setLogin(memberId, userData.login);
+	}
+
+	private async get42UserInfo(code: string, redirectUri: string) {
+		const api42_client_uid = await this.appConfig.get("42api-uid");
+		const api42_client_secret = await this.appConfig.get("42api-secret");
+
+		if (!api42_client_uid || !api42_client_secret) {
+			throw new InternalServerErrorException("API 42 credentials are not set");
+		}
+
+		try {
+			const tokenResponse = await fetch("https://api.intra.42.fr/oauth/token", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					grant_type: "authorization_code",
+					client_id: api42_client_uid,
+					client_secret: api42_client_secret,
+					code,
+					redirect_uri: redirectUri,
+				}),
+			});
+
+			const tokenData = TokenResponseSchema.parse(await tokenResponse.json());
+
+			if (!tokenData.access_token) {
+				throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to authenticate with 42");
+			}
+
+			const userResponse = await fetch("https://api.intra.42.fr/v2/me", {
+				headers: { Authorization: `Bearer ${tokenData.access_token}` },
+			});
+			const userData = Me42ResponseSchema.parse(await userResponse.json());
+
+			if (!userData) {
+				throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
+			}
+			return userData;
+
+		} catch (_e) {
+			throw new InternalServerErrorException("An error occured while fetching data from 42's api");
+		}
 	}
 
 }
