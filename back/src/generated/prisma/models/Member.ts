@@ -580,10 +580,12 @@ export type MemberCreateNestedOneWithoutTokensInput = {
   connect?: Prisma.MemberWhereUniqueInput
 }
 
-export type MemberUpdateOneRequiredWithoutTokensNestedInput = {
+export type MemberUpdateOneWithoutTokensNestedInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutTokensInput, Prisma.MemberUncheckedCreateWithoutTokensInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTokensInput
   upsert?: Prisma.MemberUpsertWithoutTokensInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
   connect?: Prisma.MemberWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutTokensInput, Prisma.MemberUpdateWithoutTokensInput>, Prisma.MemberUncheckedUpdateWithoutTokensInput>
 }
@@ -2578,6 +2580,11 @@ export type MemberFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Skip the first `n` Members.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Members.
+   */
   distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
 }
 

@@ -443,14 +443,6 @@ export type ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput = {
   deleteMany?: Prisma.ShiftMemberScalarWhereInput | Prisma.ShiftMemberScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ShiftMemberCreateNestedManyWithoutPositionInput = {
   create?: Prisma.XOR<Prisma.ShiftMemberCreateWithoutPositionInput, Prisma.ShiftMemberUncheckedCreateWithoutPositionInput> | Prisma.ShiftMemberCreateWithoutPositionInput[] | Prisma.ShiftMemberUncheckedCreateWithoutPositionInput[]
   connectOrCreate?: Prisma.ShiftMemberCreateOrConnectWithoutPositionInput | Prisma.ShiftMemberCreateOrConnectWithoutPositionInput[]
@@ -1377,6 +1369,11 @@ export type ShiftMemberFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` ShiftMembers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ShiftMembers.
+   */
   distinct?: Prisma.ShiftMemberScalarFieldEnum | Prisma.ShiftMemberScalarFieldEnum[]
 }
 

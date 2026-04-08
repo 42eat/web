@@ -1216,6 +1216,11 @@ export type MemberRoleFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` MemberRoles.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MemberRoles.
+   */
   distinct?: Prisma.MemberRoleScalarFieldEnum | Prisma.MemberRoleScalarFieldEnum[]
 }
 

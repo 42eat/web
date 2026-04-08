@@ -183,15 +183,26 @@ export class AuthController {
 		});
 	}
 
-	@TsRestHandler(authContract.getLogin42url)
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@TsRestHandler(authContract.redirectLogin42url)
 	public redirectAuth42(@Res() res: Response) {
-		return tsRestHandler(authContract.getLogin42url, async () => {
+		return tsRestHandler(authContract.redirectLogin42url, async () => {
 			const url = await this.authService.get42LoginUrl();
 			res.redirect(url);
 			return { status: 302, body: null };
 		});
 	}
 
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
+	@TsRestHandler(authContract.getLogin42url)
+	public getAuth42Url() {
+		return tsRestHandler(authContract.getLogin42url, async () => {
+			const url = await this.authService.get42LoginUrl();
+			return { status: 200, body: { url } };
+		});
+	}
+
+	@Throttle({ default: { limit: 20, ttl: 60000 } })
 	@TsRestHandler(authContract.auth42)
 	public auth42(
 		@Req() req: Request,

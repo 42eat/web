@@ -54,18 +54,19 @@ enum TokenPurpose {
   EMAIL_VERIFICATION
   EMAIL_RESET
   PASSWORD_RESET
+  STATE_42AUTH
 }
 
 model Token {
   id        Int       @id @default(autoincrement())
   token     String    @unique
   purpose   TokenPurpose
-  memberId  Int       @map("member_id")
+  memberId  Int?      @map("member_id")
   data      Json?
   expiresAt DateTime  @map("expires_at")
   createdAt DateTime  @default(now()) @map("created_at")
 
-  member    Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member    Member?   @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   @@map("tokens")
 }

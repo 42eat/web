@@ -6,7 +6,6 @@ import {
 import { MembersService } from "../members/members.service";
 import { RegisterDto } from "@42eat-web/shared";
 import * as bcrypt from "bcrypt";
-import { randomBytes } from "crypto";
 import { LoginDto } from "@42eat-web/shared";
 import { JwtService } from "@nestjs/jwt";
 import { SessionsService } from "../sessions/sessions.service";
@@ -61,7 +60,7 @@ export class AuthService {
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (existing) {
-			throw new ConflictException("Email alredy used");
+			throw new ConflictException("Email already used");
 		}
 
 		const insertedUser = await this.members.createFromRegister(
@@ -263,14 +262,14 @@ export class AuthService {
 		if (!existing) {
 			throw new AppForbiddenException(
 				"FORBIDDEN",
-				"You shouln't have an error unless your account have been deleted or something like that",
+				"You shouldn't have an error unless your account have been deleted or something like that",
 			);
 		}
 
 		if (!existing.password) {
 			throw new AppForbiddenException(
 				"FORBIDDEN",
-				"You shouln't be able to call this route with an intra only account",
+				"You shouldn't be able to call this route with an intra only account",
 			);
 		}
 
@@ -318,7 +317,7 @@ export class AuthService {
 		const member = await this.members.getById(memberId);
 
 		if (!member) {
-			throw new AppForbiddenException("FORBIDDEN", "This shouldn't append");
+			throw new AppForbiddenException("FORBIDDEN", "This shouldn't happen");
 		}
 
 		if (!member.password || !(await bcrypt.compare(password, member.password))) {
@@ -333,8 +332,6 @@ export class AuthService {
 		await this.members.setEmail(payload.memberId, payload.data.newEmail);
 	}
 
-	private pendingStates = new Set<string>();
-
 	public async get42LoginUrl() {
 		const api42_client_uid = await this.appConfig.get("42api-uid");
 
@@ -342,10 +339,7 @@ export class AuthService {
 			throw new InternalServerErrorException("API 42 credentials are not set");
 		}
 
-		const state = randomBytes(16).toString("hex");
-		this.pendingStates.add(state);
-
-		setTimeout(() => this.pendingStates.delete(state), 10 * 60 * 1000);
+		const state = await this.tokensService.create42AuthStateToken();
 
 		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/callback&response_type=code&scope=public&state=${state}`;
 		return url;
@@ -357,10 +351,7 @@ export class AuthService {
 		userAgent: string | undefined,
 		ipAddress: string | undefined,
 	) {
-		if (!this.pendingStates.has(state)) {
-			throw new AppUnauthorizedException("UNAUTHORIZED", "Invalid state");
-		}
-		this.pendingStates.delete(state);
+		await this.tokensService.isValidToken(state, "STATE_42AUTH");
 
 		const api42_client_uid = await this.appConfig.get("42api-uid");
 		const api42_client_secret = await this.appConfig.get("42api-secret");
@@ -398,9 +389,13 @@ export class AuthService {
 
 		let member = await this.members.getByLogin(userData.login);
 
-		if (!member) {
-			member = await this.members.getByEmail(userData.email);
-		}
+		// JSP si faut laisser ca ou pas en terme de secu et d'utilité
+		// if (!member) {
+		// 	member = await this.members.getByEmail(userData.email);
+		// 	if (member && !member.emailValidated) {
+		// 		throw new AppForbiddenException("EMAIL_NOT_VERIFIED", "You cannot login with 42 to an account that doesn't have a validated email");
+		// 	}
+		// }
 
 		if (!member) {
 			member = await this.members.createFromIntra(
@@ -411,6 +406,10 @@ export class AuthService {
 
 		if (!member) {
 			throw new InternalServerErrorException("An error occured while creating the user");
+		}
+
+		if (!member?.login) {
+			await this.members.setLogin(member.id, userData.login);
 		}
 
 		return {

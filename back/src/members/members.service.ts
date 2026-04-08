@@ -180,4 +180,11 @@ export class MembersService {
 			data: { email },
 		});
 	}
+
+	public async setLogin(memberId: number, login: string) {
+		await this.prisma.member.update({
+			where: { id: memberId },
+			data: { login },
+		});
+	}
 }

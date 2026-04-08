@@ -195,7 +195,7 @@ export type TokenGroupByOutputType = {
   id: number
   token: string
   purpose: $Enums.TokenPurpose
-  memberId: number
+  memberId: number | null
   data: runtime.JsonValue | null
   expiresAt: Date
   createdAt: Date
@@ -228,18 +228,18 @@ export type TokenWhereInput = {
   id?: Prisma.IntFilter<"Token"> | number
   token?: Prisma.StringFilter<"Token"> | string
   purpose?: Prisma.EnumTokenPurposeFilter<"Token"> | $Enums.TokenPurpose
-  memberId?: Prisma.IntFilter<"Token"> | number
+  memberId?: Prisma.IntNullableFilter<"Token"> | number | null
   data?: Prisma.JsonNullableFilter<"Token">
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
-  member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
 }
 
 export type TokenOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   token?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  memberId?: Prisma.SortOrderInput | Prisma.SortOrder
   data?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -253,18 +253,18 @@ export type TokenWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TokenWhereInput[]
   NOT?: Prisma.TokenWhereInput | Prisma.TokenWhereInput[]
   purpose?: Prisma.EnumTokenPurposeFilter<"Token"> | $Enums.TokenPurpose
-  memberId?: Prisma.IntFilter<"Token"> | number
+  memberId?: Prisma.IntNullableFilter<"Token"> | number | null
   data?: Prisma.JsonNullableFilter<"Token">
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
-  member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
 }, "id" | "token">
 
 export type TokenOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   token?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
-  memberId?: Prisma.SortOrder
+  memberId?: Prisma.SortOrderInput | Prisma.SortOrder
   data?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -282,7 +282,7 @@ export type TokenScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Token"> | number
   token?: Prisma.StringWithAggregatesFilter<"Token"> | string
   purpose?: Prisma.EnumTokenPurposeWithAggregatesFilter<"Token"> | $Enums.TokenPurpose
-  memberId?: Prisma.IntWithAggregatesFilter<"Token"> | number
+  memberId?: Prisma.IntNullableWithAggregatesFilter<"Token"> | number | null
   data?: Prisma.JsonNullableWithAggregatesFilter<"Token">
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Token"> | Date | string
@@ -294,14 +294,14 @@ export type TokenCreateInput = {
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt: Date | string
   createdAt?: Date | string
-  member: Prisma.MemberCreateNestedOneWithoutTokensInput
+  member?: Prisma.MemberCreateNestedOneWithoutTokensInput
 }
 
 export type TokenUncheckedCreateInput = {
   id?: number
   token: string
   purpose: $Enums.TokenPurpose
-  memberId: number
+  memberId?: number | null
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt: Date | string
   createdAt?: Date | string
@@ -313,14 +313,14 @@ export type TokenUpdateInput = {
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  member?: Prisma.MemberUpdateOneRequiredWithoutTokensNestedInput
+  member?: Prisma.MemberUpdateOneWithoutTokensNestedInput
 }
 
 export type TokenUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.EnumTokenPurposeFieldUpdateOperationsInput | $Enums.TokenPurpose
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -330,7 +330,7 @@ export type TokenCreateManyInput = {
   id?: number
   token: string
   purpose: $Enums.TokenPurpose
-  memberId: number
+  memberId?: number | null
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt: Date | string
   createdAt?: Date | string
@@ -348,7 +348,7 @@ export type TokenUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.EnumTokenPurposeFieldUpdateOperationsInput | $Enums.TokenPurpose
-  memberId?: Prisma.IntFieldUpdateOperationsInput | number
+  memberId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -448,6 +448,14 @@ export type EnumTokenPurposeFieldUpdateOperationsInput = {
   set?: $Enums.TokenPurpose
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type TokenCreateWithoutMemberInput = {
   token: string
   purpose: $Enums.TokenPurpose
@@ -498,7 +506,7 @@ export type TokenScalarWhereInput = {
   id?: Prisma.IntFilter<"Token"> | number
   token?: Prisma.StringFilter<"Token"> | string
   purpose?: Prisma.EnumTokenPurposeFilter<"Token"> | $Enums.TokenPurpose
-  memberId?: Prisma.IntFilter<"Token"> | number
+  memberId?: Prisma.IntNullableFilter<"Token"> | number | null
   data?: Prisma.JsonNullableFilter<"Token">
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
@@ -549,7 +557,7 @@ export type TokenSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   data?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }, ExtArgs["result"]["token"]>
 
 export type TokenSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -560,7 +568,7 @@ export type TokenSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   data?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }, ExtArgs["result"]["token"]>
 
 export type TokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -571,7 +579,7 @@ export type TokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   data?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }, ExtArgs["result"]["token"]>
 
 export type TokenSelectScalar = {
@@ -586,25 +594,25 @@ export type TokenSelectScalar = {
 
 export type TokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "token" | "purpose" | "memberId" | "data" | "expiresAt" | "createdAt", ExtArgs["result"]["token"]>
 export type TokenInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }
 export type TokenIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }
 export type TokenIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  member?: boolean | Prisma.Token$memberArgs<ExtArgs>
 }
 
 export type $TokenPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Token"
   objects: {
-    member: Prisma.$MemberPayload<ExtArgs>
+    member: Prisma.$MemberPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     token: string
     purpose: $Enums.TokenPurpose
-    memberId: number
+    memberId: number | null
     data: runtime.JsonValue | null
     expiresAt: Date
     createdAt: Date
@@ -1002,7 +1010,7 @@ readonly fields: TokenFieldRefs;
  */
 export interface Prisma__TokenClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  member<T extends Prisma.Token$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Token$memberArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1235,6 +1243,11 @@ export type TokenFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Skip the first `n` Tokens.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Tokens.
+   */
   distinct?: Prisma.TokenScalarFieldEnum | Prisma.TokenScalarFieldEnum[]
 }
 
@@ -1432,6 +1445,25 @@ export type TokenDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Tokens to delete.
    */
   limit?: number
+}
+
+/**
+ * Token.member
+ */
+export type Token$memberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Member
+   */
+  select?: Prisma.MemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Member
+   */
+  omit?: Prisma.MemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
 }
 
 /**

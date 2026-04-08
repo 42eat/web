@@ -6,3 +6,9 @@ export const auth42Schema = z.object({
 });
 
 export type Auth42Dto = z.infer<typeof auth42Schema>;
+
+export const auth42UrlSchema = z.object({
+	url: z.string(),
+});
+
+export type Auth42UrlRespone = z.infer<typeof auth42UrlSchema>;

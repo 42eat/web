@@ -12,7 +12,8 @@
 export const TokenPurpose = {
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
   EMAIL_RESET: 'EMAIL_RESET',
-  PASSWORD_RESET: 'PASSWORD_RESET'
+  PASSWORD_RESET: 'PASSWORD_RESET',
+  STATE_42AUTH: 'STATE_42AUTH'
 } as const
 
 export type TokenPurpose = (typeof TokenPurpose)[keyof typeof TokenPurpose]
