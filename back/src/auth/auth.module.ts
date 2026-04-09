@@ -9,9 +9,10 @@ import { RefreshStrategy } from "./strategies/refresh.strategy";
 import { MailModule } from "../core/mail/mail.module";
 import { TokensModule } from "../tokens/tokens.module";
 import { AppConfigModule } from "../config/config.controller";
+import { LoggingModule } from "../core/logging/logging.module";
 
 @Module({
-	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule, AppConfigModule],
+	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule, AppConfigModule, LoggingModule],
 	providers: [AuthService, JwtStrategy, RefreshStrategy],
 	controllers: [AuthController],
 	exports: [AuthService],

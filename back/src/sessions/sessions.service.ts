@@ -2,19 +2,24 @@ import { Injectable, Logger } from "@nestjs/common";
 import { Cron } from "@nestjs/schedule";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { UUID } from "crypto";
+import { WinstonLoggerService } from "../core/logging/logger.service";
+import { LogBuilder } from "../core/logging/log-builder";
 
 @Injectable()
 export class SessionsService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly logger: WinstonLoggerService,
+	) {}
 
-	private readonly logger = new Logger(SessionsService.name);
+	private readonly nestLogger = new Logger(SessionsService.name);
 
 	@Cron("05 * * * *")
 	async cleanupExpiredSessions() {
 		const result = await this.prisma.session.deleteMany({
 			where: { expiresAt: { lt: new Date() } },
 		});
-		this.logger.log(`Deleted ${result.count} expired sessions`);
+		this.logger.log(LogBuilder.session.cleanupCompleted(result.count));
 	}
 
 	public async create(

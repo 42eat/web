@@ -5,22 +5,26 @@ import { Permission } from "@42eat-web/shared";
 import { RolesService } from "../roles/roles.service";
 import * as bcrypt from "bcrypt";
 import { Cron } from "@nestjs/schedule";
+import { WinstonLoggerService } from "../core/logging/logger.service";
+import { LogBuilder } from "../core/logging/log-builder";
 
 @Injectable()
 export class MembersService {
 	constructor(
 		private readonly prisma: PrismaService,
 		private readonly roles: RolesService,
+		private readonly logger: WinstonLoggerService,
 	) {}
 
 	@Cron("0 * * * *")
 	async clearUnverifiedMembers() {
-		await this.prisma.member.deleteMany({
+		const result = await this.prisma.member.deleteMany({
 			where: {
 				emailValidated: false,
 				createdAt: { lt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
 			},
 		});
+		this.logger.log(LogBuilder.member.unverifiedCleaned(result.count));
 	}
 
 	public async getAll(): Promise<Member[]> {

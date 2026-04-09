@@ -19,6 +19,8 @@ import { AppConfigService } from "../config/config.service";
 import z from "zod";
 import { env } from "../core/env";
 import { randomUUID, UUID } from "crypto";
+import { WinstonLoggerService } from "../core/logging/logger.service";
+import { LogBuilder } from "../core/logging/log-builder";
 
 const TokenResponseSchema = z.object({
 	access_token: z.string(),
@@ -38,6 +40,7 @@ export class AuthService {
 		private readonly mailService: MailService,
 		private readonly tokensService: TokensService,
 		private readonly appConfig: AppConfigService,
+		private readonly logger: WinstonLoggerService,
 	) {}
 
 	// This will be replaced by nodejs throttler
@@ -62,6 +65,7 @@ export class AuthService {
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (existing) {
+			this.logger.warn(LogBuilder.auth.registrationFailed(dto.email, "Email already exists"));
 			throw new ConflictException("Email already used");
 		}
 
@@ -72,8 +76,11 @@ export class AuthService {
 		);
 
 		if (!insertedUser) {
+			this.logger.error(LogBuilder.error("AUTH_REGISTRATION", "Failed to create user"));
 			throw new InternalServerErrorException("An error occured while creating the user");
 		}
+
+		this.logger.log(LogBuilder.auth.registration(dto.email, insertedUser.id));
 
 		await this.sendEmailValidation(insertedUser);
 
@@ -102,6 +109,7 @@ export class AuthService {
 		}
 
 		if (!existing.password) {
+			this.logger.warn(LogBuilder.auth.loginFailed(dto.email, "Intra-only account"));
 			throw new AppUnauthorizedException("INTRA_ONLY_ACCOUNT", "This email is related to an intra login only");
 		}
 
@@ -111,8 +119,11 @@ export class AuthService {
 		);
 
 		if (!isValidPassword) {
+			this.logger.warn(LogBuilder.auth.loginFailed(dto.email, "Invalid password"));
 			throw new AppUnauthorizedException("INVALID_CREDENTIALS", "Invalid credentials");
 		}
+
+		this.logger.log(LogBuilder.auth.login(dto.email, existing.id));
 
 		return {
 			accessToken: await this.generateAccessToken(existing.id),
@@ -235,6 +246,7 @@ export class AuthService {
 		if (member) {
 			await this.sendResetPasswordEmail(member);
 		}
+		this.logger.log(LogBuilder.auth.passwordResetRequested(email));
 	}
 
 	public async resetPassword(token: string, password: string) {
@@ -244,6 +256,7 @@ export class AuthService {
 		);
 
 		await this.members.setPassword(payload.memberId, password);
+		this.logger.log(LogBuilder.auth.passwordChanged(payload.memberId));
 	}
 
 	public async changePassword(
@@ -272,6 +285,7 @@ export class AuthService {
 		}
 
 		await this.members.setPassword(memberId, newPassword);
+		this.logger.log(LogBuilder.auth.passwordChanged(memberId));
 	}
 
 	public async logout(memberId: number, jti: UUID | undefined) {
@@ -281,6 +295,7 @@ export class AuthService {
 
 		if (validSession) {
 			await this.sessions.removeSession(validSession.id);
+			this.logger.log(LogBuilder.auth.logout(memberId));
 		}
 	}
 

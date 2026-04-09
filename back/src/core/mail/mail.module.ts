@@ -5,6 +5,7 @@ import { MailerModule } from "@nestjs-modules/mailer";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/adapters/handlebars.adapter";
 import { join } from "path";
 import { env } from "../env";
+import { LoggingModule } from "../logging/logging.module";
 
 @Module({
 	imports: [
@@ -39,6 +40,7 @@ import { env } from "../env";
 				preview: env.NODE_ENV !== "prod",
 			}),
 		}),
+		LoggingModule,
 	],
 	providers: [MailService],
 	controllers: [MailController],
