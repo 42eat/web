@@ -17,6 +17,7 @@ import { AppForbiddenException } from "../core/error/forbidden";
 import { TokensService } from "../tokens/tokens.service";
 import { AppConfigService } from "../config/config.service";
 import z from "zod";
+import { env } from "../core/env";
 
 const TokenResponseSchema = z.object({
 	access_token: z.string(),
@@ -159,7 +160,7 @@ export class AuthService {
 		return this.jwtService.signAsync(
 			createJwtPayload(memberId, user.emailValidated),
 			{
-				secret: process.env.JWT_SECRET,
+				secret: env.JWT_SECRET,
 				expiresIn: "15m",
 			},
 		);
@@ -172,7 +173,7 @@ export class AuthService {
 	) {
 		const token = await this.jwtService.signAsync(
 			{ sub: memberId },
-			{ secret: process.env.JWT_REFRESH_SECRET, expiresIn: "7d" },
+			{ secret: env.JWT_REFRESH_SECRET, expiresIn: "7d" },
 		);
 		const hashedToken = await bcrypt.hash(token, 10);
 		const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
@@ -199,11 +200,8 @@ export class AuthService {
 
 		await this.mailService.sendEmail([member.email], "Confirm your email - 42's Foyer", "confirm-email", {
 			username: member.displayName,
-			token: await this.jwtService.signAsync(
-				{ sub: member.id },
-				{ secret: process.env.JWT_EMAIL_SECRET, expiresIn: "15m" },
-			),
-			baseFrontUrl: process.env.BASE_FRONT_URL,
+			token: await this.tokensService.createConfirmEmailToken(member.id),
+			baseFrontUrl: env.BASE_FRONT_URL,
 			year: new Date().getFullYear(),
 		});
 	}
@@ -229,7 +227,7 @@ export class AuthService {
 			"reset-password",
 			{
 				token: await this.tokensService.createResetPasswordToken(member.id),
-				baseFrontUrl: process.env.BASE_FRONT_URL,
+				baseFrontUrl: env.BASE_FRONT_URL,
 				year: new Date().getFullYear(),
 			},
 		);
@@ -303,7 +301,7 @@ export class AuthService {
 					member.id,
 					newEmail,
 				),
-				baseFrontUrl: process.env.BASE_FRONT_URL,
+				baseFrontUrl: env.BASE_FRONT_URL,
 				year: new Date().getFullYear(),
 			},
 		);
@@ -341,7 +339,7 @@ export class AuthService {
 
 		const state = await this.tokensService.create42AuthStateToken();
 
-		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/auth-callback&response_type=code&scope=public&state=${state}`;
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${env.BASE_FRONT_URL}/auth/42/auth-callback&response_type=code&scope=public&state=${state}`;
 		return url;
 	}
 
@@ -360,7 +358,7 @@ export class AuthService {
 
 		const state = await this.tokensService.create42LinkStateToken(memberId);
 
-		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${process.env.BASE_FRONT_URL}/auth/42/link-callback&response_type=code&scope=public&state=${state}`;
+		const url = `https://api.intra.42.fr/oauth/authorize?client_id=${api42_client_uid}&redirect_uri=${env.BASE_FRONT_URL}/auth/42/link-callback&response_type=code&scope=public&state=${state}`;
 		return url;
 	}
 
@@ -372,7 +370,7 @@ export class AuthService {
 	) {
 		await this.tokensService.isValidToken(state, "STATE_42AUTH");
 
-		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/auth-callback");
+		const userData = await this.get42UserInfo(code, env.BASE_FRONT_URL + "/auth/42/auth-callback");
 
 		if (!userData || !userData.login) {
 			throw new AppUnauthorizedException("UNAUTHORIZED", "Failed to retrieve user data from 42");
@@ -424,7 +422,7 @@ export class AuthService {
 			throw new AppForbiddenException("FORBIDDEN", "This is not your token");
 		}
 
-		const userData = await this.get42UserInfo(code, process.env.BASE_FRONT_URL + "/auth/42/link-callback");
+		const userData = await this.get42UserInfo(code, env.BASE_FRONT_URL + "/auth/42/link-callback");
 
 		const existingMember = await this.members.getByLogin(userData.login);
 

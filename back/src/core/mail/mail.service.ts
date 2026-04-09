@@ -1,5 +1,6 @@
 import { ISendMailOptions, MailerService } from "@nestjs-modules/mailer";
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { env } from "../env";
 
 @Injectable()
 export class MailService {
@@ -18,7 +19,7 @@ export class MailService {
 				template: template,
 				context: context,
 				headers: {
-					"List-Unsubscribe": `<mailto:${process.env.SMTP_USER}?subject=unsubscribe>`,
+					"List-Unsubscribe": `<mailto:${env.SMTP_USER}?subject=unsubscribe>`,
 					"List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
 					"X-Mailer": "42eat",
 					"X-Priority": "3",

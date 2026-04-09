@@ -2,6 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
 import { Code401, Code403, code401, code403 } from "@42eat-web/shared";
 import { Response } from "express";
 import { Prisma } from "../../generated/prisma/client";
+import { env } from "../env";
 
 interface TsRestException {
 	response?: {
@@ -23,7 +24,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
 
-		if (process.env.NODE_ENV === "dev") {
+		if (env.NODE_ENV === "dev") {
 			console.error(exception);
 		}
 

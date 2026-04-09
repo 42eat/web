@@ -4,21 +4,22 @@ import { MailController } from "./mail.controller";
 import { MailerModule } from "@nestjs-modules/mailer";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/adapters/handlebars.adapter";
 import { join } from "path";
+import { env } from "../env";
 
 @Module({
 	imports: [
 		MailerModule.forRootAsync({
 			useFactory: () => ({
 				transport: {
-					host: process.env.SMTP_HOST,
-					port: +(process.env.SMTP_PORT ?? 465),
+					host: env.SMTP_HOST,
+					port: env.SMTP_PORT,
 					secure: true,
 					tls: {
 						rejectUnauthorized: true,
 					},
 					auth: {
-						user: process.env.SMTP_USER,
-						pass: process.env.SMTP_PASS,
+						user: env.SMTP_USER,
+						pass: env.SMTP_PASS,
 					},
 					pool: {
 						maxConnections: 5,
@@ -26,7 +27,7 @@ import { join } from "path";
 					},
 				},
 				defaults: {
-					from: `42's Foyer <${process.env.SMTP_USER}>`,
+					from: `42's Foyer <${env.SMTP_USER}>`,
 				},
 				template: {
 					dir: join(__dirname, "templates"),
@@ -35,7 +36,7 @@ import { join } from "path";
 						strict: true,
 					},
 				},
-				preview: process.env.NODE_ENV !== "production",
+				preview: env.NODE_ENV !== "prod",
 			}),
 		}),
 	],

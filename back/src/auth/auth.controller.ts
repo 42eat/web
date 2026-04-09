@@ -14,13 +14,14 @@ import {
 	JwtAuthOptionalGuard,
 } from "../core/guards/jwt-auth.guard";
 import { Throttle } from "@nestjs/throttler";
+import { env } from "../core/env";
 
 @Controller()
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	private setRefreshTokenCookie(res: Response, token: string | null) {
-		const isProd = process.env.NODE_ENV === "prod";
+		const isProd = env.NODE_ENV === "prod";
 
 		const options = {
 			httpOnly: true,
