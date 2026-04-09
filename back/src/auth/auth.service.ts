@@ -18,6 +18,7 @@ import { TokensService } from "../tokens/tokens.service";
 import { AppConfigService } from "../config/config.service";
 import z from "zod";
 import { env } from "../core/env";
+import { randomUUID, UUID } from "crypto";
 
 const TokenResponseSchema = z.object({
 	access_token: z.string(),
@@ -125,33 +126,27 @@ export class AuthService {
 
 	public async refresh(
 		memberId: number,
-		refreshToken: string,
+		jti: UUID | undefined,
 		userAgent: string | undefined,
 		ipAddress: string | undefined,
 	) {
-		let allSessions = await this.sessions.getMemberSessions(memberId);
-		allSessions = allSessions.filter(
-			(session) => session.expiresAt > new Date(),
-		);
+		if (!jti) throw new AppUnauthorizedException("INVALID_REFRESH_TOKEN", "Invalid refresh token");
 
-		for (const session of allSessions) {
-			const isValidSession = await bcrypt.compare(
-				refreshToken,
-				session.refreshToken,
-			);
-			if (isValidSession) {
-				await this.sessions.removeSession(session.id);
+		const validSession = await this.sessions.isValidSession(memberId, jti);
 
-				return {
-					accessToken: await this.generateAccessToken(memberId),
-					refreshToken: await this.generateRefreshToken(
-						memberId,
-						userAgent,
-						ipAddress,
-					),
-				};
-			}
+		if (validSession) {
+			await this.sessions.removeSession(validSession.id);
+
+			return {
+				accessToken: await this.generateAccessToken(memberId),
+				refreshToken: await this.generateRefreshToken(
+					memberId,
+					userAgent,
+					ipAddress,
+				),
+			};
 		}
+
 		throw new AppUnauthorizedException("INVALID_REFRESH_TOKEN", "Invalid refresh token");
 	}
 
@@ -171,17 +166,17 @@ export class AuthService {
 		userAgent: string | undefined,
 		ipAddress: string | undefined,
 	) {
+		const jti = randomUUID();
 		const token = await this.jwtService.signAsync(
-			{ sub: memberId },
+			{ sub: memberId, jti },
 			{ secret: env.JWT_REFRESH_SECRET, expiresIn: "7d" },
 		);
-		const hashedToken = await bcrypt.hash(token, 10);
 		const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
 		if (
 			!(await this.sessions.create(
 				memberId,
-				hashedToken,
+				jti,
 				expiresAt,
 				userAgent ?? "",
 				ipAddress ?? "unknown",
@@ -279,15 +274,13 @@ export class AuthService {
 		await this.members.setPassword(memberId, newPassword);
 	}
 
-	public async logout(memberId: number, refreshToken: string | undefined) {
-		const allSessions = await this.sessions.getMemberSessions(memberId);
+	public async logout(memberId: number, jti: UUID | undefined) {
+		if (!jti) return;
 
-		if (!refreshToken) return;
+		const validSession = await this.sessions.isValidSession(memberId, jti);
 
-		for (const session of allSessions) {
-			if (await bcrypt.compare(refreshToken, session.refreshToken)) {
-				await this.sessions.removeSession(session.id);
-			}
+		if (validSession) {
+			await this.sessions.removeSession(validSession.id);
 		}
 	}
 

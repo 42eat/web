@@ -83,7 +83,7 @@ export class AuthController {
 		@Res({ passthrough: true }) res: Response,
 	) {
 		return tsRestHandler(authContract.logout, async () => {
-			await this.authService.logout(member.id, member.refreshToken);
+			await this.authService.logout(member.id, member.jti);
 
 			this.setRefreshTokenCookie(res, null);
 
@@ -101,7 +101,7 @@ export class AuthController {
 		return tsRestHandler(authContract.refresh, async () => {
 			const { accessToken, refreshToken } = await this.authService.refresh(
 				member.id,
-				member.refreshToken ?? "",
+				member.jti,
 				req.headers["user-agent"],
 				req.ip,
 			);

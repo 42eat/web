@@ -3,6 +3,7 @@ import { PassportStrategy } from "@nestjs/passport";
 import { Request } from "express";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { env } from "../../core/env";
+import { UUID } from "crypto";
 
 @Injectable()
 export class RefreshStrategy extends PassportStrategy(Strategy, "jwt-refresh") {
@@ -16,8 +17,7 @@ export class RefreshStrategy extends PassportStrategy(Strategy, "jwt-refresh") {
 		});
 	}
 
-	validate(req: Request, payload: { sub: number }) {
-		const refreshToken = req.cookies?.refresh_token as string | undefined;
-		return { id: payload.sub, refreshToken };
+	validate(req: Request, payload: { sub: number; jti: UUID }) {
+		return { id: payload.sub, jti: payload.jti };
 	}
 }
