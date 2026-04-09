@@ -12,6 +12,7 @@ import { MailModule } from "./core/mail/mail.module";
 import { TokensService } from "./tokens/tokens.service";
 import { TokensModule } from "./tokens/tokens.module";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { LoggingModule } from "./core/logging/logging.module";
 
 @Module({
 	providers: [
@@ -33,6 +34,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 		SessionsModule,
 		PermissionsModule,
 		MailModule,
+		LoggingModule,
 		ScheduleModule.forRoot(),
 		TokensModule,
 		ThrottlerModule.forRoot({

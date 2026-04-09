@@ -4,6 +4,8 @@ import { randomBytes } from "crypto";
 import { TokenPurpose } from "../generated/prisma/enums";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { Cron } from "@nestjs/schedule";
+import { WinstonLoggerService } from "../core/logging/logger.service";
+import { LogBuilder } from "../core/logging/log-builder";
 
 export type TokenCreationParam<T extends TokenPurpose>
 	= T extends "EMAIL_RESET" ? { memberId: number; data: { newEmail: string } }
@@ -12,13 +14,17 @@ export type TokenCreationParam<T extends TokenPurpose>
 
 @Injectable()
 export class TokensService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly logger: WinstonLoggerService,
+	) {}
 
 	@Cron("0 * * * *")
 	async clearExpiredTokens() {
-		await this.prisma.token.deleteMany({
+		const result = await this.prisma.token.deleteMany({
 			where: { expiresAt: { lt: new Date() } },
 		});
+		this.logger.log(LogBuilder.token.cleanupCompleted(result.count));
 	}
 
 	public async createConfirmEmailToken(memberId: number) {
@@ -56,6 +62,7 @@ export class TokensService {
 				expiresAt: new Date(Date.now() + 15 * 60 * 1000),
 			},
 		});
+		this.logger.log(LogBuilder.token.created(tokenPurpose, memberId ?? undefined));
 		return token;
 	}
 
@@ -70,11 +77,23 @@ export class TokensService {
 		if (token) await this.prisma.token.delete({ where: { id: token.id } });
 
 		if (!token || purpose != token.purpose || token.expiresAt < new Date()) {
+			this.logger.warn(
+				LogBuilder.token.validationFailed(
+					purpose,
+					!token
+						? "Token not found"
+						: token.purpose !== purpose
+							? "Purpose mismatch"
+							: "Token expired",
+				),
+			);
 			throw new AppUnauthorizedException(
 				"UNAUTHORIZED",
 				"Invalid or expired token",
 			);
 		}
+
+		this.logger.log(LogBuilder.token.validated(purpose, token.memberId ?? undefined));
 		return (
 			purpose === "EMAIL_RESET"
 				? { memberId: token.memberId, data: token.data }
