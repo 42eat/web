@@ -43,20 +43,6 @@ export class AuthService {
 		private readonly logger: WinstonLoggerService,
 	) {}
 
-	// This will be replaced by nodejs throttler
-	// // Cooldown to send a new confirmation email
-	// private resendCooldowns = new Map<number, Date>();
-
-	// @Cron("0 * * * *")
-	// private cleanupOldCooldowns() {
-	// 	const now = Date.now();
-	// 	for (const [memberId, date] of this.resendCooldowns.entries()) {
-	// 		if (now - date.getTime() > 2 * 60 * 1000) {
-	// 			this.resendCooldowns.delete(memberId);
-	// 		}
-	// 	}
-	// }
-
 	public async register(
 		dto: RegisterDto,
 		userAgent: string | undefined,
@@ -385,14 +371,6 @@ export class AuthService {
 		}
 
 		let member = await this.members.getByLogin(userData.login);
-
-		// JSP si faut laisser ca ou pas en terme de secu et d'utilité
-		// if (!member) {
-		// 	member = await this.members.getByEmail(userData.email);
-		// 	if (member && !member.emailValidated) {
-		// 		throw new AppForbiddenException("EMAIL_NOT_VERIFIED", "You cannot login with 42 to an account that doesn't have a validated email");
-		// 	}
-		// }
 
 		if (!member) {
 			member = await this.members.createFromIntra(
