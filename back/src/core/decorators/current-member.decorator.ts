@@ -1,9 +1,10 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { UUID } from "crypto";
 
 export interface AuthMember {
 	id: number;
 	emailValidated: boolean;
-	refreshToken?: string;
+	jti?: UUID;
 }
 
 export const CurrentMember = createParamDecorator(
