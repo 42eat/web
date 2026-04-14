@@ -32,6 +32,7 @@
 		"@42eat-web/shared": "workspace:*",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@fontsource/instrument-serif": "^5.2.8",
+		"@solid-primitives/i18n": "^2.2.1",
 		"@solidjs/router": "^0.16.1",
 		"@tanstack/solid-query": "^4.0.0",
 		"@ts-rest/core": "^3.52.1",
