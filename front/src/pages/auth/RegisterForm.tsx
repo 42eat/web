@@ -21,8 +21,11 @@ export default function RegisterForm() {
 		e.preventDefault();
 
 		const usernameValue = username();
-		if (!registerSchema.shape.email.safeParse(usernameValue).success) {
-			return usernameInput.setCustomValidity("Please enter a valid email");
+		const emailValidation = registerSchema.shape.email.safeParse(usernameValue);
+		console.log(emailValidation);
+		if (!emailValidation.success) {
+			console.log(emailValidation.error.message);
+			return usernameInput.setCustomValidity(emailValidation.error.message);
 		}
 		loginMutation.mutate(
 			{ body: { email: usernameValue, password: password() } },

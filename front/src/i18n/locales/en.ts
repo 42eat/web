@@ -1,3 +1,56 @@
 export default {
-
-}
+	pages: {
+		login: {
+			error: {
+				intraOnly: {
+					begin: "This account is only accessible with the ",
+					link: "42's Intra login",
+					end: "",
+				},
+				invalidCredentials: "Invalid credential combination",
+			},
+		},
+	},
+	errors: {
+		input: {
+			text: {
+				tooShort: "Input too short",
+				tooLong: "Input too long",
+				patternMismatch: "Invalid input format",
+				text: {
+					valueMissing: "Please fill this input",
+					typeMismatch: "Please fill this input with a valid value",
+				},
+				email: {
+					valueMissing: "Please enter an email",
+					typeMismatch: "Please enter a valid email",
+				},
+				password: {
+					valueMissing: "Please enter a password",
+					typeMismatch: "Please enter a valid password",
+				},
+				tel: {
+					valueMissing: "Please enter a phone number",
+					typeMismatch: "Please enter a valid phone number",
+				},
+				url: {
+					valueMissing: "Please enter a url",
+					typeMismatch: "Please enter a valid url",
+				},
+				search: {
+					valueMissing: "Please enter a research",
+					typeMismatch: "Please enter a valid research",
+				},
+			},
+		},
+	},
+	validation: {
+		email: {
+			invalid: "validation.email.invalid",
+		},
+		string: {
+			tooShort: "validation.string.tooShort {{min}}",
+		},
+		required: "validation.required",
+	},
+} as const;
