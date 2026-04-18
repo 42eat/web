@@ -74,22 +74,20 @@ export default function TextInput(props: TextInputProps) {
 
 	const isInvalid = () => !!invalidMessage();
 
-	return (
-		<div class={`text-input ${local.class ?? ""}`}>
-			<input
-				onInvalid={handleInvalid}
-				onInput={handleInput}
-				aria-invalid={isInvalid()}
-				aria-describedby={isInvalid()
-					? ariaMessageId
-					: undefined}
-				{...rest}
-			/>
-			<Show when={isInvalid()}>
-				<p class="invalid-message" id={ariaMessageId}>
-					{invalidMessage()}
-				</p>
-			</Show>
-		</div>
-	);
+	return <div class={`text-input ${local.class ?? ""}`}>
+		<input
+			onInvalid={handleInvalid}
+			onInput={handleInput}
+			aria-invalid={isInvalid()}
+			aria-describedby={isInvalid()
+				? ariaMessageId
+				: undefined}
+			{...rest}
+		/>
+		<Show when={isInvalid()}>
+			<p class="invalid-message" id={ariaMessageId}>
+				{invalidMessage()}
+			</p>
+		</Show>
+	</div>;
 }
