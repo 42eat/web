@@ -1,18 +1,17 @@
-import z from "zod";
+import { z } from "zod";
 
-const EnvSchema = z.object({
+const envSchema = z.object({
 	VITE_API_URL: z.string(),
 	VITE_DEFAULT_LANG: z.enum(["en", "fr"]),
 });
 
-const result = EnvSchema.safeParse(import.meta.env);
-
-if (!result.success) {
-	console.error(
-		"Invalid environment variables:",
-		result.error.flatten().fieldErrors,
-	);
-	process.exit(1);
+let result;
+try {
+	result = envSchema.parse(import.meta.env);
+} catch (e) {
+	if (!(e instanceof z.ZodError)) throw e;
+	console.error(e.issues.map((issue) => `env.${issue.path[0]}: ${issue.message}`).join("\n"));
+	throw new Error("Invalid env provided", { cause: e });
 }
 
-export const env = result.data;
+export const env = result;
