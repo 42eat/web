@@ -127,10 +127,13 @@ model MemberRole {
 model Shift {
   id               Int      @id @default(autoincrement())
   date             DateTime
+  typeId           Int      @map("type_id")
   manager          Int
   discordMessageId String   @map("discord_message_id")
   validated        Boolean
 
+
+  type         ShiftType     @relation(fields: [typeId], references: [id])
   managerRef   Member        @relation("ShiftManager", fields: [manager], references: [id])
   shiftMembers ShiftMember[]
 
@@ -158,6 +161,16 @@ model ShiftPosition {
   shiftMembers ShiftMember[]
 
   @@map("shift_positions")
+}
+
+model ShiftType {
+  id      Int    @id @default(autoincrement())
+  type    String @unique
+  xpMult  Float? @default(1) @map("xp_mult")
+
+  shiftTypes Shift[]
+
+  @@map("shift_type")
 }
 
 model ShiftAssignment {

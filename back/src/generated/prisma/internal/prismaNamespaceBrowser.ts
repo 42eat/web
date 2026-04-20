@@ -61,6 +61,7 @@ export const ModelName = {
   Shift: 'Shift',
   ShiftMember: 'ShiftMember',
   ShiftPosition: 'ShiftPosition',
+  ShiftType: 'ShiftType',
   ShiftAssignment: 'ShiftAssignment',
   StockCategory: 'StockCategory',
   StockItem: 'StockItem',
@@ -172,6 +173,7 @@ export type MemberRoleScalarFieldEnum = (typeof MemberRoleScalarFieldEnum)[keyof
 export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
+  typeId: 'typeId',
   manager: 'manager',
   discordMessageId: 'discordMessageId',
   validated: 'validated'
@@ -197,6 +199,15 @@ export const ShiftPositionScalarFieldEnum = {
 } as const
 
 export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)[keyof typeof ShiftPositionScalarFieldEnum]
+
+
+export const ShiftTypeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  xpMult: 'xpMult'
+} as const
+
+export type ShiftTypeScalarFieldEnum = (typeof ShiftTypeScalarFieldEnum)[keyof typeof ShiftTypeScalarFieldEnum]
 
 
 export const ShiftAssignmentScalarFieldEnum = {

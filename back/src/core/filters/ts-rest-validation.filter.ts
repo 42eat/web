@@ -46,7 +46,10 @@ export class TsRestValidationFilter implements ExceptionFilter {
 			// x to the user y, and x or y doesn't exist in db, prisma will throw an error.
 			// This interceptor format the error for the api, and so we don't have to check for x and y before
 			// adding our row.
-			if (exception.code === "P2003") {
+			console.log("CODE : " + exception.code);
+			if (exception.code === "P2003"
+				|| exception.code === "P2025"
+			) {
 				const meta = exception.meta as {
 					driverAdapterError?: {
 						cause?: {
@@ -62,6 +65,7 @@ export class TsRestValidationFilter implements ExceptionFilter {
 					detail: meta?.driverAdapterError?.cause?.originalMessage,
 				});
 			}
+
 		}
 
 		// Format the zod errors

@@ -6,6 +6,7 @@ import { permissionsContract } from "./permissions/permissions.contract";
 import { error401BaseSchema, error401Schema } from "./schemas/error401";
 import { error403Schema } from "./schemas/error403";
 import { error400Schema } from "./schemas/error400";
+import { shiftsContract } from "./shifts/shifts.contract";
 
 const c = initContract();
 
@@ -15,6 +16,7 @@ export const appContract = c.router(
 		members: membersContract,
 		roles: rolesContract,
 		permissions: permissionsContract,
+		shifts: shiftsContract,
 	},
 	{
 		// Pour ceux qui se demandent, la difference entre 401 Unauthorized et 403 Forbidden :

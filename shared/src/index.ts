@@ -3,11 +3,13 @@ export { authContract } from "./contracts/auth/auth.contract";
 export { membersContract } from "./contracts/members/members.contract";
 export { rolesContract } from "./contracts/roles/roles.contract";
 export { permissionsContract } from "./contracts/permissions/permissions.contract";
+export { shiftsContract } from "./contracts/shifts/shifts.contract";
 
 export { loginSchema, type LoginDto } from "./contracts/auth/schemas/login.schema";
 export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/register.schema";
 export { memberSchema, type MemberDto } from "./contracts/members/schemas/member.schema";
 export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
+export { shiftPositionSchema, type ShiftPositionResponse, shiftPositionsSchema, type ShiftPositionsResponse, createShiftPositionSchema, type CreateShiftPositionDto, editShiftPositionSchema, type EditShiftPositionDto } from "./contracts/shifts/schemas/shift-positions.schema";
 
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";

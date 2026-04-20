@@ -90,6 +90,11 @@ export type ShiftMember = Prisma.ShiftMemberModel
  */
 export type ShiftPosition = Prisma.ShiftPositionModel
 /**
+ * Model ShiftType
+ * 
+ */
+export type ShiftType = Prisma.ShiftTypeModel
+/**
  * Model ShiftAssignment
  * 
  */

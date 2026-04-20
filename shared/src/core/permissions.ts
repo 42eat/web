@@ -17,6 +17,13 @@ export const PERMISSIONS = {
 		LIST_DETAILED: "roles:list_detailed",
 		LIST_MEMBERS: "roles:list_members",
 	},
+	SHIFT: {
+		GET_POSITION: "shift:position:get",
+		GET_POSITIONS: "shift:positions:get",
+		CREATE_POSITION: "shift:position:create",
+		EDIT_POSITION: "shift:position:edit",
+		DELETE_POSITION: "shift:position:delete",
+	},
 	PERMISSIONS: {
 		LIST: "permissions:list",
 	},
