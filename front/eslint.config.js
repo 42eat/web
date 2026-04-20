@@ -29,6 +29,7 @@ export default tseslint.config(
 		rules: {
 			"no-empty": ["error", { allowEmptyCatch: true }],
 			"no-unassigned-vars": "off",
+			"preserve-caught-error": "off",
 			"@stylistic/indent": ["error", "tab"],
 			"@stylistic/indent-binary-ops": ["error", "tab"],
 			"@stylistic/no-tabs": "off",

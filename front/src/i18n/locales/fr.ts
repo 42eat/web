@@ -16,6 +16,7 @@ export default {
 	errors: {
 		input: {
 			text: {
+				passwordConfirmationMismatch: "FR: Password and confirmation password are different",
 				tooShort: "FR: Input too short",
 				tooLong: "FR: Input too long",
 				patternMismatch: "FR: Invalid input format",
