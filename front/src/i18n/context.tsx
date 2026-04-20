@@ -53,6 +53,8 @@ export function useTranslation() {
 	return ctx;
 }
 
+export type Translator = I18nContextType["t"];
+
 export function I18nProvider(props: { children: JSXElement }) {
 	const lang = getInitLang();
 	const [locale, setLocale] = createSignal<Locale>(lang);

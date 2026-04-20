@@ -1,7 +1,5 @@
 import { z } from "zod";
-import { useTranslation } from "./context";
-
-type Translator = ReturnType<typeof useTranslation>["t"];
+import { Translator } from "./context";
 
 export function setupZodErrorMap(t: Translator) {
 	z.setErrorMap((iss, _context) => {
@@ -12,7 +10,7 @@ export function setupZodErrorMap(t: Translator) {
 				break;
 
 			case "invalid_string":
-				if (iss.validation === "email") result = t("validation.email.invalid");
+				if (iss.validation === "email") result = t("errors.input.text.email.typeMismatch");
 				break;
 
 			case "too_small":

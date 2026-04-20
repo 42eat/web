@@ -7,10 +7,10 @@ import { authActions } from "~/store/auth.store";
 import { loginSchema } from "@42eat-web/shared";
 import { useTranslation } from "~/i18n/context";
 import "./LoginForm.scss";
+import Form from "~/components/ui/Form/Form";
+import { validateFromZod } from "~/utils/validateFromZod";
 
 export default function LoginForm() {
-	const [username, setUsername] = createSignal("");
-	const [password, setPassword] = createSignal("");
 	const [error, setError] = createSignal<JSXElement>(null);
 
 	const { t } = useTranslation();
@@ -18,17 +18,14 @@ export default function LoginForm() {
 	const loginMutation = client.auth.login.createMutation();
 
 	let usernameInput!: HTMLInputElement;
+	let passwordInput!: HTMLInputElement;
 
 	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
 
-		const usernameValue = username();
-		const emailValidation = loginSchema.shape.email.safeParse(usernameValue);
-		if (!emailValidation.success) {
-			return usernameInput.setCustomValidity(emailValidation.error.message);
-		}
+
 		loginMutation.mutate(
-			{ body: { email: usernameValue, password: password() } },
+			{ body: { email: usernameInput.value, password: passwordInput.value } },
 			{
 				onSuccess: (data) => {
 					authActions.login(data.body.accessToken);
@@ -60,23 +57,10 @@ export default function LoginForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} id="login-form">
+		<Form onSubmit={handleSubmit} id="login-form">
 			<div class="login-inputs">
-				<TextInput
-					ref={usernameInput}
-					type="email"
-					placeholder="Email"
-					required
-					value={username()}
-					onInput={(e) => setUsername(e.currentTarget.value)}
-				/>
-				<TextInput
-					type="password"
-					placeholder="Password"
-					required
-					value={password()}
-					onInput={(e) => setPassword(e.currentTarget.value)}
-				/>
+				<TextInput ref={(e) => usernameInput = e.htmlElement} type="email" validator={(e) => validateFromZod(loginSchema.shape.email, e.value)} placeholder="Email" required />
+				<TextInput ref={(e) => passwordInput = e.htmlElement} type="password" validator={(e) => validateFromZod(loginSchema.shape.password, e.value)} placeholder="Password" required />
 				<Show when={error()}>
 					<p class="invalid-message" role="alert">
 						{error()}
@@ -97,6 +81,6 @@ export default function LoginForm() {
 			<Button class="ft-login-button" onClick={console.log}>
 				Login with <p>42</p> Intra
 			</Button>
-		</form>
+		</Form>
 	);
 }

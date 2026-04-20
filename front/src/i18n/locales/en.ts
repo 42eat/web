@@ -28,6 +28,7 @@ export default {
 				password: {
 					valueMissing: "Please enter a password",
 					typeMismatch: "Please enter a valid password",
+					confirmationMismatch: "Password and confirmation password are different",
 				},
 				tel: {
 					valueMissing: "Please enter a phone number",
