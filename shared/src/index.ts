@@ -10,6 +10,7 @@ export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/regis
 export { memberSchema, type MemberDto } from "./contracts/members/schemas/member.schema";
 export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
 export { shiftPositionSchema, type ShiftPositionResponse, shiftPositionsSchema, type ShiftPositionsResponse, createShiftPositionSchema, type CreateShiftPositionDto, editShiftPositionSchema, type EditShiftPositionDto } from "./contracts/shifts/schemas/shift-positions.schema";
+export { shiftTypeSchema, type ShiftTypeResponse, shiftTypesSchema, type ShiftTypesResponse, createShiftTypeSchema, type CreateShiftTypeDto, editShiftTypeSchema, type EditShiftTypeDto } from "./contracts/shifts/schemas/shift-types.schema";
 
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";

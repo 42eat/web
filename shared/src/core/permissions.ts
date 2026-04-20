@@ -23,6 +23,11 @@ export const PERMISSIONS = {
 		CREATE_POSITION: "shift:position:create",
 		EDIT_POSITION: "shift:position:edit",
 		DELETE_POSITION: "shift:position:delete",
+		GET_TYPE: "shift:type:get",
+		GET_TYPES: "shift:types:get",
+		CREATE_TYPE: "shift:type:create",
+		EDIT_TYPE: "shift:type:edit",
+		DELETE_TYPE: "shift:type:delete",
 	},
 	PERMISSIONS: {
 		LIST: "permissions:list",

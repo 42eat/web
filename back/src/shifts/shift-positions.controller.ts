@@ -1,6 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
-import { ShiftPositionService } from "./shift-position.service";
+import { ShiftPositionService } from "./shift-positions.service";
 import { PERMISSIONS, shiftsContract } from "@42eat-web/shared";
 import { RequirePermission } from "../core/decorators/require-permission.decorator";
 import { shiftPositionSchema, shiftPositionsSchema } from "@42eat-web/shared";
