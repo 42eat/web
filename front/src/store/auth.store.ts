@@ -11,12 +11,16 @@ interface JwtPayload {
 	emailVerified: boolean;
 }
 
-type AuthState = {
+export interface AuthenticatedState {
 	accessToken: string;
 	jwtPayload: JwtPayload;
-} | {
+}
+
+export interface GuestState {
 	accessToken: null;
-};
+}
+
+export type AuthState = AuthenticatedState | GuestState;
 
 const [initialized, setInitialized] = createSignal(false);
 
