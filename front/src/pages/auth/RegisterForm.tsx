@@ -56,9 +56,9 @@ export default function RegisterForm() {
 								setError(e.body.message);
 						}
 					} else if (e.status === 403) {
-						setError(
-							e.body.message ?? "An error occured. There is nothing to do :/",
-						);
+						setError(e.body.message ?? "An error occured. There is nothing to do :/");
+					} else if (e.status === 409) {
+						setError(t("errors.register.conflictingEmail"));
 					}
 					setError("An error occured. There is nothing to do :/");
 				},
@@ -81,7 +81,7 @@ export default function RegisterForm() {
 		<p class="register-details">
 			Already have an account? <A href="/auth/login">Login</A>.
 		</p>
-		<Button type="submit" onClick={console.log}>
+		<Button type="submit">
 			Register
 		</Button>
 		<div class="separator">

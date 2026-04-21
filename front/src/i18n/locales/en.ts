@@ -44,14 +44,8 @@ export default {
 				},
 			},
 		},
-	},
-	validation: {
-		email: {
-			invalid: "validation.email.invalid",
+		register: {
+			conflictingEmail: "This email is already taken",
 		},
-		string: {
-			tooShort: "validation.string.tooShort {{min}}",
-		},
-		required: "validation.required",
 	},
 } as const;
