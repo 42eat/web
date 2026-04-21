@@ -33,7 +33,7 @@ export default function Form(props: FormProps) {
 		e.preventDefault();
 		if (!local.novalidate) {
 			const inputErrors = inputs.map((ref) => ref.checkErrors());
-			if (inputErrors.some((hasError) => hasError)) return console.log(inputErrors);
+			if (inputErrors.some((hasError) => hasError)) return;
 		}
 		if (typeof local.onSubmit === "function") {
 			local.onSubmit(e);

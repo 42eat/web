@@ -16,7 +16,6 @@ export default {
 	errors: {
 		input: {
 			text: {
-				passwordConfirmationMismatch: "FR: Password and confirmation password are different",
 				tooShort: "FR: Input too short",
 				tooLong: "FR: Input too long",
 				patternMismatch: "FR: Invalid input format",
@@ -31,6 +30,7 @@ export default {
 				password: {
 					valueMissing: "FR: Please enter a password",
 					typeMismatch: "FR: Please enter a valid password",
+					confirmationMismatch: "FR: Password and confirmation password are different",
 				},
 				tel: {
 					valueMissing: "FR: Please enter a phone number",
@@ -46,14 +46,8 @@ export default {
 				},
 			},
 		},
-	},
-	validation: {
-		email: {
-			invalid: "validation.email.invalid",
+		register: {
+			conflictingEmail: "FR: This email is already taken",
 		},
-		string: {
-			tooShort: "validation.string.tooShort {{min}}",
-		},
-		required: "validation.required",
 	},
 } as const satisfies RawDictionary;

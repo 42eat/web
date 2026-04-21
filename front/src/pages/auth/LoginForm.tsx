@@ -23,7 +23,6 @@ export default function LoginForm() {
 	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
 
-
 		loginMutation.mutate(
 			{ body: { email: usernameInput.value, password: passwordInput.value } },
 			{

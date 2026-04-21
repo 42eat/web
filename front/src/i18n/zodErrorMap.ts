@@ -6,7 +6,7 @@ export function setupZodErrorMap(t: Translator) {
 		let result = "";
 		switch (iss.code) {
 			case "invalid_type":
-				if (iss.received === "undefined" || iss.received === "null") result = t("validation.required");
+				if (iss.received === "undefined" || iss.received === "null") result = t("errors.input.text.text.valueMissing");
 				break;
 
 			case "invalid_string":
@@ -14,7 +14,7 @@ export function setupZodErrorMap(t: Translator) {
 				break;
 
 			case "too_small":
-				result = t("validation.string.tooShort", { min: String(iss.minimum) });
+				result = t("errors.input.text.tooShort", { min: String(iss.minimum) });
 		}
 		return { message: result ?? undefined };
 	});
