@@ -38,6 +38,7 @@
 		"@ts-rest/core": "^3.52.1",
 		"@ts-rest/solid-query": "^3.52.1",
 		"class-validator": "^0.14.4",
+		"jwt-decode": "^4.0.0",
 		"solid-js": "^1.9.5",
 		"solid-transition-group": "^0.3.0",
 		"zod": "^3.25.76"
