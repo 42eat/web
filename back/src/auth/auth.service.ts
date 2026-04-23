@@ -18,6 +18,9 @@ import { TokensService } from "../tokens/tokens.service";
 import { AppConfigService } from "../config/config.service";
 import z from "zod";
 import { env } from "../core/env";
+import { randomUUID, UUID } from "crypto";
+import { WinstonLoggerService } from "../core/logging/logger.service";
+import { LogBuilder } from "../core/logging/log-builder";
 
 const TokenResponseSchema = z.object({
 	access_token: z.string(),
@@ -37,21 +40,8 @@ export class AuthService {
 		private readonly mailService: MailService,
 		private readonly tokensService: TokensService,
 		private readonly appConfig: AppConfigService,
+		private readonly logger: WinstonLoggerService,
 	) {}
-
-	// This will be replaced by nodejs throttler
-	// // Cooldown to send a new confirmation email
-	// private resendCooldowns = new Map<number, Date>();
-
-	// @Cron("0 * * * *")
-	// private cleanupOldCooldowns() {
-	// 	const now = Date.now();
-	// 	for (const [memberId, date] of this.resendCooldowns.entries()) {
-	// 		if (now - date.getTime() > 2 * 60 * 1000) {
-	// 			this.resendCooldowns.delete(memberId);
-	// 		}
-	// 	}
-	// }
 
 	public async register(
 		dto: RegisterDto,
@@ -61,6 +51,7 @@ export class AuthService {
 		const existing = await this.members.getByEmail(dto.email);
 
 		if (existing) {
+			this.logger.warn(LogBuilder.auth.registrationFailed(dto.email, "Email already exists"));
 			throw new ConflictException("Email already used");
 		}
 
@@ -71,8 +62,11 @@ export class AuthService {
 		);
 
 		if (!insertedUser) {
+			this.logger.error(LogBuilder.error("AUTH_REGISTRATION", "Failed to create user"));
 			throw new InternalServerErrorException("An error occured while creating the user");
 		}
+
+		this.logger.log(LogBuilder.auth.registration(dto.email, insertedUser.id));
 
 		await this.sendEmailValidation(insertedUser);
 
@@ -101,6 +95,7 @@ export class AuthService {
 		}
 
 		if (!existing.password) {
+			this.logger.warn(LogBuilder.auth.loginFailed(dto.email, "Intra-only account"));
 			throw new AppUnauthorizedException("INTRA_ONLY_ACCOUNT", "This email is related to an intra login only");
 		}
 
@@ -110,8 +105,11 @@ export class AuthService {
 		);
 
 		if (!isValidPassword) {
+			this.logger.warn(LogBuilder.auth.loginFailed(dto.email, "Invalid password"));
 			throw new AppUnauthorizedException("INVALID_CREDENTIALS", "Invalid credentials");
 		}
+
+		this.logger.log(LogBuilder.auth.login(dto.email, existing.id));
 
 		return {
 			accessToken: await this.generateAccessToken(existing.id),
@@ -125,33 +123,27 @@ export class AuthService {
 
 	public async refresh(
 		memberId: number,
-		refreshToken: string,
+		jti: UUID | undefined,
 		userAgent: string | undefined,
 		ipAddress: string | undefined,
 	) {
-		let allSessions = await this.sessions.getMemberSessions(memberId);
-		allSessions = allSessions.filter(
-			(session) => session.expiresAt > new Date(),
-		);
+		if (!jti) throw new AppUnauthorizedException("INVALID_REFRESH_TOKEN", "Invalid refresh token");
 
-		for (const session of allSessions) {
-			const isValidSession = await bcrypt.compare(
-				refreshToken,
-				session.refreshToken,
-			);
-			if (isValidSession) {
-				await this.sessions.removeSession(session.id);
+		const validSession = await this.sessions.isValidSession(memberId, jti);
 
-				return {
-					accessToken: await this.generateAccessToken(memberId),
-					refreshToken: await this.generateRefreshToken(
-						memberId,
-						userAgent,
-						ipAddress,
-					),
-				};
-			}
+		if (validSession) {
+			await this.sessions.removeSession(validSession.id);
+
+			return {
+				accessToken: await this.generateAccessToken(memberId),
+				refreshToken: await this.generateRefreshToken(
+					memberId,
+					userAgent,
+					ipAddress,
+				),
+			};
 		}
+
 		throw new AppUnauthorizedException("INVALID_REFRESH_TOKEN", "Invalid refresh token");
 	}
 
@@ -171,17 +163,17 @@ export class AuthService {
 		userAgent: string | undefined,
 		ipAddress: string | undefined,
 	) {
+		const jti = randomUUID();
 		const token = await this.jwtService.signAsync(
-			{ sub: memberId },
+			{ sub: memberId, jti },
 			{ secret: env.JWT_REFRESH_SECRET, expiresIn: "7d" },
 		);
-		const hashedToken = await bcrypt.hash(token, 10);
 		const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
 		if (
 			!(await this.sessions.create(
 				memberId,
-				hashedToken,
+				jti,
 				expiresAt,
 				userAgent ?? "",
 				ipAddress ?? "unknown",
@@ -241,6 +233,7 @@ export class AuthService {
 		if (member) {
 			await this.sendResetPasswordEmail(member);
 		}
+		this.logger.log(LogBuilder.auth.passwordResetRequested(email));
 	}
 
 	public async resetPassword(token: string, password: string) {
@@ -250,6 +243,7 @@ export class AuthService {
 		);
 
 		await this.members.setPassword(payload.memberId, password);
+		this.logger.log(LogBuilder.auth.passwordChanged(payload.memberId));
 	}
 
 	public async changePassword(
@@ -278,17 +272,17 @@ export class AuthService {
 		}
 
 		await this.members.setPassword(memberId, newPassword);
+		this.logger.log(LogBuilder.auth.passwordChanged(memberId));
 	}
 
-	public async logout(memberId: number, refreshToken: string | undefined) {
-		const allSessions = await this.sessions.getMemberSessions(memberId);
+	public async logout(memberId: number, jti: UUID | undefined) {
+		if (!jti) return;
 
-		if (!refreshToken) return;
+		const validSession = await this.sessions.isValidSession(memberId, jti);
 
-		for (const session of allSessions) {
-			if (await bcrypt.compare(refreshToken, session.refreshToken)) {
-				await this.sessions.removeSession(session.id);
-			}
+		if (validSession) {
+			await this.sessions.removeSession(validSession.id);
+			this.logger.log(LogBuilder.auth.logout(memberId));
 		}
 	}
 
@@ -378,14 +372,6 @@ export class AuthService {
 		}
 
 		let member = await this.members.getByLogin(userData.login);
-
-		// JSP si faut laisser ca ou pas en terme de secu et d'utilité
-		// if (!member) {
-		// 	member = await this.members.getByEmail(userData.email);
-		// 	if (member && !member.emailValidated) {
-		// 		throw new AppForbiddenException("EMAIL_NOT_VERIFIED", "You cannot login with 42 to an account that doesn't have a validated email");
-		// 	}
-		// }
 
 		if (!member) {
 			member = await this.members.createFromIntra(

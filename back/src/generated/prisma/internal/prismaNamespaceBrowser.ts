@@ -107,7 +107,7 @@ export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof 
 export const SessionScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
-  refreshToken: 'refreshToken',
+  jti: 'jti',
   userAgent: 'userAgent',
   ipAddress: 'ipAddress',
   createdAt: 'createdAt',

@@ -37,16 +37,17 @@ model Member {
 }
 
 model Session {
-  id           Int      @id @default(autoincrement())
-  memberId     Int      @map("member_id")
-  refreshToken String   @map("refresh_token")
-  userAgent    String?  @map("user_agent")
-  ipAddress    String?  @map("ip_address")
-  createdAt    DateTime @default(now()) @map("created_at")
-  expiresAt    DateTime @map("expires_at")
+  id        Int      @id @default(autoincrement())
+  memberId  Int      @map("member_id")
+  jti       String   @map("refresh_token")
+  userAgent String?  @map("user_agent")
+  ipAddress String?  @map("ip_address")
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
 
   member Member @relation(fields: [memberId], references: [id])
 
+  @@unique([memberId, jti])
   @@map("sessions")
 }
 
