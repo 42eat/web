@@ -4,11 +4,14 @@ import { auth, authActions } from "../store/auth.store";
 import { ApiFetcher, tsRestFetchApi } from "@ts-rest/core";
 import { env } from "~/env";
 import { doRefresh } from "./doRefresh";
+import z from "zod";
+import { error401Schema } from "@42eat-web/shared";
 
 const fetchWithRefresh: ApiFetcher = async (args) => {
 	const response = await tsRestFetchApi(args);
 
 	if (response.status !== 401) return response;
+	if (!response.body || (response.body && (response.body as z.infer<typeof error401Schema>).code !== "INVALID_TOKEN")) return response;
 
 	const accessToken = await doRefresh();
 

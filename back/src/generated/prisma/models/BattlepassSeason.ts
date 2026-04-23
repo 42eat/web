@@ -185,7 +185,7 @@ export type BattlepassSeasonGroupByOutputType = {
   _max: BattlepassSeasonMaxAggregateOutputType | null
 }
 
-type GetBattlepassSeasonGroupByPayload<T extends BattlepassSeasonGroupByArgs> = Prisma.PrismaPromise<
+export type GetBattlepassSeasonGroupByPayload<T extends BattlepassSeasonGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BattlepassSeasonGroupByOutputType, T['by']> &
       {

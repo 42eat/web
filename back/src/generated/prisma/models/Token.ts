@@ -206,7 +206,7 @@ export type TokenGroupByOutputType = {
   _max: TokenMaxAggregateOutputType | null
 }
 
-type GetTokenGroupByPayload<T extends TokenGroupByArgs> = Prisma.PrismaPromise<
+export type GetTokenGroupByPayload<T extends TokenGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<TokenGroupByOutputType, T['by']> &
       {

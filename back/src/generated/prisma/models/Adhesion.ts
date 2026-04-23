@@ -193,7 +193,7 @@ export type AdhesionGroupByOutputType = {
   _max: AdhesionMaxAggregateOutputType | null
 }
 
-type GetAdhesionGroupByPayload<T extends AdhesionGroupByArgs> = Prisma.PrismaPromise<
+export type GetAdhesionGroupByPayload<T extends AdhesionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AdhesionGroupByOutputType, T['by']> &
       {

@@ -186,7 +186,7 @@ export type MemberRoleGroupByOutputType = {
   _max: MemberRoleMaxAggregateOutputType | null
 }
 
-type GetMemberRoleGroupByPayload<T extends MemberRoleGroupByArgs> = Prisma.PrismaPromise<
+export type GetMemberRoleGroupByPayload<T extends MemberRoleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MemberRoleGroupByOutputType, T['by']> &
       {
