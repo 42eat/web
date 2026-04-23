@@ -2,14 +2,7 @@ import { createStore } from "solid-js/store";
 import { jwtDecode } from "jwt-decode";
 import { createSignal } from "solid-js";
 import { doRefresh } from "~/api/doRefresh";
-
-/**
- * @ts-expect-error Temp code only until type is exposed in shared workspace
- */
-interface JwtPayload {
-	sub: number;
-	emailVerified: boolean;
-}
+import { JwtPayload } from "@42eat-web/shared";
 
 export interface AuthenticatedState {
 	accessToken: string;
@@ -28,7 +21,7 @@ function authStateFromToken(accessToken: string | null): AuthState {
 	if (accessToken === null) return { accessToken: null };
 	const jwtPayload = jwtDecode<JwtPayload>(accessToken);
 	return {
-		accessToken: accessToken,
+		accessToken,
 		jwtPayload,
 	};
 }
@@ -49,6 +42,10 @@ export const authActions = {
 	login(accessToken: string) {
 		setAccessToken(accessToken);
 		sessionStorage.setItem("access-token", accessToken);
+	},
+	async refreshToken() {
+		const token = await doRefresh();
+		setAccessToken(token);
 	},
 	logout() {
 		setAccessToken(null);

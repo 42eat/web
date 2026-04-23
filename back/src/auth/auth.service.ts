@@ -4,12 +4,12 @@ import {
 	InternalServerErrorException,
 } from "@nestjs/common";
 import { MembersService } from "../members/members.service";
-import { RegisterDto } from "@42eat-web/shared";
+import { emailConfirmationPath, RegisterDto } from "@42eat-web/shared";
 import * as bcrypt from "bcrypt";
 import { LoginDto } from "@42eat-web/shared";
 import { JwtService } from "@nestjs/jwt";
 import { SessionsService } from "../sessions/sessions.service";
-import { createJwtPayload } from "./jwt.payload";
+import { createJwtPayload } from "@42eat-web/shared"
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";
@@ -194,6 +194,7 @@ export class AuthService {
 			username: member.displayName,
 			token: await this.tokensService.createConfirmEmailToken(member.id),
 			baseFrontUrl: env.BASE_FRONT_URL,
+			emailConfirmationPath,
 			year: new Date().getFullYear(),
 		});
 	}

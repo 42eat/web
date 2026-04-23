@@ -9,6 +9,11 @@ export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/regis
 export { memberSchema, type MemberDto } from "./contracts/members/schemas/member.schema";
 export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
 
+export { error401Schema } from "./contracts/schemas/error401";
+
+
+export { emailConfirmationPath } from "./core/constants";
+export { createJwtPayload, type JwtPayload } from "./core/jwt.payload";
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
 

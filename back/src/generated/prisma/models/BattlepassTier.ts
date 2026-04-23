@@ -204,7 +204,7 @@ export type BattlepassTierGroupByOutputType = {
   _max: BattlepassTierMaxAggregateOutputType | null
 }
 
-type GetBattlepassTierGroupByPayload<T extends BattlepassTierGroupByArgs> = Prisma.PrismaPromise<
+export type GetBattlepassTierGroupByPayload<T extends BattlepassTierGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BattlepassTierGroupByOutputType, T['by']> &
       {

@@ -182,7 +182,7 @@ export type StockCategoryGroupByOutputType = {
   _max: StockCategoryMaxAggregateOutputType | null
 }
 
-type GetStockCategoryGroupByPayload<T extends StockCategoryGroupByArgs> = Prisma.PrismaPromise<
+export type GetStockCategoryGroupByPayload<T extends StockCategoryGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<StockCategoryGroupByOutputType, T['by']> &
       {
