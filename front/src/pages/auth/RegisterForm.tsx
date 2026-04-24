@@ -37,28 +37,11 @@ export default function RegisterForm() {
 					authActions.login(data.body.accessToken);
 				},
 				onError: (e) => {
-					if (e.status === 401) {
-						switch (e.body.code) {
-							case "INTRA_ONLY_ACCOUNT":
-								setError(
-									<>
-										This account is only accessible with the{" "}
-										<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-											42's Intra login
-										</a>
-									</>,
-								);
-								break;
-							case "INVALID_CREDENTIALS":
-								setError("Invalid credential combination");
-								break;
-							default:
-								setError(e.body.message);
-						}
-					} else if (e.status === 409) {
+					if (e.status === 409) {
 						setError(t("errors.register.conflictingEmail"));
+					} else {
+						setError("An error occured. There is nothing to do :/");
 					}
-					setError("An error occured. There is nothing to do :/");
 				},
 			},
 		);
