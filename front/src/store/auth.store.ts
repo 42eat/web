@@ -39,18 +39,9 @@ function setAccessToken(accessToken: string | null) {
 
 export const authActions = {
 	setAccessToken,
-	login(accessToken: string) {
-		setAccessToken(accessToken);
-		sessionStorage.setItem("access-token", accessToken);
-	},
-	async refreshToken() {
-		const token = await doRefresh();
-		setAccessToken(token);
-	},
-	logout() {
-		setAccessToken(null);
-		sessionStorage.removeItem("access-token");
-	},
+	login: (accessToken: string) => setAccessToken(accessToken),
+	logout: () => setAccessToken(null),
+	refreshToken: async () => setAccessToken(await doRefresh()),
 } as const;
 
 
@@ -71,7 +62,11 @@ async function initialize() {
 	setInitialized(true);
 }
 
-/** It's too late to comment. If you don't understand, trust :) */
+/** `void` in js will ignore the return value of the following function.
+	* It's mostly used to only silence warnings by providing a exhaustive
+	* way to ignore return values of a function
+	* (every function doesn't need void to ignore return values, but in
+	* our case ignored `Promises` create warnings)*/
 void initialize();
 
 export { auth, initialized };
