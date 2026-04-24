@@ -1,8 +1,13 @@
-import { onMount } from "solid-js";
+import { onMount, Show } from "solid-js";
 import "./PromptVerifyEmail.scss";
 import { authActions } from "~/store/auth.store";
+import { client } from "~/api/client";
+import Button from "~/components/ui/Button";
 
 export default function PromptVerifyEmail() {
+
+	const profile = client.members.profile.createQuery(() => ["members", "profile"], {});
+	const logoutMutation = client.auth.logout.createMutation();
 
 	onMount(() => {
 		/** `void` in js will ignore the return value of the following function.
@@ -12,5 +17,17 @@ export default function PromptVerifyEmail() {
 			* our case ignored `Promises` create warnings)*/
 		void authActions.refreshToken();
 	});
-	return <p>VERIFIE TON EMAILLLLLLLL !!!!!!!!!!!!! </p>;
+
+	function logout() {
+		logoutMutation.mutate({});
+		authActions.logout();
+	}
+
+	return <>
+		<Show when={profile.isFetched}>
+			<pre><code>{JSON.stringify(profile.data?.body, null, 2)}</code></pre>
+			<Button onClick={logout}>logout</Button>
+		</Show>
+		<p>VERIFIE TON EMAILLLLLLLL ({profile.data?.body.email}) !!!!!!!!!!!!! </p>;
+	</>;
 }
