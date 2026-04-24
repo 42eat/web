@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const errorDefaultSchema = z.object({
-	statusCode: z.literal(403),
+	statusCode: z.number(),
 	error: z.string(),
 	message: z.string(),
 });
