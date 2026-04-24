@@ -1,4 +1,4 @@
-import { RouteDefinition, Router } from "@solidjs/router";
+import { Route, Router } from "@solidjs/router";
 import AuthLayout from "./pages/auth/AuthLayout";
 import LoginForm from "./pages/auth/LoginForm";
 import Home from "./pages/Home";
@@ -13,45 +13,23 @@ import PromptVerifyEmail from "./pages/verifyEmail/PromptVerifyEmail";
 import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard";
 import { emailConfirmationPath } from "@42eat-web/shared";
 
-const routes = [
-	{ path: "/", component: Landing },
-	{
-		path: "/",
-		component: GuestGuard,
-		children: [
-			{
-				path: "/auth",
-				component: AuthLayout,
-				children: [
-					{ path: "/login", component: LoginForm },
-					{ path: "/register", component: RegisterForm },
-				],
-			},
-		],
-	},
-	{ path: emailConfirmationPath, component: VerifyEmail },
-	{
-		path: "/",
-		component: AuthGuard,
-		children: [
-			{
-				path: "/",
-				component: UnverifiedEmailGuard,
-				children: [
-					{ path: "/verify-email", component: PromptVerifyEmail },
-				],
-			},
-			{
-				path: "/",
-				component: VerifiedEmailGuard,
-				children: [
-					{ path: "/home", component: Home },
-				],
-			},
-		],
-	},
-] as const satisfies RouteDefinition[];
-
 export const AppRouter = () => {
-	return <Router >{routes}</Router>;
+	return <Router >
+		<Route path="/" component={Landing} />
+		<Route path="/" component={GuestGuard}>
+			<Route path="/auth" component={AuthLayout}>
+				<Route path="/login" component={LoginForm}/>
+				<Route path="/register" component={RegisterForm} />
+			</Route>
+		</Route>
+		<Route path={emailConfirmationPath} component={VerifyEmail} />
+		<Route path="/" component={AuthGuard}>
+			<Route path="/" component={UnverifiedEmailGuard}>
+				<Route path="/verify-email" component={PromptVerifyEmail}/>
+			</Route>
+			<Route path="/" component={VerifiedEmailGuard}>
+				<Route path="/home" component={Home} />
+			</Route>
+		</Route>
+	</Router>;
 };
