@@ -28,6 +28,6 @@ export default function PromptVerifyEmail() {
 			<pre><code>{JSON.stringify(profile.data?.body, null, 2)}</code></pre>
 			<Button onClick={logout}>logout</Button>
 		</Show>
-		<p>VERIFIE TON EMAILLLLLLLL ({profile.data?.body.email}) !!!!!!!!!!!!! </p>;
+		<p>VERIFIE TON EMAILLLLLLLL ({profile.data?.body.email}) !!!!!!!!!!!!! </p>
 	</>;
 }

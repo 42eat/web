@@ -10,7 +10,7 @@ import VerifyEmail from "./pages/verifyEmail/ComfirmEmail";
 import VerifiedEmailGuard from "./components/guards/VerifiedEmailGuard";
 
 import PromptVerifyEmail from "./pages/verifyEmail/PromptVerifyEmail";
-import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard copy";
+import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard";
 import { emailConfirmationPath } from "@42eat-web/shared";
 
 const routes = [
