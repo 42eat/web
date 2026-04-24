@@ -5,7 +5,7 @@ import {
 	CurrentMember,
 } from "../core/decorators/current-member.decorator";
 import {
-	memberSchema,
+	profileSchema,
 	membersContract,
 	rolesListDetailedResponseSchema,
 	rolesListResponseSchema,
@@ -23,7 +23,7 @@ export class MembersController {
 	public profile(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(membersContract.profile, async () => {
 			const member = await this.membersService.getById(authMember.id);
-			return { status: 200, body: memberSchema.parse(member) };
+			return { status: 200, body: profileSchema.parse(member) };
 		});
 	}
 

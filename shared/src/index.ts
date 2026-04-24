@@ -7,10 +7,10 @@ export { shiftsContract } from "./contracts/shifts/shifts.contract";
 
 export { loginSchema, type LoginDto } from "./contracts/auth/schemas/login.schema";
 export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/register.schema";
-export { memberSchema, type MemberDto } from "./contracts/members/schemas/member.schema";
-export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
-export { shiftPositionSchema, type ShiftPositionResponse, shiftPositionsSchema, type ShiftPositionsResponse, createShiftPositionSchema, type CreateShiftPositionDto, editShiftPositionSchema, type EditShiftPositionDto } from "./contracts/shifts/schemas/shift-positions.schema";
-export { shiftTypeSchema, type ShiftTypeResponse, shiftTypesSchema, type ShiftTypesResponse, createShiftTypeSchema, type CreateShiftTypeDto, editShiftTypeSchema, type EditShiftTypeDto } from "./contracts/shifts/schemas/shift-types.schema";
+export { memberSchema, profileSchema } from "./contracts/members/schemas/member.schema";
+export { createRoleSchema, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
+export { shiftPositionSchema, shiftPositionsSchema, createShiftPositionSchema, editShiftPositionSchema } from "./contracts/shifts/schemas/shift-positions.schema";
+export { shiftTypeSchema, shiftTypesSchema, createShiftTypeSchema, editShiftTypeSchema } from "./contracts/shifts/schemas/shift-types.schema";
 
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
