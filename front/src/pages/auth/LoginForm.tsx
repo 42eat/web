@@ -60,16 +60,14 @@ export default function LoginForm() {
 			<div class="login-inputs">
 				<TextInput ref={(e) => usernameInput = e.htmlElement} type="email" validator={(e) => validateFromZod(loginSchema.shape.email, e.value)} placeholder="Email" required />
 				<TextInput ref={(e) => passwordInput = e.htmlElement} type="password" validator={(e) => validateFromZod(loginSchema.shape.password, e.value)} placeholder="Password" required />
+				<p class="password-reset">
+					<A href="/auth/register">Forgot password?</A>
+				</p>
 				<Show when={error()}>
 					<p class="invalid-message" role="alert">
 						{error()}
 					</p>
 				</Show>
-			</div>
-			<div class="login-details">
-				<p class="auth-switcher">
-					Need an account? <A href="/auth/register">Register</A>.
-				</p>
 			</div>
 			<Button type="submit">Login</Button>
 			<div class="separator">
@@ -80,6 +78,9 @@ export default function LoginForm() {
 			<Button class="ft-login-button" onClick={console.log}>
 				Login with <p>42</p> Intra
 			</Button>
+			<p class="auth-switcher">
+				Need an account? <A href="/auth/register">Register</A>.
+			</p>
 		</Form>
 	);
 }

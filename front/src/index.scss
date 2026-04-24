@@ -47,7 +47,7 @@ body {
 a {
 	text-decoration: none;
 	font-weight: bold;
-	transition: color .2s;
+	transition: color 0.2s;
 	color: var(--link-main);
 	outline: none;
 }
@@ -59,6 +59,10 @@ a:hover {
 a:focus-visible {
 	color: var(--link-hover);
 	text-decoration: underline;
+}
+
+p {
+	margin: 0;
 }
 
 code {
