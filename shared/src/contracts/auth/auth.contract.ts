@@ -21,8 +21,8 @@ export const authContract = c.router(
 			responses: {
 				200: authResponseSchema,
 				409: errorDefaultSchema,
-				401: z.unknown(),
-				403: z.unknown(),
+				401: z.never(),
+				403: z.never(),
 			},
 		},
 		login: {
@@ -32,7 +32,7 @@ export const authContract = c.router(
 			responses: {
 				200: authResponseSchema,
 				401: error401AuthSchema,
-				403: z.unknown(),
+				403: z.never(),
 			},
 		},
 		logout: {
@@ -41,7 +41,7 @@ export const authContract = c.router(
 			body: null,
 			responses: {
 				204: null,
-				403: z.unknown(),
+				403: z.never(),
 			},
 		},
 		refresh: {
@@ -50,7 +50,7 @@ export const authContract = c.router(
 			body: null,
 			responses: {
 				200: authResponseSchema,
-				403: z.unknown(),
+				403: z.never(),
 			},
 		},
 		confirmEmail: {
@@ -59,7 +59,7 @@ export const authContract = c.router(
 			body: confirmEmailSchema,
 			responses: {
 				204: null,
-				403: z.unknown(),
+				403: z.never(),
 			},
 		},
 		askNewConfirmationEmail: {
@@ -103,7 +103,7 @@ export const authContract = c.router(
 			path: "/42",
 			responses: {
 				302: null,
-				401: z.unknown(),
+				401: z.never(),
 			},
 		},
 		getLogin42url: {
@@ -111,7 +111,7 @@ export const authContract = c.router(
 			path: "/42/url",
 			responses: {
 				200: auth42UrlSchema,
-				401: z.unknown(),
+				401: z.never(),
 			},
 		},
 		auth42: {
@@ -120,7 +120,7 @@ export const authContract = c.router(
 			body: auth42Schema,
 			responses: {
 				200: authResponseSchema,
-				403: z.unknown(),
+				403: z.never(),
 			},
 		},
 		link42: {
