@@ -3,7 +3,7 @@ import { authContract } from "./auth/auth.contract";
 import { membersContract } from "./members/members.contract";
 import { rolesContract } from "./roles/roles.contract";
 import { permissionsContract } from "./permissions/permissions.contract";
-import { error401Schema } from "./schemas/error401";
+import { error401BaseSchema, error401Schema } from "./schemas/error401";
 import { error403Schema } from "./schemas/error403";
 
 const c = initContract();
@@ -20,7 +20,7 @@ export const appContract = c.router(
 		// 401, t'as pas la perm et le serveur te connais pas -> plus de token, mot de passe invalide
 		// 403, t'as pas la perm et le serveur te connais -> email non valide, permission invalide
 		commonResponses: {
-			401: error401Schema,
+			401: error401BaseSchema,
 			403: error403Schema,
 		},
 	},

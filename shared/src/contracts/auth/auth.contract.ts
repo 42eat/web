@@ -6,6 +6,9 @@ import { confirmEmailSchema } from "./schemas/confirm-email.schema";
 import { changePasswordSchema, requestPasswordResetSchema, resetPasswordSchema } from "./schemas/password.schema";
 import { requestEmailResetSchema, resetEmailSchema } from "./schemas/email.schema";
 import { auth42Schema, auth42UrlSchema } from "./schemas/42login.schema";
+import { errorDefaultSchema } from "../schemas/error-default";
+import { error401AuthSchema } from "../schemas/error401";
+import z from "zod";
 
 const c = initContract();
 
@@ -15,31 +18,49 @@ export const authContract = c.router(
 			method: "POST",
 			path: "/register",
 			body: registerSchema,
-			responses: { 200: authResponseSchema },
+			responses: {
+				200: authResponseSchema,
+				409: errorDefaultSchema,
+				401: z.unknown(),
+				403: z.unknown(),
+			},
 		},
 		login: {
 			method: "POST",
 			path: "/login",
 			body: loginSchema,
-			responses: { 200: authResponseSchema },
+			responses: {
+				200: authResponseSchema,
+				401: error401AuthSchema,
+				403: z.unknown(),
+			},
 		},
 		logout: {
 			method: "POST",
 			path: "/logout",
 			body: null,
-			responses: { 204: null },
+			responses: {
+				204: null,
+				403: z.unknown(),
+			},
 		},
 		refresh: {
 			method: "POST",
 			path: "/refresh",
 			body: null,
-			responses: { 200: authResponseSchema },
+			responses: {
+				200: authResponseSchema,
+				403: z.unknown(),
+			},
 		},
 		confirmEmail: {
 			method: "POST",
 			path: "/confirm-email",
 			body: confirmEmailSchema,
-			responses: { 204: null },
+			responses: {
+				204: null,
+				403: z.unknown(),
+			},
 		},
 		askNewConfirmationEmail: {
 			method: "POST",
@@ -80,24 +101,36 @@ export const authContract = c.router(
 		redirectLogin42url: {
 			method: "GET",
 			path: "/42",
-			responses: { 302: null },
+			responses: {
+				302: null,
+				401: z.unknown(),
+			},
 		},
 		getLogin42url: {
 			method: "GET",
 			path: "/42/url",
-			responses: { 200: auth42UrlSchema },
+			responses: {
+				200: auth42UrlSchema,
+				401: z.unknown(),
+			},
 		},
 		auth42: {
 			method: "POST",
 			path: "/42/auth",
 			body: auth42Schema,
-			responses: { 200: authResponseSchema },
+			responses: {
+				200: authResponseSchema,
+				403: z.unknown(),
+			},
 		},
 		link42: {
 			method: "POST",
 			path: "/42/link",
 			body: auth42Schema,
-			responses: { 204: null },
+			responses: {
+				204: null,
+				409: errorDefaultSchema,
+			},
 		},
 	},
 	{ pathPrefix: "/auth" },
