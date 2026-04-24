@@ -10,8 +10,11 @@ import { error401Schema } from "@42eat-web/shared";
 const fetchWithRefresh: ApiFetcher = async (args) => {
 	const response = await tsRestFetchApi(args);
 
-	if (response.status !== 401) return response;
-	if (!response.body || (response.body && (response.body as z.infer<typeof error401Schema>).code !== "INVALID_TOKEN")) return response;
+	if (response.status !== 401
+		|| !response.body
+		|| (response.body
+			&& (response.body as z.infer<typeof error401Schema>).code !== "INVALID_TOKEN")
+	) return response;
 
 	const accessToken = await doRefresh();
 
