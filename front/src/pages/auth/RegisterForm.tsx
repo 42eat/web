@@ -55,8 +55,6 @@ export default function RegisterForm() {
 							default:
 								setError(e.body.message);
 						}
-					} else if (e.status === 403) {
-						setError(e.body.message ?? "An error occured. There is nothing to do :/");
 					} else if (e.status === 409) {
 						setError(t("errors.register.conflictingEmail"));
 					}

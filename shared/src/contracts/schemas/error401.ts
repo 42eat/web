@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-function error401SchemaVariant<T extends readonly [string, ...(string)[]]>(enumArray: T) {
+function error401SchemaVariant<T extends readonly [string, ...string[]]>(enumArray: T) {
 	return z.object({
 		statusCode: z.literal(401),
 		error: z.string(),
