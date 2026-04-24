@@ -24,11 +24,13 @@ export class RolesService {
 		defaultRole: boolean | undefined,
 		displayColor: string | undefined,
 	) {
-		const role = await this.prisma.role.update({
+		const existing = await this.prisma.role.findUnique({ where: { id: roleId } });
+		if (!existing) throw new NotFoundException("Role does not exist");
+
+		return await this.prisma.role.update({
 			where: { id: roleId },
 			data: { name, defaultRole, displayColor },
 		});
-		return role;
 	}
 
 	public async deleteRole(roleId: number) {

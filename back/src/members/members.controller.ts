@@ -39,18 +39,10 @@ export class MembersController {
 	@TsRestHandler(membersContract.getMemberRolesDetailed)
 	@RequirePermission(PERMISSIONS.MEMBERS.GET_ROLES_DETAILED)
 	public getMemberRolesDetailed() {
-		return tsRestHandler(
-			membersContract.getMemberRolesDetailed,
-			async ({ params }) => {
-				const member = await this.membersService.getMemberRolesDetailed(
-					params.id,
-				);
-				return {
-					status: 200,
-					body: rolesListDetailedResponseSchema.parse(member),
-				};
-			},
-		);
+		return tsRestHandler(membersContract.getMemberRolesDetailed, async ({ params }) => {
+			const member = await this.membersService.getMemberRolesDetailed(params.id);
+			return { status: 200, body: rolesListDetailedResponseSchema.parse(member) };
+		});
 	}
 
 	@TsRestHandler(membersContract.addMemberRole)
