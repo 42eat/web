@@ -40,10 +40,9 @@ export default function LoginForm() {
 						default:
 							setError(e.body.message);
 					}
-				} else if (e.status === 403) {
-					setError(e.body.message ?? "An error occured. There is nothing to do :/");
+				} else {
+					setError("An error occured. There is nothing to do :/");
 				}
-				setError("An error occured. There is nothing to do :/");
 			},
 		});
 	};

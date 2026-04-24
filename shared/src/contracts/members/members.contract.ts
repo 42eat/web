@@ -9,6 +9,7 @@ import {
 	rolesListResponseSchema,
 } from "../roles/schemas/role.schema";
 import { idParamSchema } from "../schemas/common.schema";
+import { errorDefaultSchema } from "../schemas/error-default";
 
 const c = initContract();
 
@@ -36,7 +37,10 @@ export const membersContract = c.router(
 			path: "/:id/roles",
 			pathParams: idParamSchema,
 			body: addRoleMemberSchema,
-			responses: { 204: null },
+			responses: {
+				204: null,
+				404: errorDefaultSchema,
+			},
 		},
 		removeMemberRole: {
 			method: "DELETE",
