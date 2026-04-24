@@ -9,7 +9,7 @@ import * as bcrypt from "bcrypt";
 import { LoginDto } from "@42eat-web/shared";
 import { JwtService } from "@nestjs/jwt";
 import { SessionsService } from "../sessions/sessions.service";
-import { createJwtPayload } from "@42eat-web/shared"
+import { createJwtPayload } from "@42eat-web/shared";
 import { AppUnauthorizedException } from "../core/error/unauthorized";
 import { MailService } from "../core/mail/mail.service";
 import { Member } from "../generated/prisma/client";

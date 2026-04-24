@@ -3,7 +3,7 @@ import { authContract } from "./auth/auth.contract";
 import { membersContract } from "./members/members.contract";
 import { rolesContract } from "./roles/roles.contract";
 import { permissionsContract } from "./permissions/permissions.contract";
-import { error401BaseSchema, error401Schema } from "./schemas/error401";
+import { error401BaseSchema } from "./schemas/error401";
 import { error403Schema } from "./schemas/error403";
 import { error400Schema } from "./schemas/error400";
 
