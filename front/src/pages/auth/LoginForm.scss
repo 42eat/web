@@ -9,6 +9,11 @@
 		flex-direction: column;
 		gap: 0.5rem;
 
+		.password-reset {
+			padding-inline-start: .5rem;
+			font-size: .85rem;
+		}
+
 		& > .invalid-message {
 			margin: 0;
 			text-align: center;
@@ -16,18 +21,11 @@
 		}
 	}
 
-	.login-details {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-
-		.auth-switcher {
-			text-align: center;
-			font-weight: bold;
-			margin: 0;
-			color: var(--text-muted);
-			font-size: 0.95rem;
-		}
+	.auth-switcher {
+		text-align: center;
+		font-weight: bold;
+		color: var(--text-muted);
+		font-size: 0.95rem;
 	}
 
 	.separator {
@@ -49,10 +47,6 @@
 		display: flex;
 		justify-content: center;
 		gap: 0.5rem;
-
-		p {
-			margin: 0;
-		}
 
 		&:is(:hover, :focus-visible) {
 			background-color: #030303;

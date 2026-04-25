@@ -6,8 +6,8 @@ export default function GuestGuard(props: RouteSectionProps) {
 	const navigate = useNavigate();
 
 	createEffect(() => {
-		if (auth.token) navigate("/home", { replace: true });
+		if (auth.accessToken) navigate("/home", { replace: true });
 	});
 
-	return <Show when={!auth.token}>{props.children}</Show>;
+	return <Show when={!auth.accessToken}>{props.children}</Show>;
 }

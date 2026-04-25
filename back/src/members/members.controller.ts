@@ -1,4 +1,4 @@
-import { Controller } from "@nestjs/common";
+import { Controller, UseGuards } from "@nestjs/common";
 import { MembersService } from "./members.service";
 import {
 	type AuthMember,
@@ -13,13 +13,14 @@ import {
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { RequirePermission } from "../core/decorators/require-permission.decorator";
 import { PERMISSIONS } from "@42eat-web/shared";
+import { JwtAuthGuardWithoutEmailVerif } from "../core/guards/jwt-auth.guard";
 
 @Controller()
 export class MembersController {
 	constructor(private readonly membersService: MembersService) {}
 
 	@TsRestHandler(membersContract.profile)
-	@RequirePermission(PERMISSIONS.MEMBERS.MY_PROFILE)
+	@UseGuards(JwtAuthGuardWithoutEmailVerif)
 	public profile(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(membersContract.profile, async () => {
 			const member = await this.membersService.getById(authMember.id);
