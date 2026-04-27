@@ -12,6 +12,15 @@ export default {
 				invalidCredentials: "FR: Invalid credential combination",
 			},
 		},
+		verifyEmail: {
+			title: "Vérifie ton email",
+			mainContent: "On t'a envoyé un email à",
+			description: "Clique sur le lien dans l'email pour activer ton compte.",
+			spamMention: "Pense à vérifier tes spams si tu ne vois rien.",
+			resendText: "Tu n'as rien reçu ?",
+			resendLink: "Renvoyer l'email",
+			logout: "Utiliser un autre compte",
+		},
 	},
 	errors: {
 		input: {

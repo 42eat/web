@@ -10,6 +10,15 @@ export default {
 				invalidCredentials: "Invalid credential combination",
 			},
 		},
+		verifyEmail: {
+			title: "Check your email",
+			mainContent: "We sent an email to",
+			description: "Click the link in the email to activate your account.",
+			spamMention: "Make sure to check your spam folder if you don't see anything.",
+			resendText: "Didn't receive anything?",
+			resendLink: "Resend the email",
+			logout: "Use an other account",
+		},
 	},
 	errors: {
 		input: {

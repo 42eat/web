@@ -2,12 +2,16 @@ import { onMount, Show } from "solid-js";
 import "./PromptVerifyEmail.scss";
 import { authActions } from "~/store/auth.store";
 import { client } from "~/api/client";
-import Button from "~/components/ui/Button";
+import { useTranslation } from "~/i18n/context";
+
+import "./PromptVerifyEmail.scss";
 
 export default function PromptVerifyEmail() {
+	const { t } = useTranslation();
 
 	const profile = client.members.profile.createQuery(() => ["members", "profile"], {});
 	const logoutMutation = client.auth.logout.createMutation();
+	const resendEmailMutation = client.auth.askNewConfirmationEmail.createMutation();
 
 	onMount(() => {
 		/** `void` in js will ignore the return value of the following function.
@@ -18,16 +22,35 @@ export default function PromptVerifyEmail() {
 		void authActions.refreshToken();
 	});
 
+	function resendEmail() {
+		resendEmailMutation.mutate({});
+	}
+
 	function logout() {
 		logoutMutation.mutate({});
 		authActions.logout();
 	}
 
-	return <>
-		<Show when={profile.isFetched}>
-			<pre><code>{JSON.stringify(profile.data?.body, null, 2)}</code></pre>
-			<Button onClick={logout}>logout</Button>
-		</Show>
-		<p>VERIFIE TON EMAILLLLLLLL ({profile.data?.body.email}) !!!!!!!!!!!!! </p>
-	</>;
+	return <Show when={profile.isFetched && profile.data} keyed>
+		{(data) => (<main id="prompt-verify-email">
+			<section>
+				<div class="main-block">
+					<h1>{t("pages.verifyEmail.title")}</h1>
+					<p class="main-content">{t("pages.verifyEmail.mainContent")}</p>
+					<p class="email">{data.body.email}</p>
+				</div>
+				<p class="description">
+					{t("pages.verifyEmail.description")}
+					<br />
+					{t("pages.verifyEmail.spamMention")}
+				</p>
+				<hr />
+				<div class="resend-block">
+					<p>{t("pages.verifyEmail.resendText")}</p>
+					<a onClick={(e) => { e.preventDefault(); resendEmail(); }}>{t("pages.verifyEmail.resendLink")}</a>
+				</div>
+				<a class="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>{t("pages.verifyEmail.logout")}</a>
+			</section>
+		</main>)}
+	</Show>;
 }
