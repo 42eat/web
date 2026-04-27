@@ -7,7 +7,7 @@ import { ShiftsTypeController } from "./shift-types.controller";
 import { ShiftTypeService } from "./shift-types.service";
 
 @Module({
-	controllers: [ShiftsController, ShiftsPositionController, ShiftsTypeController],
+	controllers: [ShiftsPositionController, ShiftsTypeController, ShiftsController],
 	providers: [ShiftsService, ShiftPositionService, ShiftTypeService],
 })
 export class ShiftsModule {}

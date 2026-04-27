@@ -11,6 +11,7 @@ export { memberSchema, profileSchema } from "./contracts/members/schemas/member.
 export { createRoleSchema, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
 export { shiftPositionSchema, shiftPositionsSchema, createShiftPositionSchema, editShiftPositionSchema } from "./contracts/shifts/schemas/shift-positions.schema";
 export { shiftTypeSchema, shiftTypesSchema, createShiftTypeSchema, editShiftTypeSchema } from "./contracts/shifts/schemas/shift-types.schema";
+export { shiftSchema, shiftsSchema, createShiftSchema, editShiftSchema, type ShiftResponse, type CreateShiftDto } from "./contracts/shifts/schemas/shifts.schema";
 
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";

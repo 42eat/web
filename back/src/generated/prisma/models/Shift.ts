@@ -198,7 +198,7 @@ export type ShiftGroupByOutputType = {
   date: Date
   typeId: number
   manager: number
-  discordMessageId: string
+  discordMessageId: string | null
   validated: boolean
   _count: ShiftCountAggregateOutputType | null
   _avg: ShiftAvgAggregateOutputType | null
@@ -230,7 +230,7 @@ export type ShiftWhereInput = {
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   typeId?: Prisma.IntFilter<"Shift"> | number
   manager?: Prisma.IntFilter<"Shift"> | number
-  discordMessageId?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringNullableFilter<"Shift"> | string | null
   validated?: Prisma.BoolFilter<"Shift"> | boolean
   type?: Prisma.XOR<Prisma.ShiftTypeScalarRelationFilter, Prisma.ShiftTypeWhereInput>
   managerRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
@@ -242,7 +242,7 @@ export type ShiftOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   typeId?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discordMessageId?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrderInput | Prisma.SortOrder
   validated?: Prisma.SortOrder
   type?: Prisma.ShiftTypeOrderByWithRelationInput
   managerRef?: Prisma.MemberOrderByWithRelationInput
@@ -257,7 +257,7 @@ export type ShiftWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   typeId?: Prisma.IntFilter<"Shift"> | number
   manager?: Prisma.IntFilter<"Shift"> | number
-  discordMessageId?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringNullableFilter<"Shift"> | string | null
   validated?: Prisma.BoolFilter<"Shift"> | boolean
   type?: Prisma.XOR<Prisma.ShiftTypeScalarRelationFilter, Prisma.ShiftTypeWhereInput>
   managerRef?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
@@ -269,7 +269,7 @@ export type ShiftOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   typeId?: Prisma.SortOrder
   manager?: Prisma.SortOrder
-  discordMessageId?: Prisma.SortOrder
+  discordMessageId?: Prisma.SortOrderInput | Prisma.SortOrder
   validated?: Prisma.SortOrder
   _count?: Prisma.ShiftCountOrderByAggregateInput
   _avg?: Prisma.ShiftAvgOrderByAggregateInput
@@ -286,14 +286,14 @@ export type ShiftScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"Shift"> | Date | string
   typeId?: Prisma.IntWithAggregatesFilter<"Shift"> | number
   manager?: Prisma.IntWithAggregatesFilter<"Shift"> | number
-  discordMessageId?: Prisma.StringWithAggregatesFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringNullableWithAggregatesFilter<"Shift"> | string | null
   validated?: Prisma.BoolWithAggregatesFilter<"Shift"> | boolean
 }
 
 export type ShiftCreateInput = {
   date: Date | string
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   type: Prisma.ShiftTypeCreateNestedOneWithoutShiftTypesInput
   managerRef: Prisma.MemberCreateNestedOneWithoutShiftsManagedInput
   shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
@@ -304,14 +304,14 @@ export type ShiftUncheckedCreateInput = {
   date: Date | string
   typeId: number
   manager: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
 }
 
 export type ShiftUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   type?: Prisma.ShiftTypeUpdateOneRequiredWithoutShiftTypesNestedInput
   managerRef?: Prisma.MemberUpdateOneRequiredWithoutShiftsManagedNestedInput
@@ -323,7 +323,7 @@ export type ShiftUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   typeId?: Prisma.IntFieldUpdateOperationsInput | number
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
 }
@@ -333,13 +333,13 @@ export type ShiftCreateManyInput = {
   date: Date | string
   typeId: number
   manager: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
 }
 
 export type ShiftUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -348,7 +348,7 @@ export type ShiftUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   typeId?: Prisma.IntFieldUpdateOperationsInput | number
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -506,8 +506,8 @@ export type ShiftUncheckedUpdateManyWithoutTypeNestedInput = {
 
 export type ShiftCreateWithoutManagerRefInput = {
   date: Date | string
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   type: Prisma.ShiftTypeCreateNestedOneWithoutShiftTypesInput
   shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
 }
@@ -516,8 +516,8 @@ export type ShiftUncheckedCreateWithoutManagerRefInput = {
   id?: number
   date: Date | string
   typeId: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
 }
 
@@ -555,14 +555,14 @@ export type ShiftScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"Shift"> | Date | string
   typeId?: Prisma.IntFilter<"Shift"> | number
   manager?: Prisma.IntFilter<"Shift"> | number
-  discordMessageId?: Prisma.StringFilter<"Shift"> | string
+  discordMessageId?: Prisma.StringNullableFilter<"Shift"> | string | null
   validated?: Prisma.BoolFilter<"Shift"> | boolean
 }
 
 export type ShiftCreateWithoutShiftMembersInput = {
   date: Date | string
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   type: Prisma.ShiftTypeCreateNestedOneWithoutShiftTypesInput
   managerRef: Prisma.MemberCreateNestedOneWithoutShiftsManagedInput
 }
@@ -572,8 +572,8 @@ export type ShiftUncheckedCreateWithoutShiftMembersInput = {
   date: Date | string
   typeId: number
   manager: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
 }
 
 export type ShiftCreateOrConnectWithoutShiftMembersInput = {
@@ -594,7 +594,7 @@ export type ShiftUpdateToOneWithWhereWithoutShiftMembersInput = {
 
 export type ShiftUpdateWithoutShiftMembersInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   type?: Prisma.ShiftTypeUpdateOneRequiredWithoutShiftTypesNestedInput
   managerRef?: Prisma.MemberUpdateOneRequiredWithoutShiftsManagedNestedInput
@@ -605,14 +605,14 @@ export type ShiftUncheckedUpdateWithoutShiftMembersInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   typeId?: Prisma.IntFieldUpdateOperationsInput | number
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ShiftCreateWithoutTypeInput = {
   date: Date | string
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   managerRef: Prisma.MemberCreateNestedOneWithoutShiftsManagedInput
   shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutShiftInput
 }
@@ -621,8 +621,8 @@ export type ShiftUncheckedCreateWithoutTypeInput = {
   id?: number
   date: Date | string
   manager: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutShiftInput
 }
 
@@ -656,13 +656,13 @@ export type ShiftCreateManyManagerRefInput = {
   id?: number
   date: Date | string
   typeId: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
 }
 
 export type ShiftUpdateWithoutManagerRefInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   type?: Prisma.ShiftTypeUpdateOneRequiredWithoutShiftTypesNestedInput
   shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
@@ -672,7 +672,7 @@ export type ShiftUncheckedUpdateWithoutManagerRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   typeId?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
 }
@@ -681,7 +681,7 @@ export type ShiftUncheckedUpdateManyWithoutManagerRefInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   typeId?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -689,13 +689,13 @@ export type ShiftCreateManyTypeInput = {
   id?: number
   date: Date | string
   manager: number
-  discordMessageId: string
-  validated: boolean
+  discordMessageId?: string | null
+  validated?: boolean
 }
 
 export type ShiftUpdateWithoutTypeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   managerRef?: Prisma.MemberUpdateOneRequiredWithoutShiftsManagedNestedInput
   shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutShiftNestedInput
@@ -705,7 +705,7 @@ export type ShiftUncheckedUpdateWithoutTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutShiftNestedInput
 }
@@ -714,7 +714,7 @@ export type ShiftUncheckedUpdateManyWithoutTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manager?: Prisma.IntFieldUpdateOperationsInput | number
-  discordMessageId?: Prisma.StringFieldUpdateOperationsInput | string
+  discordMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   validated?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -821,7 +821,7 @@ export type $ShiftPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     date: Date
     typeId: number
     manager: number
-    discordMessageId: string
+    discordMessageId: string | null
     validated: boolean
   }, ExtArgs["result"]["shift"]>
   composites: {}

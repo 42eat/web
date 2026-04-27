@@ -98,6 +98,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 			update: {},
 			create: {
 				email: "liam@test.com",
+				login: "lilefebv",
 				password: hashedPassword,
 				emailValidated: true,
 			},
@@ -108,6 +109,7 @@ export class DatabaseBootstrapService implements OnModuleInit {
 			update: {},
 			create: {
 				email: "chantal@test.com",
+				displayName: "Chantal",
 				password: hashedPassword,
 				emailValidated: true,
 			},
@@ -154,6 +156,57 @@ export class DatabaseBootstrapService implements OnModuleInit {
 		});
 
 		console.log("Roles asignated : liam→bigboss, chantal→manager, machin→user");
+
+		// ─── Shifts ───────────────────────────────────────────────────────────────────
+
+		await this.prisma.shiftType.upsert({
+			where: { type: "Midi" },
+			update: {},
+			create: {
+				type: "Midi",
+			},
+		});
+		await this.prisma.shiftType.upsert({
+			where: { type: "Soir" },
+			update: {},
+			create: {
+				type: "Soir",
+			},
+		});
+		await this.prisma.shiftType.upsert({
+			where: { type: "Gouter" },
+			update: {},
+			create: {
+				type: "Gouter",
+			},
+		});
+
+		console.log("Shift types inserted");
+
+		await this.prisma.shiftPosition.upsert({
+			where: { position: "Caisse" },
+			update: {},
+			create: {
+				position: "Caisse",
+			},
+		});
+		await this.prisma.shiftPosition.upsert({
+			where: { position: "Croq" },
+			update: {},
+			create: {
+				position: "Croq",
+			},
+		});
+		await this.prisma.shiftPosition.upsert({
+			where: { position: "Wrap" },
+			update: {},
+			create: {
+				position: "Wrap",
+			},
+		});
+
+		console.log("Shift positions inserted");
+
 		console.log("Seed finished!");
 	}
 }

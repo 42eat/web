@@ -14,11 +14,12 @@ export const shiftSchema = z.object({
 	})),
 	validated: z.boolean(),
 });
+export type ShiftResponse = z.infer<typeof shiftSchema>;
 
 export const shiftsSchema = z.array(shiftSchema);
 
 export const createShiftSchema = z.object({
-	date: z.date(),
+	date: z.string().datetime(),
 	type: z.number(),
 	manager: z.number(),
 	members: z.array(z.object({
@@ -27,8 +28,10 @@ export const createShiftSchema = z.object({
 	})),
 });
 
+export type CreateShiftDto = z.infer<typeof createShiftSchema>;
+
 export const editShiftSchema = z.object({
-	date: z.date(),
+	date: z.string().datetime(),
 	type: z.number(),
 	manager: z.number(),
 	members: z.array(z.object({

@@ -28,6 +28,9 @@ export const PERMISSIONS = {
 		CREATE_TYPE: "shift:type:create",
 		EDIT_TYPE: "shift:type:edit",
 		DELETE_TYPE: "shift:type:delete",
+		CREATE_SHIFT: "shift:create",
+		GET_SHIFT: "shift:get",
+		GET_SHIFTS: "shift:get_all",
 	},
 	PERMISSIONS: {
 		LIST: "permissions:list",

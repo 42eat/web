@@ -129,8 +129,8 @@ model Shift {
   date             DateTime
   typeId           Int      @map("type_id")
   manager          Int
-  discordMessageId String   @map("discord_message_id")
-  validated        Boolean
+  discordMessageId String?  @map("discord_message_id")
+  validated        Boolean  @default(false)
 
 
   type         ShiftType     @relation(fields: [typeId], references: [id])
