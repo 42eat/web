@@ -26,14 +26,14 @@ export const createShiftSchema = z.object({
 		member: z.number(),
 		position: z.number(),
 	})).superRefine((members, ctx) => {
-		const memberIds = members.map(m => m.member)
-		const positionIds = members.filter(m => m.position !== null).map(m => m.position)
+		const memberIds = members.map((m) => m.member);
+		const positionIds = members.filter((m) => m.position !== null).map((m) => m.position);
 
 		if (new Set(memberIds).size !== memberIds.length) {
-			ctx.addIssue({ code: 'custom', message: 'Duplicate member in shift' })
+			ctx.addIssue({ code: "custom", message: "Duplicate member in shift" });
 		}
 		if (new Set(positionIds).size !== positionIds.length) {
-			ctx.addIssue({ code: 'custom', message: 'Duplicate position in shift' })
+			ctx.addIssue({ code: "custom", message: "Duplicate position in shift" });
 		}
 	}),
 });
@@ -47,3 +47,15 @@ export const editShiftSchema = z.object({
 }).partial();
 
 export type EditShiftDto = z.infer<typeof editShiftSchema>;
+
+export const addShiftMemberSchema = z.object({
+	member: z.number(),
+	position: z.number(),
+});
+
+export type AddShiftMemberDto = z.infer<typeof addShiftMemberSchema>;
+
+export const deleteShiftMemberParamSchema = z.object({
+	id: z.string().transform(Number),
+	memberId: z.string().transform(Number),
+});

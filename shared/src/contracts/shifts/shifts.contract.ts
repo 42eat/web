@@ -1,7 +1,7 @@
 import { initContract } from "@ts-rest/core";
 import { shiftPositionsContract } from "./shift-positions.contract";
 import { shiftTypesContract } from "./shift-types.contract";
-import { createShiftSchema, editShiftSchema, shiftSchema, shiftsSchema } from "./schemas/shifts.schema";
+import { addShiftMemberSchema, createShiftSchema, deleteShiftMemberParamSchema, editShiftSchema, shiftSchema, shiftsSchema } from "./schemas/shifts.schema";
 import { idParamSchema } from "../schemas/common.schema";
 
 const c = initContract();
@@ -33,6 +33,19 @@ export const shiftsContract = c.router(
 			pathParams: idParamSchema,
 			body: editShiftSchema,
 			responses: { 200: shiftSchema },
+		},
+		addShiftMember: {
+			method: "POST",
+			path: "/:id/members",
+			pathParams: idParamSchema,
+			body: addShiftMemberSchema,
+			responses: { 204: null },
+		},
+		deleteShiftMember: {
+			method: "DELETE",
+			path: "/:id/members/:memberId",
+			pathParams: deleteShiftMemberParamSchema,
+			responses: { 204: null },
 		},
 	},
 	{ pathPrefix: "/shifts" },

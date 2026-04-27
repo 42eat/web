@@ -45,4 +45,22 @@ export class ShiftsController {
 			return { status: 200, body: shiftSchema.parse(shift) };
 		});
 	}
+
+	@TsRestHandler(shiftsContract.addShiftMember)
+	@RequirePermission(PERMISSIONS.SHIFT.EDIT_SHIFT)
+	public addShiftMember(@CurrentMember() authMember: AuthMember) {
+		return tsRestHandler(shiftsContract.addShiftMember, async ({ body, params }) => {
+			await this.shifts.addShiftMember(params.id, body, authMember.id);
+			return { status: 204, body: null };
+		});
+	}
+
+	@TsRestHandler(shiftsContract.deleteShiftMember)
+	@RequirePermission(PERMISSIONS.SHIFT.EDIT_SHIFT)
+	public deleteShiftMember(@CurrentMember() authMember: AuthMember) {
+		return tsRestHandler(shiftsContract.deleteShiftMember, async ({ params }) => {
+			await this.shifts.deleteShiftMember(params.id, params.memberId, authMember.id);
+			return { status: 204, body: null };
+		});
+	}
 }

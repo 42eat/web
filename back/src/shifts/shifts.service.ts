@@ -2,7 +2,7 @@ import { ConflictException, ForbiddenException, Injectable, InternalServerErrorE
 import { PrismaService } from "../core/prisma/prisma.service";
 import { CreateShiftDto, PERMISSIONS } from "@42eat-web/shared";
 import { Prisma } from "../generated/prisma/client";
-import { EditShiftDto } from "@42eat-web/shared/src/contracts/shifts/schemas/shifts.schema";
+import { AddShiftMemberDto, EditShiftDto } from "@42eat-web/shared/src/contracts/shifts/schemas/shifts.schema";
 import { MembersService } from "../members/members.service";
 
 @Injectable()
@@ -87,7 +87,12 @@ export class ShiftsService {
 		}
 	}
 
-	public async editShift(shiftId: number, data: EditShiftDto, memberId: number) {
+	private async canMemberEditShift(
+		shiftId: number,
+		memberId: number,
+		typeId?: number,
+		date?: Date,
+	) {
 		const existing = await this.prisma.shift.findUnique({
 			where: { id: shiftId },
 		});
@@ -101,17 +106,21 @@ export class ShiftsService {
 			throw new ForbiddenException("You cannot edit this shift");
 		}
 
-		const date = data.date
-			? new Date(data.date)
-			: undefined;
-
 		const existing_date_type = await this.prisma.shift.findUnique({
-			where: { date_typeId: { date: date ?? existing.date, typeId: data.type ?? existing.typeId } },
+			where: { date_typeId: { date: date ?? existing.date, typeId: typeId ?? existing.typeId } },
 		});
 
 		if (existing_date_type && existing_date_type.id != existing.id) {
 			throw new ConflictException("A shift of this type already exist for this date");
 		}
+	}
+
+	public async editShift(shiftId: number, data: EditShiftDto, memberId: number) {
+		const date = data.date
+			? new Date(data.date)
+			: undefined;
+
+		await this.canMemberEditShift(shiftId, memberId, data.type, date);
 
 		try {
 			await this.prisma.shift.update({
@@ -130,5 +139,46 @@ export class ShiftsService {
 			}
 			throw new InternalServerErrorException("An error occured while creating the shift");
 		}
+	}
+
+	public async addShiftMember(shiftId: number, data: AddShiftMemberDto, memberId: number) {
+
+		await this.canMemberEditShift(shiftId, memberId);
+
+		const existing_member = await this.prisma.shiftMember.findFirst({
+			where: {
+				shiftId,
+				memberId: data.member,
+			},
+		});
+		if (existing_member) throw new ConflictException("You are already on this shift");
+
+		const existing_position = await this.prisma.shiftMember.findFirst({
+			where: {
+				shiftId,
+				positionId: data.position,
+			},
+		});
+		if (existing_position) throw new ConflictException("There is already someone with this position on this shift");
+
+		try {
+			await this.prisma.shiftMember.create({
+				data: { shiftId: shiftId, memberId: data.member, positionId: data.position },
+			});
+		} catch (e) {
+			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
+				throw new NotFoundException("Invalid manager id");
+			}
+			throw new InternalServerErrorException("An error occured while creating the shift");
+		}
+	}
+
+	public async deleteShiftMember(shiftId: number, shiftMemberId: number, memberId: number) {
+
+		await this.canMemberEditShift(shiftId, memberId);
+
+		await this.prisma.shiftMember.delete({
+			where: { shiftId_memberId: { shiftId: shiftId, memberId: shiftMemberId } },
+		});
 	}
 }

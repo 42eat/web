@@ -7,6 +7,7 @@ import { error401BaseSchema } from "./schemas/error401";
 import { error403Schema } from "./schemas/error403";
 import { error400Schema } from "./schemas/error400";
 import { shiftsContract } from "./shifts/shifts.contract";
+import { error429Schema } from "./schemas/error429";
 
 const c = initContract();
 
@@ -26,6 +27,7 @@ export const appContract = c.router(
 			400: error400Schema,
 			401: error401BaseSchema,
 			403: error403Schema,
+			429: error429Schema,
 		},
 	},
 );

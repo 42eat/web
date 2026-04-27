@@ -119,6 +119,16 @@ export class TsRestValidationFilter implements ExceptionFilter {
 				message: exception?.response?.message ?? "Forbidden",
 				code,
 			});
+		} else if (status === 429) {
+			const retryAfter = response.getHeader("Retry-After");
+			return response.status(429).json({
+				statusCode: 429,
+				error: "Too Many Requests",
+				message: exception?.message ?? "Too many requests",
+				retryAfter: retryAfter
+					? Number(retryAfter)
+					: undefined,
+			});
 		}
 
 		// Just return the error if it was something else
