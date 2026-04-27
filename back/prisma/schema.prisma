@@ -24,6 +24,7 @@ model Member {
 
   adhesions              Adhesion[]
   memberRoles            MemberRole[]
+  reportedBy             Shift[]                  @relation("ShiftReporter")
   shiftsManaged          Shift[]                  @relation("ShiftManager")
   shiftMembers           ShiftMember[]
   shiftAssignments       ShiftAssignment[]
@@ -128,15 +129,17 @@ model Shift {
   id               Int      @id @default(autoincrement())
   date             DateTime
   typeId           Int      @map("type_id")
-  manager          Int
-  discordMessageId String?  @map("discord_message_id")
+  reporterId       Int      @map("reporter_id")
+  managerId        Int
+  discordMessageId String?  @map("discord_message_id") @unique
   validated        Boolean  @default(false)
 
-
   type         ShiftType     @relation(fields: [typeId], references: [id])
-  managerRef   Member        @relation("ShiftManager", fields: [manager], references: [id])
+  reporter     Member        @relation("ShiftReporter", fields: [reporterId], references: [id])
+  manager      Member        @relation("ShiftManager", fields: [managerId], references: [id])
   shiftMembers ShiftMember[]
 
+  @@unique([date, typeId])
   @@map("shifts")
 }
 
@@ -150,6 +153,7 @@ model ShiftMember {
   member   Member         @relation(fields: [memberId], references: [id])
   position ShiftPosition? @relation(fields: [positionId], references: [id])
 
+  @@unique([shiftId, memberId])
   @@map("shift_members")
 }
 

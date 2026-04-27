@@ -19,23 +19,31 @@ export type ShiftResponse = z.infer<typeof shiftSchema>;
 export const shiftsSchema = z.array(shiftSchema);
 
 export const createShiftSchema = z.object({
-	date: z.string().datetime(),
+	date: z.string().date(),
 	type: z.number(),
 	manager: z.number(),
 	members: z.array(z.object({
 		member: z.number(),
-		position: z.number().nullable(),
-	})),
+		position: z.number(),
+	})).superRefine((members, ctx) => {
+		const memberIds = members.map(m => m.member)
+		const positionIds = members.filter(m => m.position !== null).map(m => m.position)
+
+		if (new Set(memberIds).size !== memberIds.length) {
+			ctx.addIssue({ code: 'custom', message: 'Duplicate member in shift' })
+		}
+		if (new Set(positionIds).size !== positionIds.length) {
+			ctx.addIssue({ code: 'custom', message: 'Duplicate position in shift' })
+		}
+	}),
 });
 
 export type CreateShiftDto = z.infer<typeof createShiftSchema>;
 
 export const editShiftSchema = z.object({
-	date: z.string().datetime(),
+	date: z.string().date(),
 	type: z.number(),
 	manager: z.number(),
-	members: z.array(z.object({
-		member: z.number(),
-		position: z.number().nullable(),
-	})),
-});
+}).partial();
+
+export type EditShiftDto = z.infer<typeof editShiftSchema>;

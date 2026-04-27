@@ -1,10 +1,16 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { ConflictException, ForbiddenException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../core/prisma/prisma.service";
-import { CreateShiftDto } from "@42eat-web/shared";
+import { CreateShiftDto, PERMISSIONS } from "@42eat-web/shared";
+import { Prisma } from "../generated/prisma/client";
+import { EditShiftDto } from "@42eat-web/shared/src/contracts/shifts/schemas/shifts.schema";
+import { MembersService } from "../members/members.service";
 
 @Injectable()
 export class ShiftsService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly members: MembersService,
+	) {}
 
 	public async getShifts() {
 		const shifts = await this.prisma.shift.findMany({
@@ -16,11 +22,11 @@ export class ShiftsService {
 					},
 				},
 				type: {},
-				managerRef: {},
+				manager: {},
 			},
 		});
 		return shifts.map(
-			({ shiftMembers, managerRef, ...rest }) => ({ ...rest, members: shiftMembers, manager: managerRef }),
+			({ shiftMembers, ...rest }) => ({ ...rest, members: shiftMembers }),
 		);
 	}
 
@@ -35,73 +41,94 @@ export class ShiftsService {
 					},
 				},
 				type: {},
-				managerRef: {},
+				manager: {},
 			},
 		});
 		if (!shift) throw new NotFoundException("Shift does not exist");
-		const { shiftMembers, managerRef, ...rest } = shift;
-		return { ...rest, members: shiftMembers, manager: managerRef };
+		const { shiftMembers, ...rest } = shift;
+		return { ...rest, members: shiftMembers };
 	}
 
-	public async createShift(data: CreateShiftDto) {
-		let shiftId: number;
+	public async createShift(data: CreateShiftDto, reporterId: number) {
+		const date = new Date(data.date);
+
+		const existing = await this.prisma.shift.findUnique({
+			where: { date_typeId: { date, typeId: data.type } },
+		});
+
+		if (existing) throw new ConflictException("A shift of this type already exist for this date");
+
 		try {
-			const insertedShift = await this.prisma.shift.create({
+			const shift = await this.prisma.$transaction(async (tx) => {
+				const insertedShift = await tx.shift.create({
+					data: {
+						date,
+						managerId: data.manager,
+						typeId: data.type,
+						reporterId,
+					},
+				});
+
+				await tx.shiftMember.createMany({
+					data: data.members.map(
+						(m) => ({ shiftId: insertedShift.id, memberId: m.member, positionId: m.position }),
+					),
+				});
+
+				return insertedShift;
+			});
+
+			return this.getShift(shift.id);
+		} catch (e) {
+			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
+				throw new NotFoundException("Invalid member, manager or shift position id");
+			}
+			throw new InternalServerErrorException("An error occured while creating the shift");
+		}
+	}
+
+	public async editShift(shiftId: number, data: EditShiftDto, memberId: number) {
+		const existing = await this.prisma.shift.findUnique({
+			where: { id: shiftId },
+		});
+
+		if (!existing) throw new NotFoundException("This shift does not exist");
+		if (
+			existing.reporterId != memberId
+			&& existing.reporterId != memberId
+			&& !await this.members.doMemberHavePermission(memberId, PERMISSIONS.SHIFT.EDIT_ANY_SHIFT)
+		) {
+			throw new ForbiddenException("You cannot edit this shift");
+		}
+
+		const date = data.date
+			? new Date(data.date)
+			: undefined;
+
+		const existing_date_type = await this.prisma.shift.findUnique({
+			where: { date_typeId: { date: date ?? existing.date, typeId: data.type ?? existing.typeId } },
+		});
+
+		if (existing_date_type && existing_date_type.id != existing.id) {
+			throw new ConflictException("A shift of this type already exist for this date");
+		}
+
+		try {
+			await this.prisma.shift.update({
+				where: { id: shiftId },
 				data: {
-					date: data.date,
-					manager: data.manager,
+					date,
+					managerId: data.manager,
 					typeId: data.type,
 				},
 			});
-			shiftId = insertedShift.id;
-		} catch (_) {
-			throw new NotFoundException("Invalid manager or shift type id");
-		}
 
-		try {
-			await this.prisma.shiftMember.createMany({
-				data: data.members.map(
-					(m) => ({ shiftId, memberId: m.member, positionId: m.position }),
-				),
-			});
-		} catch (_) {
-			throw new NotFoundException("Invalid member or shift position id");
+			return this.getShift(shiftId);
+		} catch (e) {
+			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
+				throw new NotFoundException("Invalid manager id");
+			}
+			throw new InternalServerErrorException("An error occured while creating the shift");
 		}
-
-		return this.getShift(shiftId);
 	}
 }
-
-
-/*
-
-model Shift {
-  id               Int      @id @default(autoincrement())
-  date             DateTime
-  typeId           Int      @map("type_id")
-  manager          Int
-  discordMessageId String   @map("discord_message_id")
-  validated        Boolean
-
-
-  type         ShiftType     @relation(fields: [typeId], references: [id])
-  managerRef   Member        @relation("ShiftManager", fields: [manager], references: [id])
-  shiftMembers ShiftMember[]
-
-  @@map("shifts")
-}
-
-model ShiftMember {
-  id         Int  @id @default(autoincrement())
-  shiftId    Int  @map("shift_id")
-  memberId   Int  @map("member_id")
-  positionId Int? @map("position_id")
-
-  shift    Shift          @relation(fields: [shiftId], references: [id])
-  member   Member         @relation(fields: [memberId], references: [id])
-  position ShiftPosition? @relation(fields: [positionId], references: [id])
-
-  @@map("shift_members")
-}
-
-*/

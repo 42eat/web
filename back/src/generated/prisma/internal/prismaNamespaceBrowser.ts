@@ -174,7 +174,8 @@ export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
   typeId: 'typeId',
-  manager: 'manager',
+  reporterId: 'reporterId',
+  managerId: 'managerId',
   discordMessageId: 'discordMessageId',
   validated: 'validated'
 } as const
