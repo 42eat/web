@@ -29,6 +29,8 @@ export const PERMISSIONS = {
 		EDIT_TYPE: "shift:type:edit",
 		DELETE_TYPE: "shift:type:delete",
 		CREATE_SHIFT: "shift:create",
+		DELETE_SHIFT: "shift:delete",
+		VALIDATE_SHIFT: "shift:validate",
 		EDIT_SHIFT: "shift:edit",
 		EDIT_ANY_SHIFT: "shift:edit_any",
 		GET_SHIFT: "shift:get",

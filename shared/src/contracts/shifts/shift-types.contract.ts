@@ -1,6 +1,7 @@
 import { initContract } from "@ts-rest/core";
 import { createShiftTypeSchema, editShiftTypeSchema, shiftTypeSchema, shiftTypesSchema } from "./schemas/shift-types.schema";
 import { idParamSchema } from "../schemas/common.schema";
+import { errorDefaultSchema } from "../schemas/error-default";
 
 const c = initContract();
 
@@ -15,7 +16,10 @@ export const shiftTypesContract = c.router(
 			method: "GET",
 			path: "/:id",
 			pathParams: idParamSchema,
-			responses: { 200: shiftTypeSchema },
+			responses: {
+				200: shiftTypeSchema,
+				404: errorDefaultSchema,
+			},
 		},
 		createType: {
 			method: "POST",
@@ -28,7 +32,10 @@ export const shiftTypesContract = c.router(
 			path: "/:id",
 			pathParams: idParamSchema,
 			body: editShiftTypeSchema,
-			responses: { 200: shiftTypeSchema },
+			responses: {
+				200: shiftTypeSchema,
+				404: errorDefaultSchema,
+			},
 		},
 		deleteType: {
 			method: "DELETE",

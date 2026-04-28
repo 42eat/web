@@ -19,7 +19,10 @@ export type ShiftResponse = z.infer<typeof shiftSchema>;
 export const shiftsSchema = z.array(shiftSchema);
 
 export const createShiftSchema = z.object({
-	date: z.string().date(),
+	date: z.string().date().refine(
+		(val) => new Date(val) <= new Date(),
+		{ message: 'Shift date cannot be in the future' }
+	),
 	type: z.number(),
 	manager: z.number(),
 	members: z.array(z.object({
@@ -41,7 +44,10 @@ export const createShiftSchema = z.object({
 export type CreateShiftDto = z.infer<typeof createShiftSchema>;
 
 export const editShiftSchema = z.object({
-	date: z.string().date(),
+	date: z.string().date().refine(
+		(val) => new Date(val) <= new Date(),
+		{ message: 'Shift date cannot be in the future' }
+	),
 	type: z.number(),
 	manager: z.number(),
 }).partial();

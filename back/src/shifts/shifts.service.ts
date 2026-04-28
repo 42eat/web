@@ -1,9 +1,10 @@
-import { ConflictException, ForbiddenException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../core/prisma/prisma.service";
 import { CreateShiftDto, PERMISSIONS } from "@42eat-web/shared";
 import { Prisma } from "../generated/prisma/client";
 import { AddShiftMemberDto, EditShiftDto } from "@42eat-web/shared/src/contracts/shifts/schemas/shifts.schema";
 import { MembersService } from "../members/members.service";
+import { AppForbiddenException } from "../core/error/forbidden";
 
 @Injectable()
 export class ShiftsService {
@@ -13,6 +14,7 @@ export class ShiftsService {
 	) {}
 
 	public async getShifts() {
+		// Ajouter un canIEditThisShift pour que le front sache si il doit empecher ou non d'edit
 		const shifts = await this.prisma.shift.findMany({
 			include: {
 				shiftMembers: {
@@ -103,7 +105,7 @@ export class ShiftsService {
 			&& existing.reporterId != memberId
 			&& !await this.members.doMemberHavePermission(memberId, PERMISSIONS.SHIFT.EDIT_ANY_SHIFT)
 		) {
-			throw new ForbiddenException("You cannot edit this shift");
+			throw new AppForbiddenException("FORBIDDEN", "You cannot edit this shift");
 		}
 
 		const existing_date_type = await this.prisma.shift.findUnique({
@@ -180,5 +182,14 @@ export class ShiftsService {
 		await this.prisma.shiftMember.delete({
 			where: { shiftId_memberId: { shiftId: shiftId, memberId: shiftMemberId } },
 		});
+	}
+
+	public async deleteShift(shiftId: number, memberId: number) {
+		await this.canMemberEditShift(shiftId, memberId);
+		await this.prisma.shift.delete({ where: { id: shiftId } });
+	}
+
+	public async validateShift(shiftId: number) {
+		await this.prisma.shift.update({ where: { id: shiftId }, data: { validated: true } });
 	}
 }
