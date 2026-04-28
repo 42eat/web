@@ -1,7 +1,7 @@
 import { initContract } from "@ts-rest/core";
 import { shiftPositionsContract } from "./shift-positions.contract";
 import { shiftTypesContract } from "./shift-types.contract";
-import { addShiftMemberSchema, createShiftSchema, deleteShiftMemberParamSchema, editShiftSchema, shiftSchema, shiftsSchema } from "./schemas/shifts.schema";
+import { addShiftMemberSchema, createShiftSchema, deleteShiftMemberParamSchema, editShiftSchema, shiftSchema, shiftsSchema, shiftWithoutCanEditSchema } from "./schemas/shifts.schema";
 import { idParamSchema } from "../schemas/common.schema";
 import { errorDefaultSchema } from "../schemas/error-default";
 
@@ -30,7 +30,7 @@ export const shiftsContract = c.router(
 			path: "/",
 			body: createShiftSchema,
 			responses: {
-				200: shiftSchema,
+				200: shiftWithoutCanEditSchema,
 				404: errorDefaultSchema, // Arrive dans le cas ou l'id d'un membre/manager/position est invalide
 				409: errorDefaultSchema,
 			},
@@ -41,7 +41,7 @@ export const shiftsContract = c.router(
 			pathParams: idParamSchema,
 			body: editShiftSchema,
 			responses: {
-				200: shiftSchema,
+				200: shiftWithoutCanEditSchema,
 				404: errorDefaultSchema, // Si le shift existe pas ou si l'id du manager est invalide
 				409: errorDefaultSchema,
 			},

@@ -1,8 +1,7 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../core/prisma/prisma.service";
-import { CreateShiftDto, PERMISSIONS } from "@42eat-web/shared";
+import { AddShiftMemberDto, EditShiftDto, ShiftWithoutCanEdit, shiftWithoutCanEditSchema, CreateShiftDto, PERMISSIONS } from "@42eat-web/shared";
 import { Prisma } from "../generated/prisma/client";
-import { AddShiftMemberDto, EditShiftDto } from "@42eat-web/shared/src/contracts/shifts/schemas/shifts.schema";
 import { MembersService } from "../members/members.service";
 import { AppForbiddenException } from "../core/error/forbidden";
 
@@ -14,7 +13,6 @@ export class ShiftsService {
 	) {}
 
 	public async getShifts() {
-		// Ajouter un canIEditThisShift pour que le front sache si il doit empecher ou non d'edit
 		const shifts = await this.prisma.shift.findMany({
 			include: {
 				shiftMembers: {
@@ -25,10 +23,11 @@ export class ShiftsService {
 				},
 				type: {},
 				manager: {},
+				reporter: {},
 			},
 		});
 		return shifts.map(
-			({ shiftMembers, ...rest }) => ({ ...rest, members: shiftMembers }),
+			({ shiftMembers, ...rest }) => (shiftWithoutCanEditSchema.parse({ ...rest, members: shiftMembers })),
 		);
 	}
 
@@ -44,11 +43,34 @@ export class ShiftsService {
 				},
 				type: {},
 				manager: {},
+				reporter: {},
 			},
 		});
 		if (!shift) throw new NotFoundException("Shift does not exist");
 		const { shiftMembers, ...rest } = shift;
-		return { ...rest, members: shiftMembers };
+		return shiftWithoutCanEditSchema.parse({ ...rest, members: shiftMembers });
+	}
+
+	public async addCanEditShift(shift: ShiftWithoutCanEdit, memberId: number) {
+		return {
+			...shift,
+			canEdit: await this.doMemberHaveShiftEditPermission(
+				memberId,
+				{ reporterId: shift.reporter.id, managerId: shift.manager.id, validated: shift.validated },
+			),
+		};
+	}
+
+	public async addCanEditShiftList(shifts: ShiftWithoutCanEdit[], memberId: number) {
+		const canEditAll = await this.members.doMemberHavePermission(memberId, PERMISSIONS.SHIFT.EDIT_ANY_SHIFT);
+		if (canEditAll) {
+			return shifts.map((shift) => ({ ...shift, canEdit: true }));
+		} else {
+			return shifts.map((shift) => ({
+				...shift,
+				canEdit: (shift.reporter.id === memberId || shift.manager.id === memberId) && !shift.validated,
+			}));
+		}
 	}
 
 	public async createShift(data: CreateShiftDto, reporterId: number) {
@@ -89,6 +111,17 @@ export class ShiftsService {
 		}
 	}
 
+	private async doMemberHaveShiftEditPermission(
+		memberId: number,
+		shift: { reporterId: number; managerId: number; validated: boolean },
+	): Promise<boolean> {
+		return ((
+			(shift.reporterId === memberId || shift.managerId === memberId)
+			&& !shift.validated
+		)
+		|| await this.members.doMemberHavePermission(memberId, PERMISSIONS.SHIFT.EDIT_ANY_SHIFT));
+	}
+
 	private async canMemberEditShift(
 		shiftId: number,
 		memberId: number,
@@ -100,11 +133,8 @@ export class ShiftsService {
 		});
 
 		if (!existing) throw new NotFoundException("This shift does not exist");
-		if (
-			existing.reporterId != memberId
-			&& existing.reporterId != memberId
-			&& !await this.members.doMemberHavePermission(memberId, PERMISSIONS.SHIFT.EDIT_ANY_SHIFT)
-		) {
+
+		if (!await this.doMemberHaveShiftEditPermission(memberId, existing)) {
 			throw new AppForbiddenException("FORBIDDEN", "You cannot edit this shift");
 		}
 

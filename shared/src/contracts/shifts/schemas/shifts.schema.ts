@@ -8,13 +8,18 @@ export const shiftSchema = z.object({
 	date: z.date(),
 	type: shiftTypeSchema,
 	manager: memberBasicSchema,
+	reporter: memberBasicSchema,
 	members: z.array(z.object({
 		member: memberBasicSchema,
 		position: shiftPositionSchema.nullable(),
 	})),
 	validated: z.boolean(),
+	canEdit: z.boolean(),
 });
 export type ShiftResponse = z.infer<typeof shiftSchema>;
+
+export const shiftWithoutCanEditSchema = shiftSchema.omit({ canEdit: true })
+export type ShiftWithoutCanEdit = z.infer<typeof shiftWithoutCanEditSchema>
 
 export const shiftsSchema = z.array(shiftSchema);
 

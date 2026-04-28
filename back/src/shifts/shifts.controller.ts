@@ -1,6 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { ShiftsService } from "./shifts.service";
-import { PERMISSIONS, shiftsContract, shiftsSchema } from "@42eat-web/shared";
+import { PERMISSIONS, shiftsContract, shiftsSchema, shiftWithoutCanEditSchema } from "@42eat-web/shared";
 import { tsRestHandler, TsRestHandler } from "@ts-rest/nest";
 import { RequirePermission } from "../core/decorators/require-permission.decorator";
 import { shiftSchema } from "@42eat-web/shared";
@@ -12,19 +12,21 @@ export class ShiftsController {
 
 	@TsRestHandler(shiftsContract.getShift)
 	@RequirePermission(PERMISSIONS.SHIFT.GET_SHIFT)
-	public getShift() {
+	public getShift(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(shiftsContract.getShift, async ({ params }) => {
 			const shift = await this.shifts.getShift(params.id);
-			return { status: 200, body: shiftSchema.parse(shift) };
+			const shiftFinal = await this.shifts.addCanEditShift(shift, authMember.id);
+			return { status: 200, body: shiftSchema.parse(shiftFinal) };
 		});
 	}
 
 	@TsRestHandler(shiftsContract.getShifts)
 	@RequirePermission(PERMISSIONS.SHIFT.GET_SHIFTS)
-	public getShifts() {
+	public getShifts(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(shiftsContract.getShifts, async () => {
 			const shifts = await this.shifts.getShifts();
-			return { status: 200, body: shiftsSchema.parse(shifts) };
+			const shiftsFinal = await this.shifts.addCanEditShiftList(shifts, authMember.id);
+			return { status: 200, body: shiftsSchema.parse(shiftsFinal) };
 		});
 	}
 
@@ -33,7 +35,7 @@ export class ShiftsController {
 	public createShift(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(shiftsContract.createShift, async ({ body }) => {
 			const shift = await this.shifts.createShift(body, authMember.id);
-			return { status: 200, body: shiftSchema.parse(shift) };
+			return { status: 200, body: shiftWithoutCanEditSchema.parse(shift) };
 		});
 	}
 
@@ -42,7 +44,7 @@ export class ShiftsController {
 	public editShift(@CurrentMember() authMember: AuthMember) {
 		return tsRestHandler(shiftsContract.editShift, async ({ body, params }) => {
 			const shift = await this.shifts.editShift(params.id, body, authMember.id);
-			return { status: 200, body: shiftSchema.parse(shift) };
+			return { status: 200, body: shiftWithoutCanEditSchema.parse(shift) };
 		});
 	}
 
