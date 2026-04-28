@@ -12,7 +12,7 @@ export { createRoleSchema, type CreateRoleDto, roleMembersResponseSchema, roleRe
 export { error401Schema } from "./contracts/schemas/error401";
 
 
-export { emailConfirmationPath } from "./core/constants";
+export { emailConfirmationPath, ftIntraAuthCallbackPath, ftIntraLinkCallbackPath } from "./core/constants";
 export { createJwtPayload, type JwtPayload } from "./core/jwt.payload";
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";

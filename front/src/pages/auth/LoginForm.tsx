@@ -16,6 +16,7 @@ export default function LoginForm() {
 	const { t } = useTranslation();
 
 	const loginMutation = client.auth.login.createMutation();
+	const intraAuthUrl = client.auth.getLogin42url.createQuery(() => ["auth", "getLogin42url"], {});
 
 	let usernameInput!: HTMLInputElement;
 	let passwordInput!: HTMLInputElement;
@@ -33,11 +34,15 @@ export default function LoginForm() {
 					if (e.status === 401) {
 						switch (e.body.code) {
 							case "INTRA_ONLY_ACCOUNT":
-								setError(<>
-									{t("pages.login.error.intraOnly.begin")}
-									<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{t("pages.login.error.intraOnly.link")}</a>
-									{t("pages.login.error.intraOnly.end")}
-								</>);
+								setError(
+									<>
+										{t("pages.login.error.intraOnly.begin")}
+										<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+											{t("pages.login.error.intraOnly.link")}
+										</a>
+										{t("pages.login.error.intraOnly.end")}
+									</>,
+								);
 								break;
 							case "INVALID_CREDENTIALS":
 								setError(t("pages.login.error.invalidCredentials"));
@@ -53,32 +58,49 @@ export default function LoginForm() {
 		);
 	};
 
-	return (
-		<Form onSubmit={handleSubmit} id="login-form">
-			<div class="login-inputs">
-				<TextInput ref={(e) => usernameInput = e.htmlElement} type="email" validator={(e) => validateFromZod(loginSchema.shape.email, e.value)} placeholder="Email" required />
-				<TextInput ref={(e) => passwordInput = e.htmlElement} type="password" validator={(e) => validateFromZod(loginSchema.shape.password, e.value)} placeholder="Password" required />
-				<p class="password-reset">
-					<A href="/auth/register">Forgot password?</A>
-				</p>
-				<Show when={error()}>
-					<p class="invalid-message" role="alert">
-						{error()}
-					</p>
-				</Show>
-			</div>
-			<Button type="submit">Login</Button>
-			<div class="separator">
-				<hr />
-				OR
-				<hr />
-			</div>
-			<Button class="ft-login-button" onClick={console.log}>
-				Login with <p>42</p> Intra
-			</Button>
-			<p class="auth-switcher">
-				Need an account? <A href="/auth/register">Register</A>.
+	return <Form onSubmit={handleSubmit} id="login-form">
+		<div class="login-inputs">
+			<TextInput
+				ref={(e) => (usernameInput = e.htmlElement)}
+				type="email"
+				validator={(e) => validateFromZod(loginSchema.shape.email, e.value)}
+				placeholder="Email"
+				required
+			/>
+			<TextInput
+				ref={(e) => (passwordInput = e.htmlElement)}
+				type="password"
+				validator={(e) => validateFromZod(loginSchema.shape.password, e.value)}
+				placeholder="Password"
+				required
+			/>
+			<p class="password-reset">
+				<A href="/auth/register">Forgot password?</A>
 			</p>
-		</Form>
-	);
+			<Show when={error()}>
+				<p class="invalid-message" role="alert">
+					{error()}
+				</p>
+			</Show>
+		</div>
+		<Button type="submit">Login</Button>
+		<div class="separator">
+			<hr />
+			OR
+			<hr />
+		</div>
+		<Button
+			type="button"
+			class="ft-login-button"
+			disabled={!intraAuthUrl.isSuccess}
+			onClick={() => {
+				const url = intraAuthUrl.data?.body.url;
+				if (url) document.location.href = url;
+			}}>
+			Login with <p>42</p> Intra
+		</Button>
+		<p class="auth-switcher">
+			Need an account? <A href="/auth/register">Register</A>.
+		</p>
+	</Form>;
 }

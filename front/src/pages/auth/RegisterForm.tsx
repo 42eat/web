@@ -16,6 +16,7 @@ export default function RegisterForm() {
 	const { t } = useTranslation();
 
 	const registerMutation = client.auth.register.createMutation();
+	const intraAuthUrl = client.auth.getLogin42url.createQuery(() => ["auth", "getLogin42url"], {});
 
 	let displayNameInput!: HTMLInputElement;
 	let emailInput!: HTMLInputElement;
@@ -70,7 +71,14 @@ export default function RegisterForm() {
 			OR
 			<hr />
 		</div>
-		<Button class="ft-register-button" onClick={console.log}>
+		<Button
+			type="button"
+			class="ft-register-button"
+			disabled={!intraAuthUrl.isSuccess}
+			onClick={() => {
+				const url = intraAuthUrl.data?.body.url;
+				if (url) document.location.href = url;
+			}}>
 			Register with <p>42</p> Intra
 		</Button>
 	</Form>;

@@ -10,6 +10,12 @@ export default {
 				invalidCredentials: "Invalid credential combination",
 			},
 		},
+		ftAuthCallback: {
+			mainErrorMessage: "EN: Une erreur imprévue s'est produite :/",
+			subErrorMessage: "EN: Veuillez réessayer plus tard.",
+			mainRefusedMessage: "EN: Vous avez refusé ToT",
+			subRefusedMessage: "EN: Pas cool ...",
+		},
 	},
 	errors: {
 		input: {
