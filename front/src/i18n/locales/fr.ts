@@ -21,6 +21,12 @@ export default {
 			resendLink: "Renvoyer l'email",
 			logout: "Utiliser un autre compte",
 		},
+		requestPasswordReset: {
+			error: "Une erreur s'est produite, réessayez plus tard",
+			input: {
+				placeholder: "email",
+			},
+		},
 	},
 	errors: {
 		input: {

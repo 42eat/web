@@ -19,6 +19,16 @@ export default {
 			resendLink: "Resend the email",
 			logout: "Use an other account",
 		},
+		requestPasswordReset: {
+			title: "Reset your password",
+			description: "If an account with this email address exists, we will send you an link to reset your password.",
+			rateLimit: "You'll be able to resend an email in {{time}}",
+			error: "An error occured, please retry later",
+			success: "If you have an account at this address we sent you an email",
+			input: {
+				placeholder: "email",
+			},
+		},
 	},
 	errors: {
 		input: {

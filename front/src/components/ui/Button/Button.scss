@@ -5,16 +5,22 @@ $variants: (
 		bg: var(--button-primary-background),
 		bg-hov: var(--button-primary-background-hover),
 		bg-act: var(--button-primary-background-active),
+		bg-dis: var(--button-primary-background-disabled),
+		col: var(--button-primary-text),
 	),
 	ghost: (
 		bg: var(--button-ghost-background),
 		bg-hov: var(--button-ghost-background-hover),
 		bg-act: var(--button-ghost-background-active),
+		bg-dis: var(--button-ghost-background-disabled),
+		col: var(--button-ghost-text),
 	),
 	danger: (
 		bg: var(--button-danger-background),
 		bg-hov: var(--button-danger-background-hover),
 		bg-act: var(--button-danger-background-active),
+		bg-dis: var(--button-danger-background-disabled),
+		col: var(--button-danger-text),
 	),
 );
 
@@ -41,6 +47,13 @@ $sizes: (
 	transition: background-color 0.2s;
 	color: var(--button-text);
 
+	/* Important to make the inputs consistent.
+	Basically inputs like the TextInput have precisely the same properties
+	as the Button, BUT they have a border that make it 2px bigger. To keep
+	the same sizes, we put the same border but in transparet, it adds up
+	to the size of the button without changing the background behavior */
+	border: 1px solid transparent;
+
 	&:disabled {
 		color: var(--button-text-disabled);
 	}
@@ -48,6 +61,7 @@ $sizes: (
 	@each $name, $values in $variants {
 		&--#{$name} {
 			background: map.get($values, bg);
+			color: map.get($values, col);
 		}
 
 		&--#{$name}:is(:hover, :focus-visible) {
@@ -57,6 +71,12 @@ $sizes: (
 		&--#{$name}:active {
 			background: map.get($values, bg-act);
 		}
+
+		&--#{$name}:disabled {
+			cursor: default;
+			background: map.get($values, bg-dis);
+		}
+
 	}
 
 	@each $name, $values in $sizes {

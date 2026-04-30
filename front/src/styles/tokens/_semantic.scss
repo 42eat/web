@@ -13,23 +13,30 @@
 	--background-accent-hover: var(--pink-400);
 	--background-accent-active: var(--pink-600);
 	--background-danger: var(--red-500);
+	--background-danger-hover: var(--red-400);
+	--background-danger-active: var(--red-600);
 	--mix-hover: white;
 	--mix-active: black;
 	--mix-disabled: transparent;
 }
 
 @mixin theme-light {
-	--background-page: #FFF;
-	--background-surface: var(--neutral-900);
-	--background-card: var(--neutral-800);
-	--background-overlay: var(--neutral-700);
-	--text-primary: var(--neutral-0);
-	--text-secondary: var(--neutral-300);
-	--text-muted: var(--neutral-400);
-	--text-accent: var(--pink-200);
-	--text-accent-hover: var(--pink-300);
-	--background-accent: var(--pink-500);
+	--background-page: var(--neutral-0);
+	--background-surface: var(--neutral-50);
+	--background-card: var(--neutral-100);
+	--background-overlay: var(--neutral-200);
+	--text-primary: var(--neutral-1000);
+	--text-secondary: var(--neutral-700);
+	--text-muted: var(--neutral-600);
+	--text-accent: var(--pink-500);
+	--text-accent-hover: var(--pink-400);
+	--text-danger: var(--red-500);
+	--background-accent: var(--pink-400);
+	--background-accent-hover: var(--pink-300);
+	--background-accent-active: var(--pink-500);
 	--background-danger: var(--red-500);
+	--background-danger-hover: var(--red-400);
+	--background-danger-active: var(--red-600);
 	--mix-hover: black;
 	--mix-active: white;
 	--mix-disabled: transparent;
