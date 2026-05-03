@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { memberSchema } from "../../members/schemas/member.schema";
+import { memberBasicSchema } from "../../members/schemas/member.schema";
 import { permissionValues } from "../../../core/permissions";
 import { colorRegex } from "../../schemas/color";
 
@@ -43,7 +43,7 @@ export type RolesListDetailedResponse = z.infer<
 	typeof rolesListDetailedResponseSchema
 >;
 
-export const roleMembersResponseSchema = z.array(memberSchema);
+export const roleMembersResponseSchema = z.array(memberBasicSchema);
 export type RoleMembersResponse = z.infer<typeof roleMembersResponseSchema>;
 
 export const permissionListSchema = z.array(z.enum(permissionValues));

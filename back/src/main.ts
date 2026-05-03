@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { TsRestValidationFilter } from "./core/filters/ts-rest-validation.filter";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { env } from "./core/env";
+import { customSwaggerJs } from "./swagger.dev";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -33,7 +34,13 @@ async function bootstrap() {
 			},
 			security: [{ bearerAuth: [] }],
 		});
-		SwaggerModule.setup("api", app, document);
+
+		SwaggerModule.setup("api", app, document, {
+			swaggerOptions: {
+				persistAuthorization: true,
+			},
+			customJsStr: customSwaggerJs,
+		});
 	}
 
 	await app.listen(env.PORT ?? 3001);

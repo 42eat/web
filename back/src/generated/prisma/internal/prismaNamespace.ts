@@ -394,6 +394,7 @@ export const ModelName = {
   Shift: 'Shift',
   ShiftMember: 'ShiftMember',
   ShiftPosition: 'ShiftPosition',
+  ShiftType: 'ShiftType',
   ShiftAssignment: 'ShiftAssignment',
   StockCategory: 'StockCategory',
   StockItem: 'StockItem',
@@ -418,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "member" | "session" | "token" | "adhesion" | "role" | "rolePermission" | "memberRole" | "shift" | "shiftMember" | "shiftPosition" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward" | "appConfig"
+    modelProps: "member" | "session" | "token" | "adhesion" | "role" | "rolePermission" | "memberRole" | "shift" | "shiftMember" | "shiftPosition" | "shiftType" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward" | "appConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1159,6 +1160,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ShiftPositionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftPositionCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShiftType: {
+      payload: Prisma.$ShiftTypePayload<ExtArgs>
+      fields: Prisma.ShiftTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShiftTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShiftTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        findFirst: {
+          args: Prisma.ShiftTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShiftTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        findMany: {
+          args: Prisma.ShiftTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>[]
+        }
+        create: {
+          args: Prisma.ShiftTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        createMany: {
+          args: Prisma.ShiftTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShiftTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>[]
+        }
+        delete: {
+          args: Prisma.ShiftTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        update: {
+          args: Prisma.ShiftTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.ShiftTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShiftTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShiftTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.ShiftTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftTypePayload>
+        }
+        aggregate: {
+          args: Prisma.ShiftTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShiftType>
+        }
+        groupBy: {
+          args: Prisma.ShiftTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShiftTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftTypeCountAggregateOutputType> | number
         }
       }
     }
@@ -1951,7 +2026,9 @@ export type MemberRoleScalarFieldEnum = (typeof MemberRoleScalarFieldEnum)[keyof
 export const ShiftScalarFieldEnum = {
   id: 'id',
   date: 'date',
-  manager: 'manager',
+  typeId: 'typeId',
+  reporterId: 'reporterId',
+  managerId: 'managerId',
   discordMessageId: 'discordMessageId',
   validated: 'validated'
 } as const
@@ -1976,6 +2053,15 @@ export const ShiftPositionScalarFieldEnum = {
 } as const
 
 export type ShiftPositionScalarFieldEnum = (typeof ShiftPositionScalarFieldEnum)[keyof typeof ShiftPositionScalarFieldEnum]
+
+
+export const ShiftTypeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  xpMult: 'xpMult'
+} as const
+
+export type ShiftTypeScalarFieldEnum = (typeof ShiftTypeScalarFieldEnum)[keyof typeof ShiftTypeScalarFieldEnum]
 
 
 export const ShiftAssignmentScalarFieldEnum = {
@@ -2319,6 +2405,7 @@ export type GlobalOmitConfig = {
   shift?: Prisma.ShiftOmit
   shiftMember?: Prisma.ShiftMemberOmit
   shiftPosition?: Prisma.ShiftPositionOmit
+  shiftType?: Prisma.ShiftTypeOmit
   shiftAssignment?: Prisma.ShiftAssignmentOmit
   stockCategory?: Prisma.StockCategoryOmit
   stockItem?: Prisma.StockItemOmit
