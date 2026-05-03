@@ -237,6 +237,7 @@ export type ShiftMemberOrderByWithRelationInput = {
 
 export type ShiftMemberWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  shiftId_memberId?: Prisma.ShiftMemberShiftIdMemberIdCompoundUniqueInput
   AND?: Prisma.ShiftMemberWhereInput | Prisma.ShiftMemberWhereInput[]
   OR?: Prisma.ShiftMemberWhereInput[]
   NOT?: Prisma.ShiftMemberWhereInput | Prisma.ShiftMemberWhereInput[]
@@ -246,7 +247,7 @@ export type ShiftMemberWhereUniqueInput = Prisma.AtLeast<{
   shift?: Prisma.XOR<Prisma.ShiftScalarRelationFilter, Prisma.ShiftWhereInput>
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   position?: Prisma.XOR<Prisma.ShiftPositionNullableScalarRelationFilter, Prisma.ShiftPositionWhereInput> | null
-}, "id">
+}, "id" | "shiftId_memberId">
 
 export type ShiftMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -322,6 +323,11 @@ export type ShiftMemberListRelationFilter = {
 
 export type ShiftMemberOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ShiftMemberShiftIdMemberIdCompoundUniqueInput = {
+  shiftId: number
+  memberId: number
 }
 
 export type ShiftMemberCountOrderByAggregateInput = {
