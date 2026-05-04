@@ -21,12 +21,12 @@ export default {
 		},
 		requestPasswordReset: {
 			title: "Reset your password",
-			description: "If an account with this email address exists, we will send you an link to reset your password.",
+			description: "Enter your email address to reset your password.",
 			rateLimit: "You'll be able to resend an email in {{time}}",
-			error: "An error occured, please retry later",
-			success: "If you have an account at this address we sent you an email",
+			success: "If an account with this email address exists, you will receive a link to reset your password",
+			error: "An error occurred, please try again later",
 			input: {
-				placeholder: "email",
+				placeholder: "Email address",
 			},
 		},
 	},

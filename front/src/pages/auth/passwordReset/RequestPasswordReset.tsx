@@ -23,10 +23,6 @@ export default function RequestPasswordReset() {
 
 	function isRateLimitError(error: NonNullable<typeof requestPasswordReset.error>) {
 		const e = error;
-		switch (e.status) {
-			case 429:
-			console.log(e)
-		}
 		if (error.status === 429) {
 			return error;
 		}
@@ -35,7 +31,7 @@ export default function RequestPasswordReset() {
 
 	return <main id="request-password-reset">
 		<section>
-			<h2>{t("pages.requestPasswordReset.title")}</h2>
+			<h1>{t("pages.requestPasswordReset.title")}</h1>
 			<p class="description">{t("pages.requestPasswordReset.description")}</p>
 			<Form onSubmit={handleSubmit} >
 				<div class="inputs">
@@ -54,7 +50,7 @@ export default function RequestPasswordReset() {
 				{(error) => <Switch>
 					<Match when={isRateLimitError(error)} keyed>
 						{(rateLimitError) => <p class="invalid-message">
-							{t("pages.requestPasswordReset.rateLimit", { time: "<NOT PROVIDED FOR NOW>" })}
+							{t("pages.requestPasswordReset.rateLimit", { time: rateLimitError.body.retryAfter })}
 						</p>}
 					</Match>
 					<Match when={true}>

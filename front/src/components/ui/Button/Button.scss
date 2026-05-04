@@ -47,6 +47,11 @@ $sizes: (
 	transition: background-color 0.2s;
 	color: var(--button-text);
 
+	/* In most cases, you won't want the text to wrap and extend the button
+	height, feel free to override it in superior level of styling if it's
+	necessary */
+	white-space: nowrap;
+
 	/* Important to make the inputs consistent.
 	Basically inputs like the TextInput have precisely the same properties
 	as the Button, BUT they have a border that make it 2px bigger. To keep
@@ -76,7 +81,6 @@ $sizes: (
 			cursor: default;
 			background: map.get($values, bg-dis);
 		}
-
 	}
 
 	@each $name, $values in $sizes {

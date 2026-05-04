@@ -22,9 +22,13 @@ export default {
 			logout: "Utiliser un autre compte",
 		},
 		requestPasswordReset: {
+			title: "Réinitialiser votre mot de passe",
+			description: "Entrez votre addresse email pour réinitialiser votre mot de passe.",
+			rateLimit: "Vous pouvez renvoyer une addresse email dans {{time}}",
+			success: "Si un compte est associé à cette adresse email, vous recevrez un lien pour réinitialiser votre mot de passe",
 			error: "Une erreur s'est produite, réessayez plus tard",
 			input: {
-				placeholder: "email",
+				placeholder: "Adresse email",
 			},
 		},
 	},
