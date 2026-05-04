@@ -30,7 +30,7 @@ export default function RequestPasswordReset() {
 	}
 
 	return <DialogPage id="request-password-reset">
-		<h1>{t("pages.requestPasswordReset.title")}</h1>
+		<h2>{t("pages.requestPasswordReset.title")}</h2>
 		<p class="description">{t("pages.requestPasswordReset.description")}</p>
 		<Form onSubmit={handleSubmit} >
 			<div class="inputs">
@@ -54,7 +54,7 @@ export default function RequestPasswordReset() {
 				</Match>
 				<Match when={true}>
 					<p class="invalid-message">
-						{t("pages.requestPasswordReset.error")}
+						{t("errors.unknownFallback")}
 					</p>
 				</Match>
 			</Switch>}

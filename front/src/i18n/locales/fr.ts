@@ -26,13 +26,23 @@ export default {
 			description: "Entrez votre addresse email pour réinitialiser votre mot de passe.",
 			rateLimit: "Vous pouvez renvoyer une addresse email dans {{time}}",
 			success: "Si un compte est associé à cette adresse email, vous recevrez un lien pour réinitialiser votre mot de passe",
-			error: "Une erreur s'est produite, réessayez plus tard",
 			input: {
 				placeholder: "Adresse email",
 			},
 		},
+		resetPassword: {
+			title: "Modifier votre mot de passe",
+			success: "Votre mot de passe a été modifié avec succès",
+			invalidToken: "Votre lien a expiré",
+			submitButton: "Modifier le mot de passe",
+			inputs: {
+				newPassword: "Nouveau mot de passe",
+				confirmNewPassword: "Confirmer le nouveau mot de passe",
+			},
+		},
 	},
 	errors: {
+		unknownFallback: "Une erreur s'est produite, réessayez plus tard",
 		input: {
 			text: {
 				tooShort: "FR: Input too short",

@@ -24,13 +24,23 @@ export default {
 			description: "Enter your email address to reset your password.",
 			rateLimit: "You'll be able to resend an email in {{time}}",
 			success: "If an account with this email address exists, you will receive a link to reset your password",
-			error: "An error occurred, please try again later",
 			input: {
 				placeholder: "Email address",
 			},
 		},
+		resetPassword: {
+			title: "Change your password",
+			success: "Your password has successfully been changed",
+			invalidToken: "Your link is expired",
+			submitButton: "Reset password",
+			inputs: {
+				newPassword: "New password",
+				confirmNewPassword: "Confirm password",
+			},
+		},
 	},
 	errors: {
+		unknownFallback: "An error occurred, please try again later",
 		input: {
 			text: {
 				tooShort: "Input too short",
