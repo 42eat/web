@@ -5,6 +5,7 @@ import { client } from "~/api/client";
 import { useTranslation } from "~/i18n/context";
 
 import "./PromptVerifyEmail.scss";
+import DialogPage from "~/components/ui/DialogPage";
 
 export default function PromptVerifyEmail() {
 	const { t } = useTranslation();
@@ -32,25 +33,23 @@ export default function PromptVerifyEmail() {
 	}
 
 	return <Show when={profile.isFetched && profile.data} keyed>
-		{(data) => (<main id="prompt-verify-email">
-			<section>
-				<div class="main-block">
-					<h1>{t("pages.verifyEmail.title")}</h1>
-					<p class="main-content">{t("pages.verifyEmail.mainContent")}</p>
-					<p class="email">{data.body.email}</p>
-				</div>
-				<p class="description">
-					{t("pages.verifyEmail.description")}
-					<br />
-					{t("pages.verifyEmail.spamMention")}
-				</p>
-				<hr />
-				<div class="resend-block">
-					<p>{t("pages.verifyEmail.resendText")}</p>
-					<a onClick={(e) => { e.preventDefault(); resendEmail(); }}>{t("pages.verifyEmail.resendLink")}</a>
-				</div>
-				<a class="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>{t("pages.verifyEmail.logout")}</a>
-			</section>
-		</main>)}
+		{(data) => (<DialogPage id="prompt-verify-email">
+			<div class="main-block">
+				<h1>{t("pages.verifyEmail.title")}</h1>
+				<p class="main-content">{t("pages.verifyEmail.mainContent")}</p>
+				<p class="email">{data.body.email}</p>
+			</div>
+			<p class="description">
+				{t("pages.verifyEmail.description")}
+				<br />
+				{t("pages.verifyEmail.spamMention")}
+			</p>
+			<hr />
+			<div class="resend-block">
+				<p>{t("pages.verifyEmail.resendText")}</p>
+				<a onClick={(e) => { e.preventDefault(); resendEmail(); }}>{t("pages.verifyEmail.resendLink")}</a>
+			</div>
+			<a class="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>{t("pages.verifyEmail.logout")}</a>
+		</DialogPage>)}
 	</Show>;
 }
