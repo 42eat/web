@@ -14,6 +14,7 @@ interface SummonToastOptions {
 interface Toast {
 	id: number;
 	element: JSXElement;
+	remove: () => void;
 }
 
 const { toasts, setToasts } = createRoot(() => {
@@ -23,11 +24,28 @@ const { toasts, setToasts } = createRoot(() => {
 
 let toastId = 0;
 
-export function summonToast(content: JSXElement, options?: SummonToastOptions) {
+export function summonToast(content: JSXElement, options?: SummonToastOptions): Toast {
 	const ttl = options?.ttl ?? DEFAULT_TTL;
 	const thisToastId = toastId++;
-	setToasts((prev) => [...prev, { id: thisToastId, element: content }]);
-	setTimeout(() => setToasts((prev) => prev.filter((toast) => toast.id !== thisToastId)), ttl);
+
+	function removeToast() {
+		setToasts((prev) => prev.filter((toast) => toast.id !== thisToastId));
+	}
+
+	const deleteTimeoutId = setTimeout(removeToast, ttl);
+
+	const newToast = {
+		id: thisToastId,
+		element: content,
+		remove: () => {
+			clearTimeout(deleteTimeoutId);
+			removeToast();
+		}
+	}
+
+	setToasts((prev) => [...prev, newToast]);
+
+	return newToast;
 }
 
 (window as unknown as { summonToast: typeof summonToast }).summonToast = () => summonToast(<div style={{ padding: "5px", background: "red" }}>TEST</div>);
@@ -36,7 +54,7 @@ export function ToasterProvider(props: { children: JSXElement }) {
 	return <>
 		<div id="toast-container" class="">
 			<TransitionGroup name="toast-wrapper" onExit={(_, done) => setTimeout(done, 1000)}>
-				<For each={toasts()}>{(toast) => <div>{toast.element}</div>}</For>
+				<For each={toasts()}>{(toast) => <div onClick={toast.remove}>{toast.element}</div>}</For>
 			</TransitionGroup>
 		</div>
 		{props.children}
