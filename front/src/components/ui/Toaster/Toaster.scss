@@ -1,0 +1,44 @@
+#toast-container {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	right: 0;
+	padding: 0.5rem;
+
+	& > div {
+		overflow: hidden;
+		display: grid;
+		grid-template-rows: 1fr;
+		margin-bottom: 0.5rem;
+
+		& > * {
+			overflow: hidden;
+		}
+	}
+
+	.toast-wrapper-enter {
+		opacity: 0;
+		transform: translateX(40px);
+	}
+
+	.toast-wrapper-enter-active {
+		transition:
+			opacity 500ms ease,
+			transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.toast-wrapper-exit-active {
+		opacity: 0;
+		margin-bottom: 0;
+		transform: translateX(40px);
+		grid-template-rows: 0fr !important;
+
+		/* If you change transition time, you'll maybe need to change the timeout that call `done` in Toaster.tsx in the Transition component */
+		transition:
+			grid-template-rows 300ms ease 500ms,
+			margin-bottom 300ms ease 500ms,
+			opacity 500ms ease,
+			transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+}

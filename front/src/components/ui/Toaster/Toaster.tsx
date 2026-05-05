@@ -1,6 +1,8 @@
-import { createSignal, For, JSXElement } from "solid-js";
+import { createRoot, createSignal, For, JSXElement } from "solid-js";
+import { TransitionGroup } from "solid-transition-group";
+import "./Toaster.scss";
 
-const DEFAULT_TTL = 1000;
+const DEFAULT_TTL = 3000;
 
 interface SummonToastOptions {
 	customClass?: string;
@@ -12,30 +14,30 @@ interface SummonToastOptions {
 interface Toast {
 	id: number;
 	element: JSXElement;
-	deathTime: number;
 }
 
-const [toasts, setToasts] = createSignal<Toast[]>([]);
+const { toasts, setToasts } = createRoot(() => {
+	const [toasts, setToasts] = createSignal<Toast[]>([]);
+	return { toasts, setToasts };
+});
 
 let toastId = 0;
 
 export function summonToast(content: JSXElement, options?: SummonToastOptions) {
 	const ttl = options?.ttl ?? DEFAULT_TTL;
 	const thisToastId = toastId++;
-	setToasts((prev) => [...prev, { id: thisToastId, element: content, deathTime: Date.now() + ttl }]);
+	setToasts((prev) => [...prev, { id: thisToastId, element: content }]);
 	setTimeout(() => setToasts((prev) => prev.filter((toast) => toast.id !== thisToastId)), ttl);
 }
 
-(window as unknown as { summonToast: typeof summonToast }).summonToast = (() => summonToast(<div style={{ padding: "5px", background: "red" }}>TEST</div>));
+(window as unknown as { summonToast: typeof summonToast }).summonToast = () => summonToast(<div style={{ padding: "5px", background: "red" }}>TEST</div>);
 
 export function ToasterProvider(props: { children: JSXElement }) {
 	return <>
-		<div class="toast-container">
-			<For each={toasts()}>
-				{(toast) => <div style={{ background: "red", padding: "1rem" }}>
-					{toast.element}
-				</div>}
-			</For>
+		<div id="toast-container" class="">
+			<TransitionGroup name="toast-wrapper" onExit={(_, done) => setTimeout(done, 1000)}>
+				<For each={toasts()}>{(toast) => <div>{toast.element}</div>}</For>
+			</TransitionGroup>
 		</div>
 		{props.children}
 	</>;
