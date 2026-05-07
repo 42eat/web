@@ -1,0 +1,16 @@
+@use "sass:map";
+
+$variants: (
+	success: green,
+	info: blue,
+	warning: orange,
+	error: var(--text-danger),
+);
+
+.default-toast {
+	@each $variant, $col in $variants {
+		&--#{$variant} {
+			background: $col;
+		}
+	}
+}

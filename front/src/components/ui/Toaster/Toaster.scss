@@ -36,8 +36,8 @@
 
 		/* If you change transition time, you'll maybe need to change the timeout that call `done` in Toaster.tsx in the Transition component */
 		transition:
-			grid-template-rows 300ms 500ms,
-			margin-bottom 300ms 500ms,
+			grid-template-rows 300ms ease-in-out 500ms,
+			margin-bottom 300ms ease-in-out 500ms,
 			opacity 500ms ease,
 			transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 	}

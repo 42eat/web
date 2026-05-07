@@ -4,7 +4,7 @@ import { AppRouter } from "./routes";
 import { I18nProvider } from "./i18n/context";
 import { initialized } from "./store/auth.store";
 import LoadingSplash from "./pages/Loading/LoadingSplash";
-import { ToasterProvider } from "./components/ui/Toaster/Toaster";
+import { ToasterProvider } from "./components/ui/Toaster";
 
 const client = new QueryClient();
 

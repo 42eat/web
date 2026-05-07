@@ -4,14 +4,14 @@ import "./Toaster.scss";
 
 const DEFAULT_TTL = 3000;
 
-interface SummonToastOptions {
+export interface SummonToastOptions {
 	customClass?: string;
 	/** The time the Toast stay in ms. */
 	ttl?: number;
 	ref?: (element: HTMLDialogElement) => void;
 }
 
-interface Toast {
+export interface Toast {
 	id: number;
 	element: JSXElement;
 	remove: () => void;
@@ -24,7 +24,7 @@ const { toasts, setToasts } = createRoot(() => {
 
 let toastId = 0;
 
-export function summonToast(content: JSXElement, options?: SummonToastOptions): Toast {
+export function summonRawToast(content: JSXElement, options?: SummonToastOptions): Toast {
 	const ttl = options?.ttl ?? DEFAULT_TTL;
 	const thisToastId = toastId++;
 
@@ -40,15 +40,13 @@ export function summonToast(content: JSXElement, options?: SummonToastOptions): 
 		remove: () => {
 			clearTimeout(deleteTimeoutId);
 			removeToast();
-		}
-	}
+		},
+	};
 
 	setToasts((prev) => [...prev, newToast]);
 
 	return newToast;
 }
-
-(window as unknown as { summonToast: typeof summonToast }).summonToast = () => summonToast(<div style={{ padding: "5px", background: "red" }}>TEST</div>);
 
 export function ToasterProvider(props: { children: JSXElement }) {
 	return <>
