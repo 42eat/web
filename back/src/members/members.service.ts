@@ -135,7 +135,7 @@ export class MembersService {
 		});
 	}
 
-	private async doMemberBypassPermission(memberId: number) {
+	public async doMemberBypassPermission(memberId: number) {
 		const memberSuperRole = await this.prisma.memberRole.findFirst({
 			where: {
 				memberId: memberId,

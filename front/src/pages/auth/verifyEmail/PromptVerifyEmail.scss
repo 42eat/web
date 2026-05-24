@@ -1,0 +1,63 @@
+#prompt-verify-email {
+	gap: 1.5rem;
+
+	.main-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+
+		h1 {
+			margin: 0 0 1rem 0;
+		}
+
+		p {
+			font-size: 1.2rem;
+		}
+
+		.main-content {
+			color: var(--text-secondary);
+		}
+
+		.email {
+			font-weight: 800;
+		}
+	}
+
+	.description {
+		font-size: 1rem;
+		text-align: center;
+		color: var(--text-secondary);
+	}
+
+	hr {
+		width: 70%;
+		border: none;
+		height: 2px;
+		background-color: var(--text-secondary);
+		border-radius: 9999px;
+	}
+
+	.resend-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.25rem;
+
+		p {
+			color: var(--text-secondary);
+		}
+
+		a {
+			text-decoration: underline;
+		}
+	}
+
+	.logout-link {
+		color: var(--text-muted);
+
+		&:hover {
+			color: var(--text-primary);
+		}
+	}
+}
