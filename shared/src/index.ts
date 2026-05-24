@@ -7,6 +7,7 @@ export { shiftsContract } from "./contracts/shifts/shifts.contract";
 
 export { loginSchema, type LoginDto } from "./contracts/auth/schemas/login.schema";
 export { registerSchema, type RegisterDto } from "./contracts/auth/schemas/register.schema";
+export { resetPasswordSchema, changePasswordSchema, type RequestPasswordResetDto, type ChangePasswordDto } from "./contracts/auth/schemas/password.schema";
 export { memberSchema, profileSchema } from "./contracts/members/schemas/member.schema";
 export { createRoleSchema, roleMembersResponseSchema, roleResponseSchema, rolesListDetailedResponseSchema, rolesListResponseSchema } from "./contracts/roles/schemas/role.schema";
 export { shiftPositionSchema, shiftPositionsSchema, createShiftPositionSchema, editShiftPositionSchema } from "./contracts/shifts/schemas/shift-positions.schema";
@@ -16,7 +17,7 @@ export { shiftSchema, shiftsSchema, createShiftSchema, editShiftSchema, type Shi
 export { error401Schema } from "./contracts/schemas/error401";
 
 
-export { emailConfirmationPath } from "./core/constants";
+export { emailConfirmationPath, passwordResetConfirmationPath } from "./core/constants";
 export { createJwtPayload, type JwtPayload } from "./core/jwt.payload";
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";
