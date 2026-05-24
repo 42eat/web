@@ -55,13 +55,10 @@ function useTextInputFormContext() {
 	try {
 		return useFormContext();
 	} catch (_) {
-		throw new Error("useFormContext should only be used inside a Form context provider.");
+		throw new Error("<TextInput> should only be used inside a <Form> provider.");
 	}
 }
 
-/**
- *
- */
 export default function TextInput(props: TextInputProps) {
 	const [invalidMessage, setInvalidMessage] = createSignal<JSXElement>(null);
 	const { t } = useTranslation();

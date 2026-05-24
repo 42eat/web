@@ -12,8 +12,37 @@ export default {
 				invalidCredentials: "FR: Invalid credential combination",
 			},
 		},
+		verifyEmail: {
+			title: "Vérifie ton email",
+			mainContent: "On t'a envoyé un email à",
+			description: "Clique sur le lien dans l'email pour activer ton compte.",
+			spamMention: "Pense à vérifier tes spams si tu ne vois rien.",
+			resendText: "Tu n'as rien reçu ?",
+			resendLink: "Renvoyer l'email",
+			logout: "Utiliser un autre compte",
+		},
+		requestPasswordReset: {
+			title: "Réinitialiser votre mot de passe",
+			description: "Entrez votre addresse email pour réinitialiser votre mot de passe.",
+			rateLimit: "Vous pouvez renvoyer une addresse email dans {{time}}",
+			success: "Si un compte est associé à cette adresse email, vous recevrez un lien pour réinitialiser votre mot de passe",
+			input: {
+				placeholder: "Adresse email",
+			},
+		},
+		resetPassword: {
+			title: "Modifier votre mot de passe",
+			success: "Votre mot de passe a été modifié avec succès",
+			invalidToken: "Votre lien a expiré",
+			submitButton: "Modifier le mot de passe",
+			inputs: {
+				newPassword: "Nouveau mot de passe",
+				confirmNewPassword: "Confirmer le nouveau mot de passe",
+			},
+		},
 	},
 	errors: {
+		unknownFallback: "Une erreur s'est produite, réessayez plus tard",
 		input: {
 			text: {
 				tooShort: "FR: Input too short",

@@ -1,0 +1,19 @@
+.dialog-page {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	& > .dialog-page-section {
+		width: 100%;
+		max-width: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 3rem 2rem;
+		border-radius: 2rem;
+		background-color: var(--background-card);
+		gap: 1.5rem;
+	}
+}
