@@ -21,7 +21,7 @@ export default function RegisterForm() {
 	let emailInput!: HTMLInputElement;
 	let passwordInput!: HTMLInputElement;
 
-	function handleSubmit(e: SubmitEvent) {
+	const handleSubmit = (e: SubmitEvent) => {
 		e.preventDefault();
 
 		registerMutation.mutate(
@@ -45,7 +45,7 @@ export default function RegisterForm() {
 				},
 			},
 		);
-	}
+	};
 
 	return <Form onSubmit={handleSubmit} id="register-form">
 		<div class="register-inputs">
@@ -59,6 +59,9 @@ export default function RegisterForm() {
 				</p>
 			</Show>
 		</div>
+		<p class="register-details">
+			Already have an account? <A href="/auth/login">Login</A>.
+		</p>
 		<Button type="submit">
 			Register
 		</Button>
@@ -70,8 +73,5 @@ export default function RegisterForm() {
 		<Button class="ft-register-button" onClick={console.log}>
 			Register with <p>42</p> Intra
 		</Button>
-		<p class="register-details">
-			Already have an account? <A href="/auth/login">Login</A>.
-		</p>
 	</Form>;
 }

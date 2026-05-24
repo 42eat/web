@@ -10,37 +10,8 @@ export default {
 				invalidCredentials: "Invalid credential combination",
 			},
 		},
-		verifyEmail: {
-			title: "Check your email",
-			mainContent: "We sent an email to",
-			description: "Click the link in the email to activate your account.",
-			spamMention: "Make sure to check your spam folder if you don't see anything.",
-			resendText: "Didn't receive anything?",
-			resendLink: "Resend the email",
-			logout: "Use an other account",
-		},
-		requestPasswordReset: {
-			title: "Reset your password",
-			description: "Enter your email address to reset your password.",
-			rateLimit: "You'll be able to resend an email in {{time}}",
-			success: "If an account with this email address exists, you will receive a link to reset your password",
-			input: {
-				placeholder: "Email address",
-			},
-		},
-		resetPassword: {
-			title: "Change your password",
-			success: "Your password has successfully been changed",
-			invalidToken: "Your link is expired",
-			submitButton: "Reset password",
-			inputs: {
-				newPassword: "New password",
-				confirmNewPassword: "Confirm password",
-			},
-		},
 	},
 	errors: {
-		unknownFallback: "An error occurred, please try again later",
 		input: {
 			text: {
 				tooShort: "Input too short",

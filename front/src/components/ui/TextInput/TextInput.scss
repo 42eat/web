@@ -33,11 +33,6 @@
 			border-color: var(--input-outline-active);
 			background-color: var(--input-background-active);
 		}
-
-		&:disabled {
-			border-color: var(--input-outline-active);
-			background-color: var(--input-background-active);
-		}
 	}
 
 	.invalid-message {

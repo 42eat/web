@@ -11,9 +11,7 @@ import VerifiedEmailGuard from "./components/guards/VerifiedEmailGuard";
 
 import PromptVerifyEmail from "./pages/verifyEmail/PromptVerifyEmail";
 import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard";
-import { emailConfirmationPath, passwordResetConfirmationPath } from "@42eat-web/shared";
-import ResetPassword from "./pages/auth/passwordReset/ResetPassword";
-import RequestPasswordReset from "./pages/auth/passwordReset/RequestPasswordReset";
+import { emailConfirmationPath } from "@42eat-web/shared";
 
 export const AppRouter = () => {
 	return <Router >
@@ -23,10 +21,8 @@ export const AppRouter = () => {
 				<Route path="/login" component={LoginForm}/>
 				<Route path="/register" component={RegisterForm} />
 			</Route>
-			<Route path="/auth/request-password-reset" component={RequestPasswordReset} />
 		</Route>
 		<Route path={emailConfirmationPath} component={VerifyEmail} />
-		<Route path={passwordResetConfirmationPath} component={ResetPassword} />
 		<Route path="/" component={AuthGuard}>
 			<Route path="/" component={UnverifiedEmailGuard}>
 				<Route path="/verify-email" component={PromptVerifyEmail}/>

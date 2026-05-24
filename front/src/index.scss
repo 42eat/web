@@ -17,6 +17,7 @@ body {
 	height: 100%;
 	width: 100%;
 
+	font-weight: 600;
 
 	font-family:
 		vars.$font-stack,
@@ -49,7 +50,6 @@ a {
 	transition: color 0.2s;
 	color: var(--link-main);
 	outline: none;
-	cursor: pointer;
 }
 
 a:hover {
