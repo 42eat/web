@@ -30,22 +30,15 @@
 	--button-primary-background: var(--background-accent);
 	--button-primary-background-hover: var(--background-accent-hover);
 	--button-primary-background-active: var(--background-accent-active);
-	/* --button-primary-background-disabled: var(--background-accent-active); */
-	--button-primary-background-disabled: color-mix(in oklab, var(--button-primary-background) 40%, var(--mix-disabled));
-	--button-primary-text: var(--neutral-0);
 
 	--button-ghost-background: var(--background-overlay);
 	--button-ghost-background-hover: var(--background-overlay);
 	--button-ghost-background-active: var(--background-overlay);
-	--button-ghost-background-disabled: var(--background-overlay);
-	--button-ghost-text: var(--text-primary);
 
 	--button-danger-background: var(--background-danger);
 	--button-danger-background-hover: var(--background-danger-hover);
 	--button-danger-background-active: var(--background-danger-active);
-	--button-danger-background-disabled: var(--background-danger-active);
-	--button-danger-text: var(--neutral-0);
 
 	--button-text: var(--text-primary);
-	--button-text-disabled: color-mix(in oklab, var(--text-primary) 80%, var(--mix-disabled));
+	--button-text-disabled: color-mix(in oklab, var(--text-primary) 80%, transparent);
 }
