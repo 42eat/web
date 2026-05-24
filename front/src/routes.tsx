@@ -6,10 +6,10 @@ import RegisterForm from "./pages/auth/RegisterForm";
 import AuthGuard from "./components/guards/AuthGuard";
 import Landing from "./pages/Landing";
 import GuestGuard from "./components/guards/GuestGuard";
-import VerifyEmail from "./pages/verifyEmail/ComfirmEmail";
+import VerifyEmail from "./pages/auth/verifyEmail/ComfirmEmail";
 import VerifiedEmailGuard from "./components/guards/VerifiedEmailGuard";
 
-import PromptVerifyEmail from "./pages/verifyEmail/PromptVerifyEmail";
+import PromptVerifyEmail from "./pages/auth/verifyEmail/PromptVerifyEmail";
 import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard";
 import { emailConfirmationPath, passwordResetConfirmationPath } from "@42eat-web/shared";
 import ResetPassword from "./pages/auth/passwordReset/ResetPassword";
