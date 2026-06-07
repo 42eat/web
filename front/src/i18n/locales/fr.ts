@@ -12,7 +12,7 @@ export default {
 				invalidCredentials: "FR: Invalid credential combination",
 			},
 		},
-		verifyEmail: {
+		promptVerifyEmail: {
 			title: "Vérifie ton email",
 			mainContent: "On t'a envoyé un email à",
 			description: "Clique sur le lien dans l'email pour activer ton compte.",
@@ -20,6 +20,14 @@ export default {
 			resendText: "Tu n'as rien reçu ?",
 			resendLink: "Renvoyer l'email",
 			logout: "Utiliser un autre compte",
+		},
+		confirmEmail: {
+			title: "Vérifie ton email",
+			loadingMessage: "On prépare tout, attends juste une petite seconde...",
+			successMessage: "Tout est bon, ton compte est prêt !",
+			successLink: "Aller à la page d'accueil",
+			errorMessage: "Mmh... On a rencontré un problème :(",
+			errorLink: "Retourner en lieu sûr",
 		},
 		requestPasswordReset: {
 			title: "Réinitialiser votre mot de passe",

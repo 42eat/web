@@ -35,21 +35,21 @@ export default function PromptVerifyEmail() {
 	return <Show when={profile.isFetched && profile.data} keyed>
 		{(data) => (<DialogPage id="prompt-verify-email">
 			<div class="main-block">
-				<h1>{t("pages.verifyEmail.title")}</h1>
-				<p class="main-content">{t("pages.verifyEmail.mainContent")}</p>
+				<h1>{t("pages.promptVerifyEmail.title")}</h1>
+				<p class="main-content">{t("pages.promptVerifyEmail.mainContent")}</p>
 				<p class="email">{data.body.email}</p>
 			</div>
 			<p class="description">
-				{t("pages.verifyEmail.description")}
+				{t("pages.promptVerifyEmail.description")}
 				<br />
-				{t("pages.verifyEmail.spamMention")}
+				{t("pages.promptVerifyEmail.spamMention")}
 			</p>
 			<hr />
 			<div class="resend-block">
-				<p>{t("pages.verifyEmail.resendText")}</p>
-				<a onClick={(e) => { e.preventDefault(); resendEmail(); }}>{t("pages.verifyEmail.resendLink")}</a>
+				<p>{t("pages.promptVerifyEmail.resendText")}</p>
+				<a onClick={(e) => { e.preventDefault(); resendEmail(); }}>{t("pages.promptVerifyEmail.resendLink")}</a>
 			</div>
-			<a class="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>{t("pages.verifyEmail.logout")}</a>
+			<a class="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>{t("pages.promptVerifyEmail.logout")}</a>
 		</DialogPage>)}
 	</Show>;
 }
