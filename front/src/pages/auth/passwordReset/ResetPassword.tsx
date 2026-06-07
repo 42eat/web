@@ -10,6 +10,7 @@ import { useNavigate } from "@solidjs/router";
 import { createSignal, onMount, Show } from "solid-js";
 import Button from "~/components/ui/Button";
 import DialogPage from "~/components/ui/DialogPage";
+import { summonErrorToast, summonSuccessToast } from "~/components/ui/Toaster";
 
 export default function ResetPassword() {
 	const { t } = useTranslation();
@@ -39,16 +40,16 @@ export default function ResetPassword() {
 			{ body: { token, newPassword: passwordInput.value } },
 			{
 				onSuccess: () => {
-					/* summonNotification */
+					summonSuccessToast(<div>OK</div>);
 					navigate("/auth/login");
 				},
 				onError: (error) => {
 					if (error.status === 401) {
-					/* summonNotification */
+						summonErrorToast(<div>ERROR</div>, { ttl: 11111111 });
 						navigate("/auth/request-password-reset");
-						return;
+					} else {
+						setError(true);
 					}
-					setError(true);
 				},
 			},
 		);

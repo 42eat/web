@@ -1,16 +1,22 @@
 @use "sass:map";
+@use "sass:color";
 
 $variants: (
-	success: green,
-	info: blue,
-	warning: orange,
+	success: var(--text-valid),
+	info: var(--text-info),
+	warning: var(--text-warning),
 	error: var(--text-danger),
 );
 
 .default-toast {
 	@each $variant, $col in $variants {
 		&--#{$variant} {
-			background: $col;
+			border-radius: 0.5rem;
+			padding: 0.5rem;
+			backdrop-filter: blur(12px) saturate(180%);
+			-webkit-backdrop-filter: blur(12px) saturate(180%);
+			background: color-mix(in srgb, $col 50%, transparent);
+			border: 1px solid color-mix(in srgb, $col 80%, transparent);
 		}
 	}
 }
