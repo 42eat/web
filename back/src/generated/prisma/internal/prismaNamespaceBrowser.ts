@@ -70,7 +70,8 @@ export const ModelName = {
   BattlepassSeason: 'BattlepassSeason',
   BattlepassTier: 'BattlepassTier',
   MemberBattlepassReward: 'MemberBattlepassReward',
-  AppConfig: 'AppConfig'
+  AppConfig: 'AppConfig',
+  ActionLog: 'ActionLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -310,6 +311,18 @@ export const AppConfigScalarFieldEnum = {
 export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
 
 
+export const ActionLogScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  targetId: 'targetId',
+  data: 'data',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type ActionLogScalarFieldEnum = (typeof ActionLogScalarFieldEnum)[keyof typeof ActionLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -324,6 +337,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

@@ -18,21 +18,22 @@ model Member {
   displayName    String?   @map("display_name")
   internalNote   String?   @map("internal_note")
   joinDate       DateTime? @map("join_date")
-  emailValidated Boolean   @map("email_validated") @default(false)
+  emailValidated Boolean   @default(false) @map("email_validated")
   updatedAt      DateTime? @updatedAt @map("updated_at")
   createdAt      DateTime? @default(now()) @map("created_at")
 
-  adhesions              Adhesion[]
-  memberRoles            MemberRole[]
-  reportedBy             Shift[]                  @relation("ShiftReporter")
-  shiftsManaged          Shift[]                  @relation("ShiftManager")
-  shiftMembers           ShiftMember[]
-  shiftAssignments       ShiftAssignment[]
-  vehicles               Vehicle[]
-  expenseTrips           ExpenseTrip[]
+  adhesions               Adhesion[]
+  memberRoles             MemberRole[]
+  reportedBy              Shift[]                  @relation("ShiftReporter")
+  shiftsManaged           Shift[]                  @relation("ShiftManager")
+  shiftMembers            ShiftMember[]
+  shiftAssignments        ShiftAssignment[]
+  vehicles                Vehicle[]
+  expenseTrips            ExpenseTrip[]
   memberBattlepassRewards MemberBattlepassReward[]
-  sessions               Session[]
-  tokens                 Token[]
+  sessions                Session[]
+  tokens                  Token[]
+  actions                 ActionLog[]
 
   @@map("members")
 }
@@ -61,15 +62,15 @@ enum TokenPurpose {
 }
 
 model Token {
-  id        Int       @id @default(autoincrement())
-  token     String    @unique
+  id        Int          @id @default(autoincrement())
+  token     String       @unique
   purpose   TokenPurpose
-  memberId  Int?      @map("member_id")
+  memberId  Int?         @map("member_id")
   data      Json?
-  expiresAt DateTime  @map("expires_at")
-  createdAt DateTime  @default(now()) @map("created_at")
+  expiresAt DateTime     @map("expires_at")
+  createdAt DateTime     @default(now()) @map("created_at")
 
-  member    Member?   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   @@map("tokens")
 }
@@ -107,19 +108,19 @@ model RolePermission {
 
   roleRef Role @relation(fields: [roleId], references: [id])
 
-	@@unique([roleId, permission])
+  @@unique([roleId, permission])
   @@map("role_permissions")
 }
 
 model MemberRole {
-  id       Int  @id @default(autoincrement())
-  memberId Int  @map("member_id")
-  roleId   Int  @map("role_id")
+  id       Int @id @default(autoincrement())
+  memberId Int @map("member_id")
+  roleId   Int @map("role_id")
 
   memberRef Member @relation(fields: [memberId], references: [id])
   roleRef   Role   @relation(fields: [roleId], references: [id])
 
-	@@unique([memberId, roleId])
+  @@unique([memberId, roleId])
   @@map("member_roles")
 }
 
@@ -131,7 +132,7 @@ model Shift {
   typeId           Int      @map("type_id")
   reporterId       Int      @map("reporter_id")
   managerId        Int
-  discordMessageId String?  @map("discord_message_id") @unique
+  discordMessageId String?  @unique @map("discord_message_id")
   validated        Boolean  @default(false)
 
   type         ShiftType     @relation(fields: [typeId], references: [id])
@@ -168,9 +169,9 @@ model ShiftPosition {
 }
 
 model ShiftType {
-  id      Int    @id @default(autoincrement())
-  type    String @unique
-  xpMult  Float? @default(1) @map("xp_mult")
+  id     Int    @id @default(autoincrement())
+  type   String @unique
+  xpMult Float? @default(1) @map("xp_mult")
 
   shiftTypes Shift[]
 
@@ -261,11 +262,11 @@ model BattlepassSeason {
 }
 
 model BattlepassTier {
-  id         Int    @id @default(autoincrement())
-  seasonId   Int    @map("season_id")
-  tierNumber Int    @map("tier_number")
+  id          Int    @id @default(autoincrement())
+  seasonId    Int    @map("season_id")
+  tierNumber  Int    @map("tier_number")
   requirement Int
-  reward     String
+  reward      String
 
   season  BattlepassSeason         @relation(fields: [seasonId], references: [id])
   rewards MemberBattlepassReward[]
@@ -295,4 +296,62 @@ model AppConfig {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("app_config")
+}
+
+// ─── Logs ─────────────────────────────────────────────────────────────────────
+
+enum ActionType {
+  // Member relative
+  MEMBER_CREATE
+  MEMBER_DELETE
+  MEMBER_UPDATE
+
+  MEMBER_ROLE_ADD
+  MEMBER_ROLE_DELETE
+
+  // Role relative
+  ROLE_CREATE
+  ROLE_DELETE
+  ROLE_UPDATE
+
+  PERMISSION_CREATE
+  PERMISSION_DELETE
+  PERMISSION_UPDATE
+
+  // Shift relative
+  SHIFT_CREATE
+  SHIFT_DELETE
+  SHIFT_UPDATE
+
+  // Stock relative
+  STOCK_ITEM_CREATE
+  STOCK_ITEM_DELETE
+  STOCK_ITEM_UPDATE
+
+  STOCK_CATEGORY_CREATE
+  STOCK_CATEGORY_DELETE
+  STOCK_CATEGORY_UPDATE
+
+  // Vehicle relative
+  VEHICLE_CREATE
+  VEHICLE_DELETE
+  VEHICLE_UPDATE
+
+  // App config relative
+  APP_CONFIG_CREATE
+  APP_CONFIG_DELETE
+  APP_CONFIG_UPDATE
+}
+
+model ActionLog {
+  id Int @id @default(autoincrement())
+
+  authorId Int
+  author   Member @relation(fields: [authorId], references: [id])
+
+  targetId Int?
+  data     Json
+  type     ActionType
+
+  createdAt DateTime @default(now())
 }

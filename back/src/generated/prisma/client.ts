@@ -139,3 +139,8 @@ export type MemberBattlepassReward = Prisma.MemberBattlepassRewardModel
  * 
  */
 export type AppConfig = Prisma.AppConfigModel
+/**
+ * Model ActionLog
+ * 
+ */
+export type ActionLog = Prisma.ActionLogModel

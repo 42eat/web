@@ -267,6 +267,7 @@ export type MemberWhereInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
+  actions?: Prisma.ActionLogListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
@@ -291,6 +292,7 @@ export type MemberOrderByWithRelationInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   tokens?: Prisma.TokenOrderByRelationAggregateInput
+  actions?: Prisma.ActionLogOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +320,7 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
+  actions?: Prisma.ActionLogListRelationFilter
 }, "id" | "email" | "login">
 
 export type MemberOrderByWithAggregationInput = {
@@ -375,6 +378,7 @@ export type MemberCreateInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateInput = {
@@ -399,6 +403,7 @@ export type MemberUncheckedCreateInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUpdateInput = {
@@ -422,6 +427,7 @@ export type MemberUpdateInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
@@ -446,6 +452,7 @@ export type MemberUncheckedUpdateInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateManyInput = {
@@ -725,6 +732,20 @@ export type MemberUpdateOneRequiredWithoutMemberBattlepassRewardsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutMemberBattlepassRewardsInput, Prisma.MemberUpdateWithoutMemberBattlepassRewardsInput>, Prisma.MemberUncheckedUpdateWithoutMemberBattlepassRewardsInput>
 }
 
+export type MemberCreateNestedOneWithoutActionsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutActionsInput, Prisma.MemberUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutActionsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutActionsInput, Prisma.MemberUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutActionsInput
+  upsert?: Prisma.MemberUpsertWithoutActionsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutActionsInput, Prisma.MemberUpdateWithoutActionsInput>, Prisma.MemberUncheckedUpdateWithoutActionsInput>
+}
+
 export type MemberCreateWithoutSessionsInput = {
   email: string
   password?: string | null
@@ -745,6 +766,7 @@ export type MemberCreateWithoutSessionsInput = {
   expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutMemberInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutSessionsInput = {
@@ -768,6 +790,7 @@ export type MemberUncheckedCreateWithoutSessionsInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutMemberInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutSessionsInput = {
@@ -806,6 +829,7 @@ export type MemberUpdateWithoutSessionsInput = {
   expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutMemberNestedInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSessionsInput = {
@@ -829,6 +853,7 @@ export type MemberUncheckedUpdateWithoutSessionsInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutMemberNestedInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutTokensInput = {
@@ -851,6 +876,7 @@ export type MemberCreateWithoutTokensInput = {
   expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutMemberInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutTokensInput = {
@@ -874,6 +900,7 @@ export type MemberUncheckedCreateWithoutTokensInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutMemberInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutTokensInput = {
@@ -912,6 +939,7 @@ export type MemberUpdateWithoutTokensInput = {
   expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutMemberNestedInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutTokensInput = {
@@ -935,6 +963,7 @@ export type MemberUncheckedUpdateWithoutTokensInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutMemberNestedInput
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutAdhesionsInput = {
@@ -957,6 +986,7 @@ export type MemberCreateWithoutAdhesionsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutAdhesionsInput = {
@@ -980,6 +1010,7 @@ export type MemberUncheckedCreateWithoutAdhesionsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutAdhesionsInput = {
@@ -1018,6 +1049,7 @@ export type MemberUpdateWithoutAdhesionsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutAdhesionsInput = {
@@ -1041,6 +1073,7 @@ export type MemberUncheckedUpdateWithoutAdhesionsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutMemberRolesInput = {
@@ -1063,6 +1096,7 @@ export type MemberCreateWithoutMemberRolesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutMemberRolesInput = {
@@ -1086,6 +1120,7 @@ export type MemberUncheckedCreateWithoutMemberRolesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutMemberRolesInput = {
@@ -1124,6 +1159,7 @@ export type MemberUpdateWithoutMemberRolesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMemberRolesInput = {
@@ -1147,6 +1183,7 @@ export type MemberUncheckedUpdateWithoutMemberRolesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutReportedByInput = {
@@ -1169,6 +1206,7 @@ export type MemberCreateWithoutReportedByInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutReportedByInput = {
@@ -1192,6 +1230,7 @@ export type MemberUncheckedCreateWithoutReportedByInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutReportedByInput = {
@@ -1219,6 +1258,7 @@ export type MemberCreateWithoutShiftsManagedInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutShiftsManagedInput = {
@@ -1242,6 +1282,7 @@ export type MemberUncheckedCreateWithoutShiftsManagedInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutShiftsManagedInput = {
@@ -1280,6 +1321,7 @@ export type MemberUpdateWithoutReportedByInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutReportedByInput = {
@@ -1303,6 +1345,7 @@ export type MemberUncheckedUpdateWithoutReportedByInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUpsertWithoutShiftsManagedInput = {
@@ -1336,6 +1379,7 @@ export type MemberUpdateWithoutShiftsManagedInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutShiftsManagedInput = {
@@ -1359,6 +1403,7 @@ export type MemberUncheckedUpdateWithoutShiftsManagedInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutShiftMembersInput = {
@@ -1381,6 +1426,7 @@ export type MemberCreateWithoutShiftMembersInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutShiftMembersInput = {
@@ -1404,6 +1450,7 @@ export type MemberUncheckedCreateWithoutShiftMembersInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutShiftMembersInput = {
@@ -1442,6 +1489,7 @@ export type MemberUpdateWithoutShiftMembersInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutShiftMembersInput = {
@@ -1465,6 +1513,7 @@ export type MemberUncheckedUpdateWithoutShiftMembersInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutShiftAssignmentsInput = {
@@ -1487,6 +1536,7 @@ export type MemberCreateWithoutShiftAssignmentsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutShiftAssignmentsInput = {
@@ -1510,6 +1560,7 @@ export type MemberUncheckedCreateWithoutShiftAssignmentsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutShiftAssignmentsInput = {
@@ -1548,6 +1599,7 @@ export type MemberUpdateWithoutShiftAssignmentsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutShiftAssignmentsInput = {
@@ -1571,6 +1623,7 @@ export type MemberUncheckedUpdateWithoutShiftAssignmentsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutVehiclesInput = {
@@ -1593,6 +1646,7 @@ export type MemberCreateWithoutVehiclesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutVehiclesInput = {
@@ -1616,6 +1670,7 @@ export type MemberUncheckedCreateWithoutVehiclesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutVehiclesInput = {
@@ -1654,6 +1709,7 @@ export type MemberUpdateWithoutVehiclesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutVehiclesInput = {
@@ -1677,6 +1733,7 @@ export type MemberUncheckedUpdateWithoutVehiclesInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutExpenseTripsInput = {
@@ -1699,6 +1756,7 @@ export type MemberCreateWithoutExpenseTripsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutExpenseTripsInput = {
@@ -1722,6 +1780,7 @@ export type MemberUncheckedCreateWithoutExpenseTripsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutExpenseTripsInput = {
@@ -1760,6 +1819,7 @@ export type MemberUpdateWithoutExpenseTripsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutExpenseTripsInput = {
@@ -1783,6 +1843,7 @@ export type MemberUncheckedUpdateWithoutExpenseTripsInput = {
   memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberCreateWithoutMemberBattlepassRewardsInput = {
@@ -1805,6 +1866,7 @@ export type MemberCreateWithoutMemberBattlepassRewardsInput = {
   expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberUncheckedCreateWithoutMemberBattlepassRewardsInput = {
@@ -1828,6 +1890,7 @@ export type MemberUncheckedCreateWithoutMemberBattlepassRewardsInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutMemberInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+  actions?: Prisma.ActionLogUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type MemberCreateOrConnectWithoutMemberBattlepassRewardsInput = {
@@ -1866,6 +1929,7 @@ export type MemberUpdateWithoutMemberBattlepassRewardsInput = {
   expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUpdateManyWithoutAuthorNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutMemberBattlepassRewardsInput = {
@@ -1889,6 +1953,117 @@ export type MemberUncheckedUpdateWithoutMemberBattlepassRewardsInput = {
   expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutMemberNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
+  actions?: Prisma.ActionLogUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type MemberCreateWithoutActionsInput = {
+  email: string
+  password?: string | null
+  login?: string | null
+  displayName?: string | null
+  internalNote?: string | null
+  joinDate?: Date | string | null
+  emailValidated?: boolean
+  updatedAt?: Date | string | null
+  createdAt?: Date | string | null
+  adhesions?: Prisma.AdhesionCreateNestedManyWithoutMemberInput
+  memberRoles?: Prisma.MemberRoleCreateNestedManyWithoutMemberRefInput
+  reportedBy?: Prisma.ShiftCreateNestedManyWithoutReporterInput
+  shiftsManaged?: Prisma.ShiftCreateNestedManyWithoutManagerInput
+  shiftMembers?: Prisma.ShiftMemberCreateNestedManyWithoutMemberInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutMemberInput
+  vehicles?: Prisma.VehicleCreateNestedManyWithoutMemberInput
+  expenseTrips?: Prisma.ExpenseTripCreateNestedManyWithoutMemberInput
+  memberBattlepassRewards?: Prisma.MemberBattlepassRewardCreateNestedManyWithoutMemberInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutMemberInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutActionsInput = {
+  id?: number
+  email: string
+  password?: string | null
+  login?: string | null
+  displayName?: string | null
+  internalNote?: string | null
+  joinDate?: Date | string | null
+  emailValidated?: boolean
+  updatedAt?: Date | string | null
+  createdAt?: Date | string | null
+  adhesions?: Prisma.AdhesionUncheckedCreateNestedManyWithoutMemberInput
+  memberRoles?: Prisma.MemberRoleUncheckedCreateNestedManyWithoutMemberRefInput
+  reportedBy?: Prisma.ShiftUncheckedCreateNestedManyWithoutReporterInput
+  shiftsManaged?: Prisma.ShiftUncheckedCreateNestedManyWithoutManagerInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedCreateNestedManyWithoutMemberInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutMemberInput
+  vehicles?: Prisma.VehicleUncheckedCreateNestedManyWithoutMemberInput
+  expenseTrips?: Prisma.ExpenseTripUncheckedCreateNestedManyWithoutMemberInput
+  memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedCreateNestedManyWithoutMemberInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMemberInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutActionsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutActionsInput, Prisma.MemberUncheckedCreateWithoutActionsInput>
+}
+
+export type MemberUpsertWithoutActionsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutActionsInput, Prisma.MemberUncheckedUpdateWithoutActionsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutActionsInput, Prisma.MemberUncheckedCreateWithoutActionsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutActionsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutActionsInput, Prisma.MemberUncheckedUpdateWithoutActionsInput>
+}
+
+export type MemberUpdateWithoutActionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joinDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adhesions?: Prisma.AdhesionUpdateManyWithoutMemberNestedInput
+  memberRoles?: Prisma.MemberRoleUpdateManyWithoutMemberRefNestedInput
+  reportedBy?: Prisma.ShiftUpdateManyWithoutReporterNestedInput
+  shiftsManaged?: Prisma.ShiftUpdateManyWithoutManagerNestedInput
+  shiftMembers?: Prisma.ShiftMemberUpdateManyWithoutMemberNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutMemberNestedInput
+  vehicles?: Prisma.VehicleUpdateManyWithoutMemberNestedInput
+  expenseTrips?: Prisma.ExpenseTripUpdateManyWithoutMemberNestedInput
+  memberBattlepassRewards?: Prisma.MemberBattlepassRewardUpdateManyWithoutMemberNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutMemberNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutActionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joinDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adhesions?: Prisma.AdhesionUncheckedUpdateManyWithoutMemberNestedInput
+  memberRoles?: Prisma.MemberRoleUncheckedUpdateManyWithoutMemberRefNestedInput
+  reportedBy?: Prisma.ShiftUncheckedUpdateManyWithoutReporterNestedInput
+  shiftsManaged?: Prisma.ShiftUncheckedUpdateManyWithoutManagerNestedInput
+  shiftMembers?: Prisma.ShiftMemberUncheckedUpdateManyWithoutMemberNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutMemberNestedInput
+  vehicles?: Prisma.VehicleUncheckedUpdateManyWithoutMemberNestedInput
+  expenseTrips?: Prisma.ExpenseTripUncheckedUpdateManyWithoutMemberNestedInput
+  memberBattlepassRewards?: Prisma.MemberBattlepassRewardUncheckedUpdateManyWithoutMemberNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutMemberNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 
@@ -1908,6 +2083,7 @@ export type MemberCountOutputType = {
   memberBattlepassRewards: number
   sessions: number
   tokens: number
+  actions: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1922,6 +2098,7 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   memberBattlepassRewards?: boolean | MemberCountOutputTypeCountMemberBattlepassRewardsArgs
   sessions?: boolean | MemberCountOutputTypeCountSessionsArgs
   tokens?: boolean | MemberCountOutputTypeCountTokensArgs
+  actions?: boolean | MemberCountOutputTypeCountActionsArgs
 }
 
 /**
@@ -2011,6 +2188,13 @@ export type MemberCountOutputTypeCountTokensArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.TokenWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionLogWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2034,6 +2218,7 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   memberBattlepassRewards?: boolean | Prisma.Member$memberBattlepassRewardsArgs<ExtArgs>
   sessions?: boolean | Prisma.Member$sessionsArgs<ExtArgs>
   tokens?: boolean | Prisma.Member$tokensArgs<ExtArgs>
+  actions?: boolean | Prisma.Member$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
@@ -2089,6 +2274,7 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   memberBattlepassRewards?: boolean | Prisma.Member$memberBattlepassRewardsArgs<ExtArgs>
   sessions?: boolean | Prisma.Member$sessionsArgs<ExtArgs>
   tokens?: boolean | Prisma.Member$tokensArgs<ExtArgs>
+  actions?: boolean | Prisma.Member$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2108,6 +2294,7 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     memberBattlepassRewards: Prisma.$MemberBattlepassRewardPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     tokens: Prisma.$TokenPayload<ExtArgs>[]
+    actions: Prisma.$ActionLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2525,6 +2712,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   memberBattlepassRewards<T extends Prisma.Member$memberBattlepassRewardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$memberBattlepassRewardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberBattlepassRewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.Member$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tokens<T extends Prisma.Member$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  actions<T extends Prisma.Member$actionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3218,6 +3406,30 @@ export type Member$tokensArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.TokenScalarFieldEnum | Prisma.TokenScalarFieldEnum[]
+}
+
+/**
+ * Member.actions
+ */
+export type Member$actionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActionLog
+   */
+  select?: Prisma.ActionLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActionLog
+   */
+  omit?: Prisma.ActionLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionLogInclude<ExtArgs> | null
+  where?: Prisma.ActionLogWhereInput
+  orderBy?: Prisma.ActionLogOrderByWithRelationInput | Prisma.ActionLogOrderByWithRelationInput[]
+  cursor?: Prisma.ActionLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionLogScalarFieldEnum | Prisma.ActionLogScalarFieldEnum[]
 }
 
 /**

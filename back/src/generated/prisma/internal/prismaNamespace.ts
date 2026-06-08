@@ -403,7 +403,8 @@ export const ModelName = {
   BattlepassSeason: 'BattlepassSeason',
   BattlepassTier: 'BattlepassTier',
   MemberBattlepassReward: 'MemberBattlepassReward',
-  AppConfig: 'AppConfig'
+  AppConfig: 'AppConfig',
+  ActionLog: 'ActionLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "member" | "session" | "token" | "adhesion" | "role" | "rolePermission" | "memberRole" | "shift" | "shiftMember" | "shiftPosition" | "shiftType" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward" | "appConfig"
+    modelProps: "member" | "session" | "token" | "adhesion" | "role" | "rolePermission" | "memberRole" | "shift" | "shiftMember" | "shiftPosition" | "shiftType" | "shiftAssignment" | "stockCategory" | "stockItem" | "vehicle" | "expenseTrip" | "battlepassSeason" | "battlepassTier" | "memberBattlepassReward" | "appConfig" | "actionLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1903,6 +1904,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ActionLog: {
+      payload: Prisma.$ActionLogPayload<ExtArgs>
+      fields: Prisma.ActionLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActionLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActionLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        findFirst: {
+          args: Prisma.ActionLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActionLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        findMany: {
+          args: Prisma.ActionLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>[]
+        }
+        create: {
+          args: Prisma.ActionLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        createMany: {
+          args: Prisma.ActionLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActionLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>[]
+        }
+        delete: {
+          args: Prisma.ActionLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        update: {
+          args: Prisma.ActionLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.ActionLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActionLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActionLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.ActionLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActionLogPayload>
+        }
+        aggregate: {
+          args: Prisma.ActionLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActionLog>
+        }
+        groupBy: {
+          args: Prisma.ActionLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActionLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActionLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActionLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2163,6 +2238,18 @@ export const AppConfigScalarFieldEnum = {
 export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
 
 
+export const ActionLogScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  targetId: 'targetId',
+  data: 'data',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type ActionLogScalarFieldEnum = (typeof ActionLogScalarFieldEnum)[keyof typeof ActionLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2177,6 +2264,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -2300,6 +2394,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
+
+/**
+ * Reference to a field of type 'ActionType'
+ */
+export type EnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionType'>
+    
+
+
+/**
+ * Reference to a field of type 'ActionType[]'
+ */
+export type ListEnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2415,6 +2523,7 @@ export type GlobalOmitConfig = {
   battlepassTier?: Prisma.BattlepassTierOmit
   memberBattlepassReward?: Prisma.MemberBattlepassRewardOmit
   appConfig?: Prisma.AppConfigOmit
+  actionLog?: Prisma.ActionLogOmit
 }
 
 /* Types for Logging */

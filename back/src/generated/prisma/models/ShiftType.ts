@@ -182,7 +182,7 @@ export type ShiftTypeGroupByOutputType = {
   _max: ShiftTypeMaxAggregateOutputType | null
 }
 
-type GetShiftTypeGroupByPayload<T extends ShiftTypeGroupByArgs> = Prisma.PrismaPromise<
+export type GetShiftTypeGroupByPayload<T extends ShiftTypeGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ShiftTypeGroupByOutputType, T['by']> &
       {
