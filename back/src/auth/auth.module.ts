@@ -10,9 +10,10 @@ import { MailModule } from "../core/mail/mail.module";
 import { TokensModule } from "../tokens/tokens.module";
 import { AppConfigModule } from "../config/config.controller";
 import { LoggingModule } from "../core/logging/logging.module";
+import { GatewayModule } from "../gateway/gateway.module";
 
 @Module({
-	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule, AppConfigModule, LoggingModule],
+	imports: [MembersModule, SessionsModule, JwtModule, MailModule, TokensModule, AppConfigModule, LoggingModule, GatewayModule],
 	providers: [AuthService, JwtStrategy, RefreshStrategy],
 	controllers: [AuthController],
 	exports: [AuthService],
