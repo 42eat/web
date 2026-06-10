@@ -43,6 +43,12 @@ export class DatabaseBootstrapService implements OnModuleInit {
 			create: { key: "42api-secret", value: env.API42_CLIENT_SECRET ?? "" },
 		});
 
+		await this.prisma.appConfig.upsert({
+			where: { key: "foyer-open" },
+			update: {},
+			create: { key: "foyer-open", value: "false" },
+		});
+
 		// ─── Roles ───────────────────────────────────────────────────────────────────
 
 		const bigboss = await this.prisma.role.upsert({

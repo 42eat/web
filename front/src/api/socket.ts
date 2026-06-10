@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
-import { env } from "~/env";
+// import { env } from "~/env";
+import { auth } from "~/store/auth.store";
 
-export const socket = io(`${env.VITE_API_URL}/ws`, {
-	auth: { token: localStorage.getItem("access_token") },
+export const socket = io({
+	path: "/api/ws",
+	auth: { token: auth.accessToken },
 });

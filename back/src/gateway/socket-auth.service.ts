@@ -3,6 +3,8 @@ import { MembersService } from "../members/members.service";
 import { ROOM_DEFINITIONS, RoomPrefix } from "./room-registry";
 import { JwtService, TokenExpiredError } from "@nestjs/jwt";
 import { AuthMember } from "../core/decorators/current-member.decorator";
+import { env } from "../core/env";
+import { JwtPayload } from "@42eat-web/shared";
 
 type RoomCheckResult
 	= | { allowed: true }
@@ -19,7 +21,8 @@ export class SocketAuthService {
 
 	public isClientLoggedIn(token: string): AuthResult {
 		try {
-			return { status: "SUCCESS", member: this.jwtService.verify<AuthMember>(token) };
+			const payload = this.jwtService.verify<JwtPayload>(token, { ignoreExpiration: false, secret: env.JWT_SECRET });
+			return { status: "SUCCESS", member: { id: payload.sub, emailValidated: payload.emailVerified } };
 		} catch (err) {
 			if (err instanceof TokenExpiredError) {
 				return { status: "EXPIRED" };

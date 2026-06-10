@@ -9,8 +9,7 @@ import { SocketAuthService } from "./socket-auth.service";
 import { TypedServer, TypedSocket, WsParams } from "./socket.types";
 
 @WebSocketGateway({
-	namespace: "ws",
-	cors: { origin: "*" }, // enlever en prod hein
+	path: "/ws",
 })
 export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 	constructor(private readonly socketAuthService: SocketAuthService) {}
@@ -19,6 +18,7 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 	server: TypedServer;
 
 	public handleConnection(client: TypedSocket) {
+		client.data = { user: null };
 		const token = client.handshake.auth?.token as string | undefined;
 		if (!token) {
 			console.log(`Anonymous client connected: ${client.id}`);
@@ -35,7 +35,7 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 			console.log(`Anonymous client connected: ${client.id}`);
 			return;
 		} else if (payload.status == "EXPIRED") {
-			client.emit("auth:token_expired");
+			client.emit("auth.token_expired");
 			console.log(`Anonymous client connected: ${client.id}, token refresh requested`);
 			return;
 		}
@@ -46,22 +46,23 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 	}
 
 	@SubscribeMessage("join")
-	public async handleJoin(...[rooms, client]: WsParams<"join">) {
+	public async handleJoin(...[client, rooms]: WsParams<"leave">) {
 		const roomList = Array.isArray(rooms)
 			? rooms
 			: [rooms];
 		for (const room of roomList) {
+			console.log(client.data.user);
 			const canJoinRoom = await this.socketAuthService.canJoinRoom(room, client.data.user?.id);
 			if (canJoinRoom.allowed) {
+				console.log(`Client ${client.id} joined room :`, room);
 				void client.join(room);
 			}
 		}
-		console.log(`Client ${client.id} joined rooms :`, roomList);
 		return { status: "ok", rooms: roomList };
 	}
 
 	@SubscribeMessage("leave")
-	public handleLeave(...[rooms, client]: WsParams<"leave">) {
+	public handleLeave(...[client, rooms]: WsParams<"leave">) {
 		const roomList = Array.isArray(rooms)
 			? rooms
 			: [rooms];

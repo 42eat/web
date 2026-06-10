@@ -21,7 +21,6 @@ import { env } from "../core/env";
 import { randomUUID, UUID } from "crypto";
 import { WinstonLoggerService } from "../core/logging/logger.service";
 import { LogBuilder } from "../core/logging/log-builder";
-import { EventsService } from "../events/events.service";
 
 const TokenResponseSchema = z.object({
 	access_token: z.string(),
@@ -42,7 +41,6 @@ export class AuthService {
 		private readonly tokensService: TokensService,
 		private readonly appConfig: AppConfigService,
 		private readonly logger: WinstonLoggerService,
-		private readonly events: EventsService,
 	) {}
 
 	public async register(
@@ -88,8 +86,6 @@ export class AuthService {
 		ipAddress: string | undefined,
 	) {
 		const existing = await this.members.getByEmail(dto.email);
-
-		this.events.emitProfileUpdate(1, dto.email);
 
 		if (!existing) {
 			throw new AppUnauthorizedException(

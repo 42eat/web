@@ -6,8 +6,8 @@ interface SocketData {
 }
 
 export interface ServerToClientEvents {
-	"auth:token_expired": () => void;
-	"foyer:open": (data: boolean) => void;
+	"auth.token_expired": () => void;
+	"foyer.open": (data: boolean) => void;
 }
 
 export interface ClientToServerEvents {
@@ -30,8 +30,8 @@ export type TypedSocket = Socket<
 >;
 
 export type WsHandler<E extends keyof ClientToServerEvents> = (
-	body: Parameters<ClientToServerEvents[E]>[0],
 	client: TypedSocket,
+	body: Parameters<ClientToServerEvents[E]>[0],
 ) => unknown;
 
 export type WsParams<E extends keyof ClientToServerEvents> = Parameters<WsHandler<E>>;

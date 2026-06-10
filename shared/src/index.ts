@@ -13,6 +13,8 @@ export { createRoleSchema, roleMembersResponseSchema, roleResponseSchema, rolesL
 export { shiftPositionSchema, shiftPositionsSchema, createShiftPositionSchema, editShiftPositionSchema } from "./contracts/shifts/schemas/shift-positions.schema";
 export { shiftTypeSchema, shiftTypesSchema, createShiftTypeSchema, editShiftTypeSchema } from "./contracts/shifts/schemas/shift-types.schema";
 export { shiftSchema, shiftsSchema, createShiftSchema, editShiftSchema, type ShiftResponse, type CreateShiftDto, type EditShiftDto, type AddShiftMemberDto, shiftWithoutCanEditSchema, type ShiftWithoutCanEdit } from "./contracts/shifts/schemas/shifts.schema";
+export { statusSchema, setStatusSchema } from "./contracts/foyer/schemas/foyer.schema";
+export { foyerContract } from "./contracts/foyer/foyer.contract";
 
 export { error401Schema } from "./contracts/schemas/error401";
 

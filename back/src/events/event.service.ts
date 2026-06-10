@@ -3,7 +3,7 @@ import { AppGateway } from "../gateway/app.gateway";
 import { ServerToClientEvents } from "../gateway/socket.types";
 
 @Injectable()
-export class EventsService {
+export class EventService {
 	constructor(private readonly gateway: AppGateway) {}
 
 	// emit<T>(room: string, event: string, payload: T) {
@@ -28,6 +28,6 @@ export class EventsService {
 	// }
 
 	emitFoyerOpenStatus(open: boolean) {
-		this.emit("global", "foyer:open", open);
+		this.emit("global", "foyer.open", open);
 	}
 }
