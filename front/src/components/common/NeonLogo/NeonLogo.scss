@@ -3,12 +3,21 @@
 
 	.neon-halo {
 		stroke-width: 0.7px;
-		stroke: var(--logo-neon-halo);
-		filter: url(#neon-diffused);
+		stroke: var(--logo-neon-halo-off);
 		will-change: filter;
 	}
 	.neon-center {
 		stroke-width: 0.25px;
-		stroke: var(--logo-neon);
+		stroke: var(--logo-neon-off);
+	}
+}
+
+.neon-logo-on {
+	.neon-halo {
+		stroke: var(--logo-neon-halo-on);
+		filter: url(#neon-diffused);
+	}
+	.neon-center {
+		stroke: var(--logo-neon-on);
 	}
 }

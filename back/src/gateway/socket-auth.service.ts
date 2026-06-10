@@ -1,16 +1,34 @@
 import { Injectable } from "@nestjs/common";
 import { MembersService } from "../members/members.service";
 import { ROOM_DEFINITIONS, RoomPrefix } from "./room-registry";
+import { JwtService, TokenExpiredError } from "@nestjs/jwt";
+import { AuthMember } from "../core/decorators/current-member.decorator";
 
 type RoomCheckResult
 	= | { allowed: true }
 		| { allowed: false; reason: "UNKNOWN_ROOM" | "FORBIDDEN" | "INVALID_ID" | "UNAUTHORIZED" };
 
-@Injectable()
-export class RoomAuthService {
-	constructor(private readonly members: MembersService) {}
+type AuthResult
+	= | { status: "SUCCESS"; member: AuthMember }
+		| { status: "EXPIRED" }
+		| { status: "ERROR" };
 
-	async canJoinRoom(room: string, memberId: number | null): Promise<RoomCheckResult> {
+@Injectable()
+export class SocketAuthService {
+	constructor(private readonly members: MembersService, private readonly jwtService: JwtService) {}
+
+	public isClientLoggedIn(token: string): AuthResult {
+		try {
+			return { status: "SUCCESS", member: this.jwtService.verify<AuthMember>(token) };
+		} catch (err) {
+			if (err instanceof TokenExpiredError) {
+				return { status: "EXPIRED" };
+			}
+			return { status: "ERROR" };
+		}
+	}
+
+	public async canJoinRoom(room: string, memberId: number | undefined): Promise<RoomCheckResult> {
 		const { prefix, id } = this.parseRoom(room);
 		const definition = ROOM_DEFINITIONS[prefix as RoomPrefix];
 
@@ -26,7 +44,7 @@ export class RoomAuthService {
 			return { allowed: true };
 		}
 
-		if (memberId === null) {
+		if (memberId === undefined) {
 			return { allowed: false, reason: "UNAUTHORIZED" };
 		}
 
