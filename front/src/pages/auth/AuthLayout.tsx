@@ -3,11 +3,12 @@ import { Transition } from "solid-transition-group";
 
 import "./AuthLayout.scss";
 import NeonLogo from "~/components/common/NeonLogo";
+import { store } from "~/store/store";
 
 export default function AuthLayout(props: RouteSectionProps) {
 	return <div id="auth-page">
 		<div class="auth-hero">
-			<NeonLogo />
+			<NeonLogo on={store.foyerOpen}/>
 		</div>
 		<section class="auth-section">
 			<header class="top-details" />
