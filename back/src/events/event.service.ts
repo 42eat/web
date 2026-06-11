@@ -1,12 +1,24 @@
 import { Injectable } from "@nestjs/common";
 import { AppGateway } from "../gateway/app.gateway";
 import { ServerToClientEvents } from "../gateway/socket.types";
+// import { EventName, EventPayload, RoomName } from "@42eat-web/shared";
 
 @Injectable()
 export class EventService {
 	constructor(private readonly gateway: AppGateway) {}
 
 	// emit<T>(room: string, event: string, payload: T) {
+	// 	this.gateway.server.to(room).emit(event, payload);
+	// }
+
+	// emit<
+	// 	TRoom extends RoomName,
+	// 	TEvent extends EventName<TRoom>,
+	// >(
+	// 	room: string,
+	// 	event: TEvent,
+	// 	payload: EventPayload<TRoom, TEvent>,
+	// ) {
 	// 	this.gateway.server.to(room).emit(event, payload);
 	// }
 
@@ -28,6 +40,6 @@ export class EventService {
 	// }
 
 	emitFoyerOpenStatus(open: boolean) {
-		this.emit("global", "foyer.open", open);
+		this.emit("global", "foyer.status", open);
 	}
 }

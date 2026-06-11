@@ -18,15 +18,15 @@ export const shiftSchema = z.object({
 });
 export type ShiftResponse = z.infer<typeof shiftSchema>;
 
-export const shiftWithoutCanEditSchema = shiftSchema.omit({ canEdit: true })
-export type ShiftWithoutCanEdit = z.infer<typeof shiftWithoutCanEditSchema>
+export const shiftWithoutCanEditSchema = shiftSchema.omit({ canEdit: true });
+export type ShiftWithoutCanEdit = z.infer<typeof shiftWithoutCanEditSchema>;
 
 export const shiftsSchema = z.array(shiftSchema);
 
 export const createShiftSchema = z.object({
 	date: z.string().date().refine(
 		(val) => new Date(val) <= new Date(),
-		{ message: 'Shift date cannot be in the future' }
+		{ message: "Shift date cannot be in the future" },
 	),
 	type: z.number(),
 	manager: z.number(),
@@ -51,7 +51,7 @@ export type CreateShiftDto = z.infer<typeof createShiftSchema>;
 export const editShiftSchema = z.object({
 	date: z.string().date().refine(
 		(val) => new Date(val) <= new Date(),
-		{ message: 'Shift date cannot be in the future' }
+		{ message: "Shift date cannot be in the future" },
 	),
 	type: z.number(),
 	manager: z.number(),
@@ -69,4 +69,8 @@ export type AddShiftMemberDto = z.infer<typeof addShiftMemberSchema>;
 export const deleteShiftMemberParamSchema = z.object({
 	id: z.string().transform(Number),
 	memberId: z.string().transform(Number),
+});
+
+export const deleteShiftWsSchema = z.object({
+	id: z.number(),
 });

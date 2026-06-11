@@ -7,7 +7,7 @@ interface SocketData {
 
 export interface ServerToClientEvents {
 	"auth.token_expired": () => void;
-	"foyer.open": (data: boolean) => void;
+	"foyer.status": (data: boolean) => void;
 }
 
 export interface ClientToServerEvents {
