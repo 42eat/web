@@ -27,4 +27,5 @@ export { type Permission } from "./core/permissions";
 export { type Code401, code401 } from "./contracts/schemas/error401";
 export { type Code403, code403 } from "./contracts/schemas/error403";
 
-export { w } from "./websocket/index";
+// export { w } from "./websocket/index";
+export { type SC } from "./websocket/contract";

@@ -1,43 +1,76 @@
 import { z } from "zod";
-import { w } from "./index";
+import { w } from "./builders";
 import { PERMISSIONS } from "../core/permissions";
-import { idParamSchema } from "../contracts/schemas/common.schema";
 import { deleteShiftWsSchema, shiftSchema } from "../contracts/shifts/schemas/shifts.schema";
+import { SocketClient } from "./infer";
 // import { ParamSchema } from "./builders";
 
-export const socketContract = w.contract([
+// export const socketContract = w.contract([
 
-	w.room({
-		name: "shift.:id",
-		params: { id: idParamSchema },
+// 	w.room({
+// 		name: "shift.:id",
+// 		params: { id: idParamSchema },
+// 		permission: PERMISSIONS.SHIFT.GET_SHIFT,
+// 		events: [
+// 			w.event("shift.updated", shiftSchema),
+// 			w.event("shift.deleted", deleteShiftWsSchema),
+// 		],
+// 	}),
+
+// 	w.room({
+// 		name: "shift.list",
+// 		permission: PERMISSIONS.SHIFT.GET_SHIFTS,
+// 		events: [
+// 			w.event("shift.created", shiftSchema),
+// 			w.event("shift.updated", shiftSchema),
+// 			w.event("shift.deleted", deleteShiftWsSchema),
+// 		],
+// 	}),
+
+// 	w.room({
+// 		name: "global",
+// 		permission: null,
+// 		events: [
+// 			w.event("foyer.status", z.object({ open: z.boolean() })),
+// 			w.event("auth.token_expired", null),
+// 		],
+// 	}),
+
+// ]);
+
+const shiftContract = w.contract({
+	shiftId: w.room({
+		name: ":id",
+		params: { id: z.coerce.number() },
 		permission: PERMISSIONS.SHIFT.GET_SHIFT,
-		events: [
-			w.event("shift.updated", shiftSchema),
-			w.event("shift.deleted", deleteShiftWsSchema),
-		],
+		events: {
+			update: w.event(shiftSchema),
+			delete: w.event(deleteShiftWsSchema),
+		},
 	}),
-
-	w.room({
-		name: "shift.list",
+	shiftList: w.room({
+		name: "list",
 		permission: PERMISSIONS.SHIFT.GET_SHIFTS,
-		events: [
-			w.event("shift.created", shiftSchema),
-			w.event("shift.updated", shiftSchema),
-			w.event("shift.deleted", deleteShiftWsSchema),
-		],
+		events: {
+			create: w.event(shiftSchema),
+			update: w.event(shiftSchema),
+			delete: w.event(deleteShiftWsSchema),
+		},
 	}),
+}, "shift");
 
-	w.room({
+export const socketContract = w.contract({
+	shift: shiftContract,
+	global: w.room({
 		name: "global",
 		permission: null,
-		events: [
-			w.event("foyer.status", z.object({ open: z.boolean() })),
-			w.event("auth.token_expired", null),
-		],
+		events: {
+			foyerStatus: w.event(z.boolean()),
+		},
 	}),
+});
 
-]);
-
+export type SC = SocketClient<typeof socketContract>;
 
 // type ContractRooms = typeof socketContract.rooms[number];
 

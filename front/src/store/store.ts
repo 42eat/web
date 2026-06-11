@@ -23,7 +23,7 @@ socket.on("connect", () => {
 	console.log("Room joined");
 });
 
-socket.on("foyer.open", (data: boolean) => {
+socket.on("foyer.status", (data: boolean) => {
 	setFoyerOpen(data);
 	console.log(data);
 });
