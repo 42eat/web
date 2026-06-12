@@ -19,7 +19,7 @@ export const AppRouter = () => {
 	return <Router >
 		<Route path="/" component={Landing} />
 		<Route path="/" component={GuestGuard}>
-			<Route path="/auth" component={AuthLayout}>
+			<Route path="/" component={AuthLayout}>
 				<Route path="/login" component={LoginForm}/>
 				<Route path="/register" component={RegisterForm} />
 			</Route>

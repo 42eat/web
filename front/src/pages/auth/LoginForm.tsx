@@ -76,7 +76,7 @@ export default function LoginForm() {
 			Login with <p>42</p> Intra
 		</Button>
 		<p class="auth-switcher">
-			Need an account? <A href="/auth/register">Register</A>.
+			Need an account? <A href="/register">Register</A>.
 		</p>
 	</Form>;
 }
