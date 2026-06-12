@@ -47,17 +47,27 @@ $sizes: (
 	transition: background-color 0.2s;
 	color: var(--button-text);
 
-	/* In most cases, you won't want the text to wrap and extend the button
-	height, feel free to override it in superior level of styling if it's
-	necessary */
-	white-space: nowrap;
+	display: flex;
+	align-items: center;
+
 
 	/* Important to make the inputs consistent.
 	Basically inputs like the TextInput have precisely the same properties
 	as the Button, BUT they have a border that make it 2px bigger. To keep
-	the same sizes, we put the same border but in transparet, it adds up
+	the same sizes, we put the same border but in transparent, it adds up
 	to the size of the button without changing the background behavior */
 	border: 1px solid transparent;
+
+	& .btn-content {
+		/* In most cases, you won't want the text to wrap and extend the button
+		height, feel free to override it in superior level of styling if it's
+		necessary */
+		display: inline-block;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+	}
 
 	&:disabled {
 		color: var(--button-text-disabled);
