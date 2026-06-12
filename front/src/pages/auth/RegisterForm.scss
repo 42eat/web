@@ -7,7 +7,13 @@
 	.register-inputs {
 		display: flex;
 		flex-direction: column;
-		gap: .5rem;
+		gap: 0.5rem;
+
+		& > .invalid-message {
+			margin: 0;
+			text-align: center;
+			color: var(--input-invalid);
+		}
 	}
 
 	.register-details {
@@ -15,7 +21,7 @@
 		font-weight: bold;
 		margin: 0;
 		color: var(--text-muted);
-		font-size: .95rem;
+		font-size: 0.95rem;
 	}
 
 	.separator {
@@ -35,16 +41,19 @@
 	.ft-register-button {
 		background-color: black;
 		color: white;
-		display: flex;
-		justify-content: center;
-		gap: .5rem;
+
+		& .btn-content {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+		}
 
 		p {
 			margin: 0;
 		}
 
 		&:is(:hover, :focus-visible) {
-			background-color: #030303	;
+			background-color: #030303;
 		}
 	}
 }

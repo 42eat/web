@@ -1,9 +1,11 @@
 .dialog-page {
 	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 2rem;
 
 	& > .dialog-page-section {
 		width: 100%;
