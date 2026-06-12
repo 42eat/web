@@ -12,9 +12,6 @@ export const AppVariableParam = z.object({
 export const getAppVariables = z.array(keyValuePair);
 export type GetVariablesDto = z.infer<typeof getAppVariables>;
 
-export const createAppVariable = keyValuePair;
-export type CreateVariableDto = z.infer<typeof createAppVariable>;
-
 export const editAppVariable = z.object({
 	value: z.string(),
 });
