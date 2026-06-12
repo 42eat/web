@@ -6,6 +6,7 @@ Web is the new interface created to enhance the experience of 42eat members
 
 ### Requirements
 
+- [`node`](https://www.nvmnode.com/fr/guide/installation-sh.html) (see [details](#node-details))
 - [`pnpm`](https://pnpm.io/installation)
 - [`docker`](https://docs.docker.com/desktop/setup/install/linux/)
 - `make`
@@ -34,6 +35,10 @@ make run
 > [!NOTE]  
 > If you are new to web and you come from C/C++ etc :  
 > Forget everything you know, no compilation or stuff like that here. Once you started `make run` every time you'll save a file, it will either restart the server (if you made changes in the back), or apply modification to the page (if you made changes in the front)
+
+### Node details
+
+We recommend at least `node` v20 to make everything run smooth. Use of [`nvm`](https://github.com/nvm-sh/nvm#install--update-script) is highly recommended if you don't have root privileges on your session.
 
 ## Stack
 
