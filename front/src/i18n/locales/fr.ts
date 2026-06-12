@@ -41,6 +41,7 @@ export default {
 		resetPassword: {
 			title: "Modifier votre mot de passe",
 			success: "Votre mot de passe a été modifié avec succès",
+			error: "Ce lien n'est plus valide",
 			invalidToken: "Votre lien a expiré",
 			submitButton: "Modifier le mot de passe",
 			inputs: {
@@ -50,6 +51,7 @@ export default {
 		},
 	},
 	errors: {
+		rateLimit: "Euh... Bro tu vas trop vite là !",
 		unknownFallback: "Une erreur s'est produite, réessayez plus tard",
 		input: {
 			text: {

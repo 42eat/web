@@ -39,6 +39,7 @@ export default {
 		resetPassword: {
 			title: "Change your password",
 			success: "Your password has successfully been changed",
+			error: "This link is not valid anymore",
 			invalidToken: "Your link is expired",
 			submitButton: "Reset password",
 			inputs: {
@@ -48,6 +49,7 @@ export default {
 		},
 	},
 	errors: {
+		rateLimit: "You are being rate limited",
 		unknownFallback: "An error occurred, please try again later",
 		input: {
 			text: {

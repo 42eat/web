@@ -12,6 +12,7 @@ import { setupZodErrorMap } from "./zodErrorMap";
 import { Shape } from "~/types/generics/Shape";
 import { z } from "zod";
 import { env } from "~/env";
+import { createRoot } from "solid-js";
 
 export const localeSchema = z.enum(["en", "fr"]);
 
@@ -55,7 +56,7 @@ export function useTranslation() {
 
 export type Translator = I18nContextType["t"];
 
-export function I18nProvider(props: { children: JSXElement }) {
+export const { t, locale, setLocale } = createRoot(() => {
 	const lang = getInitLang();
 	const [locale, setLocale] = createSignal<Locale>(lang);
 
@@ -65,9 +66,13 @@ export function I18nProvider(props: { children: JSXElement }) {
 
 	setupZodErrorMap(t);
 
-	return (
-		<I18nContext.Provider value={{ t, locale, setLocale }}>
-			{props.children}
-		</I18nContext.Provider>
-	);
+	return { t, locale, setLocale };
+});
+
+(window as { setLocale: typeof setLocale }).setLocale = setLocale;
+
+export function I18nProvider(props: { children: JSXElement }) {
+	return <I18nContext.Provider value={{ t, locale, setLocale }}>
+		{props.children}
+	</I18nContext.Provider>;
 }
