@@ -9,6 +9,7 @@ $variants: (
 );
 
 .default-toast {
+	cursor: pointer;
 	@each $variant, $col in $variants {
 		&--#{$variant} {
 			border-radius: 0.5rem;

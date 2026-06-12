@@ -40,12 +40,12 @@ export default function ResetPassword() {
 			{ body: { token, newPassword: passwordInput.value } },
 			{
 				onSuccess: () => {
-					/* summonNotification */
+					summonSuccessToast(t("pages.resetPassword.success"));
 					navigate("/login");
 				},
 				onError: (error) => {
 					if (error.status === 401) {
-						summonErrorToast(<div>ERROR</div>, { ttl: 11111111 });
+						summonErrorToast(t("pages.resetPassword.error"));
 						navigate("/auth/request-password-reset");
 					} else {
 						setError(true);
