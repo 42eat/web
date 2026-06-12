@@ -10,7 +10,7 @@ export default function AuthLayout(props: RouteSectionProps) {
 			<NeonLogo />
 		</div>
 		<section class="auth-section">
-			<header class="top-details" />
+			{/* <header class="top-details" /> */}
 			<div class="auth-block">
 				<h1>42's Foyer</h1>
 				<Transition name="slide" mode="outin">
@@ -19,7 +19,7 @@ export default function AuthLayout(props: RouteSectionProps) {
 					</main>
 				</Transition>
 			</div>
-			<footer class="bottom-details" />
+			{/* <footer class="bottom-details" /> */}
 		</section>
 	</div>;
 }

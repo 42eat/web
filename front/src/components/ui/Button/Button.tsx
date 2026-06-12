@@ -9,5 +9,5 @@ type ButtonProps = JSX.IntrinsicElements["button"] & {
 export default function Button(props: ButtonProps) {
 	const [local, rest] = splitProps(props, ["variant", "size", "class", "children"]);
 
-	return <button class={`btn btn--${local.variant ?? "primary"} btn--${local.size ?? "md"} ${local.class ?? ""}`} {...rest}>{local.children}</button>;
+	return <button class={`btn btn--${local.variant ?? "primary"} btn--${local.size ?? "md"} ${local.class ?? ""}`} {...rest}><span class="btn-content">{local.children}</span></button>;
 }

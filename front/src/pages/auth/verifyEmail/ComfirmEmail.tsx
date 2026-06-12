@@ -3,12 +3,16 @@ import { client } from "~/api/client";
 import "./ComfirmEmail.scss";
 import { A } from "@solidjs/router";
 import DialogPage from "~/components/ui/DialogPage";
+import { useTranslation } from "~/i18n/context";
 
 type State = "WAITING" | "CONFIRMED" | "MISSING_TOKEN" | "ERROR";
 
 export default function ConfirmEmail() {
+	const { t } = useTranslation();
+
 	const confirmEmailMutation = client.auth.confirmEmail.createMutation();
 	const [state, setState] = createSignal<State>("WAITING");
+
 
 	onMount(() => {
 		const token = new URLSearchParams(window.location.search).get("token");
@@ -26,24 +30,24 @@ export default function ConfirmEmail() {
 	});
 
 	return <DialogPage id="confirm-email">
-		<h2>Vérifie ton email</h2>
+		<h2>{t("pages.confirmEmail.title")}</h2>
 		<hr/>
 		<div class="content">
 			<Switch>
 				<Match when={state() === "WAITING"}>
-					<p>On prépare tout, attends juste une petite seconde...</p>
+					<p>{t("pages.confirmEmail.loadingMessage")}</p>
 				</Match>
 				<Match when={state() === "CONFIRMED"}>
-					<p>Tout est bon, ton compte est prêt !</p>
-					<A href="/home">Aller à la page d'accueil</A>
+					<p>{t("pages.confirmEmail.successMessage")}</p>
+					<A href="/home">{t("pages.confirmEmail.successLink")}</A>
 				</Match>
 				<Match when={state() === "MISSING_TOKEN"}>
-					<p>Mmh... On a rencontré un problème :(</p>
-					<A href="/home">Retourner en lieu sûr</A>
+					<p>{t("pages.confirmEmail.errorMessage")}</p>
+					<A href="/home">{t("pages.confirmEmail.errorLink")}</A>
 				</Match>
 				<Match when={state() === "ERROR"}>
-					<p>Mmh... On a rencontré un problème :(</p>
-					<A href="/home">Retourner en lieu sûr</A>
+					<p>{t("pages.confirmEmail.errorMessage")}</p>
+					<A href="/home">{t("pages.confirmEmail.errorLink")}</A>
 				</Match>
 			</Switch>
 		</div>

@@ -71,7 +71,7 @@ export default function RegisterForm() {
 			Register with <p>42</p> Intra
 		</Button>
 		<p class="register-details">
-			Already have an account? <A href="/auth/login">Login</A>.
+			Already have an account? <A href="/login">Login</A>.
 		</p>
 	</Form>;
 }

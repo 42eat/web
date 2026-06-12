@@ -14,7 +14,7 @@ export default function AuthGuard(props: RouteSectionProps) {
 	const navigate = useNavigate();
 
 	createEffect(() => {
-		if (!auth.accessToken) navigate("/auth/login", { replace: true });
+		if (!auth.accessToken) navigate("/login", { replace: true });
 	});
 
 	return <Show when={auth.accessToken !== null && auth} keyed>
