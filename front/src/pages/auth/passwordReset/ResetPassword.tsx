@@ -21,7 +21,7 @@ export default function ResetPassword() {
 	onMount(() => {
 		const localToken = new URLSearchParams(window.location.search).get("token");
 		if (!localToken) {
-			navigate("/auth/login", { replace: true });
+			navigate("/login", { replace: true });
 			return;
 		}
 		token = localToken;
@@ -40,7 +40,7 @@ export default function ResetPassword() {
 			{
 				onSuccess: () => {
 					/* summonNotification */
-					navigate("/auth/login");
+					navigate("/login");
 				},
 				onError: (error) => {
 					if (error.status === 401) {
