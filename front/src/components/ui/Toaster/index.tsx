@@ -17,7 +17,4 @@ export function summonErrorToast(...args: Tail<Parameters<typeof summonToast>>) 
 	return summonToast("error", ...args);
 }
 
-(window as (typeof window & { summonErrorToast: typeof summonErrorToast })).summonErrorToast = summonErrorToast;
-(window as (typeof window & { summonInfoToast: typeof summonInfoToast })).summonInfoToast = summonInfoToast;
-
 export * from "./Toaster";
