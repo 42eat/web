@@ -8,7 +8,7 @@ import { JwtStrategy } from "./strategies/jwt.strategy";
 import { RefreshStrategy } from "./strategies/refresh.strategy";
 import { MailModule } from "../core/mail/mail.module";
 import { TokensModule } from "../tokens/tokens.module";
-import { AppConfigModule } from "../config/config.controller";
+import { AppConfigModule } from "../config/config.module";
 import { LoggingModule } from "../core/logging/logging.module";
 
 @Module({

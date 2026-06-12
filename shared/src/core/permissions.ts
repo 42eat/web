@@ -39,6 +39,10 @@ export const PERMISSIONS = {
 	PERMISSIONS: {
 		LIST: "permissions:list",
 	},
+	APP_CONFIG: {
+		LIST: "app-config:list",
+		EDIT: "app-config:edit",
+	},
 } as const;
 
 type PermissionValues<T> = T extends object
