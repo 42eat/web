@@ -69,8 +69,6 @@ export const { t, locale, setLocale } = createRoot(() => {
 	return { t, locale, setLocale };
 });
 
-(window as { setLocale: typeof setLocale }).setLocale = setLocale;
-
 export function I18nProvider(props: { children: JSXElement }) {
 	return <I18nContext.Provider value={{ t, locale, setLocale }}>
 		{props.children}

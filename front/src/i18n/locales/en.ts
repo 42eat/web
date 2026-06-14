@@ -56,6 +56,7 @@ export default {
 	},
 	errors: {
 		rateLimit: "You are being rate limited",
+		unavailableFtApi: "We are not currently able to reach 42's API",
 		unknownFallback: "An error occurred, please try again later",
 		input: {
 			text: {

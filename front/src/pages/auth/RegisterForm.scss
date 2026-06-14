@@ -37,23 +37,4 @@
 			background-color: var(--text-muted);
 		}
 	}
-
-	.ft-register-button {
-		background-color: black;
-		color: white;
-
-		& .btn-content {
-			display: flex;
-			justify-content: center;
-			gap: 0.5rem;
-		}
-
-		p {
-			margin: 0;
-		}
-
-		&:is(:hover, :focus-visible) {
-			background-color: #030303;
-		}
-	}
 }

@@ -58,6 +58,7 @@ export default {
 	},
 	errors: {
 		rateLimit: "Euh... Bro tu vas trop vite là !",
+		unavailableFtApi: "We are not currently able to reach 42's API",
 		unknownFallback: "Une erreur s'est produite, réessayez plus tard",
 		input: {
 			text: {

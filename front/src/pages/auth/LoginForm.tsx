@@ -9,6 +9,7 @@ import { useTranslation } from "~/i18n/context";
 import "./LoginForm.scss";
 import Form from "~/components/ui/Form/Form";
 import { validateFromZod } from "~/utils/validateFromZod";
+import IntraButton from "~/components/common/IntraButton/IntraButton";
 
 export default function LoginForm() {
 	const [error, setError] = createSignal<JSXElement>(null);
@@ -16,7 +17,6 @@ export default function LoginForm() {
 	const { t } = useTranslation();
 
 	const loginMutation = client.auth.login.createMutation();
-	const intraAuthUrl = client.auth.getLogin42url.createQuery(() => ["auth", "getLogin42url"], {});
 
 	let usernameInput!: HTMLInputElement;
 	let passwordInput!: HTMLInputElement;
@@ -77,16 +77,7 @@ export default function LoginForm() {
 			OR
 			<hr />
 		</div>
-		<Button
-			type="button"
-			class="ft-login-button"
-			disabled={!intraAuthUrl.isSuccess}
-			onClick={() => {
-				const url = intraAuthUrl.data?.body.url;
-				if (url) document.location.href = url;
-			}}>
-			Login with <p>42</p> Intra
-		</Button>
+		<IntraButton>Login with <p>42</p> Intra</IntraButton>
 		<p class="auth-switcher">
 			Need an account? <A href="/register">Register</A>.
 		</p>

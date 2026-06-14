@@ -1,0 +1,19 @@
+.ft-login-button {
+	background-color: black;
+	color: white;
+
+	& .btn-content {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	&:is(:hover, :focus-visible) {
+		background-color: #030303;
+	}
+
+	&:disabled {
+		background-color: #03030350;
+		pointer-events: none;
+	}
+}

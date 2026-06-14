@@ -10,13 +10,13 @@ import { authActions } from "~/store/auth.store";
 import Form from "~/components/ui/Form/Form";
 import { validateFromZod } from "~/utils/validateFromZod";
 import { useTranslation } from "~/i18n/context";
+import IntraButton from "~/components/common/IntraButton/IntraButton";
 
 export default function RegisterForm() {
 	const [error, setError] = createSignal<JSXElement>(null);
 	const { t } = useTranslation();
 
 	const registerMutation = client.auth.register.createMutation();
-	const intraAuthUrl = client.auth.getLogin42url.createQuery(() => ["auth", "getLogin42url"], {});
 
 	let displayNameInput!: HTMLInputElement;
 	let emailInput!: HTMLInputElement;
@@ -68,16 +68,9 @@ export default function RegisterForm() {
 			OR
 			<hr />
 		</div>
-		<Button
-			type="button"
-			class="ft-register-button"
-			disabled={!intraAuthUrl.isSuccess}
-			onClick={() => {
-				const url = intraAuthUrl.data?.body.url;
-				if (url) document.location.href = url;
-			}}>
+		<IntraButton>
 			Register with <p>42</p> Intra
-		</Button>
+		</IntraButton>
 		<p class="register-details">
 			Already have an account? <A href="/login">Login</A>.
 		</p>

@@ -1,8 +1,10 @@
-import { createStore } from "solid-js/store";
 import { jwtDecode } from "jwt-decode";
 import { createSignal } from "solid-js";
 import { doRefresh } from "~/api/doRefresh";
 import { JwtPayload } from "@42eat-web/shared";
+import { queryClient } from "~/App";
+import { queryKeys } from "~/api/client";
+import { createStore } from "solid-js/store";
 
 export interface AuthenticatedState {
 	accessToken: string;
@@ -29,6 +31,10 @@ function authStateFromToken(accessToken: string | null): AuthState {
 const [auth, setAuth] = createStore<AuthState>(authStateFromToken(null));
 
 function setAccessToken(accessToken: string | null) {
+	if ((auth.accessToken == null && accessToken)
+		|| (auth.accessToken && accessToken == null)) {
+		void queryClient.invalidateQueries({ queryKey: queryKeys.auth.getLogin42url() });
+	}
 	setAuth(authStateFromToken(accessToken));
 	if (accessToken === null) {
 		sessionStorage.removeItem("access-token");
@@ -69,4 +75,12 @@ async function initialize() {
 	* our case ignored `Promises` create warnings)*/
 void initialize();
 
-export { auth, initialized };
+function isLoggedIn() {
+	return auth.accessToken != null;
+}
+
+export {
+	auth,
+	initialized,
+	isLoggedIn,
+};

@@ -6,13 +6,13 @@ import { initialized } from "./store/auth.store";
 import LoadingSplash from "./pages/Loading/LoadingSplash";
 import { ToasterProvider } from "./components/ui/Toaster";
 
-const client = new QueryClient();
+export const queryClient = new QueryClient();
 
 const App: Component = () => {
 	return <I18nProvider>
 		<ToasterProvider>
 			<Show when={initialized()} fallback={<LoadingSplash/>}>
-				<QueryClientProvider client={client}>
+				<QueryClientProvider client={queryClient}>
 					<AppRouter />
 				</QueryClientProvider>
 			</Show>

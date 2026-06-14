@@ -13,9 +13,9 @@ export default function FtAuthCallback() {
 	function onError() {
 		navigate("/login", { replace: true });
 		summonErrorToast(<div>
-			{t("pages.ftAuthCallback.mainRefusedMessage")}
+			{t("pages.ftAuthCallback.mainErrorMessage")}
 			<br />
-			{t("pages.ftAuthCallback.subRefusedMessage")}
+			{t("pages.ftAuthCallback.subErrorMessage")}
 		</div>);
 	}
 
