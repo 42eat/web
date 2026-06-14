@@ -28,7 +28,7 @@ export const AppRouter = () => {
 		</Route>
 		<Route path={emailConfirmationPath} component={VerifyEmail} />
 		<Route path={ftIntraAuthCallbackPath} component={FtAuthCallback} />
-		{/* <Route path={ftIntraLinkCallbackPath} component={FtLinkCallback} />*/}
+		<Route path={ftIntraLinkCallbackPath} component={() => null} />
 		<Route path={passwordResetConfirmationPath} component={ResetPassword} />
 		<Route path="/" component={AuthGuard}>
 			<Route path="/" component={UnverifiedEmailGuard}>
