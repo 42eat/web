@@ -77,7 +77,14 @@ export default function LoginForm() {
 			OR
 			<hr />
 		</div>
-		<Button class="ft-login-button" onClick={console.log}>
+		<Button
+			type="button"
+			class="ft-login-button"
+			disabled={!intraAuthUrl.isSuccess}
+			onClick={() => {
+				const url = intraAuthUrl.data?.body.url;
+				if (url) document.location.href = url;
+			}}>
 			Login with <p>42</p> Intra
 		</Button>
 		<p class="auth-switcher">

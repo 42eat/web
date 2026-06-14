@@ -15,6 +15,7 @@ export default {
 			subErrorMessage: "EN: Veuillez réessayer plus tard.",
 			mainRefusedMessage: "EN: Vous avez refusé ToT",
 			subRefusedMessage: "EN: Pas cool ...",
+		},
 		promptVerifyEmail: {
 			title: "Check your email",
 			mainContent: "We sent an email to",

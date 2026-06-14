@@ -11,9 +11,8 @@ import VerifiedEmailGuard from "./components/guards/VerifiedEmailGuard";
 
 import PromptVerifyEmail from "./pages/auth/verifyEmail/PromptVerifyEmail";
 import UnverifiedEmailGuard from "./components/guards/UnverifiedEmailGuard";
-import { emailConfirmationPath, ftIntraAuthCallbackPath, ftIntraLinkCallbackPath } from "@42eat-web/shared";
+import { emailConfirmationPath, passwordResetConfirmationPath, ftIntraAuthCallbackPath, ftIntraLinkCallbackPath } from "@42eat-web/shared";
 import FtAuthCallback from "./pages/ftCallback/FtAuthCallback";
-import { emailConfirmationPath, passwordResetConfirmationPath } from "@42eat-web/shared";
 import ResetPassword from "./pages/auth/passwordReset/ResetPassword";
 import RequestPasswordReset from "./pages/auth/passwordReset/RequestPasswordReset";
 
