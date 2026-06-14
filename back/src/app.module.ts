@@ -13,6 +13,8 @@ import { TokensService } from "./tokens/tokens.service";
 import { TokensModule } from "./tokens/tokens.module";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { LoggingModule } from "./core/logging/logging.module";
+import { ShiftsModule } from "./shifts/shifts.module";
+import { AppConfigModule } from "./config/config.module";
 
 @Module({
 	providers: [
@@ -37,9 +39,11 @@ import { LoggingModule } from "./core/logging/logging.module";
 		LoggingModule,
 		ScheduleModule.forRoot(),
 		TokensModule,
+		AppConfigModule,
 		ThrottlerModule.forRoot({
 			throttlers: [{ ttl: 60000, limit: 100 }],
 		}),
+		ShiftsModule,
 	],
 })
 export class AppModule {}

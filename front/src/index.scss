@@ -11,14 +11,14 @@
 	width: 100vw;
 }
 
-body {
+* {
 	margin: 0;
 	box-sizing: border-box;
+}
+
+body {
 	height: 100%;
 	width: 100%;
-
-	font-weight: 600;
-
 	font-family:
 		vars.$font-stack,
 		-apple-system,
@@ -50,6 +50,7 @@ a {
 	transition: color 0.2s;
 	color: var(--link-main);
 	outline: none;
+	cursor: pointer;
 }
 
 a:hover {

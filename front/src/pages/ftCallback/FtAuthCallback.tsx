@@ -22,6 +22,8 @@ export default function FtAuthCallback() {
 		const queryParams = new URLSearchParams(location.search);
 		const errorParam = queryParams.get("error");
 		if (errorParam) {
+			navigate("/login");
+			summon
 			setError({ source: "provider", code: errorParam, description: queryParams.get("error_description")?.replace("+", " ") ?? null });
 			return;
 		}

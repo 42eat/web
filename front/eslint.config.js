@@ -81,7 +81,7 @@ export default tseslint.config(
 			"@stylistic/semi-spacing": ["error", { "before": false, "after": true }],
 			"@stylistic/operator-linebreak": ["error", "before"],
 			"@stylistic/quotes": ["error", "double"],
-			"@stylistic/multiline-ternary": ["error", "always"],
+			"@stylistic/multiline-ternary": ["error", "always-multiline"],
 			"@stylistic/no-floating-decimal": "error",
 			"@stylistic/no-multi-spaces": "error",
 			"@stylistic/no-multiple-empty-lines": ["error", { max: 2 }],

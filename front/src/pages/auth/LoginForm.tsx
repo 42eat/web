@@ -60,22 +60,10 @@ export default function LoginForm() {
 
 	return <Form onSubmit={handleSubmit} id="login-form">
 		<div class="login-inputs">
-			<TextInput
-				ref={(e) => (usernameInput = e.htmlElement)}
-				type="email"
-				validator={(e) => validateFromZod(loginSchema.shape.email, e.value)}
-				placeholder="Email"
-				required
-			/>
-			<TextInput
-				ref={(e) => (passwordInput = e.htmlElement)}
-				type="password"
-				validator={(e) => validateFromZod(loginSchema.shape.password, e.value)}
-				placeholder="Password"
-				required
-			/>
+			<TextInput ref={(e) => usernameInput = e.htmlElement} type="email" validator={(e) => validateFromZod(loginSchema.shape.email, e.value)} placeholder="Email" required />
+			<TextInput ref={(e) => passwordInput = e.htmlElement} type="password" validator={(e) => validateFromZod(loginSchema.shape.password, e.value)} placeholder="Password" required />
 			<p class="password-reset">
-				<A href="/auth/register">Forgot password?</A>
+				<A href="/auth/request-password-reset">Forgot password?</A>
 			</p>
 			<Show when={error()}>
 				<p class="invalid-message" role="alert">
@@ -89,18 +77,11 @@ export default function LoginForm() {
 			OR
 			<hr />
 		</div>
-		<Button
-			type="button"
-			class="ft-login-button"
-			disabled={!intraAuthUrl.isSuccess}
-			onClick={() => {
-				const url = intraAuthUrl.data?.body.url;
-				if (url) document.location.href = url;
-			}}>
+		<Button class="ft-login-button" onClick={console.log}>
 			Login with <p>42</p> Intra
 		</Button>
 		<p class="auth-switcher">
-			Need an account? <A href="/auth/register">Register</A>.
+			Need an account? <A href="/register">Register</A>.
 		</p>
 	</Form>;
 }

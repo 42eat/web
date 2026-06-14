@@ -15,9 +15,47 @@ export default {
 			subErrorMessage: "EN: Veuillez réessayer plus tard.",
 			mainRefusedMessage: "EN: Vous avez refusé ToT",
 			subRefusedMessage: "EN: Pas cool ...",
+		promptVerifyEmail: {
+			title: "Check your email",
+			mainContent: "We sent an email to",
+			description: "Click the link in the email to activate your account.",
+			spamMention: "Make sure to check your spam folder if you don't see anything.",
+			resendText: "Didn't receive anything?",
+			resendLink: "Resend the email",
+			logout: "Use an other account",
+		},
+		confirmEmail: {
+			title: "Verify your email",
+			loadingMessage: "We're getting everything ready, just hang tight for a second...",
+			successMessage: "You're all set! Your account is ready to use.",
+			successLink: "Go to the homepage",
+			errorMessage: "Hmm... Something went wrong :(",
+			errorLink: "Return to safety",
+		},
+		requestPasswordReset: {
+			title: "Reset your password",
+			description: "Enter your email address to reset your password.",
+			rateLimit: "You'll be able to resend an email in {{time}}",
+			success: "If an account with this email address exists, you will receive a link to reset your password",
+			input: {
+				placeholder: "Email address",
+			},
+		},
+		resetPassword: {
+			title: "Change your password",
+			success: "Your password has successfully been changed",
+			error: "This link is not valid anymore",
+			invalidToken: "Your link is expired",
+			submitButton: "Reset password",
+			inputs: {
+				newPassword: "New password",
+				confirmNewPassword: "Confirm password",
+			},
 		},
 	},
 	errors: {
+		rateLimit: "You are being rate limited",
+		unknownFallback: "An error occurred, please try again later",
 		input: {
 			text: {
 				tooShort: "Input too short",

@@ -2,7 +2,7 @@ import { initContract } from "@ts-rest/core";
 import {
 	addRoleMemberSchema,
 	DeleteRoleParamSchema,
-	memberSchema,
+	profileSchema,
 } from "./schemas/member.schema";
 import {
 	rolesListDetailedResponseSchema,
@@ -18,7 +18,7 @@ export const membersContract = c.router(
 		profile: {
 			method: "GET",
 			path: "/profile",
-			responses: { 200: memberSchema },
+			responses: { 200: profileSchema },
 		},
 		getMemberRoles: {
 			method: "GET",

@@ -6,6 +6,9 @@ import { permissionsContract } from "./permissions/permissions.contract";
 import { error401BaseSchema } from "./schemas/error401";
 import { error403Schema } from "./schemas/error403";
 import { error400Schema } from "./schemas/error400";
+import { shiftsContract } from "./shifts/shifts.contract";
+import { error429Schema } from "./schemas/error429";
+import { appConfigContract } from "./appConfig/app-config.contract";
 
 const c = initContract();
 
@@ -15,6 +18,8 @@ export const appContract = c.router(
 		members: membersContract,
 		roles: rolesContract,
 		permissions: permissionsContract,
+		shifts: shiftsContract,
+		config: appConfigContract,
 	},
 	{
 		// Pour ceux qui se demandent, la difference entre 401 Unauthorized et 403 Forbidden :
@@ -24,6 +29,7 @@ export const appContract = c.router(
 			400: error400Schema,
 			401: error401BaseSchema,
 			403: error403Schema,
+			429: error429Schema,
 		},
 	},
 );
