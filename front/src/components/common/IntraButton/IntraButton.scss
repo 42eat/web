@@ -2,6 +2,10 @@
 	background-color: black;
 	color: white;
 
+	& svg path {
+		fill: white;
+	}
+
 	& .btn-content {
 		display: flex;
 		justify-content: center;

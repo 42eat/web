@@ -10,6 +10,7 @@ import "./LoginForm.scss";
 import Form from "~/components/ui/Form/Form";
 import { validateFromZod } from "~/utils/validateFromZod";
 import IntraButton from "~/components/common/IntraButton/IntraButton";
+import Logo42 from "~/components/graphics/icons/Logo42";
 
 export default function LoginForm() {
 	const [error, setError] = createSignal<JSXElement>(null);
@@ -77,7 +78,7 @@ export default function LoginForm() {
 			OR
 			<hr />
 		</div>
-		<IntraButton>Login with <p>42</p> Intra</IntraButton>
+		<IntraButton>Login with <Logo42/> Intra</IntraButton>
 		<p class="auth-switcher">
 			Need an account? <A href="/register">Register</A>.
 		</p>
