@@ -6,10 +6,8 @@ import { authActions } from "~/store/auth.store";
 export default function Home() {
 	const profile = client.members.profile.createQuery(queryKeys.members.profile, () => ({}));
 
-	const logoutMutation = client.auth.logout.createMutation();
 
 	function logout() {
-		logoutMutation.mutate({});
 		authActions.logout();
 	}
 

@@ -4,6 +4,7 @@ import { client } from "~/api/client";
 import { summonErrorToast, summonWarningToast } from "~/components/ui/Toaster";
 import { useTranslation } from "~/i18n/context";
 import { authActions } from "~/store/auth.store";
+import { decodeOauthState } from "~/utils/encodeOauthState";
 
 export default function FtAuthCallback() {
 	const ftAuthMutation = client.auth.auth42.createMutation();
@@ -40,10 +41,16 @@ export default function FtAuthCallback() {
 		const state = queryParams.get("state");
 		if (!code || !state) return onError();
 
-		ftAuthMutation.mutate({ body: { code, state } }, {
+		const {
+			backState,
+			authTarget,
+		} = decodeOauthState(state);
+
+		ftAuthMutation.mutate({ body: { code, state: backState } }, {
 			onSuccess: (r) => {
 				authActions.login(r.body.accessToken);
-				navigate("/home", { replace: true });
+				if (authTarget === "_parent") window.close();
+				navigate(authTarget ?? "/home", { replace: true });
 			},
 			onError: () => onError(),
 		});

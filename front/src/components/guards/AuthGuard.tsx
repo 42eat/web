@@ -1,6 +1,7 @@
 import { useNavigate, RouteSectionProps } from "@solidjs/router";
 import { createContext, createEffect, Show, useContext } from "solid-js";
 import { auth, AuthenticatedState } from "~/store/auth.store";
+import { getAuthTarget } from "~/utils/getAuthTarget";
 
 const AuthenticatedContext = createContext<AuthenticatedState>();
 
@@ -14,7 +15,7 @@ export default function AuthGuard(props: RouteSectionProps) {
 	const navigate = useNavigate();
 
 	createEffect(() => {
-		if (!auth.accessToken) navigate("/login", { replace: true });
+		if (!auth.accessToken) navigate(`/login?authTarget=${getAuthTarget()}`, { replace: true });
 	});
 
 	return <Show when={auth.accessToken !== null && auth} keyed>

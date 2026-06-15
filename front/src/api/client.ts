@@ -50,5 +50,3 @@ export const client = initQueryClient(appContract, {
 });
 
 export const queryKeys = queryKeyFromContract(appContract);
-
-export const test = console.log(queryKeys);

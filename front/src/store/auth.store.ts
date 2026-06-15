@@ -3,7 +3,7 @@ import { createSignal } from "solid-js";
 import { doRefresh } from "~/api/doRefresh";
 import { JwtPayload } from "@42eat-web/shared";
 import { queryClient } from "~/App";
-import { queryKeys } from "~/api/client";
+import { client, queryKeys } from "~/api/client";
 import { createStore } from "solid-js/store";
 
 export interface AuthenticatedState {
@@ -16,6 +16,8 @@ export interface GuestState {
 }
 
 export type AuthState = AuthenticatedState | GuestState;
+
+const authChannel = new BroadcastChannel("auth");
 
 const [initialized, setInitialized] = createSignal(false);
 
@@ -41,18 +43,30 @@ function setAccessToken(accessToken: string | null) {
 	} else {
 		sessionStorage.setItem("access-token", accessToken);
 	}
+	authChannel.postMessage(accessToken);
 }
 
 export const authActions = {
 	setAccessToken,
 	login: (accessToken: string) => setAccessToken(accessToken),
-	logout: () => setAccessToken(null),
+	logout: () => {
+		void client.auth.logout.mutation().then(() => {
+			setAccessToken(null);
+			window.location.replace("/login");
+		});
+	},
 	refreshToken: async () => setAccessToken(await doRefresh()),
 } as const;
 
 
 async function initialize() {
 	const stored = sessionStorage.getItem("access-token");
+
+	authChannel.addEventListener("message", (e: MessageEvent<string | null>) => {
+		if (auth.accessToken === e.data) return;
+		setAuth(authStateFromToken(e.data));
+		if (e.data === null) window.location.replace("/login");
+	});
 
 	if (stored) {
 		setAuth(authStateFromToken(stored));
