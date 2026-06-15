@@ -1,4 +1,4 @@
-import { createEffect, createSignal, splitProps } from "solid-js";
+import { createEffect, splitProps } from "solid-js";
 import { client, queryKeys } from "~/api/client";
 import Button from "~/components/ui/Button";
 import { ButtonProps } from "~/components/ui/Button/Button";
@@ -32,7 +32,7 @@ export default function IntraButton(props: IntraButtonProps) {
 				redirect(response.body.url, e);
 				return;
 			default:
-				summonErrorToast(t("errors.unknownFallback"))
+				summonErrorToast(t("errors.unknownFallback"));
 		}
 	}
 
