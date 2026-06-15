@@ -1,48 +1,53 @@
 import { Permission } from "../core/permissions";
+import { EventRouter, makeEventRouter, RecursiveApplyEventRouter } from "./my-event-builder";
 
-
-type WSRoom = {
+export type Room<E extends EventRouter = EventRouter> = {
 	name: string;
 	permissions: Permission[];
-	// events: ...
+	events: E;
 };
 
-type WSRouter = {
-	[key: string]: WSRouter | WSRoom;
+export type RoomRouter = {
+	[key: string]: RoomRouter | Room;
 };
 
-function isRoom(routerChild: WSRouter | WSRoom): routerChild is WSRoom {
+export function isRoom(routerChild: RoomRouter | Room): routerChild is Room {
 	return typeof routerChild.name === "string";
 }
 
-type WSRouterOptions<TPrefix extends string = string> = {
+export type RouterOptions<TPrefix extends string = string> = {
 	prefix?: TPrefix;
 	commonPermissions?: Permission[];
 };
 
-type ApplyOptions<T extends WSRoom, O extends WSRouterOptions> = {
+export type ApplyOptions<T extends Room, O extends RouterOptions> = {
 	name: O["prefix"] extends string ? `${O["prefix"]}${T["name"]}` : T["name"];
-	permission: O["commonPermissions"] extends Permission[] ? [...O["commonPermissions"], ...T["permissions"]] : T["permissions"];
+	permissions: O["commonPermissions"] extends Permission[] ? [...O["commonPermissions"], ...T["permissions"]] : T["permissions"];
+	events: RecursiveApplyEventRouter<T["events"]>;
 };
 
-type RecursiveWSRouter<T extends WSRouter> = {
-	[K in keyof T]: T[K] extends WSRoom ? WSRoom : T[K] extends WSRouter ? RecursiveWSRouter<T[K]> : T[K];
+export type RecursiveRouter<T extends RoomRouter> = {
+	[K in keyof T]: T[K] extends Room ? T[K] : T[K] extends RoomRouter ? RecursiveRouter<T[K]> : T[K];
 };
 
-type RecursiveApplyWSRouter<T extends WSRouter, O extends WSRouterOptions> = {
-	[K in keyof T]: T[K] extends WSRoom ? ApplyOptions<T[K], O> : T[K] extends WSRouter ? RecursiveApplyWSRouter<T[K], O> : T[K];
+export type RecursiveApplyRouter<T extends RoomRouter, O extends RouterOptions> = {
+	[K in keyof T]: T[K] extends Room ? ApplyOptions<T[K], O> : T[K] extends RoomRouter ? RecursiveApplyRouter<T[K], O> : T[K];
 };
 
-function applyOptions<T extends WSRoom, P extends string, O extends WSRouterOptions<P>>(room: T, options?: O): ApplyOptions<T, O> {
+function applyOptions<T extends Room, P extends string, O extends RouterOptions<P>>(room: T, options?: O): ApplyOptions<T, O> {
 	return {
 		name: options?.prefix
 			? `${options.prefix}${room.name}`
 			: room.name,
+		permissions: options?.commonPermissions
+			? [...options.commonPermissions, ...room.permissions]
+			: room.permissions,
+		events: makeEventRouter(room.events),
 	} as ApplyOptions<T, O>;
 }
 
-function makeRouter<TWSRouter extends WSRouter, TPrefix extends string, TOptions extends WSRouterOptions<TPrefix>>(router: RecursiveWSRouter<TWSRouter>, options?: TOptions): RecursiveApplyWSRouter<TWSRouter, TOptions> {
-	const result = {} as Record<keyof TWSRouter, unknown>;
+function makeRoomRouter<T extends RoomRouter, TPrefix extends string, O extends RouterOptions<TPrefix>>(router: RecursiveRouter<T>, options?: O): RecursiveApplyRouter<T, O> {
+	const result = {} as Record<keyof T, unknown>;
 	for (const k in router) {
 		const key = k as keyof typeof router;
 		const routerChild = router[key];
@@ -50,12 +55,13 @@ function makeRouter<TWSRouter extends WSRouter, TPrefix extends string, TOptions
 			const appliedOptions = applyOptions(routerChild, options);
 			result[key] = appliedOptions;
 		} else {
-			result[key] = makeRouter(routerChild as RecursiveWSRouter<WSRouter>);
+			result[key] = makeRoomRouter(routerChild as RecursiveRouter<RoomRouter>, options);
 		}
 	}
-	return result as RecursiveApplyWSRouter<TWSRouter, TOptions>;
+	return result as RecursiveApplyRouter<T, O>;
 }
 
 export const w = {
-	router: makeRouter,
+	router: makeRoomRouter,
+	eventRouter: makeEventRouter,
 };
