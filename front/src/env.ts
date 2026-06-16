@@ -14,4 +14,4 @@ try {
 	throw new Error("Invalid env provided", { cause: e });
 }
 
-export const env = result;
+export const env = result
