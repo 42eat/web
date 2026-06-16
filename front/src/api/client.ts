@@ -10,7 +10,7 @@ import { summonWarningToast } from "~/components/ui/Toaster";
 import { t } from "~/i18n/context";
 import { queryKeyFromContract } from "./utils/queryKeys";
 
-const fetchWithRefresh: ApiFetcher = async (args) => {
+const fetchWithRefresh = async (args) => {
 	const response = await tsRestFetchApi(args);
 
 	if (response.status === 429) {
