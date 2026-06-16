@@ -1,0 +1,71 @@
+name: pull-request-check
+
+on:
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pull-request-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install pnpm dependencies
+        run: pnpm install
+
+      - name: Run linter
+        id: lint
+        run: pnpm run lint
+        continue-on-error: true
+
+      - name: Type and lint checks
+        id: check
+        run: pnpm run check
+
+      - uses: peter-evans/create-or-update-comment@v4
+        if: failure() && steps.check.outcome == 'failure'
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Errors detected
+            Errors require manual fixes, make a new commit to make you PR mergeable.
+            You'll see errors by running :
+            ```bash
+            # Auto fix lint errors you may have
+            pnpm run lint
+
+            # Checks for errors needing manual intervention
+            pnpm run check
+            ```
+            Commit the changes and push to make this PR mergeable.
+
+      - name: Diff check after lint
+        id: diff
+        run: git diff --exit-code
+
+      - uses: peter-evans/create-or-update-comment@v4
+        if: failure() && steps.diff.outcome == 'failure'
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Lint errors detected
+            Some issues were found but can be **automatically fixed** by running:
+            ```bash
+            pnpm run lint
+            ```
+            Commit the changes and push to make this PR mergeable.
