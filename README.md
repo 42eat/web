@@ -48,11 +48,12 @@ We use [SolidJS](https://www.solidjs.com/) as frontend renderer, this framework 
 
 ### Backend
 
-[NestJS](https://nestjs.com/)
+[NestJS](https://nestjs.com/) is a modern framework cool qui use decorateur pour faire thing cool et en plus y a des very good erreur management
 
 ### DB
 
 [PostgreSQL](https://www.postgresql.org/) + [Prisma](https://www.prisma.io/)
+postgreSQL c'est juste un docker qui run, et prisma c'est du sql en en json typé c'est cool aussi
 
 ## Architecture
 
