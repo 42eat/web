@@ -27,6 +27,9 @@ jobs:
     - name: Run lint checks
       run: pnpm run lint
 
+    - name: Diff check after lint
+      run: git diff --exit-code
+
     - uses: peter-evans/create-or-update-comment@v4
       if: failure()
       with:
