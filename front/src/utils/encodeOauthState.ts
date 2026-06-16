@@ -1,7 +1,11 @@
-export interface FrontState {
-	backState: string;
-	authTarget: string | null;
-}
+import z from "zod";
+
+const frontStateSchema = z.object({
+	backState: z.string(),
+	authTarget: z.string().nullable(),
+});
+
+export type FrontState = z.infer<typeof frontStateSchema>;
 
 export function encodeOauthState(state: FrontState) {
 	return encodeURIComponent(btoa(JSON.stringify(state)));
@@ -9,7 +13,7 @@ export function encodeOauthState(state: FrontState) {
 
 export function decodeOauthState(encodedState: string): FrontState {
 	try {
-		return JSON.parse(atob(decodeURIComponent(encodedState))) as FrontState;
+		return frontStateSchema.parse(JSON.parse(atob(decodeURIComponent(encodedState))));
 	} catch (_) {
 		return {
 			backState: encodedState,
