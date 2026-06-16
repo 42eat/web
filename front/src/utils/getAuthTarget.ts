@@ -1,3 +1,5 @@
-export function getAuthTarget() {
-	return encodeURIComponent(window.location.pathname);
+import { Location } from "@solidjs/router";
+
+export function getAuthTarget(location: Location<unknown>) {
+	return encodeURIComponent(location.pathname);
 }
