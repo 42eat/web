@@ -28,18 +28,43 @@ jobs:
       - name: Install pnpm dependencies
         run: pnpm install
 
-      - name: Run lint checks
+      - name: Run linter
+        id: lint
         run: pnpm run lint
 
-      - name: Diff check after lint
-        run: git diff --exit-code
+      - name: Type and lint checks
+        id: check
+        run: pnpm run check
 
       - uses: peter-evans/create-or-update-comment@v4
-        if: failure()
+        if: steps.check.outcome == 'failure'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ## **You have lint errors in your pull request**
-            ${{ steps.lint.outcome == 'failure'
-              && 'Errors require manual fixes, make a new commit to make you PR mergeable'
-              || 'Errors can be automatically fix by running `pnpm run lint`, make a new commit to make you PR mergeable' }}
+            ## Errors detected
+            Errors require manual fixes, make a new commit to make you PR mergeable.
+            You'll see errors by running :
+            ```bash
+            # Auto fix lint errors you may have
+            pnpm run lint
+
+            # Checks for errors needing manual intervention
+            pnpm run check
+            ```
+            Commit the changes and push to make this PR mergeable.
+
+      - name: Diff check after lint
+        id: diff
+        run: git diff --exit-code
+
+      - uses: peter-evans/create-or-update-comment@v4
+        if: steps.diff.outcome == 'failure'
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Lint errors detected
+            Some issues were found but can be **automatically fixed** by running:
+            ```bash
+            pnpm run lint
+            ```
+            Commit the changes and push to make this PR mergeable.
