@@ -19,7 +19,7 @@ export { getAppVariables } from "./contracts/appConfig/schemas/app-config.schema
 export { error401Schema } from "./contracts/schemas/error401";
 
 
-export { emailConfirmationPath, passwordResetConfirmationPath } from "./core/constants";
+export { emailConfirmationPath, passwordResetConfirmationPath, ftIntraAuthCallbackPath, ftIntraLinkCallbackPath } from "./core/constants";
 export { createJwtPayload, type JwtPayload } from "./core/jwt.payload";
 export { PERMISSIONS } from "./core/permissions";
 export { type Permission } from "./core/permissions";

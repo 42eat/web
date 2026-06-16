@@ -1,7 +1,7 @@
 import { JSX, splitProps } from "solid-js";
 import "./Button.scss";
 
-type ButtonProps = JSX.IntrinsicElements["button"] & {
+export type ButtonProps = JSX.IntrinsicElements["button"] & {
 	variant?: "primary" | "ghost" | "danger";
 	size?: "sm" | "md" | "lg";
 };

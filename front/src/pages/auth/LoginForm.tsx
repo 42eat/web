@@ -9,6 +9,8 @@ import { useTranslation } from "~/i18n/context";
 import "./LoginForm.scss";
 import Form from "~/components/ui/Form/Form";
 import { validateFromZod } from "~/utils/validateFromZod";
+import IntraButton from "~/components/common/IntraButton/IntraButton";
+import Logo42 from "~/components/graphics/icons/Logo42";
 
 export default function LoginForm() {
 	const [error, setError] = createSignal<JSXElement>(null);
@@ -33,11 +35,15 @@ export default function LoginForm() {
 					if (e.status === 401) {
 						switch (e.body.code) {
 							case "INTRA_ONLY_ACCOUNT":
-								setError(<>
-									{t("pages.login.error.intraOnly.begin")}
-									<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{t("pages.login.error.intraOnly.link")}</a>
-									{t("pages.login.error.intraOnly.end")}
-								</>);
+								setError(
+									<>
+										{t("pages.login.error.intraOnly.begin")}
+										<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+											{t("pages.login.error.intraOnly.link")}
+										</a>
+										{t("pages.login.error.intraOnly.end")}
+									</>,
+								);
 								break;
 							case "INVALID_CREDENTIALS":
 								setError(t("pages.login.error.invalidCredentials"));
@@ -72,9 +78,7 @@ export default function LoginForm() {
 			OR
 			<hr />
 		</div>
-		<Button class="ft-login-button" onClick={console.log}>
-			Login with <p>42</p> Intra
-		</Button>
+		<IntraButton>Login with <Logo42/> Intra</IntraButton>
 		<p class="auth-switcher">
 			Need an account? <A href="/register">Register</A>.
 		</p>

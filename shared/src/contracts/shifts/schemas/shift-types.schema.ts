@@ -13,7 +13,7 @@ export type ShiftTypesResponse = z.infer<typeof shiftTypesSchema>;
 export const createShiftTypeSchema = z.object({
 	type: z.string(),
 	xpMult: z.number().optional(),
-})
+});
 export type CreateShiftTypeDto = z.infer<typeof createShiftTypeSchema>;
 
 export const editShiftTypeSchema = createShiftTypeSchema.partial();

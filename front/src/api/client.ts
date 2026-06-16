@@ -8,12 +8,13 @@ import z from "zod";
 import { error401Schema } from "@42eat-web/shared";
 import { summonWarningToast } from "~/components/ui/Toaster";
 import { t } from "~/i18n/context";
+import { queryKeyFromContract } from "./utils/queryKeys";
 
 const fetchWithRefresh: ApiFetcher = async (args) => {
 	const response = await tsRestFetchApi(args);
 
 	if (response.status === 429) {
-		summonWarningToast(<>{t("errors.rateLimit")}</>);
+		summonWarningToast(t("errors.rateLimit"));
 	}
 
 	if (response.status !== 401
@@ -47,3 +48,5 @@ export const client = initQueryClient(appContract, {
 	},
 	api: fetchWithRefresh,
 });
+
+export const queryKeys = queryKeyFromContract(appContract);

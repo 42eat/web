@@ -1,16 +1,16 @@
 import { onMount, Show } from "solid-js";
 import "./PromptVerifyEmail.scss";
 import { authActions } from "~/store/auth.store";
-import { client } from "~/api/client";
+import { client, queryKeys } from "~/api/client";
 import { useTranslation } from "~/i18n/context";
+import DialogPage from "~/components/ui/DialogPage";
 
 import "./PromptVerifyEmail.scss";
-import DialogPage from "~/components/ui/DialogPage";
 
 export default function PromptVerifyEmail() {
 	const { t } = useTranslation();
 
-	const profile = client.members.profile.createQuery(() => ["members", "profile"], {});
+	const profile = client.members.profile.createQuery(queryKeys.members.profile, {});
 	const logoutMutation = client.auth.logout.createMutation();
 	const resendEmailMutation = client.auth.askNewConfirmationEmail.createMutation();
 

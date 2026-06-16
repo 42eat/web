@@ -10,6 +10,8 @@ import { authActions } from "~/store/auth.store";
 import Form from "~/components/ui/Form/Form";
 import { validateFromZod } from "~/utils/validateFromZod";
 import { useTranslation } from "~/i18n/context";
+import IntraButton from "~/components/common/IntraButton/IntraButton";
+import Logo42 from "~/components/graphics/icons/Logo42";
 
 export default function RegisterForm() {
 	const [error, setError] = createSignal<JSXElement>(null);
@@ -67,9 +69,9 @@ export default function RegisterForm() {
 			OR
 			<hr />
 		</div>
-		<Button class="ft-register-button" onClick={console.log}>
-			Register with <p>42</p> Intra
-		</Button>
+		<IntraButton>
+			Register with <Logo42/> Intra
+		</IntraButton>
 		<p class="register-details">
 			Already have an account? <A href="/login">Login</A>.
 		</p>

@@ -12,6 +12,12 @@ export default {
 				invalidCredentials: "FR: Invalid credential combination",
 			},
 		},
+		ftAuthCallback: {
+			mainErrorMessage: "EN: Une erreur imprévue s'est produite :/",
+			subErrorMessage: "EN: Veuillez réessayer plus tard.",
+			mainRefusedMessage: "EN: Vous avez refusé ToT",
+			subRefusedMessage: "EN: Pas cool ...",
+		},
 		promptVerifyEmail: {
 			title: "Vérifie ton email",
 			mainContent: "On t'a envoyé un email à",
@@ -52,6 +58,7 @@ export default {
 	},
 	errors: {
 		rateLimit: "Euh... Bro tu vas trop vite là !",
+		unavailableFtApi: "We are not currently able to reach 42's API",
 		unknownFallback: "Une erreur s'est produite, réessayez plus tard",
 		input: {
 			text: {
