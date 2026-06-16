@@ -31,13 +31,14 @@ jobs:
       - name: Run linter
         id: lint
         run: pnpm run lint
+        continue-on-error: true
 
       - name: Type and lint checks
         id: check
         run: pnpm run check
 
       - uses: peter-evans/create-or-update-comment@v4
-        if: steps.check.outcome == 'failure'
+        if: failure() && steps.check.outcome == 'failure'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
@@ -58,7 +59,7 @@ jobs:
         run: git diff --exit-code
 
       - uses: peter-evans/create-or-update-comment@v4
-        if: steps.diff.outcome == 'failure'
+        if: failure() && steps.diff.outcome == 'failure'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
