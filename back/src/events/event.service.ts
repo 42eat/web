@@ -23,23 +23,23 @@ export class EventService {
 	// 	this.gateway.server.to(room).emit(event, payload);
 	// }
 
-	room<TName extends SC['rooms']>(
-    name: TName,
-    params: ReturnType<SC['params']<TName>>,
-  ) {
-    const resolved = (name as string).replace(/:(\w+)/g, (_, key) =>
-      String((params as Record<string, unknown>)?.[key]),
-    );
+	// room<TName extends SC['rooms']>(
+	//   name: TName,
+	//   params: ReturnType<SC['params']<TName>>,
+	// ) {
+	//   const resolved = (name as string).replace(/:(\w+)/g, (_, key) =>
+	//     String((params as Record<string, unknown>)?.[key]),
+	//   );
 
-    return {
-      emit: <TEvent extends ReturnType<SC['events']<TName>>>(
-        event: TEvent,
-        payload: ReturnType<SC['payload']<TName, TEvent>>,
-      ) => {
-        this.gateway.server.to(resolved).emit(event as string, payload);
-      },
-    };
-  }
+	//   return {
+	//     emit: <TEvent extends ReturnType<SC['events']<TName>>>(
+	//       event: TEvent,
+	//       payload: ReturnType<SC['payload']<TName, TEvent>>,
+	//     ) => {
+	//       this.gateway.server.to(resolved).emit(event as string, payload);
+	//     },
+	//   };
+	// }
 
 	// emit<E extends keyof ServerToClientEvents>(
 	// 	room: string,
@@ -59,6 +59,6 @@ export class EventService {
 	// }
 
 	emitFoyerOpenStatus(open: boolean) {
-		this.emit("global", "foyer.status", open);
+		// this.emit("global", "foyer.status", open);
 	}
 }

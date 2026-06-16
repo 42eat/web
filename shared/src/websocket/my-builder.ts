@@ -21,7 +21,7 @@ export type RouterOptions<TPrefix extends string = string> = {
 };
 
 export type ApplyOptions<T extends Room, O extends RouterOptions> = {
-	name: O["prefix"] extends string ? `${O["prefix"]}${T["name"]}` : T["name"];
+	name: O["prefix"] extends string ? `${O["prefix"]}:${T["name"]}` : T["name"];
 	permissions: O["commonPermissions"] extends Permission[] ? [...O["commonPermissions"], ...T["permissions"]] : T["permissions"];
 	events: RecursiveApplyEventRouter<T["events"]>;
 };
@@ -37,7 +37,7 @@ export type RecursiveApplyRouter<T extends RoomRouter, O extends RouterOptions> 
 function applyOptions<T extends Room, P extends string, O extends RouterOptions<P>>(room: T, options?: O): ApplyOptions<T, O> {
 	return {
 		name: options?.prefix
-			? `${options.prefix}${room.name}`
+			? `${options.prefix}:${room.name}`
 			: room.name,
 		permissions: options?.commonPermissions
 			? [...options.commonPermissions, ...room.permissions]
@@ -46,7 +46,7 @@ function applyOptions<T extends Room, P extends string, O extends RouterOptions<
 	} as ApplyOptions<T, O>;
 }
 
-function makeRoomRouter<T extends RoomRouter, TPrefix extends string, O extends RouterOptions<TPrefix>>(router: RecursiveRouter<T>, options?: O): RecursiveApplyRouter<T, O> {
+function makeRoomRouter<const T extends RoomRouter, TPrefix extends string, O extends RouterOptions<TPrefix>>(router: RecursiveRouter<T>, options?: O): RecursiveApplyRouter<T, O> {
 	const result = {} as Record<keyof T, unknown>;
 	for (const k in router) {
 		const key = k as keyof typeof router;

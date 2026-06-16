@@ -18,7 +18,7 @@ export type EventRouterOptions<TPrefix extends string = string> = {
 };
 
 export type ApplyEventOptions<T extends WSEvent, O extends EventRouterOptions> = {
-	name: O["prefix"] extends string ? `${O["prefix"]}${T["name"]}` : T["name"];
+	name: O["prefix"] extends string ? `${O["prefix"]}:${T["name"]}` : T["name"];
 	data: T["data"];
 };
 
@@ -33,7 +33,7 @@ export type RecursiveApplyEventRouter<T extends EventRouter, O extends EventRout
 function applyEventOptions<T extends WSEvent, P extends string, O extends EventRouterOptions<P>>(event: T, options?: O): ApplyEventOptions<T, O> {
 	return {
 		name: options?.prefix
-			? `${options.prefix}${event.name}`
+			? `${options.prefix}:${event.name}`
 			: event.name,
 		data: event.data,
 	} as ApplyEventOptions<T, O>;
@@ -53,3 +53,5 @@ export function makeEventRouter<T extends EventRouter, TPrefix extends string, O
 	}
 	return result as RecursiveApplyEventRouter<T, O>;
 }
+
+

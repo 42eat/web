@@ -2,7 +2,7 @@ import { z } from "zod";
 import { w } from "./builders";
 import { PERMISSIONS } from "../core/permissions";
 import { deleteShiftWsSchema, shiftSchema } from "../contracts/shifts/schemas/shifts.schema";
-import { SocketClient } from "./infer";
+// import { SocketClient } from "./infer";
 // import { ParamSchema } from "./builders";
 
 // export const socketContract = w.contract([
@@ -70,7 +70,8 @@ export const socketContract = w.contract({
 	}),
 });
 
-export type SC = SocketClient<typeof socketContract>;
+
+// export type SC = SocketClient<typeof socketContract>;
 
 // type ContractRooms = typeof socketContract.rooms[number];
 
