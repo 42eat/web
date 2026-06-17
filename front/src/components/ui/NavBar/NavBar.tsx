@@ -1,7 +1,9 @@
-import { A, RouteSectionProps } from "@solidjs/router";
+import { RouteSectionProps } from "@solidjs/router";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import "./NavBar.scss";
 import HouseIcon from "~/components/graphics/icons/HouseIcon";
+import NavLink from "./NavLink/NavLink";
+import BurgerIcon from "~/components/graphics/icons/BurgerIcon";
 
 export default function NavBar(props: RouteSectionProps) {
 	return <div id="app-page">
@@ -9,10 +11,8 @@ export default function NavBar(props: RouteSectionProps) {
 			<ProfileCard />
 			<hr />
 			<div>
-				<A class="nav-link" href="/home">
-					<HouseIcon />
-					Home
-				</A>
+				<NavLink icon={HouseIcon} href="/home">Home</NavLink>
+				<NavLink icon={BurgerIcon} href="/menu">Home</NavLink>
 			</div>
 		</nav>
 		<main id="app-page-content">

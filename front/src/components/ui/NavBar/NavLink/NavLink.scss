@@ -1,0 +1,24 @@
+.nav-link {
+	display: flex;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	gap: 1rem;
+	align-items: center;
+
+	transition: color .2s;
+
+	color: var(--text-secondary);
+	&:hover {
+		color: var(--text-primary);
+	}
+
+	&.focused {
+		background-color: var(--background-overlay);
+		color: var(--text-accent);
+	}
+
+	& > svg {
+		height: 2rem;
+		width: 2rem;
+	}
+}

@@ -18,23 +18,6 @@
 			height: 1px;
 			background-color: var(--background-overlay);
 		}
-
-		& > div {
-			& > .nav-link {
-				display: flex;
-				padding: .5rem;
-				gap: 1rem;
-				align-items: center;
-
-				& > svg {
-					height: 2rem;
-					width: 2rem;
-					& > path {
-						stroke: var(--text-secondary)
-					}
-				}
-			}
-		}
 	}
 
 	& #app-page-content {
