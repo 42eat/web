@@ -25,8 +25,10 @@ export default function IntraButton(props: IntraButtonProps) {
 			const localSearchParams = new URLSearchParams(location.search);
 			const localAuthTarget = localSearchParams.get("authTarget");
 
-			url.searchParams.set("state", encodeOauthState({ backState: state ?? "", authTarget: e.ctrlKey ? "_parent" : localAuthTarget }));
-			window.open(url, e.ctrlKey ? "_blank" : "_self");
+			const openToBlank = e.ctrlKey || e.button === 1;
+
+			url.searchParams.set("state", encodeOauthState({ backState: state ?? "", authTarget: openToBlank ? "_parent" : localAuthTarget }));
+			window.open(url, openToBlank ? "_blank" : "_self");
 		} else {
 			summonErrorToast(t("errors.unknownFallback"));
 		}
@@ -37,5 +39,6 @@ export default function IntraButton(props: IntraButtonProps) {
 		type="button"
 		class={`ft-login-button ${local.class ?? ""}`}
 		disabled={fetchingUrl()}
-		onClick={(e) => { void handleClick(e); }} {...rest} />;
+		onAuxClick={(e) => void handleClick(e)}
+		onClick={(e) => void handleClick(e)} {...rest} />;
 }
