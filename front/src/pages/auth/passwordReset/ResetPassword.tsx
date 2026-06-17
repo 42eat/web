@@ -6,7 +6,7 @@ import TextInput from "~/components/ui/TextInput";
 import { validateFromZod } from "~/utils/validateFromZod";
 import { resetPasswordSchema } from "@42eat-web/shared";
 import { client } from "~/api/client";
-import { useNavigate } from "@solidjs/router";
+import { useLocation, useNavigate } from "@solidjs/router";
 import { createSignal, onMount, Show } from "solid-js";
 import Button from "~/components/ui/Button";
 import DialogPage from "~/components/ui/DialogPage";
@@ -15,12 +15,13 @@ import { summonErrorToast, summonSuccessToast } from "~/components/ui/Toaster";
 export default function ResetPassword() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const [error, setError] = createSignal(false);
 
 	let token!: string;
 
 	onMount(() => {
-		const localToken = new URLSearchParams(window.location.search).get("token");
+		const localToken = new URLSearchParams(location.search).get("token");
 		if (!localToken) {
 			navigate("/login", { replace: true });
 			return;
