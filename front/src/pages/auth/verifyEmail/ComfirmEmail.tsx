@@ -1,7 +1,7 @@
 import { createSignal, Match, onMount, Switch } from "solid-js";
 import { client } from "~/api/client";
 import "./ComfirmEmail.scss";
-import { A } from "@solidjs/router";
+import { A, useLocation } from "@solidjs/router";
 import DialogPage from "~/components/ui/DialogPage";
 import { useTranslation } from "~/i18n/context";
 
@@ -9,13 +9,14 @@ type State = "WAITING" | "CONFIRMED" | "MISSING_TOKEN" | "ERROR";
 
 export default function ConfirmEmail() {
 	const { t } = useTranslation();
+	const location = useLocation();
 
 	const confirmEmailMutation = client.auth.confirmEmail.createMutation();
 	const [state, setState] = createSignal<State>("WAITING");
 
 
 	onMount(() => {
-		const token = new URLSearchParams(window.location.search).get("token");
+		const token = new URLSearchParams(location.search).get("token");
 		if (!token) {
 			setState("MISSING_TOKEN");
 			return;
