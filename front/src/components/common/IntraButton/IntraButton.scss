@@ -12,12 +12,21 @@
 		gap: 0.5rem;
 	}
 
-	&:is(:hover, :focus-visible) {
-		background-color: #030303;
-	}
 
 	&:disabled {
 		background-color: #03030350;
 		pointer-events: none;
+	}
+}
+
+html[data-theme="dark"] {
+	.ft-login-button:is(:hover, :focus-visible) {
+		background-color: #1A1A1A;
+	}
+}
+
+html[data-theme="light"] {
+	.ft-login-button:is(:hover, :focus-visible) {
+		background-color: #1D1D1D;
 	}
 }
