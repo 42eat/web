@@ -48,4 +48,8 @@
 
 	--button-text: var(--text-primary);
 	--button-text-disabled: color-mix(in oklab, var(--text-primary) 80%, var(--mix-disabled));
+
+	--nav-link-hover: color-mix(in oklab, var(--background-card) 50%, transparent);
+	--nav-link-focused: var(--background-card);
+
 }

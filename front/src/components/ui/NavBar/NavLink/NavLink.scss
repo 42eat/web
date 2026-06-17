@@ -5,16 +5,17 @@
 	gap: 1rem;
 	align-items: center;
 
-	transition: color .2s;
+	transition: color .2s, background-color .2s;
 
 	color: var(--text-secondary);
 	&:hover {
 		color: var(--text-primary);
+		background-color: var(--nav-link-hover);
 	}
 
 	&.focused {
-		background-color: var(--background-overlay);
 		color: var(--text-accent);
+		background-color: var(--nav-link-focused);
 	}
 
 	& > svg {

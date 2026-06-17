@@ -16,6 +16,8 @@ import FtAuthCallback from "./pages/ftCallback/FtAuthCallback";
 import ResetPassword from "./pages/auth/passwordReset/ResetPassword";
 import RequestPasswordReset from "./pages/auth/passwordReset/RequestPasswordReset";
 import NavBar from "./components/ui/NavBar";
+import Planning from "./pages/Planning";
+import FoodMenu from "./pages/FoodMenu";
 
 export const AppRouter = () => {
 	return <Router >
@@ -38,6 +40,8 @@ export const AppRouter = () => {
 			<Route path="/" component={VerifiedEmailGuard}>
 				<Route path="/" component={NavBar}>
 					<Route path="/home" component={Home} />
+					<Route path="/planning" component={Planning} />
+					<Route path="/menu" component={FoodMenu} />
 				</Route>
 			</Route>
 		</Route>
