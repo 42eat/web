@@ -9,7 +9,7 @@ export type EventRouter = {
 	[key: string]: EventRouter | WSEvent;
 };
 
-function isEvent(eventRouterChild: EventRouter | WSEvent): eventRouterChild is WSEvent {
+export function isEvent(eventRouterChild: EventRouter | WSEvent): eventRouterChild is WSEvent {
 	return typeof eventRouterChild.name === "string";
 }
 

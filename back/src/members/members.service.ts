@@ -71,6 +71,8 @@ export class MembersService {
 
 		await this.setDefaultMemberRoles(newMember.id);
 
+		// this.eventService.emit(ws.room.event, payload);
+		// ws.room.event.emit(data)
 		return newMember;
 	}
 

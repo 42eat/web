@@ -27,5 +27,8 @@ export { type Permission } from "./core/permissions";
 export { type Code401, code401 } from "./contracts/schemas/error401";
 export { type Code403, code403 } from "./contracts/schemas/error403";
 
-// export { w } from "./websocket/index";
-export { type SC } from "./websocket/contract";
+// export { w } from "./websocket/builder";
+// export { type SC } from "./websocket/contract";
+export { ws } from "./websocket/contracts";
+export { type WSEvent, type EventRouter, isEvent } from "./websocket/event-builder";
+export { type RoomRouter, isRoom } from "./websocket/builder";

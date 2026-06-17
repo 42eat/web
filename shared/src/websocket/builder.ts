@@ -1,5 +1,5 @@
 import { Permission } from "../core/permissions";
-import { EventRouter, makeEventRouter, RecursiveApplyEventRouter } from "./my-event-builder";
+import { EventRouter, makeEventRouter, RecursiveApplyEventRouter } from "./event-builder";
 
 export type Room<E extends EventRouter = EventRouter> = {
 	name: string;

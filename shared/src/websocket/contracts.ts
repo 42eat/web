@@ -1,8 +1,8 @@
 import z from "zod";
-import { w } from "./my-builder";
+import { w } from "./builder";
 import { deleteShiftWsSchema, shiftSchema } from "../contracts/shifts/schemas/shifts.schema";
 import { PERMISSIONS } from "../core/permissions";
-import { makeEventRouter } from "./my-event-builder";
+import { makeEventRouter } from "./event-builder";
 import { foyerContract } from "../contracts/foyer/foyer.contract";
 
 // ";shift;:id;update"
@@ -36,9 +36,9 @@ import { foyerContract } from "../contracts/foyer/foyer.contract";
 // "&shift&:id&update"
 // "'shift':id'update"
 
-const caca = z.coerce.number();
+// const caca = z.coerce.number();
 
-type Test = `:shift:${z.infer<typeof caca>}:update`;
+// type Test = `:shift:${z.infer<typeof caca>}:update`;
 
 // const shiftContract = w.router({
 // 	shift: {
@@ -83,7 +83,7 @@ const shiftContract = w.router({
 		events: {
 			update: {
 				name: "update",
-				data: shiftSchema,
+				data: z.boolean(),
 			},
 			delete: {
 				name: "delete",
@@ -119,7 +119,7 @@ const foyeStatusEvent = makeEventRouter({
 	},
 }, { prefix: "foyer" });
 
-export const constat = w.router({
+export const ws = w.router({
 	shifts: shiftContract,
 	global: {
 		name: "global",
@@ -131,7 +131,7 @@ export const constat = w.router({
 });
 
 
-void constat.global.events.foyer.status.name;
+// void ws.global.events.foyer.status.name;
 
-void constat.shifts.byId.events.update.name;
-void constat.shifts.byId.name;
+// void ws.shifts.byId.events.update.name;
+// void ws.shifts.byId.name;

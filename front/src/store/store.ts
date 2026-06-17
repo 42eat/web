@@ -19,11 +19,11 @@ void client.foyer.getStatus.query().then((status) => {
 });
 
 socket.on("connect", () => {
-	socket.emit("join", "global");
+	socket.emit("join", "shift:123");
 	console.log("Room joined");
 });
 
-socket.on("foyer.status", (data: boolean) => {
+socket.on("shift:123:update", (data: boolean) => {
 	setFoyerOpen(data);
 	console.log(data);
 });
