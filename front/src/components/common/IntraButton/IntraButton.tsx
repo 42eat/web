@@ -38,5 +38,6 @@ export default function IntraButton(props: IntraButtonProps) {
 		class={`ft-login-button ${local.class ?? ""}`}
 		disabled={fetchingUrl()}
 		onAuxClick={(e) => void handleClick(e)}
-		onClick={(e) => void handleClick(e)} {...rest} />;
+		onClick={(e) => void handleClick(e)}
+		{...rest} />;
 }
