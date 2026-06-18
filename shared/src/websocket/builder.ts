@@ -1,8 +1,17 @@
 import { Permission } from "../core/permissions";
 import { EventRouter, makeEventRouter, RecursiveApplyEventRouter } from "./event-builder";
 
-export type Room<E extends EventRouter = EventRouter> = {
-	name: string;
+export type ExtractParamsName<T extends string = string> = T extends `:${infer TParam}`
+	? TParam extends `${infer TParamName}:${infer TSuffix}`
+		? TParamName | ExtractParamsName<TSuffix>
+		: TParam
+	: T extends `${string}:${infer TSuffix}`
+		? ExtractParamsName<TSuffix>
+		: never;
+
+export type Room<N extends string = string, E extends EventRouter = EventRouter> = {
+	name: N;
+	params: ExtractParamsName<N>;
 	permissions: Permission[];
 	events: E;
 };

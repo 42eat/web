@@ -79,6 +79,7 @@ import { foyerContract } from "../contracts/foyer/foyer.contract";
 const shiftContract = w.router({
 	byId: {
 		name: ":id",
+		params: ,
 		permissions: [PERMISSIONS.SHIFT.GET_SHIFT],
 		events: {
 			update: {
