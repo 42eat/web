@@ -41,11 +41,11 @@ export type WsHandler<E extends keyof ClientToServerEvents> = (
 export type WsParams<E extends keyof ClientToServerEvents> = Parameters<WsHandler<E>>;
 
 
-type EmitNode<E extends WSEvent> = {
+export type EmitNode<E extends WSEvent> = {
 	emit(payload: z.infer<E["data"]>): void;
 };
 
-type BuildEvents<E extends EventRouter> = {
+export type BuildEvents<E extends EventRouter> = {
 	[K in keyof E]: E[K] extends WSEvent
 		? EmitNode<E[K]>
 		: E[K] extends EventRouter
@@ -53,9 +53,11 @@ type BuildEvents<E extends EventRouter> = {
 			: never;
 };
 
-type BuildRoom<R extends Room>
-	= R["name"] extends `${string}:${string}`
-		? (id: string) => BuildEvents<R["events"]>
+export type BuildRoom<R extends Room>
+	= R["name"] extends `${string}:${infer S}`
+		? S extends `:${string}`
+			? (id: string) => BuildEvents<R["events"]>
+			: BuildEvents<R["events"]>
 		: BuildEvents<R["events"]>;
 
 export type BuildWsServer<T extends RoomRouter> = {

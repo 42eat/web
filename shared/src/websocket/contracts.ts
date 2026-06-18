@@ -84,7 +84,7 @@ const shiftContract = w.router({
 		events: {
 			update: {
 				name: "update",
-				data: z.boolean(),
+				data: shiftSchema,
 			},
 			delete: {
 				name: "delete",

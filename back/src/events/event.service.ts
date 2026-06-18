@@ -2,40 +2,36 @@ import { Injectable } from "@nestjs/common";
 import { AppGateway } from "../gateway/app.gateway";
 import { ws } from "@42eat-web/shared";
 import { EventRouter, isEvent } from "@42eat-web/shared";
-import { BuildWsServer, TypedServer } from "../gateway/socket.types";
+import { BuildEvents, BuildWsServer, TypedServer } from "../gateway/socket.types";
 import { isRoom, RoomRouter } from "@42eat-web/shared";
+import z from "zod";
 // import { EventName, EventPayload, RoomName } from "@42eat-web/shared";
 
 
-function buildEvents(
-	events: EventRouter,
-	server: TypedServer,
-	roomName: string,
-): Record<string, unknown> {
+function buildEvents<T extends EventRouter>(events: T, server: TypedServer, roomName: string): BuildEvents<T> {
 	const result: Record<string, unknown> = {};
+
 	for (const key in events) {
 		const node = events[key];
 		if (isEvent(node)) {
 			result[key] = {
-				emit(payload: unknown) {
+				emit(payload: z.infer<typeof node.data>) {
 					const eventName = `${roomName}:${node.name}`;
-					const parsed = node.data.parse(payload);
-					server.to(roomName).emit(eventName, parsed);
-					console.log(`Room: ${roomName} | Event: ${eventName} | data: ${parsed}`);
+					server.to(roomName).emit(eventName, node.data.parse(payload));
+					console.log(`Room: ${roomName} | Event: ${eventName} | data: ${payload}`);
 				},
 			};
 		} else {
 			result[key] = buildEvents(node, server, roomName);
 		}
 	}
-	return result;
+	return result as BuildEvents<T>;
 }
 
-function buildRoomRouter(
-	router: RoomRouter,
-	server: TypedServer,
-): Record<string, unknown> {
+function buildRoomRouter<T extends RoomRouter>(router: T, server: TypedServer): BuildWsServer<T> {
+
 	const result: Record<string, unknown> = {};
+
 	for (const key in router) {
 		const node = router[key];
 		if (isRoom(node)) {
@@ -51,19 +47,16 @@ function buildRoomRouter(
 			result[key] = buildRoomRouter(node, server);
 		}
 	}
-	return result;
+	return result as BuildWsServer<T>;
 }
 
-export function buildWsServer<T extends RoomRouter>(
-	contract: T,
-	server: TypedServer,
-): BuildWsServer<T> {
-	return buildRoomRouter(contract, server) as BuildWsServer<T>;
+export function buildWsServer<T extends RoomRouter>(contract: T, server: TypedServer): BuildWsServer<T> {
+	return buildRoomRouter(contract, server);
 }
 
 @Injectable()
 export class EventService {
-	public ws!: ReturnType<typeof buildWsServer<typeof ws>>;
+	public ws!: BuildWsServer<typeof ws>;
 
 	constructor(private readonly gateway: AppGateway) {}
 
@@ -77,7 +70,9 @@ export class EventService {
 
 	emitFoyerOpenStatus(open: boolean) {
 		// this.ws.global.foyer.status.emit(open);
-		this.ws.shifts.byId("123").update.emit(open);
+		// this.ws.shifts.byId("123").update.emit();
+		this.ws.global.foyer.status.emit(open);
+		this.ws.shifts.list.delete.emit({ id: 123 });
 		// this.emit(ws.global.events.foyer.status, open);
 		// this.emit("global", "foyer.status", open);
 	}
